@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
-import { merge, Subject } from 'rxjs';
+import { merge, pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
 import { PocStatus } from 'src/app/core/models/enums/poc-status.enum';
@@ -53,6 +53,8 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   showActions = false;
 
   get search() { return this.filters.get('search'); }
+  get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
+  get statusFilter() { return this.columnFilters?.controls?.status; }
 
   private unsubscribe$ = new Subject();
 
@@ -77,7 +79,9 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       map(search => ({ search })),
     );
 
-    const filters$ = this.filters.get('filterColumns').valueChanges;
+    const status$ = this.statusFilter.valueChanges.pipe(
+      pipe(debounceTime(1000))
+    );
 
     const sort$ = this.sort.sortChange.pipe(
       map(sort => ({
@@ -94,7 +98,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       }))
     );
 
-    merge(search$, sort$, paginate$, filters$).pipe(
+    merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
         this.loadPocPage();
@@ -172,7 +176,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private generateFilters() {
-    this.filters = this.fb.group({ ...new PocFilters(), status: undefined });
+    this.filters = this.fb.group(new PocFilters());
     this.filters.get('search').setValidators([Validators.minLength(3)]);
 
     this.filters.addControl('filterColumns', this.fb.group({
