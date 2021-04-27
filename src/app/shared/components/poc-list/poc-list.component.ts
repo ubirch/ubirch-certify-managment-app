@@ -9,7 +9,7 @@ import { merge, pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
 import { PocStatus } from 'src/app/core/models/enums/poc-status.enum';
-import { Poc } from 'src/app/core/models/interfaces/poc.interface';
+import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
 import { PocsService } from 'src/app/core/services/pocs.service';
@@ -31,18 +31,17 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: PocDataSource;
   displayColumns: string[] = [
     'select',
-    'pocId',
-    'name',
-    // 'deviceId',
+    'externalId',
+    'pocName',
     'folderIdentifier',
     'createdAt',
     'updatedAt',
     'status',
   ];
-  selection = new SelectionModel<Poc>(true, []);
+  selection = new SelectionModel<IPoc>(true, []);
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
-  expandedElement: Poc | null;
+  expandedElement: IPoc | null;
 
   filters: FormGroup;
   action: FormControl = new FormControl(PocActions.delete);
@@ -128,11 +127,11 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Poc): string {
+  checkboxLabel(row?: IPoc): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.pocId}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.externalId}`;
   }
 
   applyAction() {
@@ -153,7 +152,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private deleteItems(pocs: Poc[]) {
+  private deleteItems(pocs: IPoc[]) {
     const message = this.translate.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
     const title = this.translate.instant('pocList.actions.deleteConfirmTitle');
     const dialogData = new ConfirmDialogModel(title, message);

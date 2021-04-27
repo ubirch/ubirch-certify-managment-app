@@ -3,8 +3,15 @@
 		"logout": "Logout",
 		"back": "Back"
 	},
+	"dashboard": {
+		"headline": "Dashboard"
+	},
+	"import": {
+		"headline": "PoC Import",
+		"upload": "Upload"
+	},
 	"poc": {
-		"pocId": "PoC Id",
+		"externalId": "External Id",
 		"name": "Name",
 		"deviceId": "Device Id",
 		"folderIdentifier": "Folder identifier",
@@ -29,10 +36,6 @@
 			"deleteConfirmTitle": "Delete items",
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
 		}
-	},
-	"import": {
-		"headline": "Import PoCs",
-		"upload": "Upload"
 	},
 	"pocStatuses": {
 		"ready": "Ready",

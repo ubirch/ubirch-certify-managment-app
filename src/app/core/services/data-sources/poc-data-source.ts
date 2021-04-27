@@ -1,14 +1,14 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
-import { ListResult } from '../../models/interfaces/poc-list-result';
-import { Poc } from '../../models/interfaces/poc.interface';
+import { IListResult } from '../../models/interfaces/poc-list-result.interface';
+import { IPoc } from '../../models/interfaces/poc.interface';
 import { PocFilters } from '../../models/poc-filters';
 import { PocsService } from '../pocs.service';
 
-export class PocDataSource implements DataSource<Poc> {
+export class PocDataSource implements DataSource<IPoc> {
 
-    private pocSubject = new BehaviorSubject<Poc[]>([]);
+    private pocSubject = new BehaviorSubject<IPoc[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private totalItemsSubject = new BehaviorSubject<number>(0);
 
@@ -19,7 +19,7 @@ export class PocDataSource implements DataSource<Poc> {
 
     constructor(private service: PocsService) { }
 
-    connect(collectionViewer: CollectionViewer): Observable<Poc[] | readonly Poc[]> {
+    connect(collectionViewer: CollectionViewer): Observable<IPoc[] | readonly IPoc[]> {
         return this.pocSubject.asObservable();
     }
 
@@ -32,7 +32,7 @@ export class PocDataSource implements DataSource<Poc> {
         this.loadingSubject.next(true);
 
         this.service.loadPocs(filters).pipe(
-            catchError(() => of({} as ListResult<Poc>)),
+            catchError(() => of({} as IListResult<IPoc>)),
             finalize(() => this.loadingSubject.next(false))
         ).subscribe(pocResult => {
             this.pocSubject.next(pocResult.pocs ?? []);
@@ -40,7 +40,7 @@ export class PocDataSource implements DataSource<Poc> {
         });
     }
 
-    deletePocs(pocs: Poc[], filters: PocFilters) {
+    deletePocs(pocs: IPoc[], filters: PocFilters) {
         this.loadingSubject.next(true);
         this.service.deletePocs(pocs).pipe(
             tap(() => this.loadPocs({ ...filters, pageIndex: 0 }))

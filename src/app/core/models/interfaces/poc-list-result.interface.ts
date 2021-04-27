@@ -1,4 +1,4 @@
-export interface ListResult<T> {
+export interface IListResult<T> {
     pocs: T[];
     total: number;
 }
