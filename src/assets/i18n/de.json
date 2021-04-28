@@ -8,7 +8,9 @@
 	},
 	"import": {
 		"headline": "PoC Import",
-		"upload": "Upload"
+		"upload": "Upload",
+		"filePlaceholder": "No files selected",
+		"selectBtn": "Select File"
 	},
 	"poc": {
 		"externalId": "External Id",

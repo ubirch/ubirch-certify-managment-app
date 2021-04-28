@@ -48,14 +48,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
+
 import { RouterModule } from '@angular/router';
-import { PocListComponent } from './components/poc-list/poc-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PocListComponent } from './components/poc-list/poc-list.component';
+import { ngfModule } from 'angular-file';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileSizePipe } from './pipes/file-size.pipe';
 
 
 @NgModule({
@@ -65,6 +69,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     PocListComponent,
     LanguageSelectComponent,
     ConfirmDialogComponent,
+    FileUploadComponent,
+    FileSizePipe,
   ],
   imports: [
     CommonModule,
@@ -118,6 +124,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     // PortalModule,
     // ScrollingModule,
     FlexLayoutModule,
+    ngfModule,
   ],
   exports: [
     CommonModule,
@@ -139,6 +146,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCardModule,
 
     FlexLayoutModule,
+    ngfModule,
 
     TranslateModule,
 
@@ -146,6 +154,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FooterComponent,
     PocListComponent,
     ConfirmDialogComponent,
+    FileUploadComponent,
+    FileSizePipe,
   ]
 })
 export class SharedModule { }

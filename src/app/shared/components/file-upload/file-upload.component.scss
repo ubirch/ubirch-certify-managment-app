@@ -1,0 +1,19 @@
+input[type="file"] {
+    display: none;
+}
+
+.file-drop {
+    border: 2px dashed #aaa;
+    background: #ddd;
+    padding: 2rem 3rem;
+
+    &.drag-over {
+        border-color: #555;
+    }
+
+    button {
+        width: 250px;
+    }
+
+
+}
