@@ -1,11 +1,11 @@
 FROM node:12 AS builder
 
 WORKDIR /app
-ADD ./package*.json .
+ADD ./package*.json ./
 RUN npm install
 RUN npm install -g @angular/cli
 
-ADD . .
+ADD . ./
 RUN ng build
 
 
