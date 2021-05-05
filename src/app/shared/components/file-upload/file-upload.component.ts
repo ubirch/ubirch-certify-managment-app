@@ -1,7 +1,10 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
+import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
 
 @Component({
   selector: 'app-file-upload',
@@ -12,16 +15,17 @@ export class FileUploadComponent implements AfterViewInit {
   file: File;
   accept = '.csv';
   draggedOver = false;
+  uploadStates = UploadState;
 
   @ViewChild('input') input: ElementRef;
   @ViewChild('drop') drop: ElementRef;
 
   // tslint:disable-next-line:variable-name
-  private _progress = 0;
+  private _progress: IUploadStatus;
   get progress() { return this._progress; }
-  @Input() set progress(value) {
+  @Input() set progress(value: IUploadStatus) {
     this._progress = value;
-    if (this._progress >= 100) { this.resetUpload(); }
+    if (value?.state === UploadState.done) { this.resetUpload(); }
   }
 
   @Output() fileSelected = new EventEmitter<File>();
@@ -49,7 +53,7 @@ export class FileUploadComponent implements AfterViewInit {
             const file = filesList.item(i);
             if (file.type === 'text/csv') {
               this.file = file;
-              this.fileChnaged();
+              this.fileChanaged();
               this.draggedOver = false;
               return;
             }
@@ -70,23 +74,22 @@ export class FileUploadComponent implements AfterViewInit {
 
   selected(event) {
     this.file = event?.target?.files?.[0];
-    this.fileChnaged();
+    this.fileChanaged();
   }
 
   fileDropped(event) {
     event.preventDefault();
   }
 
-  private fileChnaged() {
-    console.log('changed');
+  private fileChanaged() {
     this.fileSelected.emit(this.file);
-    this.progress = 0;
   }
 
   private resetUpload() {
     this.file = undefined;
-    this.fileChnaged();
+    this.fileChanaged();
     this.input.nativeElement.value = '';
+    this._progress = null;
   }
 
 

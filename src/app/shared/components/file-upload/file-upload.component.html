@@ -4,6 +4,12 @@
     <span *ngIf="fileSize">{{ fileSize | fileSize}}</span>
   </label>
   <input type="file" id="file" #input (change)="selected($event)" [accept]="accept">
+  <mat-progress-bar
+    *ngIf="progress && this.file"
+    mode="determinate"
+    [value]="progress.progress"
+  >
+  </mat-progress-bar>
   <button mat-raised-button (click)="triggerrFileSelect()">{{ 'import.selectBtn' | translate }}</button>
 </div>
 
