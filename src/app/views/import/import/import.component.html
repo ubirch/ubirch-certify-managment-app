@@ -1,18 +1,18 @@
 <h2>{{ 'import.headline' | translate }}</h2>
 
-<mat-card fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="start center">
+<mat-card fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="start stretch">
   <p>
     Upload a .csv file below. 
   </p>
 
-  <div class="notice warn">
-    <p>Ooops. Seems like 20 out of 100 PoCs failed to upload.<br/> See error details by downloading the following <a href="#">file</a>.</p>
-  </div>
+   <app-notification-inline [notification]="notification">
+      Download button goes here...
+  </app-notification-inline>
 
   <app-file-upload (fileSelected)="fileSelected($event)" [progress]="progress"></app-file-upload>
 
-  <div fxLayout="column" fxLayoutGap="3rem">
-    <button [disabled]="!file" mat-raised-button color="primary" (click)="uploadFile()" class="import-btn">
+  <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+    <button [disabled]="!file || !!progress" mat-raised-button color="primary" (click)="uploadFile()" class="import-btn">
       <mat-icon aria-hidden="false" aria-label="Import pocs">file_upload</mat-icon>
       {{ 'import.upload' | translate }} 
     </button>

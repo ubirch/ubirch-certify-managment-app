@@ -1,7 +1,5 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { fromEvent, merge, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
 import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
@@ -89,7 +87,6 @@ export class FileUploadComponent implements AfterViewInit {
     this.file = undefined;
     this.fileChanaged();
     this.input.nativeElement.value = '';
-    this._progress = null;
   }
 
 

@@ -1,0 +1,7 @@
+<div [ngClass]="cssClass" *ngIf="notification">
+  <h3 *ngIf="notification.title">{{ notification.title }}</h3>
+  <p>{{ notification.message }}</p>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

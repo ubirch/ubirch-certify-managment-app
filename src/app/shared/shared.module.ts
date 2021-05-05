@@ -57,9 +57,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PocListComponent } from './components/poc-list/poc-list.component';
-import { ngfModule } from 'angular-file';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
+import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
 
 
 @NgModule({
@@ -70,6 +71,8 @@ import { FileSizePipe } from './pipes/file-size.pipe';
     LanguageSelectComponent,
     ConfirmDialogComponent,
     FileUploadComponent,
+    NotificationComponent,
+    NotificationInlineComponent,
     FileSizePipe,
   ],
   imports: [
@@ -124,7 +127,6 @@ import { FileSizePipe } from './pipes/file-size.pipe';
     // PortalModule,
     // ScrollingModule,
     FlexLayoutModule,
-    ngfModule,
   ],
   exports: [
     CommonModule,
@@ -148,8 +150,6 @@ import { FileSizePipe } from './pipes/file-size.pipe';
     MatSnackBarModule,
 
     FlexLayoutModule,
-    ngfModule,
-
     TranslateModule,
 
     HeaderComponent,
@@ -157,6 +157,8 @@ import { FileSizePipe } from './pipes/file-size.pipe';
     PocListComponent,
     ConfirmDialogComponent,
     FileUploadComponent,
+    NotificationComponent,
+    NotificationInlineComponent,
     FileSizePipe,
   ]
 })
