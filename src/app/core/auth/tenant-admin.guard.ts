@@ -9,7 +9,7 @@ import { AuthGuard } from './auth.guard';
 import { TENANT_ADMIN } from '../models/roles';
 
 
-export const NOT_AUTHORIZED_URL = 'not-authorized';
+export const NOT_AUTHORIZED_URL = ['views', 'not-authorized'];
 
 @Injectable({
     providedIn: 'root',
@@ -29,7 +29,7 @@ export class TenantAdminGuard extends AuthGuard {
         const authenticated = await super.isAccessAllowed(route, state);
 
         if (!this.roles.includes(TENANT_ADMIN)) {
-            this.router.navigate([NOT_AUTHORIZED_URL]);
+            this.router.navigate(NOT_AUTHORIZED_URL);
             return false;
         }
 

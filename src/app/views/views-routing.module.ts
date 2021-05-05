@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/auth/auth.guard';
 import { TenantAdminGuard } from '../core/auth/tenant-admin.guard';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ViewsComponent } from './views.component';
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
+      },
+      {
+        path: 'not-authorized',
+        component: NotAuthorizedComponent
       },
       {
         path: 'dashboard',
