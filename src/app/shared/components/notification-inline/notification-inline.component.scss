@@ -1,11 +1,17 @@
 .notification {
+    border: 1px solid ;
     padding: 1rem 2rem;
     text-align: center;
 }
 .error {
-    border: 1px solid tomato;
+    border-color: tomato;
     background-color: rgb(255, 99, 71, 0.2);
 }
 .success {
-    background-color: greenyellow;
+    border-color: rgb(76, 175, 80);
+    background-color: rgba(76, 175, 80, 0.2);;
+}
+.warning {
+    border-color: rgb(91, 91, 38);
+    background-color: rgba(255, 255, 104, 0.2);
 }

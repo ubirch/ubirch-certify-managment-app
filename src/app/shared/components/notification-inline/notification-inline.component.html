@@ -1,6 +1,6 @@
 <div [ngClass]="cssClass" *ngIf="notification">
-  <h3 *ngIf="notification.title">{{ notification.title }}</h3>
-  <p>{{ notification.message }}</p>
+  <h3 *ngIf="notification.title">{{ notification.title | translate }}</h3>
+  <p>{{ notification.message | translate }}</p>
   <div>
     <ng-content></ng-content>
   </div>

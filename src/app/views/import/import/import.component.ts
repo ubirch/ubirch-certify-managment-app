@@ -43,15 +43,21 @@ export class ImportComponent implements OnInit {
           if (event.state === UploadState.done) {
             if (event.result && event.result instanceof Blob) {
               this.errorFile = event.result;
-              this.notification = this.notificationService.warning({ message: 'There were some errors while processing csv file' });
+              this.notification = this.notificationService.warning({
+                title: 'import.notifications.partialTitle',
+                message: 'import.notifications.partial'
+              });
             } else {
-              this.notificationService.success({ message: 'File upload successfully' });
+              this.notificationService.success({ message: 'import.notifications.success' });
             }
           }
         },
         err => {
           this.progress = null;
-          this.notification = this.notificationService.error({ title: 'Upload Error', message: 'There was an error during file upload' });
+          this.notification = this.notificationService.error({
+            title: 'import.notifications.errorTitle',
+            message: 'import.notifications.error'
+          });
         }
       );
   }

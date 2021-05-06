@@ -8,10 +8,18 @@
 	},
 	"import": {
 		"headline": "PoC Import",
+		"uploadPrompt": "Select or drag a .csv file below and click \"Upload\" button.",
 		"upload": "Upload",
 		"downloadFile": "Download File",
 		"filePlaceholder": "No files selected",
-		"selectBtn": "Select File"
+		"selectBtn": "Select File",
+		"notifications": {
+			"success": "POCs have been successfully processed",
+			"partial": "There were some errors while processing your .csv file. See below output file for details.",
+			"partialTitle": "POC import incomplete",
+			"error": "Ooops, we are unable to process the file. Please try again later.",
+			"errorTitle": "File upload failed"
+		}
 	},
 	"poc": {
 		"externalId": "External Id",
