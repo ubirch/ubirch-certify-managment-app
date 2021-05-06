@@ -15,6 +15,7 @@ const INITIALSTATE: IUploadStatus = { state: UploadState.pending, progress: 0, r
 export class ImportComponent implements OnInit {
 
   file: File;
+  errorFile: Blob;
   progress: IUploadStatus;
   notification: INotification;
 
@@ -27,6 +28,7 @@ export class ImportComponent implements OnInit {
 
   fileSelected(file: File) {
     this.file = file;
+    this.progress = null;
   }
 
   uploadFile() {
@@ -35,7 +37,12 @@ export class ImportComponent implements OnInit {
         event => {
           this.progress = event;
           if (event.state === UploadState.done) {
-            this.notification = this.notificationService.success({ message: 'File upload successfully' });
+            if (event.result && event.result instanceof Blob) {
+              this.errorFile = event.result;
+              this.notification = this.notificationService.warning({ message: 'There were some errors while processing csv file' });
+            } else {
+              this.notificationService.success({ message: 'File upload successfully' });
+            }
           }
         },
         err => {
@@ -43,6 +50,13 @@ export class ImportComponent implements OnInit {
           this.notification = this.notificationService.error({ title: 'Upload Error', message: 'There was an error during file upload' });
         }
       );
+  }
+
+  downloadResult() {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(this.errorFile);
+    a.download = 'processing_errors.csv';
+    a.click();
   }
 
 }

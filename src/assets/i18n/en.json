@@ -9,6 +9,7 @@
 	"import": {
 		"headline": "PoC Import",
 		"upload": "Upload",
+		"downloadFile": "Download File",
 		"filePlaceholder": "No files selected",
 		"selectBtn": "Select File"
 	},

@@ -8,6 +8,6 @@ const keycloakConfig: any = {
 export const environment = {
   production: true,
   keycloak: keycloakConfig,
-  anchoringAPIUrl: '@@ANCHORING_API_URL@@',
-  verificationPageDefaultUrl: '@@VERIFICATION_PAGE_URL@@'
+  // pocManagerApi: 'https://poc-api.dev.ubirch.com/tenant-admin/',
+  // pocUpload: 'pocs/create',
 };

@@ -6,7 +6,10 @@
   </p>
 
    <app-notification-inline [notification]="notification">
-      Download button goes here...
+    <button mat-raised-button color="accent" (click)="downloadResult()" *ngIf="errorFile">
+      <mat-icon aria-hidden="false" aria-label="Import pocs">file_download</mat-icon>
+      {{ 'import.downloadFile' | translate }} 
+    </button>
   </app-notification-inline>
 
   <app-file-upload (fileSelected)="fileSelected($event)" [progress]="progress"></app-file-upload>

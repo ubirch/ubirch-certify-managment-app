@@ -22,6 +22,10 @@ export class NotificationService {
     return this.openSnackBar({ ...notificationConfig, type: NotificationType.errorr });
   }
 
+  warning(notificationConfig: INotification) {
+    return this.openSnackBar({ ...notificationConfig, type: NotificationType.warning });
+  }
+
   private openSnackBar(config: INotification) {
     this.notifications.openFromComponent(NotificationComponent, {
       duration: config.duration || DEFAULT_NOTIFICATION_DURATION,

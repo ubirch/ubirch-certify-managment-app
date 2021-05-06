@@ -4,23 +4,24 @@ import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { UploadState } from '../models/enums/upload-state.enum';
 import { IUploadStatus } from '../models/interfaces/upload-status';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
 
-  constructor(private http: HttpClient) { }
+  postUrl = `${environment.pocManagerApi}${environment.pocUpload}`;
 
-  postUrl = 'http://localhost:8000/upload';
+  constructor(private http: HttpClient) { }
 
   uploadFile(file: File): Observable<IUploadStatus> {
     const myFormData: FormData = new FormData();
     myFormData.append('file', file, file.name);
 
-    const config = new HttpRequest('POST', this.postUrl, myFormData, {
+    const config = new HttpRequest('POST', this.postUrl, file, {
       reportProgress: true,
-      responseType: 'text'
+      responseType: 'blob'
     });
 
     return this.http.request(config).pipe(

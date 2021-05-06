@@ -11,9 +11,8 @@ const keycloakConfig: any = {
 export const environment = {
     production: false,
     keycloak: keycloakConfig,
-    anchoringAPIUrl: 'https://api.certify.dev.ubirch.com',
-    // verificationPageDefaultUrl: 'https://verification.dev.ubirch.com/v/gd-vcc',
-    verificationPageDefaultUrl: 'https://verification.dev.ubirch.com/v',
+    pocManagerApi: 'https://poc-api.dev.ubirch.com/tenant-admin/',
+    pocUpload: 'pocs/create',
 };
 
 /*
