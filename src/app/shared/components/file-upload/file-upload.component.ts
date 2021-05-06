@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
 import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
 
@@ -30,6 +30,7 @@ export class FileUploadComponent implements AfterViewInit {
 
   fileDropped$: Observable<any>;
 
+  get disabled(): boolean { return [UploadState.inPorgress, this.uploadStates.pending].includes(this.progress?.state); }
   get fileSize(): number { return this.file?.size; }
   get fileName(): string { return this.file?.name ?? 'import.filePlaceholder'; }
 
@@ -37,14 +38,17 @@ export class FileUploadComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     merge(
-      fromEvent(this.drop.nativeElement, 'dragover'),
+      fromEvent(this.drop.nativeElement, 'dragover').pipe(filter(v => !this.disabled)),
       fromEvent(this.drop.nativeElement, 'dragenter').pipe(
+        filter(v => !this.disabled),
         tap(() => this.draggedOver = true)
       ),
       fromEvent(this.drop.nativeElement, 'dragleave').pipe(
+        filter(v => !this.disabled),
         tap(() => this.draggedOver = false)
       ),
       fromEvent(this.drop.nativeElement, 'drop').pipe(
+        filter(v => !this.disabled),
         tap((event: DragEvent) => {
           const filesList = event.dataTransfer?.files;
           for (let i = 0; i < filesList?.length ?? 0; i++) {

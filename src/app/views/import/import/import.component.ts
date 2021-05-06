@@ -29,6 +29,10 @@ export class ImportComponent implements OnInit {
   fileSelected(file: File) {
     this.file = file;
     this.progress = null;
+    if (this.file) {
+      this.notification = null;
+      this.errorFile = null;
+    }
   }
 
   uploadFile() {

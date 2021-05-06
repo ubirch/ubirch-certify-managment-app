@@ -10,6 +10,6 @@
     [value]="progress.progress"
   >
   </mat-progress-bar>
-  <button mat-raised-button (click)="triggerrFileSelect()">{{ 'import.selectBtn' | translate }}</button>
+  <button mat-raised-button [disabled]="disabled" (click)="triggerrFileSelect()">{{ 'import.selectBtn' | translate }}</button>
 </div>
 
