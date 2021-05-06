@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from 'src/app/core/services/locale.service';
 
 @Component({
@@ -8,9 +9,16 @@ import { LocaleService } from 'src/app/core/services/locale.service';
 })
 export class LanguageSelectComponent implements OnInit {
 
-  constructor(private languageService: LocaleService) { }
+  languages: string[] = [];
 
-  ngOnInit() { }
+  constructor(
+    private languageService: LocaleService,
+    private translateService: TranslateService
+  ) { }
+
+  ngOnInit() {
+    this.languages = this.translateService.getLangs();
+  }
 
   get language() { return this.languageService.getLanguage(); }
 

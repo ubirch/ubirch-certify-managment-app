@@ -2,6 +2,5 @@
     <mat-icon>language</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="setLanguage('de')" [ngClass]="{'active': language === 'de'}">DE</button>
-    <button mat-menu-item (click)="setLanguage('en')" [ngClass]="{'active': language === 'en'}">EN</button>
+    <button mat-menu-item (click)="setLanguage(lang)" [ngClass]="{'active': language === lang}" *ngFor="let lang of languages" >{{ lang | uppercase}}</button>
   </mat-menu>
