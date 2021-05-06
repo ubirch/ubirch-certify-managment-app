@@ -19,7 +19,7 @@ export class NotificationService {
   }
 
   error(notificationConfig: INotification) {
-    return this.openSnackBar({ ...notificationConfig, type: NotificationType.errorr });
+    return this.openSnackBar({ ...notificationConfig, type: NotificationType.error });
   }
 
   warning(notificationConfig: INotification) {

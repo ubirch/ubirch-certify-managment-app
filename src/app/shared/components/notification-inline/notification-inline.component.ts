@@ -10,11 +10,12 @@ import { INotification } from 'src/app/core/models/interfaces/notification.inter
 export class NotificationInlineComponent implements OnInit {
 
   @Input() notification: INotification;
+  notificationTypes = NotificationType;
 
   get cssClass() {
     return {
       success: this.notification?.type === NotificationType.success,
-      error: this.notification?.type === NotificationType.errorr,
+      error: this.notification?.type === NotificationType.error,
       warning: !this.notification?.type || this.notification?.type === NotificationType.warning,
       notification: true,
     };

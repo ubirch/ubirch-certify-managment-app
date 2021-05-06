@@ -7,12 +7,18 @@
     .notification {
         padding: 1rem 2rem;
     }
+
     .error {
-        background-color: tomato;
-        color: #fff;
+        color: #792618;
+        background-color: #f9aa9c;
     }
     .success {
-        background-color: greenyellow;
+        color: #28792a;
+        background-color: #beffc0;;
+    }
+    .warning {
+        color: #63630d;
+        background-color: #ffffa9;
     }
 }
 

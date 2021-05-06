@@ -1,7 +1,15 @@
-<div [ngClass]="cssClass" *ngIf="notification">
-  <h3 *ngIf="notification.title">{{ notification.title | translate }}</h3>
-  <p>{{ notification.message | translate }}</p>
-  <div>
-    <ng-content></ng-content>
+<div [ngClass]="cssClass" *ngIf="notification" fxLayout fxLayoutAlign="center center">
+  <div class="notify-side">
+    <mat-icon aria-hidden="false" aria-label="errro" *ngIf="notification.type === notificationTypes.error">error_outline</mat-icon>
+    <mat-icon aria-hidden="false" aria-label="warning" *ngIf="notification.type === notificationTypes.warning">warning_amber</mat-icon>
+    <mat-icon aria-hidden="false" aria-label="success" *ngIf="notification.type === notificationTypes.success">check_circle</mat-icon>
   </div>
+  <div fxFlex>
+    <h3 *ngIf="notification.title">{{ notification.title | translate }}</h3>
+    <p>{{ notification.message | translate }}</p>
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="notify-side"></div>
 </div>

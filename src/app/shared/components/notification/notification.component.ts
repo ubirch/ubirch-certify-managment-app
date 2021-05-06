@@ -13,7 +13,7 @@ export class NotificationComponent implements OnInit {
   get cssClass() {
     return {
       success: this.data?.type === NotificationType.success,
-      error: this.data?.type === NotificationType.errorr,
+      error: this.data?.type === NotificationType.error,
       warning: !this.data?.type || this.data?.type === NotificationType.warning,
       notification: true,
     };

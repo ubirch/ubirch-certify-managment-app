@@ -4,14 +4,26 @@
     text-align: center;
 }
 .error {
-    border-color: tomato;
-    background-color: rgb(255, 99, 71, 0.2);
+    border-color: #792618;
+    color: #792618;
+    background-color: #f9aa9c;
 }
 .success {
-    border-color: rgb(76, 175, 80);
-    background-color: rgba(76, 175, 80, 0.2);;
+    border-color: #28792a;
+    color: #28792a;
+    background-color: #beffc0;;
 }
 .warning {
-    border-color: rgb(91, 91, 38);
-    background-color: rgba(255, 255, 104, 0.2);
+    border-color: #63630d;
+    color: #63630d;
+    background-color: #ffffa9;
 }
+
+.notify-side {
+    width: 2rem;
+}
+
+mat-icon {
+    font-size: 2rem;
+}
+
