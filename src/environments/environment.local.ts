@@ -7,6 +7,7 @@ const keycloakConfig: any = {
 export const environment = {
     production: true,
     keycloak: keycloakConfig,
-    pocManagerApi: 'https://poc-api.dev.ubirch.com/tenant-admin/',
+    pocManagerApi: 'https://api.poc.dev.ubirch.com/tenant-admin/',
     pocUpload: 'pocs/create',
+    pocList: 'pocs',
 };
