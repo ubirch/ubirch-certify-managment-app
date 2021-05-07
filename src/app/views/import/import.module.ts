@@ -4,7 +4,6 @@ import { ImportRoutingModule } from './import-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ImportComponent } from './import/import.component';
 
-
 @NgModule({
   declarations: [
     ImportComponent

@@ -1,4 +1,4 @@
-<div [ngClass]="cssClass" *ngIf="notification" fxLayout fxLayoutAlign="center center">
+<div [ngClass]="cssClass" *ngIf="notification" fxLayout fxLayoutAlign="center center" [@fadeUpDown]="notification">
   <div class="notify-side">
     <mat-icon aria-hidden="false" aria-label="errro" *ngIf="notification.type === notificationTypes.error">error_outline</mat-icon>
     <mat-icon aria-hidden="false" aria-label="warning" *ngIf="notification.type === notificationTypes.warning">warning_amber</mat-icon>
