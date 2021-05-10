@@ -40,6 +40,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'status',
   ];
   selection = new SelectionModel<IPoc>(true, []);
+  defaultSortColumn = 'externalId';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPoc | null;
@@ -68,7 +69,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource = new PocDataSource(this.pocService, this.error);
-    this.dataSource.loadPocs(new PocFilters());
+    this.dataSource.loadPocs({ ...new PocFilters(), sortColumn: this.defaultSortColumn });
     this.generateFilters();
   }
 

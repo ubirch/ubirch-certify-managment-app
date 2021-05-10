@@ -31,7 +31,7 @@
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
-    matSort matSortActive="externalId" matSortDirection="asc" matSortDisableClear>
+    matSort [matSortActive]="defaultSortColumn" matSortDirection="asc" matSortDisableClear>
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
