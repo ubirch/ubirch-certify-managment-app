@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
 import { INotification } from 'src/app/core/models/interfaces/notification.interface';
 import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
@@ -19,6 +20,7 @@ export class ImportComponent implements OnInit {
 
   constructor(
     private fileService: FileUploadService,
+    private error: ErrorHandlerService,
     private notificationService: NotificationService
   ) { }
 
@@ -52,10 +54,7 @@ export class ImportComponent implements OnInit {
         },
         err => {
           this.progress = null;
-          this.notification = this.notificationService.error({
-            title: 'import.notifications.errorTitle',
-            message: 'import.notifications.error'
-          });
+          this.notification = this.error.handlerResponseError(err);
         }
       );
   }

@@ -4,8 +4,8 @@ import { DEFAULT_PAGE_SIZE } from '../utils/constants';
 const FILTER_PARAM_PREFIX = 'filterColumn';
 
 export class PocFilters {
-    search?: string = undefined;
-    sortColumn?: string = undefined;
+    search = '';
+    sortColumn = '';
     sortOrder: SortDirection = 'asc';
     pageIndex = 0;
     pageSize: number = DEFAULT_PAGE_SIZE;

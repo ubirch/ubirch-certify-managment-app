@@ -1,4 +1,4 @@
 export interface IListResult<T> {
-    pocs: T[];
+    records: T[];
     total: number;
 }

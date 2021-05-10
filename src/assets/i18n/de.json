@@ -1,7 +1,15 @@
 {
 	"global": {
 		"logout": "Logout",
-		"back": "Back"
+		"back": "Back",
+		"errors": {
+			"requestDefaultTitle": "Request error",
+			"requestDefault": "There was an error while processing your request. Pleaase try again",
+			"400Title": "Bad request",
+			"400": "Sorry. We were unable to find data using selected criteria.",
+			"403Title": "Unauthorized",
+			"403": "Sorry. We were unable to authorize this request"
+		}
 	},
 	"dashboard": {
 		"headline": "Dashboard"

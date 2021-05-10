@@ -1,10 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { MOCK_DATA } from '../mocks/pocs.mock';
-import { IListResult } from '../models/interfaces/poc-list-result.interface';
+import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPoc } from '../models/interfaces/poc.interface';
 import { flattenFilters, PocFilters } from '../models/poc-filters';
 

@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,6 +12,7 @@ import { PocStatus } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
 import { detailExpand } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
@@ -62,10 +63,11 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     private fb: FormBuilder,
     private translate: TranslateService,
     public dialog: MatDialog,
+    private error: ErrorHandlerService,
   ) { }
 
   ngOnInit() {
-    this.dataSource = new PocDataSource(this.pocService);
+    this.dataSource = new PocDataSource(this.pocService, this.error);
     this.dataSource.loadPocs(new PocFilters());
     this.generateFilters();
   }
