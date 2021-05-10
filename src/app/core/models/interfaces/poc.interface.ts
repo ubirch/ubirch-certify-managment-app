@@ -5,8 +5,10 @@ import { IPocAddons } from './poc-addons.interface';
 
 export interface IPoc {
     id: string;
+    tenantId: string;
     externalId: string;
     pocName: string;
+    deviceId: string;
     status: PocStatus;
 
     address?: IAddress;
@@ -14,13 +16,13 @@ export interface IPoc {
     logoUrl?: string;
     extraConfig?: any;
     manager?: IPerson;
+    roleName: string;
 
-    schemaId?: string;
+    dataSchemaId?: string;
     certifyApp?: boolean;
+    clientCertRequired: boolean;
     pocAddons: IPocAddons;
 
-    createdAt: Date;
-    updatedAt?: Date;
+    created: Date;
+    lastUpdated?: Date;
 }
-
-
