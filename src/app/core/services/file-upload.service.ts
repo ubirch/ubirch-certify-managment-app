@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 })
 export class FileUploadService {
 
-  postUrl = `${environment.pocManagerApi}${environment.pocUpload}`;
+  postUrl = `${environment.pocManagerApi}pocs/create`;
 
   constructor(private http: HttpClient) { }
 

@@ -11,7 +11,7 @@ import { flattenFilters, PocFilters } from '../models/poc-filters';
 })
 export class PocsService {
 
-  pocListUrl = `${environment.pocManagerApi}${environment.pocList}`;
+  pocListUrl = `${environment.pocManagerApi}pocs`;
 
   constructor(private http: HttpClient) { }
 
@@ -20,10 +20,7 @@ export class PocsService {
   }
 
   deletePocs(pocs: IPoc[]) {
-    // const count = this.pocsList.length;
-    // const pocIds = pocs.map(p => p.id);
-    // this.pocsList = this.pocsList.filter(p => !pocIds.includes(p.id));
-    return of([]);
+    return this.http.delete(this.pocListUrl, { params: { pocIds: pocs.map(p => p.id).toString() } });
   }
 
 }
