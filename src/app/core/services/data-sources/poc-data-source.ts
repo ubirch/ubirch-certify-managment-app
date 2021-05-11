@@ -53,7 +53,9 @@ export class PocDataSource implements DataSource<IPoc> {
     deletePocs(pocs: IPoc[], filters: PocFilters) {
         this.loadingSubject.next(true);
         this.service.deletePocs(pocs).pipe(
-            tap(() => this.loadPocs({ ...filters, pageIndex: 0 }))
+            tap(() => this.loadPocs({ ...filters, pageIndex: 0 })),
+            catchError(err => of(this.error.handlerResponseError(err))),
+            finalize(() => this.loadingSubject.next(false))
         ).subscribe();
     }
 
