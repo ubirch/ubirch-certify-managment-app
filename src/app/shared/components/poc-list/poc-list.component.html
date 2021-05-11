@@ -18,7 +18,7 @@
 </form>
 
 <!-- ACTIONS -->
-<div class="actions" [hidden]="!showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem">
+<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeDownIn]="showActions">
     <label>{{ 'pocList.actions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">

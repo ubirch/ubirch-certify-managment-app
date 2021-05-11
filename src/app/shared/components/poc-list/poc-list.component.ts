@@ -14,7 +14,7 @@ import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
-import { detailExpand } from 'src/app/core/utils/animations';
+import { detailExpand, fadeDownIn } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
@@ -22,7 +22,7 @@ import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/co
   selector: 'app-poc-list',
   templateUrl: './poc-list.component.html',
   styleUrls: ['./poc-list.component.scss'],
-  animations: [detailExpand],
+  animations: [detailExpand, fadeDownIn],
 })
 export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
