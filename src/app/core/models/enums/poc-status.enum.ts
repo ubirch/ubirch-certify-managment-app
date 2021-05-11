@@ -3,3 +3,10 @@ export enum PocStatus {
     processing = 'PROCESSING',
     ready = 'READY'
 }
+
+export const PocStatusTranslation: Record<PocStatus, string> = {
+    [PocStatus.pending]: 'pending',
+    [PocStatus.processing]: 'processing',
+    [PocStatus.ready]: 'ready',
+};
+

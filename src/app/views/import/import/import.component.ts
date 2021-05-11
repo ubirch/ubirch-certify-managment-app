@@ -41,14 +41,14 @@ export class ImportComponent implements OnInit {
         event => {
           this.progress = event;
           if (event.state === UploadState.done) {
-            if (event.result && event.result instanceof Blob) {
+            if (event.result && event.result instanceof Blob && event.result.size > 0) {
               this.errorFile = event.result;
               this.notification = this.notificationService.warning({
                 title: 'import.notifications.partialTitle',
                 message: 'import.notifications.partial'
               });
             } else {
-              this.notificationService.success({ message: 'import.notifications.success' });
+              this.notification = this.notificationService.success({ message: 'import.notifications.success' });
             }
           }
         },

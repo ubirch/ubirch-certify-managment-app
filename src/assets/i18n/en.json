@@ -31,11 +31,11 @@
 	},
 	"poc": {
 		"externalId": "External Id",
-		"name": "Name",
+		"pocName": "Name",
 		"deviceId": "Device Id",
-		"folderIdentifier": "Folder identifier",
-		"createdAt": "Created",
-		"updatedAt": "Updated",
+		"dataSchemaId": "Schema Id",
+		"created": "Created",
+		"lastUpdated": "Updated",
 		"status": "Status"
 	},
 	"pocList": {

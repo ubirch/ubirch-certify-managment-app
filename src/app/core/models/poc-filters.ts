@@ -21,9 +21,10 @@ export const flattenFilters = (filters: PocFilters) => {
     if (!filterColumns) { return filters; }
 
     const flatFilters = Object.keys(filterColumns).reduce((acc, key) => {
-        const newKey = `${FILTER_PARAM_PREFIX}${key}`;
-        acc[newKey] = filters.filterColumns[key];
+        const newKey = `${FILTER_PARAM_PREFIX}[${key}]`;
+        acc[newKey] = filters.filterColumns[key].toString();
         return acc;
     }, {});
+
     return { ...other, ...flatFilters };
 };

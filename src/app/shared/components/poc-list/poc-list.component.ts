@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge, pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
-import { PocStatus } from 'src/app/core/models/enums/poc-status.enum';
+import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
@@ -34,9 +34,9 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'select',
     'externalId',
     'pocName',
-    'folderIdentifier',
-    'createdAt',
-    'updatedAt',
+    'dataSchemaId',
+    'created',
+    'lastUpdated',
     'status',
   ];
   selection = new SelectionModel<IPoc>(true, []);
@@ -51,6 +51,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     { value: PocActions.delete, label: `pocList.actions.delete` }
   ];
   statuses: string[] = [PocStatus.ready, PocStatus.pending, PocStatus.processing];
+  PocStatusTranslation = PocStatusTranslation;
   showActions = false;
 
   get search() { return this.filters.get('search'); }
@@ -69,8 +70,8 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource = new PocDataSource(this.pocService, this.error);
-    this.dataSource.loadPocs({ ...new PocFilters(), sortColumn: this.defaultSortColumn });
     this.generateFilters();
+    this.loadPocPage();
   }
 
   ngAfterViewInit(): void {
@@ -178,7 +179,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private generateFilters() {
-    this.filters = this.fb.group(new PocFilters());
+    this.filters = this.fb.group({ ...new PocFilters(), sortColumn: this.defaultSortColumn });
     this.filters.get('search').setValidators([Validators.minLength(3)]);
 
     this.filters.addControl('filterColumns', this.fb.group({

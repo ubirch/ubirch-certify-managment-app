@@ -16,9 +16,6 @@ export class FileUploadService {
   constructor(private http: HttpClient) { }
 
   uploadFile(file: File): Observable<IUploadStatus> {
-    const myFormData: FormData = new FormData();
-    myFormData.append('file', file, file.name);
-
     const config = new HttpRequest('POST', this.postUrl, file, {
       reportProgress: true,
       responseType: 'blob'
