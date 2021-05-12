@@ -1,16 +1,19 @@
 export interface IPocCreationState {
     validDataSchemaGroup: boolean;
-    userRealmRoleCreated: boolean;
-    userRealmGroupCreated: boolean;
-    deviceRealmRoleCreated: boolean;
-    deviceRealmGroupCreated: boolean;
+    userRoleCreated: boolean;
+    userGroupCreated: boolean;
+    userGroupRoleAssigned: boolean;
+    deviceRoleCreated: boolean;
+    deviceGroupCreated: boolean;
+    deviceGroupRoleAssigned: boolean;
     deviceCreated: boolean;
-    clientCertDownloaded: boolean;
-    clientCertProvided: boolean;
+    clientCertRequired: boolean;
     logoRequired: boolean;
     logoReceived: boolean;
     logoStored: boolean;
-    certApiProvided: boolean;
-    coClientProvided: boolean;
-    errorMessages: string[];
+    certifyApiProvided: boolean;
+    goClientProvided: boolean;
+    errorMessage: string;
+    lastUpdated: Date;
+    created: Date;
 }

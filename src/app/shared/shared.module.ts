@@ -61,7 +61,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
-import { PocListFiltersComponent } from './components/poc-list/poc-list-filters.component';
+import { PocListFiltersComponent } from './components/poc-list/poc-list-filters/poc-list-filters.component';
+import { PocDetailsComponent } from './components/poc-list/poc-details/poc-details.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { PocListFiltersComponent } from './components/poc-list/poc-list-filters.
     FooterComponent,
     PocListComponent,
     PocListFiltersComponent,
+    PocDetailsComponent,
     LanguageSelectComponent,
     ConfirmDialogComponent,
     FileUploadComponent,
@@ -101,7 +103,7 @@ import { PocListFiltersComponent } from './components/poc-list/poc-list-filters.
     // MatStepperModule,
     // MatDatepickerModule,
     MatDialogModule,
-    // MatDividerModule,
+    MatDividerModule,
     // MatExpansionModule,
     // MatGridListModule,
     MatIconModule,
@@ -150,6 +152,7 @@ import { PocListFiltersComponent } from './components/poc-list/poc-list-filters.
     MatCardModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatDividerModule,
 
     FlexLayoutModule,
     TranslateModule,

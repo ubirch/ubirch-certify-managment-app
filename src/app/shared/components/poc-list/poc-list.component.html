@@ -2,7 +2,7 @@
 <app-poc-list-filters [filters]="filters" (exportClicked)="export()" [exportDisabled]="exportLoading"></app-poc-list-filters>
 
 <!-- ACTIONS -->
-<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeDownIn]="showActions">
+<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
     <label>{{ 'pocList.actions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">
@@ -77,9 +77,9 @@
     <ng-container matColumnDef="expandedDetail">
         <mat-cell *matCellDef="let poc">
             <div class="element-detail"
-                [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="detail-cols">
-                    <div><label>{{ 'poc.deviceId' | translate }}:</label> <span>{{ poc.deviceId }}</span></div>
+                [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
+                <div class="detail-cols" fxFlex>
+                    <app-poc-details [poc]="poc" [current]="expandedElement === poc"></app-poc-details>
                 </div>
             </div>
         </mat-cell>

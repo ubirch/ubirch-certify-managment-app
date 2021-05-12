@@ -15,7 +15,7 @@ import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-sourc
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
-import { detailExpand, fadeDownIn } from 'src/app/core/utils/animations';
+import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
@@ -23,7 +23,7 @@ import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/co
   selector: 'app-poc-list',
   templateUrl: './poc-list.component.html',
   styleUrls: ['./poc-list.component.scss'],
-  animations: [detailExpand, fadeDownIn],
+  animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
 export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -157,7 +157,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.unsubscribe$),
       finalize(() => this.exportLoading = false)
     ).subscribe(
-      blob => this.exportService.triggerDownload(blob),
+      blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
       err => this.error.handlerResponseError(err)
     );
   }

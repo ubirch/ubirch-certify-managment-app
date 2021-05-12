@@ -1,0 +1,18 @@
+:host {
+    flex-grow: 1;
+}
+label {
+    font-weight: bold;
+    padding-right: 0.7rem;
+}
+
+.mat-divider { 
+    margin: 1rem 0;
+}
+
+.mat-icon { color: red;}
+.mat-icon.success {color: green;}
+
+.state-dates {
+    margin: 1rem 0;
+}

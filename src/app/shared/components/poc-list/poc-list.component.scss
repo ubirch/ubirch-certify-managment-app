@@ -37,19 +37,14 @@
 
 .detail-row {
     min-height: auto;
+    background: #efefef;
 }
 
 .element-detail {
     overflow: hidden;
-    display: flex;
 }
 
 .detail-cols {
     padding: 1rem 0 1rem 76px;
     display: flex;
-
-    label {
-        font-weight: bold;
-        padding-right: 0.7rem;
-    }
 }

@@ -7,7 +7,10 @@ export const detailExpand = trigger('detailExpand', [
     transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
 ]);
 
-export const fadeDownIn = trigger('fadeDownIn', [
+export const fadeDownIn = trigger('fadeInDown', [
     transition('void => *', useAnimation(fadeInUp, { params: { timing: 0.2, a: '-30px', b: '0px' } })),
+]);
+
+export const fadeUpOut = trigger('fadeOutUp', [
     transition('* => void', useAnimation(fadeOutUp, { params: { timing: 0.2, a: '0px', b: '-30px' } })),
 ]);

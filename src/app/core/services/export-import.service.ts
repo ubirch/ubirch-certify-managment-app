@@ -47,11 +47,11 @@ export class ExportImportService {
     return this.http.get(this.downloadUrl, { responseType: 'blob' });
   }
 
-  triggerDownload(blob) {
+  triggerDownload(blob: Blob, fileName: string) {
     const a = document.createElement('a');
     const objectUrl = URL.createObjectURL(blob);
     a.href = objectUrl;
-    a.download = 'POCS_' + (new Date()).toISOString() + '.csv';
+    a.download = fileName;
     a.click();
     URL.revokeObjectURL(objectUrl);
   }

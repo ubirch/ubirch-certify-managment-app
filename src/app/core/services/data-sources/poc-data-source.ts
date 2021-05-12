@@ -36,7 +36,7 @@ export class PocDataSource implements DataSource<IPoc> {
     loadPocs(filters: PocFilters) {
         this.loadingSubject.next(true);
 
-        this.service.loadPocs(filters).pipe(
+        this.service.getPocs(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
         ).subscribe(
             pocResult => {

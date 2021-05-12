@@ -36,7 +36,25 @@
 		"dataSchemaId": "Schema Id",
 		"created": "Created",
 		"lastUpdated": "Updated",
-		"status": "Status"
+		"status": "Status",
+		"state": {
+			"userRoleCreated": "User role created",
+			"validDataSchemaGroup": "Valid data schema group",
+			"userGroupCreated": "User group create",
+			"userGroupRoleAssigned": "User group role assigned",
+			"deviceRoleCreated": "Device role created",
+			"deviceGroupCreated": "Device group created",
+			"deviceGroupRoleAssigned": "Device group role assigned",
+			"deviceCreated": "Device created",
+			"clientCertRequired": "Client cert required",
+			"logoRequired": "Logo required",
+			"logoStored": "Logo stored",
+			"certifyApiProvided": "Certify api provided",
+			"goClientProvided": "Go client provided",
+			"lastUpdated": "Last Updated",
+			"created": "Created",
+			"errorMessage": "Error Message"
+		}
 	},
 	"pocList": {
 		"filters": {

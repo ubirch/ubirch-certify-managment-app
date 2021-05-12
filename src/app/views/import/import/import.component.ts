@@ -60,10 +60,7 @@ export class ImportComponent implements OnInit {
   }
 
   downloadResult() {
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(this.errorFile);
-    a.download = 'processing_errors.csv';
-    a.click();
+    this.fileService.triggerDownload(this.errorFile, 'processing_errors.csv');
   }
 
 }
