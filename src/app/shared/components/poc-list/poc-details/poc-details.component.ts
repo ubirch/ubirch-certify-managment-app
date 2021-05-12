@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPocCreationState } from 'src/app/core/models/interfaces/poc-creation-state.interface';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
@@ -21,9 +21,7 @@ export class PocDetailsComponent {
     else { this.pocState = null; }
   }
 
-  constructor(
-    private pocsService: PocsService
-  ) { }
+  constructor(private pocsService: PocsService) { }
 
   icon(value: boolean) {
     return value ? 'check_circle' : 'cancel';
