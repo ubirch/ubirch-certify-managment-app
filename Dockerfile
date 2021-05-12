@@ -10,4 +10,5 @@ RUN ng build
 
 
 FROM nginx:latest
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/www/ /usr/share/nginx/html/
