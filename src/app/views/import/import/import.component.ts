@@ -3,7 +3,7 @@ import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
 import { INotification } from 'src/app/core/models/interfaces/notification.interface';
 import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { FileUploadService } from 'src/app/core/services/file-upload.service';
+import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ImportComponent implements OnInit {
   notification: INotification;
 
   constructor(
-    private fileService: FileUploadService,
+    private fileService: ExportImportService,
     private error: ErrorHandlerService,
     private notificationService: NotificationService
   ) { }

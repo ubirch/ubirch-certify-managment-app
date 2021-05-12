@@ -9,13 +9,7 @@
         transform: translateX(-50%);
     }
     
-    .filters {
-        margin-bottom: 1rem;
-
-        .import-btn { margin-left: auto }
-    }
-
-    .actions, .filters {
+    .actions {
         label, button {
             margin-bottom: 1.34375em;
         }

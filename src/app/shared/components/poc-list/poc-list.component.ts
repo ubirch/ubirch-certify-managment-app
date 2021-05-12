@@ -6,13 +6,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, pipe, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
-import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
+import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
 import { detailExpand, fadeDownIn } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
@@ -50,9 +51,9 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   actions = [
     { value: PocActions.delete, label: `pocList.actions.delete` }
   ];
-  statuses: string[] = [PocStatus.ready, PocStatus.pending, PocStatus.processing];
   PocStatusTranslation = PocStatusTranslation;
   showActions = false;
+  exportLoading = false;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
@@ -66,6 +67,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     private translate: TranslateService,
     public dialog: MatDialog,
     private error: ErrorHandlerService,
+    private exportService: ExportImportService,
   ) { }
 
   ngOnInit() {
@@ -147,6 +149,17 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       default:
         break;
     }
+  }
+
+  export() {
+    this.exportLoading = true;
+    this.exportService.exportPocs().pipe(
+      takeUntil(this.unsubscribe$),
+      finalize(() => this.exportLoading = false)
+    ).subscribe(
+      blob => this.exportService.triggerDownload(blob),
+      err => this.error.handlerResponseError(err)
+    );
   }
 
   ngOnDestroy(): void {

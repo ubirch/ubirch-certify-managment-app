@@ -61,6 +61,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
+import { PocListFiltersComponent } from './components/poc-list/poc-list-filters.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     HeaderComponent,
     FooterComponent,
     PocListComponent,
+    PocListFiltersComponent,
     LanguageSelectComponent,
     ConfirmDialogComponent,
     FileUploadComponent,

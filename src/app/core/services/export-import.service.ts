@@ -9,14 +9,16 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
+export class ExportImportService {
 
-  postUrl = `${environment.pocManagerApi}pocs/create`;
+  baseUrl = environment.pocManagerApi;
+  uploadUrl = `${this.baseUrl}pocs/create`;
+  downloadUrl = `${this.baseUrl}devices`;
 
   constructor(private http: HttpClient) { }
 
   uploadFile(file: File): Observable<IUploadStatus> {
-    const config = new HttpRequest('POST', this.postUrl, file, {
+    const config = new HttpRequest('POST', this.uploadUrl, file, {
       reportProgress: true,
       responseType: 'blob'
     });
@@ -39,6 +41,19 @@ export class FileUploadService {
       },
         { state: UploadState.pending, progress: 0, result: null })
     );
+  }
+
+  exportPocs() {
+    return this.http.get(this.downloadUrl, { responseType: 'blob' });
+  }
+
+  triggerDownload(blob) {
+    const a = document.createElement('a');
+    const objectUrl = URL.createObjectURL(blob);
+    a.href = objectUrl;
+    a.download = 'POCS_' + (new Date()).toISOString() + '.csv';
+    a.click();
+    URL.revokeObjectURL(objectUrl);
   }
 }
 

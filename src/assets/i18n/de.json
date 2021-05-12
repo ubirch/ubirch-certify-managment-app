@@ -48,6 +48,7 @@
 		"actions": {
 			"action": "Action",
 			"import": "Import",
+			"export": "Export",
 			"apply": "Apply",
 			"delete": "Delete",
 			"activate": "Activate",
