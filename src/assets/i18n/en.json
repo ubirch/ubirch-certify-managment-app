@@ -1,5 +1,6 @@
 {
 	"global": {
+		"login": "Login",
 		"logout": "Logout",
 		"back": "Back",
 		"errors": {
@@ -7,6 +8,8 @@
 			"requestDefault": "There was an error while processing your request. Pleaase try again",
 			"400Title": "Bad request",
 			"400": "Sorry. We were unable to find data using selected criteria.",
+			"401Title": "Session expired",
+			"401": "Seems like your session has expired. Please log in again to continue",
 			"403Title": "Unauthorized",
 			"403": "Sorry. We were unable to authorize this request",
 			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented"

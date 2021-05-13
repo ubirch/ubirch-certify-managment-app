@@ -14,6 +14,7 @@ import { CoreModule } from './core/core.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { sessionEndedInterceptorProvider } from './core/interceptors/session-ended';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(http);
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             multi: true,
             deps: [KeycloakService],
         },
+        sessionEndedInterceptorProvider
     ],
     bootstrap: [AppComponent],
 })
