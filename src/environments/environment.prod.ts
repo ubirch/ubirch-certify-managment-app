@@ -8,5 +8,5 @@ const keycloakConfig: any = {
 export const environment = {
   production: true,
   keycloak: keycloakConfig,
-  // pocManagerApi: 'https://api.poc.dev.ubirch.com/tenant-admin/',
+  pocManagerApi: '@@POC_MANAGER_API@@'
 };
