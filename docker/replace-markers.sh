@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # replace the markers in any javascript file.
-find /srv/www -type f -name '*.js' -exec \
+find /usr/share/nginx/html -type f -name '*.js' -exec \
     sed -i \
         -e "s%@@KEYCLOAK_REALM@@%${KEYCLOAK_REALM}%" \
         -e "s%@@KEYCLOAK_URL@@%${KEYCLOAK_URL}%" \
