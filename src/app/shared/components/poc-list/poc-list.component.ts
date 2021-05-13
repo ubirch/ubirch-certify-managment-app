@@ -14,6 +14,7 @@ import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { ExportImportService } from 'src/app/core/services/export-import.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
@@ -64,14 +65,15 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private pocService: PocsService,
     private fb: FormBuilder,
-    private translate: TranslateService,
+    private translateService: TranslateService,
     public dialog: MatDialog,
-    private error: ErrorHandlerService,
+    private errorService: ErrorHandlerService,
     private exportService: ExportImportService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
-    this.dataSource = new PocDataSource(this.pocService, this.error);
+    this.dataSource = new PocDataSource(this.pocService, this.errorService);
     this.generateFilters();
     this.loadPocPage();
   }
@@ -144,7 +146,13 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     const selected = this.selection.selected;
     switch (this.action.value) {
       case PocActions.delete:
-        this.deleteItems(selected);
+        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
+        this.notificationService.warning({
+          message: 'global.errors.notImplemented',
+          title: 'global.errors.requestDefaultTitle',
+          duration: 7000
+        });
+        // this.deleteItems(selected);
         break;
       default:
         break;
@@ -158,7 +166,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       finalize(() => this.exportLoading = false)
     ).subscribe(
       blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
-      err => this.error.handlerResponseError(err)
+      err => this.errorService.handlerResponseError(err)
     );
   }
 
@@ -170,8 +178,8 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private deleteItems(pocs: IPoc[]) {
-    const message = this.translate.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
-    const title = this.translate.instant('pocList.actions.deleteConfirmTitle');
+    const message = this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
+    const title = this.translateService.instant('pocList.actions.deleteConfirmTitle');
     const dialogData = new ConfirmDialogModel(title, message);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

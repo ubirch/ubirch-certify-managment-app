@@ -8,7 +8,8 @@
 			"400Title": "Bad request",
 			"400": "Sorry. We were unable to find data using selected criteria.",
 			"403Title": "Unauthorized",
-			"403": "Sorry. We were unable to authorize this request"
+			"403": "Sorry. We were unable to authorize this request",
+			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented"
 		}
 	},
 	"dashboard": {
@@ -30,7 +31,7 @@
 		}
 	},
 	"poc": {
-		"externalId": "External Id",
+		"externalId": "Id",
 		"pocName": "Name",
 		"deviceId": "Device Id",
 		"dataSchemaId": "Schema Id",
