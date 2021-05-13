@@ -6,7 +6,7 @@ RUN npm install
 RUN npm install -g @angular/cli
 
 ADD . ./
-RUN ng build
+RUN ng build --configuration=production
 
 
 FROM nginx:latest
