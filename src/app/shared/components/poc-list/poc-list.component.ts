@@ -1,19 +1,22 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, pipe, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
-import { PocStatus } from 'src/app/core/models/enums/poc-status.enum';
+import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocFilters } from 'src/app/core/models/poc-filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
+import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { ExportImportService } from 'src/app/core/services/export-import.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
-import { detailExpand } from 'src/app/core/utils/animations';
+import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
@@ -21,7 +24,7 @@ import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/co
   selector: 'app-poc-list',
   templateUrl: './poc-list.component.html',
   styleUrls: ['./poc-list.component.scss'],
-  animations: [detailExpand],
+  animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
 export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -33,12 +36,13 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'select',
     'externalId',
     'pocName',
-    'folderIdentifier',
-    'createdAt',
-    'updatedAt',
+    'dataSchemaId',
+    'created',
+    'lastUpdated',
     'status',
   ];
   selection = new SelectionModel<IPoc>(true, []);
+  defaultSortColumn = 'externalId';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPoc | null;
@@ -48,8 +52,9 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   actions = [
     { value: PocActions.delete, label: `pocList.actions.delete` }
   ];
-  statuses: string[] = [PocStatus.ready, PocStatus.pending, PocStatus.processing];
+  PocStatusTranslation = PocStatusTranslation;
   showActions = false;
+  exportLoading = false;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
@@ -60,14 +65,17 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private pocService: PocsService,
     private fb: FormBuilder,
-    private translate: TranslateService,
+    private translateService: TranslateService,
     public dialog: MatDialog,
+    private errorService: ErrorHandlerService,
+    private exportService: ExportImportService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
-    this.dataSource = new PocDataSource(this.pocService);
-    this.dataSource.loadPocs(new PocFilters());
+    this.dataSource = new PocDataSource(this.pocService, this.errorService);
     this.generateFilters();
+    this.loadPocPage();
   }
 
   ngAfterViewInit(): void {
@@ -138,11 +146,28 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     const selected = this.selection.selected;
     switch (this.action.value) {
       case PocActions.delete:
-        this.deleteItems(selected);
+        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
+        this.notificationService.warning({
+          message: 'global.errors.notImplemented',
+          title: 'global.errors.requestDefaultTitle',
+          duration: 7000
+        });
+        // this.deleteItems(selected);
         break;
       default:
         break;
     }
+  }
+
+  export() {
+    this.exportLoading = true;
+    this.exportService.exportPocs().pipe(
+      takeUntil(this.unsubscribe$),
+      finalize(() => this.exportLoading = false)
+    ).subscribe(
+      blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
+      err => this.errorService.handlerResponseError(err)
+    );
   }
 
   ngOnDestroy(): void {
@@ -153,8 +178,8 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private deleteItems(pocs: IPoc[]) {
-    const message = this.translate.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
-    const title = this.translate.instant('pocList.actions.deleteConfirmTitle');
+    const message = this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
+    const title = this.translateService.instant('pocList.actions.deleteConfirmTitle');
     const dialogData = new ConfirmDialogModel(title, message);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -175,7 +200,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private generateFilters() {
-    this.filters = this.fb.group(new PocFilters());
+    this.filters = this.fb.group({ ...new PocFilters(), sortColumn: this.defaultSortColumn });
     this.filters.get('search').setValidators([Validators.minLength(3)]);
 
     this.filters.addControl('filterColumns', this.fb.group({

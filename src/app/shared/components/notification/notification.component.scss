@@ -1,0 +1,24 @@
+:host {
+    border: 1px solid transparent;
+    display: block;
+
+    p { margin-bottom: 0;  }
+
+    .notification {
+        padding: 1rem 2rem;
+    }
+
+    .error {
+        color: #792618;
+        background-color: #f9aa9c;
+    }
+    .success {
+        color: #28792a;
+        background-color: #beffc0;;
+    }
+    .warning {
+        color: #63630d;
+        background-color: #ffffa9;
+    }
+}
+

@@ -3,17 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 const keycloakConfig: any = {
-    url: 'https://id.dev.ubirch.com/auth',
-    realm: 'ubirch-default-realm',
+    url: 'https://id.certify.dev.ubirch.com/auth/',
+    realm: 'ubirch-certificator',
     clientId: 'poc-manager-user-access-local'
 };
 
 export const environment = {
     production: false,
     keycloak: keycloakConfig,
-    anchoringAPIUrl: 'https://api.certify.dev.ubirch.com',
-    // verificationPageDefaultUrl: 'https://verification.dev.ubirch.com/v/gd-vcc',
-    verificationPageDefaultUrl: 'https://verification.dev.ubirch.com/v',
+    pocManagerApi: 'https://api.poc.dev.ubirch.com/tenant-admin/',
 };
 
 /*

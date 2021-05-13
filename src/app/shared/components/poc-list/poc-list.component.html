@@ -1,24 +1,8 @@
 <!-- FILTERS -->
-<form action="" [formGroup]="filters" *ngIf="filters" fxLayout fxLayoutGap="2rem" fxLayoutAlign="start end" class="filters">
-    <label>{{ 'pocList.filters.filters' | translate }}</label>
-    <mat-form-field>
-        <mat-label>{{ 'pocList.filters.search' | translate }}</mat-label>
-        <input matInput placeholder="{{ 'pocList.filters.searchPlaceholder' | translate}}" #input formControlName="search">
-    </mat-form-field>
-    <mat-form-field formGroupName="filterColumns">
-        <mat-label>{{ 'pocList.filters.status' | translate }} </mat-label>
-        <mat-select formControlName="status" multiple>
-            <mat-option *ngFor="let status of statuses" [value]="status">{{ 'pocStatuses.' + status | translate }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [routerLink]="[ '/views', 'import' ]" class="import-btn">
-        <mat-icon aria-hidden="false" aria-label="Import pocs">add</mat-icon>
-        {{ 'pocList.actions.import' | translate }} 
-    </button>
-</form>
+<app-poc-list-filters [filters]="filters" (exportClicked)="export()" [exportDisabled]="exportLoading"></app-poc-list-filters>
 
 <!-- ACTIONS -->
-<div class="actions" [hidden]="!showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem">
+<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
     <label>{{ 'pocList.actions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">
@@ -31,7 +15,7 @@
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
-    matSort matSortActive="externalId" matSortDirection="asc" matSortDisableClear>
+    matSort [matSortActive]="defaultSortColumn" matSortDirection="asc" matSortDisableClear>
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
@@ -61,7 +45,7 @@
     <!-- status -->
     <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.status' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let poc">{{ 'pocStatuses.' + poc.status | translate }}</mat-cell>
+        <mat-cell *matCellDef="let poc">{{ 'pocStatuses.' + PocStatusTranslation[poc.status] | translate }}</mat-cell>
     </ng-container>
 
     <!-- name -->
@@ -71,21 +55,21 @@
     </ng-container>
 
     <!-- folderIdentifier -->
-    <ng-container matColumnDef="folderIdentifier">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.folderIdentifier' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let poc">{{poc.folderIdentifier}}</mat-cell>
+    <ng-container matColumnDef="dataSchemaId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.dataSchemaId' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let poc">{{poc.dataSchemaId}}</mat-cell>
     </ng-container>
 
     <!-- createdAt -->
-    <ng-container matColumnDef="createdAt">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.createdAt' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let poc">{{poc.createdAt | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.created' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let poc">{{poc.created | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
     </ng-container>
 
     <!-- updatedAt -->
-    <ng-container matColumnDef="updatedAt">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.updatedAt' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let poc">{{poc.updatedAt | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+    <ng-container matColumnDef="lastUpdated">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.lastUpdated' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let poc">{{poc.lastUpdated | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
     </ng-container>
 
 
@@ -93,9 +77,9 @@
     <ng-container matColumnDef="expandedDetail">
         <mat-cell *matCellDef="let poc">
             <div class="element-detail"
-                [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="detail-cols">
-                    <div><label>{{ 'poc.deviceId' | translate }}:</label> <span>{{ poc.pocAddons.deviceId }}</span></div>
+                [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
+                <div class="detail-cols" fxFlex>
+                    <app-poc-details [poc]="poc" [current]="expandedElement === poc"></app-poc-details>
                 </div>
             </div>
         </mat-cell>

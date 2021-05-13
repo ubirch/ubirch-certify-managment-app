@@ -1,9 +1,11 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
-import { IListResult } from '../../models/interfaces/poc-list-result.interface';
+import { IListResult } from '../../models/interfaces/list-result.interface';
 import { IPoc } from '../../models/interfaces/poc.interface';
 import { PocFilters } from '../../models/poc-filters';
+import { ErrorHandlerService } from '../error-handler.service';
 import { PocsService } from '../pocs.service';
 
 export class PocDataSource implements DataSource<IPoc> {
@@ -17,7 +19,10 @@ export class PocDataSource implements DataSource<IPoc> {
 
     get data() { return this.pocSubject.value; }
 
-    constructor(private service: PocsService) { }
+    constructor(
+        private service: PocsService,
+        private error: ErrorHandlerService,
+    ) { }
 
     connect(collectionViewer: CollectionViewer): Observable<IPoc[] | readonly IPoc[]> {
         return this.pocSubject.asObservable();
@@ -31,19 +36,26 @@ export class PocDataSource implements DataSource<IPoc> {
     loadPocs(filters: PocFilters) {
         this.loadingSubject.next(true);
 
-        this.service.loadPocs(filters).pipe(
-            catchError(() => of({} as IListResult<IPoc>)),
+        this.service.getPocs(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
-        ).subscribe(pocResult => {
-            this.pocSubject.next(pocResult.pocs ?? []);
-            this.totalItemsSubject.next(pocResult.total ?? 0);
-        });
+        ).subscribe(
+            pocResult => {
+                this.pocSubject.next(pocResult.records ?? []);
+                this.totalItemsSubject.next(pocResult.total ?? 0);
+            },
+            (err: HttpErrorResponse) => {
+                this.error.handlerResponseError(err);
+                return of({} as IListResult<IPoc>);
+            }
+        );
     }
 
     deletePocs(pocs: IPoc[], filters: PocFilters) {
         this.loadingSubject.next(true);
         this.service.deletePocs(pocs).pipe(
-            tap(() => this.loadPocs({ ...filters, pageIndex: 0 }))
+            tap(() => this.loadPocs({ ...filters, pageIndex: 0 })),
+            catchError(err => of(this.error.handlerResponseError(err))),
+            finalize(() => this.loadingSubject.next(false))
         ).subscribe();
     }
 

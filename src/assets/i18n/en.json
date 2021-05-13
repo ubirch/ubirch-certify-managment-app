@@ -1,23 +1,61 @@
 {
 	"global": {
 		"logout": "Logout",
-		"back": "Back"
+		"back": "Back",
+		"errors": {
+			"requestDefaultTitle": "Request error",
+			"requestDefault": "There was an error while processing your request. Pleaase try again",
+			"400Title": "Bad request",
+			"400": "Sorry. We were unable to find data using selected criteria.",
+			"403Title": "Unauthorized",
+			"403": "Sorry. We were unable to authorize this request",
+			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented"
+		}
 	},
 	"dashboard": {
 		"headline": "Dashboard"
 	},
 	"import": {
 		"headline": "PoC Import",
-		"upload": "Upload"
+		"uploadPrompt": "Select or drop a .csv file below and click \"Upload\" button.",
+		"upload": "Upload",
+		"downloadFile": "Download File",
+		"filePlaceholder": "No files selected",
+		"selectBtn": "Select File",
+		"notifications": {
+			"success": "POCs have been successfully processed",
+			"partial": "There were some errors while processing your .csv file. Download output file for details.",
+			"partialTitle": "POC import incomplete",
+			"error": "Ooops, we are unable to process the file. Please try again later.",
+			"errorTitle": "File upload failed"
+		}
 	},
 	"poc": {
-		"externalId": "External Id",
-		"name": "Name",
+		"externalId": "Id",
+		"pocName": "Name",
 		"deviceId": "Device Id",
-		"folderIdentifier": "Folder identifier",
-		"createdAt": "Created",
-		"updatedAt": "Updated",
-		"status": "Status"
+		"dataSchemaId": "Schema Id",
+		"created": "Created",
+		"lastUpdated": "Updated",
+		"status": "Status",
+		"state": {
+			"userRoleCreated": "User role created",
+			"validDataSchemaGroup": "Valid data schema group",
+			"userGroupCreated": "User group create",
+			"userGroupRoleAssigned": "User group role assigned",
+			"deviceRoleCreated": "Device role created",
+			"deviceGroupCreated": "Device group created",
+			"deviceGroupRoleAssigned": "Device group role assigned",
+			"deviceCreated": "Device created",
+			"clientCertRequired": "Client cert required",
+			"logoRequired": "Logo required",
+			"logoStored": "Logo stored",
+			"certifyApiProvided": "Certify api provided",
+			"goClientProvided": "Go client provided",
+			"lastUpdated": "Last Updated",
+			"created": "Created",
+			"errorMessage": "Error Message"
+		}
 	},
 	"pocList": {
 		"filters": {
@@ -29,6 +67,7 @@
 		"actions": {
 			"action": "Action",
 			"import": "Import",
+			"export": "Export",
 			"apply": "Apply",
 			"delete": "Delete",
 			"activate": "Activate",
@@ -38,7 +77,7 @@
 		}
 	},
 	"pocStatuses": {
-		"ready": "Ready",
+		"completed": "Completed",
 		"pending": "Pending",
 		"processing": "Processing"
 	},

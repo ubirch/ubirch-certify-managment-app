@@ -10,8 +10,13 @@ input[type="file"] { width: 200px; }
     background-color: rgb(255, 99, 71, 0.2);
 }
 
-mat-card {
+mat-card.mat-card {
     padding: 2rem 3rem;
+}
+
+.actions { 
+    max-width: 350px;
+    margin: 0 auto;
 }
 
 .import-btn { 

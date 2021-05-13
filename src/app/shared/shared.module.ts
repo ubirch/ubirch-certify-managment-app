@@ -48,14 +48,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
+
 import { RouterModule } from '@angular/router';
-import { PocListComponent } from './components/poc-list/poc-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PocListComponent } from './components/poc-list/poc-list.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileSizePipe } from './pipes/file-size.pipe';
+import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
+import { PocListFiltersComponent } from './components/poc-list/poc-list-filters/poc-list-filters.component';
+import { PocDetailsComponent } from './components/poc-list/poc-details/poc-details.component';
 
 
 @NgModule({
@@ -63,8 +70,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HeaderComponent,
     FooterComponent,
     PocListComponent,
+    PocListFiltersComponent,
+    PocDetailsComponent,
     LanguageSelectComponent,
     ConfirmDialogComponent,
+    FileUploadComponent,
+    NotificationComponent,
+    NotificationInlineComponent,
+    FileSizePipe,
   ],
   imports: [
     CommonModule,
@@ -90,7 +103,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     // MatStepperModule,
     // MatDatepickerModule,
     MatDialogModule,
-    // MatDividerModule,
+    MatDividerModule,
     // MatExpansionModule,
     // MatGridListModule,
     MatIconModule,
@@ -99,7 +112,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatMenuModule,
     // MatNativeDateModule,
     MatPaginatorModule,
-    // MatProgressBarModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
     // MatRadioModule,
     // MatRippleModule,
@@ -107,7 +120,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     // MatSidenavModule,
     // MatSliderModule,
     // MatSlideToggleModule,
-    // MatSnackBarModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     // MatTabsModule,
@@ -137,15 +150,21 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     MatDialogModule,
     MatCardModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatDividerModule,
 
     FlexLayoutModule,
-
     TranslateModule,
 
     HeaderComponent,
     FooterComponent,
     PocListComponent,
     ConfirmDialogComponent,
+    FileUploadComponent,
+    NotificationComponent,
+    NotificationInlineComponent,
+    FileSizePipe,
   ]
 })
 export class SharedModule { }

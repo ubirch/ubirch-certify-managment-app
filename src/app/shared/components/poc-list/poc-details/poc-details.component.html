@@ -1,0 +1,79 @@
+
+<div gdColumns="1fr 1fr">
+  <div>
+    <label>{{ 'poc.deviceId' | translate }}:</label> <span>{{ poc.deviceId }}</span>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div *ngIf="pocState | async as state; else spinner" [@fadeInDown]="state">
+    <div gdColumns="1fr 1fr" gdGap="0 1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userRoleCreated}">{{ icon(state.userRoleCreated) }}</mat-icon>
+        <span>{{ 'poc.state.userRoleCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.validDataSchemaGroup}">{{ icon(state.validDataSchemaGroup) }}</mat-icon>
+        <span>{{ 'poc.state.validDataSchemaGroup' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userGroupCreated}">{{ icon(state.userGroupCreated) }}</mat-icon>
+        <span>{{ 'poc.state.userGroupCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userGroupRoleAssigned}">{{ icon(state.userGroupRoleAssigned) }}</mat-icon>
+        <span>{{ 'poc.state.userGroupRoleAssigned' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceRoleCreated}">{{ icon(state.deviceRoleCreated) }}</mat-icon>
+        <span>{{ 'poc.state.deviceRoleCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceGroupCreated}">{{ icon(state.deviceGroupCreated) }}</mat-icon>
+        <span>{{ 'poc.state.deviceGroupCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceGroupRoleAssigned}">{{ icon(state.deviceGroupRoleAssigned) }}</mat-icon>
+        <span>{{ 'poc.state.deviceGroupRoleAssigned' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceCreated}">{{ icon(state.deviceCreated) }}</mat-icon>
+        <span>{{ 'poc.state.deviceCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertRequired}">{{ icon(state.clientCertRequired) }}</mat-icon>
+        <span>{{ 'poc.state.clientCertRequired' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoRequired}">{{ icon(state.logoRequired) }}</mat-icon>
+        <span>{{ 'poc.state.logoRequired' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoStored}">{{ icon(state.logoStored) }}</mat-icon>
+        <span>{{ 'poc.state.logoStored' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyApiProvided}">{{ icon(state.certifyApiProvided) }}</mat-icon>
+        <span>{{ 'poc.state.certifyApiProvided' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.goClientProvided}">{{ icon(state.goClientProvided) }}</mat-icon>
+        <span>{{ 'poc.state.goClientProvided' | translate}}</span>
+      </div>
+      
+    </div>
+    <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
+      <label>{{ 'poc.state.lastUpdated' | translate }}:</label><span>{{ state.lastUpdated | date:'yyyy-MM-dd hh:mm' }}</span>
+      <label>{{ 'poc.state.created' | translate }}:</label><span>{{ state.created | date:'yyyy-MM-dd hh:mm' }}</span>
+      <label>{{ 'poc.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
+    </div>
+
+</div>
+
+<ng-template #spinner>
+  <mat-spinner *ngIf="pocState" [diameter]="50"></mat-spinner>
+</ng-template>
+
+
+

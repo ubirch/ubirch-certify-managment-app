@@ -1,0 +1,29 @@
+.notification {
+    border: 1px solid ;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+.error {
+    border-color: #792618;
+    color: #792618;
+    background-color: #f9aa9c;
+}
+.success {
+    border-color: #28792a;
+    color: #28792a;
+    background-color: #beffc0;;
+}
+.warning {
+    border-color: #63630d;
+    color: #63630d;
+    background-color: #ffffa9;
+}
+
+.notify-side {
+    width: 2rem;
+}
+
+mat-icon {
+    font-size: 2rem;
+}
+
