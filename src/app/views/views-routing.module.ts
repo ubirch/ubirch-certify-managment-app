@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'pocs',
         pathMatch: 'full'
       },
       {
@@ -20,24 +20,11 @@ const routes: Routes = [
         component: NotAuthorizedComponent
       },
       {
-        path: 'dashboard',
+        path: 'pocs',
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'tenant-pocs',
-        loadChildren: () =>
-          import('./tenant-pocs/tenant-pocs.module').then((m) => m.TenantPocsModule),
+          import('./pocs/pocs.module').then((m) => m.PocsModule),
         canActivate: [TenantAdminGuard],
       },
-      {
-        path: 'import',
-        loadChildren: () =>
-          import('./import/import.module').then((m) => m.ImportModule),
-        canActivate: [TenantAdminGuard],
-      }
-
     ]
   }
 ];

@@ -8,11 +8,10 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 
 @Component({
   selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.scss'],
+  templateUrl: './poc-import.component.html',
+  styleUrls: ['./poc-import.component.scss'],
 })
-export class ImportComponent implements OnInit {
-
+export class PocImportComponent implements OnInit {
   file: File;
   errorFile: Blob;
   progress: IUploadStatus;

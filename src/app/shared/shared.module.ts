@@ -56,22 +56,17 @@ import { LanguageSelectComponent } from './components/language-select/language-s
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { PocListComponent } from './components/poc-list/poc-list.component';
+import { PocListComponent } from '../views/pocs/poc-list/poc-list.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
-import { PocListFiltersComponent } from './components/poc-list/poc-list-filters/poc-list-filters.component';
-import { PocDetailsComponent } from './components/poc-list/poc-details/poc-details.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    PocListComponent,
-    PocListFiltersComponent,
-    PocDetailsComponent,
     LanguageSelectComponent,
     ConfirmDialogComponent,
     FileUploadComponent,
@@ -159,7 +154,6 @@ import { PocDetailsComponent } from './components/poc-list/poc-details/poc-detai
 
     HeaderComponent,
     FooterComponent,
-    PocListComponent,
     ConfirmDialogComponent,
     FileUploadComponent,
     NotificationComponent,

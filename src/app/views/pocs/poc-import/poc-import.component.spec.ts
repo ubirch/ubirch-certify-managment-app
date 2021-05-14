@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PocListComponent } from './poc-list.component';
+import { PocImportComponent } from './poc-import.component';
 
-describe('PocListComponent', () => {
-  let component: PocListComponent;
-  let fixture: ComponentFixture<PocListComponent>;
+describe('ImportComponent', () => {
+  let component: PocImportComponent;
+  let fixture: ComponentFixture<PocImportComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PocListComponent ],
+      declarations: [PocImportComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PocListComponent);
+    fixture = TestBed.createComponent(PocImportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

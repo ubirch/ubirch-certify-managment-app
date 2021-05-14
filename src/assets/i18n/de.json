@@ -15,9 +15,6 @@
 			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented"
 		}
 	},
-	"dashboard": {
-		"headline": "Dashboard"
-	},
 	"import": {
 		"headline": "PoC Import",
 		"uploadPrompt": "Select or drop a .csv file below and click \"Upload\" button.",
@@ -62,6 +59,7 @@
 		}
 	},
 	"pocList": {
+		"headline": "Points of Certification",
 		"filters": {
 			"filters": "Filters",
 			"search": "Search",
