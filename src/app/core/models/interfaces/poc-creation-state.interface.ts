@@ -1,5 +1,6 @@
 export interface IPocCreationState {
-    validDataSchemaGroup: boolean;
+    assignedDataSchemaGroup: boolean;
+    assignedDeviceGroup: boolean;
     userRoleCreated: boolean;
     userGroupCreated: boolean;
     userGroupRoleAssigned: boolean;

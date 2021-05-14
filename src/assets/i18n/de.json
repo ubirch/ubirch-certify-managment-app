@@ -43,7 +43,8 @@
 		"status": "Status",
 		"state": {
 			"userRoleCreated": "User role created",
-			"validDataSchemaGroup": "Valid data schema group",
+			"assignedDataSchemaGroup": "Assigned data schema group",
+			"assignedDeviceGroup": "Assigned device group",
 			"userGroupCreated": "User group create",
 			"userGroupRoleAssigned": "User group role assigned",
 			"deviceRoleCreated": "Device role created",

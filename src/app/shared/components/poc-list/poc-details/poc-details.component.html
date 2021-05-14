@@ -14,8 +14,12 @@
         <span>{{ 'poc.state.userRoleCreated' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.validDataSchemaGroup}">{{ icon(state.validDataSchemaGroup) }}</mat-icon>
-        <span>{{ 'poc.state.validDataSchemaGroup' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDataSchemaGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
+        <span>{{ 'poc.state.assignedDataSchemaGroup' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
+        <span>{{ 'poc.state.assignedDeviceGroup' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userGroupCreated}">{{ icon(state.userGroupCreated) }}</mat-icon>
