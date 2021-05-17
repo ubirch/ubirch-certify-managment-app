@@ -25,7 +25,7 @@ export class SessionEndedInterceptor implements HttpInterceptor {
                     this.dialog.open(NotAuthorizedDialogComponent, { maxWidth: '800px', disableClose: true, closeOnNavigation: false });
                     return NEVER;
                 }
-                else { throwError(err); }
+                else { return throwError(err); }
             })
         );
     }
