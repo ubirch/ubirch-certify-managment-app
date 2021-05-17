@@ -15,6 +15,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { sessionEndedInterceptorProvider } from './core/interceptors/session-ended';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     return new TranslateHttpLoader(http);
@@ -39,6 +45,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         AppRoutingModule,
         KeycloakAngularModule,
         BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatRadioModule,
+        MatCardModule,
+        ReactiveFormsModule,
     ],
     providers: [
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

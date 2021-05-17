@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, pipe, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
@@ -40,6 +41,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'created',
     'lastUpdated',
     'status',
+    'actions',
   ];
   selection = new SelectionModel<IPoc>(true, []);
   defaultSortColumn = 'externalId';
@@ -70,6 +72,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     private errorService: ErrorHandlerService,
     private exportService: ExportImportService,
     private notificationService: NotificationService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -168,6 +171,11 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
       err => this.errorService.handlerResponseError(err)
     );
+  }
+
+  editPoc(event: MouseEvent, poc: IPoc) {
+    this.router.navigate(['/views', 'pocs', 'edit', poc.id]);
+    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

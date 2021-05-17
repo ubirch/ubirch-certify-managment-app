@@ -6,12 +6,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PocListComponent } from './poc-list/poc-list.component';
 import { PocListFiltersComponent } from './poc-list-filters/poc-list-filters.component';
 import { PocDetailsComponent } from './poc-details/poc-details.component';
+import { PocEditComponent } from './poc-edit/poc-edit.component';
 
 
 @NgModule({
   declarations: [
     PocImportComponent,
     PocListComponent,
+    PocEditComponent,
     PocListFiltersComponent,
     PocDetailsComponent,
   ],

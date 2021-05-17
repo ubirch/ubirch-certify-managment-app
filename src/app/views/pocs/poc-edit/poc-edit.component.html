@@ -1,0 +1,103 @@
+<h2>{{ 'pocEdit.headline' | translate }} {{ poc?.externalId }}</h2>
+
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" *ngIf="form">
+              <ng-container formGroupName="address">
+                <div fxLayout fxLayoutGap="2rem">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.street' | translate }}" formControlName="street">
+                    <mat-error *ngIf="form.get('address').get('street').errors">
+                      {{ 'pocEdit.validationErrors.street' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.houseNumber' | translate }}" formControlName="houseNumber">
+                    <mat-error *ngIf="form.get('address').get('houseNumber').errors">
+                      {{ 'pocEdit.validationErrors.houseNumber' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="2rem">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.additionalAddress' | translate }}" formControlName="additionalAddress">
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.zipcode' | translate }}" formControlName="zipcode">
+                    <mat-error *ngIf="form.get('address').get('zipcode').errors">
+                      {{ 'pocEdit.validationErrors.zipcode' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="2rem">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.city' | translate }}" formControlName="city">
+                    <mat-error *ngIf="form.get('address').get('city').errors">
+                      {{ 'pocEdit.validationErrors.city' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.county' | translate }}" formControlName="county">
+                  </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="2rem">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.federalState' | translate }}" formControlName="federalState">
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="{{ 'pocEdit.fields.country' | translate }}" formControlName="country">
+                    <mat-error *ngIf="form.get('address').get('country').errors">
+                      {{ 'pocEdit.validationErrors.country' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+
+            <!-- <mat-divider></mat-divider> -->
+
+            <mat-form-field class="full-width">
+              <input matInput placeholder="{{ 'pocEdit.fields.phone' | translate }}" formControlName="phone">
+              <mat-error *ngIf="form.get('phone').errors">
+                {{ 'pocEdit.validationErrors.phone' | translate }}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- <mat-divider></mat-divider> -->
+
+            <ng-container formGroupName="manager">
+              <div fxLayout fxLayoutGap="2rem">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="{{ 'pocEdit.fields.firstName' | translate }}" formControlName="firstName">
+                  <mat-error *ngIf="form.get('manager').get('firstName').errors">
+                    {{ 'pocEdit.validationErrors.firstName' | translate }}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="{{ 'pocEdit.fields.lastName' | translate }}" formControlName="lastName">
+                  <mat-error *ngIf="form.get('manager').get('lastName').errors">
+                    {{ 'pocEdit.validationErrors.lastName' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxLayout fxLayoutGap="2rem">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="{{ 'pocEdit.fields.email' | translate }}" formControlName="email">
+                  <mat-error *ngIf="form.get('manager').get('email').errors">
+                    {{ 'pocEdit.validationErrors.email' | translate }}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="{{ 'pocEdit.fields.phone' | translate }}" formControlName="mobilePhone">
+                  <mat-error *ngIf="form.get('manager').get('mobilePhone').errors">
+                    {{ 'pocEdit.validationErrors.phone' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+      </form>
+    </mat-card-content>
+      
+
+
+</mat-card>

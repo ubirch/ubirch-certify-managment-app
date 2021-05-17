@@ -72,7 +72,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     FileUploadComponent,
     NotificationComponent,
     NotificationInlineComponent,
-    FileSizePipe,
+    FileSizePipe
   ],
   imports: [
     CommonModule,

@@ -4,7 +4,7 @@
 
 const keycloakConfig: any = {
     url: 'https://id.certify.dev.ubirch.com/auth/',
-    realm: 'ubirch-certifier',
+    realm: 'ubirch-certificator',
     clientId: 'poc-manager-user-access-local'
 };
 

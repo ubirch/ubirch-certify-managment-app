@@ -16,7 +16,7 @@
 		}
 	},
 	"import": {
-		"headline": "PoC Import",
+		"headline": "Points of Certification Import",
 		"uploadPrompt": "Select or drop a .csv file below and click \"Upload\" button.",
 		"upload": "Upload",
 		"downloadFile": "Download File",
@@ -76,6 +76,33 @@
 			"deactivate": "Deactivate",
 			"deleteConfirmTitle": "Delete items",
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
+		}
+	},
+	"pocEdit": {
+		"headline": "Point of Certification Edit",
+		"fields": {
+			"street": "Street",
+			"houseNumber": "House number",
+			"additionalAddress": "Additional Address",
+			"zipcode": "Zipcode",
+			"city": "City",
+			"county": "County",
+			"federalState": "Federal State",
+			"country": "Country",
+			"phone": "Phone",
+			"firstName": "First Name",
+			"lastName": "Last Name"
+		},
+		"validationErrors": {
+			"street": "Street is required (min. 3 characters)",
+			"houseNumber": "House number is required",
+			"zipcode": "Zipcode is required (min. 5 characters)",
+			"city": "City is required (min. 3 characters)",
+			"country": "Country is required (min. 2 characters)",
+			"phone": "Phone number is required",
+			"firstName": "First name is required (min 2 characters)",
+			"lastName": "Last name is required (min 2 characters)",
+			"email": "Valid email address is required"
 		}
 	},
 	"pocStatuses": {

@@ -14,12 +14,17 @@ export class PocsService {
 
   baseUrl = environment.pocManagerApi;
   pocStatusUrl = `${this.baseUrl}pocStatus`;
-  pocListUrl = `${this.baseUrl}pocs`;
+  pocsUrl = `${this.baseUrl}pocs`;
 
   constructor(private http: HttpClient) { }
 
+  getPoc(id: string) {
+    const url = `${this.pocsUrl}/${id}`;
+    return this.http.get<IPoc>(this.pocsUrl);
+  }
+
   getPocs(filters: PocFilters): Observable<IListResult<IPoc>> {
-    return this.http.get<IListResult<IPoc>>(this.pocListUrl, { params: flattenFilters(filters) as any });
+    return this.http.get<IListResult<IPoc>>(this.pocsUrl, { params: flattenFilters(filters) as any });
   }
 
   getPocStatus(pocId: string) {
@@ -28,7 +33,7 @@ export class PocsService {
   }
 
   deletePocs(pocs: IPoc[]) {
-    return this.http.delete(this.pocListUrl, { params: { pocIds: pocs.map(p => p.id).toString() } });
+    return this.http.delete(this.pocsUrl, { params: { pocIds: pocs.map(p => p.id).toString() } });
   }
 
 }
