@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
 
 @Component({
@@ -20,7 +22,10 @@ export class PocEditComponent implements OnInit {
     private pocService: PocsService,
     private errorService: ErrorHandlerService,
     private route: ActivatedRoute,
+    private notificationService: NotificationService,
+    private translateService: TranslateService,
     private fb: FormBuilder,
+    private router: Router,
   ) {
 
   }
@@ -39,7 +44,7 @@ export class PocEditComponent implements OnInit {
   generateForm() {
     this.form = this.fb.group({
       address: this.fb.group({
-        street: this.fb.control(this.poc.address.street, [Validators.required, Validators.minLength(3)]),
+        street: this.fb.control(+this.poc.address.street, [Validators.required, Validators.minLength(3)]),
         houseNumber: this.fb.control(this.poc.address.houseNumber, [Validators.required]),
         additionalAddress: this.fb.control(this.poc.address.additionalAddress),
         zipcode: this.fb.control(this.poc.address.zipcode, [Validators.required, Validators.minLength(5)]),
@@ -58,8 +63,16 @@ export class PocEditComponent implements OnInit {
     });
   }
 
-
-
-
-
+  submitForm() {
+    this.pocService.putPoc(this.form.value).subscribe(
+      _ => {
+        this.notificationService.success({
+          message: this.translateService.instant('pocEdit.notifications.success'),
+          title: this.translateService.instant('pocEdit.notifications.successTitle'),
+        });
+        this.router.navigate(['views/', 'pocs']);
+      },
+      err => this.errorService.handlerResponseError(err)
+    );
+  }
 }

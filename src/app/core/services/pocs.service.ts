@@ -36,4 +36,8 @@ export class PocsService {
     return this.http.delete(this.pocsUrl, { params: { pocIds: pocs.map(p => p.id).toString() } });
   }
 
+  putPoc(poc: Partial<IPoc>) {
+    return this.http.put(this.pocsUrl, poc);
+  }
+
 }

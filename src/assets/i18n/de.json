@@ -3,11 +3,13 @@
 		"login": "Login",
 		"logout": "Logout",
 		"back": "Back",
+		"update": "Update",
+		"cancel": "Cancel",
 		"errors": {
 			"requestDefaultTitle": "Request error",
 			"requestDefault": "There was an error while processing your request. Pleaase try again",
 			"400Title": "Bad request",
-			"400": "Sorry. We were unable to find data using selected criteria.",
+			"400": "Sorry. We were unable to process the request. Request data seems to be invalid",
 			"401Title": "Session expired",
 			"401": "Seems like your session has expired. Please log in again to continue",
 			"403Title": "Unauthorized",
@@ -81,6 +83,9 @@
 	"pocEdit": {
 		"headline": "Point of Certification Edit",
 		"fields": {
+			"main": "Main",
+			"address": "Address",
+			"manager": "Manager",
 			"street": "Street",
 			"houseNumber": "House number",
 			"additionalAddress": "Additional Address",
@@ -91,7 +96,8 @@
 			"country": "Country",
 			"phone": "Phone",
 			"firstName": "First Name",
-			"lastName": "Last Name"
+			"lastName": "Last Name",
+			"email": "Email"
 		},
 		"validationErrors": {
 			"street": "Street is required (min. 3 characters)",
@@ -103,6 +109,10 @@
 			"firstName": "First name is required (min 2 characters)",
 			"lastName": "Last name is required (min 2 characters)",
 			"email": "Valid email address is required"
+		},
+		"notifications": {
+			"successTitle": "Update success",
+			"success": "PoC has been successfully updated"
 		}
 	},
 	"pocStatuses": {

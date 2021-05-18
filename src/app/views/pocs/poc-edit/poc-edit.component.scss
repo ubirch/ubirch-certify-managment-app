@@ -1,28 +1,23 @@
-.full-width {
-    width: 100%;
+h2 span { font-weight: normal;}
+
+form {
+  padding: 2rem;
+}
+
+.full-width { 
+  width: 100%;
+}
+
+h3 { 
+  font-weight: bold;
+  margin-top: 1rem;
+
+  mat-icon {
+    margin-right: 0.5rem;
   }
-  
-  .shipping-card {
-    min-width: 120px;
-    margin: 20px auto;
-  }
-  
-  .mat-radio-button {
-    display: block;
-    margin: 5px 0;
-  }
-  
-  .row {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .col {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .col:last-child {
-    margin-right: 0;
-  }
-  
+}
+
+.actions { 
+  max-width: 350px;
+  margin: 0 auto;
+}
