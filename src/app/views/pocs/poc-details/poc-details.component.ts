@@ -24,7 +24,9 @@ export class PocDetailsComponent {
   constructor(private pocsService: PocsService) { }
 
   icon(value: boolean) {
-    return value ? 'check_circle' : 'cancel';
+    if (value === true) { return 'check_circle'; }
+    if (value === false) { return 'cancel'; }
+    return '';
   }
 
 
