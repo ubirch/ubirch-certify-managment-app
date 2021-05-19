@@ -112,7 +112,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     // MatRadioModule,
     // MatRippleModule,
     MatSelectModule,
-    // MatSidenavModule,
+    MatSidenavModule,
     // MatSliderModule,
     // MatSlideToggleModule,
     MatSnackBarModule,
@@ -148,6 +148,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     MatProgressBarModule,
     MatSnackBarModule,
     MatDividerModule,
+    MatSidenavModule,
 
     FlexLayoutModule,
     TranslateModule,

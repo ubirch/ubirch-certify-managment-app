@@ -4,9 +4,13 @@ main {
     flex-direction: column;
 
     #main-wrap { 
+        flex-grow: 1;
         padding: 2rem 0;
     }
     
     .container { flex-grow: 1; }
 
+    mat-list-item a { 
+        min-width: 300px;
+    }
 }

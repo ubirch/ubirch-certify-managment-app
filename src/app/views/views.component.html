@@ -1,9 +1,31 @@
 <ion-content [fullscreen]="true" style="height: 100vh">
   <main>
-    <app-header></app-header>
-    <div class="container" id="main-wrap" >
-      <router-outlet></router-outlet>
-    </div>
+    <app-header>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </app-header>
+    
+    <mat-sidenav-container id="main-wrap">
+      <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
+                   [fixedInViewport]="true" mode="over" [opened]="false">
+                   
+                   <mat-nav-list>
+                      <mat-list-item>
+                        <a [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" (click)="sidenav.close()">PoCs</a>
+                      </mat-list-item>
+                      <mat-list-item>
+                        <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active" (click)="sidenav.close()">PoC Admins</a>
+                      </mat-list-item>
+                  </mat-nav-list>
+      </mat-sidenav>
+      
+      <mat-sidenav-content class="container">
+          <router-outlet></router-outlet>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+    
     <app-footer></app-footer>
   </main>
 </ion-content>
