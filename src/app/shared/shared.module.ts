@@ -82,7 +82,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     TranslateModule,
 
     // A11yModule,
-    // ClipboardModule,
+    ClipboardModule,
     // CdkStepperModule,
     // CdkTableModule,
     // CdkTreeModule,
@@ -149,6 +149,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     MatSnackBarModule,
     MatDividerModule,
     MatSidenavModule,
+    ClipboardModule,
 
     FlexLayoutModule,
     TranslateModule,

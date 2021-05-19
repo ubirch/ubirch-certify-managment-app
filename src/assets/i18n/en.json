@@ -5,6 +5,7 @@
 		"back": "Back",
 		"update": "Update",
 		"cancel": "Cancel",
+		"confirm": "Confirm",
 		"errors": {
 			"requestDefaultTitle": "Request error",
 			"requestDefault": "There was an error while processing your request. Pleaase try again",
@@ -93,6 +94,9 @@
 		"email": "Email",
 		"phone": "Phone",
 		"pocName": "PoC Name",
+		"initialId": "Web Ident initial ID",
+		"completedId": "Web Ident ID",
+		"status": "Status",
 		"state": {
 			"webIdentRequired": "Web Ident Required",
 			"webIdentPending": "Web Ident Pending",
@@ -101,6 +105,9 @@
 			"userActivated": "User Activated",
 			"userInactivated": "User Inactivated",
 			"errorMessage": "Error Message"
+		},
+		"validationErrors": {
+			"completedId": "Web Ident is reuiqred"
 		}
 	},
 	"adminList": {
@@ -118,9 +125,11 @@
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
 		}
 	},
-	"adminIdenfity": {
-		"headline": "Web-Identify Admin"
-	}
+	"adminIdentify": {
+		"headline": "Web-Identify Admin",
+		"copyMessage": "{{field}} successfully copied",
+		"success": "User has been successfully identified"
+	},
 	"pocEdit": {
 		"headline": "Point of Certification Edit",
 		"fields": {
@@ -157,6 +166,11 @@
 		}
 	},
 	"pocStatuses": {
+		"completed": "Completed",
+		"pending": "Pending",
+		"processing": "Processing"
+	},
+	"adminStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
 		"processing": "Processing"

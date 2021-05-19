@@ -10,7 +10,7 @@ const routes: Routes = [
     component: AdminListComponent
   },
   {
-    path: 'identify',
+    path: 'identify/:id',
     component: AdminIdentifyComponent
   }
 ];

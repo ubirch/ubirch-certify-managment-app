@@ -59,7 +59,7 @@
     <!-- dateOfBirth -->
     <ng-container matColumnDef="dateOfBirth">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.dateOfBirth' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.dateOfBirth | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+        <mat-cell *matCellDef="let admin">{{admin.dateOfBirth | date:'yyyy-MM-dd' }}</mat-cell>
     </ng-container>
 
     <!-- email -->

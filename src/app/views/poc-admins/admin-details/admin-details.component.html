@@ -29,7 +29,7 @@
       <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
     </div>
     <div>
-      <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'identify' ]">
+      <button mat-raised-button color="primary" (click)="identify()" *ngIf="state.webIdentRequired && !state.webIdentCompleted">
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
         {{ 'adminList.actions.identify' | translate }} 
     </button>

@@ -1,1 +1,102 @@
 <h2>{{ 'adminIdentify.headline' | translate }}</h2>
+
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" *ngIf="form" fxLayout="column" fxLayoutGap="1rem">
+          
+        <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
+            <div fxLayout>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.firstName' | translate }}" formControlName="firstName">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy firstName" 
+                    [cdkCopyToClipboard]="form.get('firstName').value"
+                    (click)="contentCopied('pocAdmin.firstName')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>  
+            </div>
+            <div fxLayout>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.lastName' | translate }}" formControlName="lastName">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy lastName" 
+                    [cdkCopyToClipboard]="form.get('lastName').value"
+                    (click)="contentCopied('pocAdmin.lastName')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>  
+            </div>
+            <div fxLayout>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.dateOfBirth' | translate }}" formControlName="dateOfBirth">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy dateOfBirth" 
+                    [cdkCopyToClipboard]="form.get('dateOfBirth').value"
+                    (click)="contentCopied('pocAdmin.dateOfBirth')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </div>
+            <div fxLayout>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.email' | translate }}" formControlName="email">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy email" 
+                    [cdkCopyToClipboard]="form.get('email').value"
+                    (click)="contentCopied('pocAdmin.email')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </div>
+            <div fxLayout>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.phone' | translate }}" formControlName="phone">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy phone" 
+                    [cdkCopyToClipboard]="form.get('phone').value"
+                    (click)="contentCopied('pocAdmin.phone')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div gdColumns="1fr 1fr" gdGap="2rem" class="ident-ids">
+            <div>
+                <mat-form-field fxFlex>
+                    <input matInput placeholder="{{ 'pocAdmin.initialId' | translate }}" formControlName="initialId">
+                </mat-form-field>
+                <button 
+                    mat-mini-fab aria-label="Copy initialId" 
+                    [cdkCopyToClipboard]="form.get('initialId').value"
+                    (click)="contentCopied('pocAdmin.initialId')">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </div>
+            <div>
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="{{ 'pocAdmin.completedId' | translate }}" formControlName="completedId">
+                  <mat-error *ngIf="form.get('completedId').errors">
+                    {{ 'pocAdmin.validationErrors.completedId' | translate }}
+                  </mat-error>
+                </mat-form-field>
+        </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+            <button mat-raised-button 
+                class="mat-btn-big"
+                color="primary" 
+                (click)="confirm()" 
+                [disabled]="form.invalid || form.pending">{{ 'global.confirm' | translate }}</button>
+            <button mat-raised-button (click)="backToList()">
+                <mat-icon aria-hidden="false" aria-label="Import pocs">chevron_left</mat-icon>
+                {{ 'global.back' | translate }}
+            </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+</mat-card>
