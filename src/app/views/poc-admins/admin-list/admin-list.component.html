@@ -1,0 +1,111 @@
+<h2>{{ 'adminList.headline' | translate }}</h2>
+
+<!-- FILTERS -->
+<app-admin-filters [filters]="filters" [exportDisabled]="exportLoading"></app-admin-filters>
+
+<!-- ACTIONS -->
+<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
+    <label>{{ 'pocList.actions.action' | translate }}</label>
+    <mat-form-field>
+        <mat-select [formControl]="action">
+            <mat-option *ngFor="let action of actions" [value]="action.value" >
+            {{ action.label | translate }}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="applyAction()">{{ 'pocList.actions.apply' | translate }} </button>
+</div>
+
+<mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
+    matSort [matSortActive]="defaultSortColumn" matSortDirection="asc" matSortDisableClear>
+
+    <!-- Checkbox -->
+    <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <!-- firstName -->
+    <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.firstName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.firstName}}</mat-cell>
+    </ng-container>
+
+    <!-- lastName -->
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.lastName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.lastName}}</mat-cell>
+    </ng-container>
+
+    <!-- state -->
+    <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.status' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
+    </ng-container>
+
+    <!-- dateOfBirth -->
+    <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.dateOfBirth' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.dateOfBirth | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+    </ng-container>
+
+    <!-- email -->
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.email}}</mat-cell>
+    </ng-container>
+
+    <!-- phone -->
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.phone' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.phone}}</mat-cell>
+    </ng-container>
+
+    <!-- phone -->
+    <ng-container matColumnDef="pocName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.pocName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.pocName}}</mat-cell>
+    </ng-container>
+
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let admin">
+            <div class="element-detail"
+                [@detailExpand]="admin == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
+                <div class="detail-cols" fxFlex>
+                    <app-admin-details [admin]="admin" [current]="expandedElement === admin"></app-admin-details>
+                </div>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let admin; columns: displayColumns;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === admin"
+        (click)="expandedElement = expandedElement === admin ? null : admin">
+    </mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></mat-row>
+</mat-table>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+
+<mat-paginator [length]="dataSource.totalItems$ | async" [pageSize]="defaultPageSize"
+[pageSizeOptions]="pageSizes"></mat-paginator>

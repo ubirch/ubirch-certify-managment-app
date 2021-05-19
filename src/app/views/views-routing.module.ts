@@ -25,6 +25,12 @@ const routes: Routes = [
           import('./pocs/pocs.module').then((m) => m.PocsModule),
         canActivate: [TenantAdminGuard],
       },
+      {
+        path: 'poc-admins',
+        loadChildren: () =>
+          import('./poc-admins/poc-admins.module').then((m) => m.PocAdminsModule),
+        canActivate: [TenantAdminGuard],
+      },
     ]
   }
 ];

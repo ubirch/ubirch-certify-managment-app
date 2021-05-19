@@ -6,55 +6,57 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { merge, pipe, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { AdminActions } from 'src/app/core/models/enums/admin-actions.enum';
+import { AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
 import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
-import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
-import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { Filters } from 'src/app/core/models/filters';
-import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
+import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
+import { PocAdminDataSource } from 'src/app/core/services/data-sources/poc-admin-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { PocsService } from 'src/app/core/services/pocs.service';
+import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
-import { ConfirmDialogComponent, ConfirmDialogModel } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+
 
 @Component({
-  selector: 'app-poc-list',
-  templateUrl: './poc-list.component.html',
-  styleUrls: ['./poc-list.component.scss'],
+  selector: 'app-admin-list',
+  templateUrl: './admin-list.component.html',
+  styleUrls: ['./admin-list.component.scss'],
   animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
-export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  dataSource: PocDataSource;
+  dataSource: PocAdminDataSource;
+
   displayColumns: string[] = [
     'select',
-    'externalId',
+    'firstName',
+    'lastName',
+    'dateOfBirth',
+    'email',
+    'phone',
     'pocName',
-    'dataSchemaId',
-    'created',
-    'lastUpdated',
-    'status',
-    'actions',
+    'state',
   ];
-  selection = new SelectionModel<IPoc>(true, []);
-  defaultSortColumn = 'externalId';
+  selection = new SelectionModel<IPocAdmin>(true, []);
+  defaultSortColumn = 'firstName';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
-  expandedElement: IPoc | null;
+  expandedElement: IPocAdmin | null;
 
   filters: FormGroup;
   action: FormControl = new FormControl(PocActions.delete);
   actions = [
-    { value: PocActions.delete, label: `pocList.actions.delete` }
+    { value: AdminActions.activate, label: `adminList.actions.activate` },
+    { value: AdminActions.deactivate, label: `adminList.actions.deactivate` }
   ];
-  PocStatusTranslation = PocStatusTranslation;
+  adminStatusTranslation = AdminStatusTranslation;
   showActions = false;
   exportLoading = false;
 
@@ -65,20 +67,19 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
 
   constructor(
-    private pocService: PocsService,
+    private adminService: PocAdminService,
     private fb: FormBuilder,
     private translateService: TranslateService,
     public dialog: MatDialog,
     private errorService: ErrorHandlerService,
-    private exportService: ExportImportService,
     private notificationService: NotificationService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.dataSource = new PocDataSource(this.pocService, this.errorService);
+    this.dataSource = new PocAdminDataSource(this.adminService, this.errorService);
     this.generateFilters();
-    this.loadPocPage();
+    this.loadAdminsPage();
   }
 
   ngAfterViewInit(): void {
@@ -111,7 +112,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
-        this.loadPocPage();
+        this.loadAdminsPage();
       }),
       takeUntil(this.unsubscribe$),
     ).subscribe();
@@ -121,6 +122,13 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(
         v => this.showActions = this.selection.selected?.length > 0
       );
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubscribe$) {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
+    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -138,73 +146,39 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: IPoc): string {
+  checkboxLabel(row?: IPocAdmin): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.externalId}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.email}`;
   }
 
   applyAction() {
     const selected = this.selection.selected;
     switch (this.action.value) {
-      case PocActions.delete:
+      case AdminActions.activate:
         // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
         this.notificationService.warning({
           message: 'global.errors.notImplemented',
           title: 'global.errors.requestDefaultTitle',
           duration: 7000
         });
-        // this.deleteItems(selected);
+        break;
+      case AdminActions.deactivate:
+        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
+        this.notificationService.warning({
+          message: 'global.errors.notImplemented',
+          title: 'global.errors.requestDefaultTitle',
+          duration: 7000
+        });
         break;
       default:
         break;
     }
   }
 
-  export() {
-    this.exportLoading = true;
-    this.exportService.exportPocs().pipe(
-      takeUntil(this.unsubscribe$),
-      finalize(() => this.exportLoading = false)
-    ).subscribe(
-      blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
-      err => this.errorService.handlerResponseError(err)
-    );
-  }
-
-  editPoc(event: MouseEvent, poc: IPoc) {
-    this.router.navigate(['/views', 'pocs', 'edit', poc.id]);
-    event.stopPropagation();
-  }
-
-  ngOnDestroy(): void {
-    if (this.unsubscribe$) {
-      this.unsubscribe$.next();
-      this.unsubscribe$.complete();
-    }
-  }
-
-  private deleteItems(pocs: IPoc[]) {
-    const message = this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
-    const title = this.translateService.instant('pocList.actions.deleteConfirmTitle');
-    const dialogData = new ConfirmDialogModel(title, message);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '800px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.dataSource.deletePocs(pocs, this.filters.value);
-        this.selection.clear();
-      }
-    });
-  }
-
-  private loadPocPage() {
-    this.dataSource.loadPocs(this.filters.value);
+  private loadAdminsPage() {
+    this.dataSource.loadAdmins(this.filters.value);
   }
 
   private generateFilters() {
@@ -215,4 +189,5 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       status: ['']
     }));
   }
+
 }

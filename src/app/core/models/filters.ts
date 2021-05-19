@@ -3,7 +3,7 @@ import { DEFAULT_PAGE_SIZE } from '../utils/constants';
 
 const FILTER_PARAM_PREFIX = 'filterColumn';
 
-export class PocFilters {
+export class Filters {
     search = '';
     sortColumn = '';
     sortOrder: SortDirection = 'asc';
@@ -16,7 +16,7 @@ export interface FilterColumn {
     [column: string]: string;
 }
 
-export const flattenFilters = (filters: PocFilters) => {
+export const flattenFilters = (filters: Filters) => {
     const { filterColumns, ...other } = filters;
     if (!filterColumns) { return filters; }
 

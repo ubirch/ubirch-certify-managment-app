@@ -86,6 +86,41 @@
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
 		}
 	},
+	"pocAdmin": {
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"dateOfBirth": "Date of Birth",
+		"email": "Email",
+		"phone": "Phone",
+		"pocName": "PoC Name",
+		"state": {
+			"webIdentRequired": "Web Ident Required",
+			"webIdentPending": "Web Ident Pending",
+			"webIdentCompleted": "Web Ident Completed",
+			"userCreated": "User Created",
+			"userActivated": "User Activated",
+			"userInactivated": "User Inactivated",
+			"errorMessage": "Error Message"
+		}
+	},
+	"adminList": {
+		"headline": "Points of Certification Admins",
+		"actions": {
+			"action": "Action",
+			"import": "Import",
+			"export": "Export",
+			"apply": "Apply",
+			"delete": "Delete",
+			"activate": "Activate",
+			"identify": "Identify",
+			"deactivate": "Deactivate",
+			"deleteConfirmTitle": "Delete items",
+			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
+		}
+	},
+	"adminIdenfity": {
+		"headline": "Web-Identify Admin"
+	}
 	"pocEdit": {
 		"headline": "Point of Certification Edit",
 		"fields": {

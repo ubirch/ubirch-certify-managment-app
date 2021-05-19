@@ -1,0 +1,45 @@
+<div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state">
+    <div gdColumns="1fr 1fr" gdGap="0 1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentRequired}">{{ icon(state.webIdentRequired) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.webIdentRequired' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentPending}">{{ icon(state.webIdentPending) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.webIdentPending' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentCompleted}">{{ icon(state.webIdentCompleted) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.webIdentCompleted' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userCreated}">{{ icon(state.userCreated) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.userCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userActivated}">{{ icon(state.userActivated) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.userActivated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userInactivated}">{{ icon(state.userInactivated) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.userInactivated' | translate}}</span>
+      </div>
+    </div>
+    <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
+      <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'identify' ]">
+        <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
+        {{ 'adminList.actions.identify' | translate }} 
+    </button>
+    </div>
+
+</div>
+
+<ng-template #spinner>
+  <mat-spinner *ngIf="adminState" [diameter]="50"></mat-spinner>
+</ng-template>
+
+
+

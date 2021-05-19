@@ -1,0 +1,13 @@
+<form action="" [formGroup]="filters" *ngIf="filters" fxLayout fxLayoutGap="2rem" fxLayoutAlign="start end" class="filters">
+  <label>{{ 'pocList.filters.filters' | translate }}</label>
+  <mat-form-field>
+      <mat-label>{{ 'pocList.filters.search' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'pocList.filters.searchPlaceholder' | translate}}" #input formControlName="search">
+  </mat-form-field>
+  <mat-form-field formGroupName="filterColumns">
+      <mat-label>{{ 'pocList.filters.status' | translate }} </mat-label>
+      <mat-select formControlName="status" multiple>
+          <mat-option *ngFor="let status of statuses" [value]="status">{{ 'pocStatuses.' + AdminStatusTranslation[status] | translate }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+</form>

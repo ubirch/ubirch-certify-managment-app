@@ -2,9 +2,9 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { Filters } from '../../models/filters';
 import { IListResult } from '../../models/interfaces/list-result.interface';
 import { IPoc } from '../../models/interfaces/poc.interface';
-import { PocFilters } from '../../models/poc-filters';
 import { ErrorHandlerService } from '../error-handler.service';
 import { PocsService } from '../pocs.service';
 
@@ -33,7 +33,7 @@ export class PocDataSource implements DataSource<IPoc> {
         this.loadingSubject.complete();
     }
 
-    loadPocs(filters: PocFilters) {
+    loadPocs(filters: Filters) {
         this.loadingSubject.next(true);
 
         this.service.getPocs(filters).pipe(
@@ -50,7 +50,7 @@ export class PocDataSource implements DataSource<IPoc> {
         );
     }
 
-    deletePocs(pocs: IPoc[], filters: PocFilters) {
+    deletePocs(pocs: IPoc[], filters: Filters) {
         this.loadingSubject.next(true);
         this.service.deletePocs(pocs).pipe(
             tap(() => this.loadPocs({ ...filters, pageIndex: 0 })),

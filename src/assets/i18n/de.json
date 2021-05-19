@@ -86,6 +86,38 @@
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
 		}
 	},
+	"pocAdmin": {
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"dateOfBirth": "Date of Birth",
+		"email": "Email",
+		"phone": "Phone",
+		"pocName": "PoC Name",
+		"status": "Status",
+		"state": {
+			"webIdentRequired": "Web Ident Required",
+			"webIdentPending": "Web Ident Pending",
+			"webIdentCompleted": "Web Ident Completed",
+			"userCreated": "User Created",
+			"userActivated": "User Activated",
+			"userInactivated": "User Inactivated",
+			"errorMessage": "Error Message"
+		}
+	},
+	"adminList": {
+		"headline": "Points of Certification Admins",
+		"actions": {
+			"action": "Action",
+			"import": "Import",
+			"export": "Export",
+			"apply": "Apply",
+			"delete": "Delete",
+			"activate": "Activate",
+			"deactivate": "Deactivate",
+			"deleteConfirmTitle": "Delete items",
+			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
+		}
+	},
 	"pocEdit": {
 		"headline": "Point of Certification Edit",
 		"fields": {
@@ -122,6 +154,11 @@
 		}
 	},
 	"pocStatuses": {
+		"completed": "Completed",
+		"pending": "Pending",
+		"processing": "Processing"
+	},
+	"adminStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
 		"processing": "Processing"
