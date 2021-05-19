@@ -13,6 +13,7 @@ export interface IPocCreationState {
     clientCertRequired: boolean;
     clientCertCreated: boolean;
     clientCertProvided: boolean;
+    orgUnitCertCreated: boolean;
     logoRequired: boolean;
     logoReceived: boolean;
     logoStored: boolean;

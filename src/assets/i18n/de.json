@@ -55,6 +55,7 @@
 			"deviceGroupTenantRoleAssigned": "Device group tenant role assigned",
 			"deviceCreated": "Device created",
 			"clientCertRequired": "Client cert required",
+			"orgUnitCertCreated": "Org unit cert created",
 			"logoRequired": "Logo required",
 			"logoReceived": "Logo received",
 			"logoStored": "Logo stored",

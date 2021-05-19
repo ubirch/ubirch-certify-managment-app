@@ -65,6 +65,10 @@
         <span>{{ 'poc.state.clientCertRequired' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertRequired}">{{ icon(state.orgUnitCertCreated) }}</mat-icon>
+        <span>{{ 'poc.state.orgUnitCertCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoRequired}">{{ icon(state.logoRequired) }}</mat-icon>
         <span>{{ 'poc.state.logoRequired' | translate}}</span>
       </div>
