@@ -4,7 +4,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ADMINS_MOCK, ADMIN_STATE_MOCK } from '../mocks/admins.mock';
-import { Filters } from '../models/filters';
+import { Filters, flattenFilters } from '../models/filters';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPocAdmin } from '../models/interfaces/poc-admin.interface';
 import { IWebIdentConfirmation } from '../models/interfaces/web-ident-confirmation.interface';
@@ -35,8 +35,9 @@ export class PocAdminService {
   getAdmins(filters: Filters) {
     return of(ADMINS_MOCK).pipe(delay(1000));
 
-    // return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl);
+    // return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl, { params: flattenFilters(filters) as any });
   }
+
 
   getAdminState(adminId: string) {
     return of(ADMIN_STATE_MOCK).pipe(delay(500));

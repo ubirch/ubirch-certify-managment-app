@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { scan } from 'rxjs/operators';
 import { UploadState } from '../models/enums/upload-state.enum';
-import { IUploadStatus } from '../models/interfaces/upload-status';
-import { environment } from '../../../environments/environment';
+import { IUploadStatus } from '../models/interfaces/upload-status.interface';
 
 @Injectable({
   providedIn: 'root'

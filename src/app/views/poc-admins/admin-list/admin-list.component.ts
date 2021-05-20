@@ -36,14 +36,12 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     'select',
     'firstName',
     'lastName',
-    'dateOfBirth',
     'email',
-    'phone',
     'pocName',
     'state',
   ];
   selection = new SelectionModel<IPocAdmin>(true, []);
-  defaultSortColumn = 'firstName';
+  defaultSortColumn = 'email';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPocAdmin | null;
@@ -67,11 +65,9 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private adminService: PocAdminService,
     private fb: FormBuilder,
-    private translateService: TranslateService,
     public dialog: MatDialog,
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
-    private router: Router,
   ) { }
 
   ngOnInit() {

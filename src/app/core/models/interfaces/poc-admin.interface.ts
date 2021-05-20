@@ -4,7 +4,7 @@ export interface IPocAdmin {
     id: string;
     firstName: string;
     lastName: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     email: string;
     phone: string;
     pocName: string;

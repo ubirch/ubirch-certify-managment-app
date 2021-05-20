@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, View
 import { fromEvent, merge, Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
-import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
+import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status.interface';
 
 @Component({
   selector: 'app-file-upload',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
 import { INotification } from 'src/app/core/models/interfaces/notification.interface';
-import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
+import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';

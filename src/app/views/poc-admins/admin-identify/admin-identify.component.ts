@@ -1,12 +1,9 @@
-import { formatDate } from '@angular/common';
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of, Subject, Subscription, throwError } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { DateFormats } from 'src/app/core/models/enums/date-format.enum';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
@@ -72,7 +69,7 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
       id: [{ value: data[0].id, disabled: true }],
       firstName: [{ value: data[0].firstName, disabled: true }],
       lastName: [{ value: data[0].lastName, disabled: true }],
-      dateOfBirth: [{ value: formatDate(data[0].dateOfBirth, DateFormats.defaultDate, 'en'), disabled: true }],
+      dateOfBirth: [{ value: data[0].dateOfBirth, disabled: true }],
       email: [{ value: data[0].email, disabled: true }],
       phone: [{ value: data[0].phone, disabled: true }],
       initialId: [{ value: data[1], disabled: true }],

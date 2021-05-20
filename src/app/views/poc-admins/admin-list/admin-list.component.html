@@ -56,25 +56,13 @@
         <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
     </ng-container>
 
-    <!-- dateOfBirth -->
-    <ng-container matColumnDef="dateOfBirth">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.dateOfBirth' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.dateOfBirth | date:'yyyy-MM-dd' }}</mat-cell>
-    </ng-container>
-
     <!-- email -->
     <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{admin.email}}</mat-cell>
     </ng-container>
 
-    <!-- phone -->
-    <ng-container matColumnDef="phone">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.phone' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.phone}}</mat-cell>
-    </ng-container>
-
-    <!-- phone -->
+    <!-- pocName -->
     <ng-container matColumnDef="pocName">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.pocName' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{admin.pocName}}</mat-cell>
