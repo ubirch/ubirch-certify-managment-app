@@ -6,7 +6,6 @@ import {
 } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { AuthGuard } from './auth.guard';
-import { TENANT_ADMIN } from '../models/roles';
 
 
 export const NOT_AUTHORIZED_URL = ['views', 'not-authorized'];
@@ -14,7 +13,7 @@ export const NOT_AUTHORIZED_URL = ['views', 'not-authorized'];
 @Injectable({
     providedIn: 'root',
 })
-export class TenantAdminGuard extends AuthGuard {
+export class RoleGuard extends AuthGuard {
     constructor(
         protected readonly router: Router,
         protected readonly keycloak: KeycloakService
@@ -28,8 +27,8 @@ export class TenantAdminGuard extends AuthGuard {
     ) {
         const authenticated = await super.isAccessAllowed(route, state);
 
-        if (!this.roles.includes(TENANT_ADMIN)) {
-            this.router.navigate(NOT_AUTHORIZED_URL);
+        if (!this.roles.includes(route.data.role)) {
+            this.router.navigate(['/']);
             return false;
         }
 

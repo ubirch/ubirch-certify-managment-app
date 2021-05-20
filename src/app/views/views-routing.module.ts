@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../core/auth/auth.guard';
-import { TenantAdminGuard } from '../core/auth/tenant-admin.guard';
+import { RoleRedirectResolver } from '../core/auth/role-redirect.resolver';
+import { RoleGuard } from '../core/auth/role-admin.guard';
+import { POC_ADMIN, TENANT_ADMIN } from '../core/models/roles';
+import { LandingComponent } from './landing/landing.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ViewsComponent } from './views.component';
 
@@ -12,8 +14,9 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'pocs',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        component: LandingComponent,
+        resolve: [RoleRedirectResolver]
       },
       {
         path: 'not-authorized',
@@ -23,18 +26,28 @@ const routes: Routes = [
         path: 'pocs',
         loadChildren: () =>
           import('./pocs/pocs.module').then((m) => m.PocsModule),
-        canActivate: [TenantAdminGuard],
+        canActivate: [RoleGuard],
+        data: {
+          role: TENANT_ADMIN
+        }
       },
       {
         path: 'poc-admins',
         loadChildren: () =>
           import('./poc-admins/poc-admins.module').then((m) => m.PocAdminsModule),
-        canActivate: [TenantAdminGuard],
+        canActivate: [RoleGuard],
+        data: {
+          role: TENANT_ADMIN
+        }
       },
       {
         path: 'poc-employees',
         loadChildren: () =>
           import('./poc-employees/poc-employees.module').then((m) => m.PocEmployeesModule),
+        canActivate: [RoleGuard],
+        data: {
+          role: POC_ADMIN
+        }
       },
     ]
   }

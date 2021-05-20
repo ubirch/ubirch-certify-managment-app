@@ -3,19 +3,19 @@ import { KeycloakService } from 'keycloak-angular';
 import { TENANT_ADMIN } from '../models/roles';
 import { fakeRouterState } from './fake-router-snapshot';
 
-import { NOT_AUTHORIZED_URL, TenantAdminGuard } from './tenant-admin.guard';
+import { NOT_AUTHORIZED_URL, RoleGuard } from './role-admin.guard';
 
 describe('TenantAdminGuardGuard', () => {
     const dummyRoute = {} as ActivatedRouteSnapshot;
     let routerSpy: jasmine.SpyObj<Router>;
     let serviceSpy: jasmine.SpyObj<KeycloakService>;
-    let guard: TenantAdminGuard;
+    let guard: RoleGuard;
 
     beforeEach(() => {
         routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
         serviceSpy = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'getUserRoles']);
         serviceSpy.isLoggedIn.and.resolveTo(true);
-        guard = new TenantAdminGuard(routerSpy, serviceSpy);
+        guard = new RoleGuard(routerSpy, serviceSpy);
     });
 
     it('should be created', () => {
