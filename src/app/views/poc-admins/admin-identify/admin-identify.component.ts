@@ -82,7 +82,7 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
 
   contentCopied(key: string) {
     const field = this.translate.instant(key);
-    const message = this.translate.instant('adminIdenfity.copyMessage', { field });
+    const message = this.translate.instant('adminIdentify.copyMessage', { field });
     this.notification.success({ message });
   }
 
