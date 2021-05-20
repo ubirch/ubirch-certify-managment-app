@@ -5,6 +5,7 @@ import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { PocsService } from 'src/app/core/services/pocs.service';
 
 @Component({
   selector: 'app-import',
@@ -19,6 +20,7 @@ export class PocImportComponent implements OnInit {
 
   constructor(
     private fileService: ExportImportService,
+    private pocService: PocsService,
     private error: ErrorHandlerService,
     private notificationService: NotificationService
   ) { }
@@ -35,7 +37,7 @@ export class PocImportComponent implements OnInit {
   }
 
   uploadFile() {
-    this.fileService.uploadFile(this.file)
+    this.pocService.importFile(this.file)
       .subscribe(
         event => {
           this.progress = event;

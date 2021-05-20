@@ -11,14 +11,10 @@ import { environment } from '../../../environments/environment';
 })
 export class ExportImportService {
 
-  baseUrl = environment.pocManagerApi;
-  uploadUrl = `${this.baseUrl}pocs/create`;
-  downloadUrl = `${this.baseUrl}devices`;
-
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File): Observable<IUploadStatus> {
-    const config = new HttpRequest('POST', this.uploadUrl, file, {
+  uploadFile(file: File, url: string): Observable<IUploadStatus> {
+    const config = new HttpRequest('POST', url, file, {
       reportProgress: true,
       responseType: 'blob'
     });
@@ -41,10 +37,6 @@ export class ExportImportService {
       },
         { state: UploadState.pending, progress: 0, result: null })
     );
-  }
-
-  exportPocs() {
-    return this.http.get(this.downloadUrl, { responseType: 'blob' });
   }
 
   triggerDownload(blob: Blob, fileName: string) {

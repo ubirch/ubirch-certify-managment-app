@@ -164,7 +164,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   export() {
     this.exportLoading = true;
-    this.exportService.exportPocs().pipe(
+    this.pocService.exportPocs().pipe(
       takeUntil(this.unsubscribe$),
       finalize(() => this.exportLoading = false)
     ).subscribe(
