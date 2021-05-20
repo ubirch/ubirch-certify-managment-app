@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { ADMIN_STATE_MOCK } from '../mocks/admins.mock';
+import { ADMINS_MOCK, ADMIN_STATE_MOCK } from '../mocks/admins.mock';
 import { Filters } from '../models/filters';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPocAdmin } from '../models/interfaces/poc-admin.interface';
@@ -33,7 +33,9 @@ export class PocAdminService {
   }
 
   getAdmins(filters: Filters) {
-    return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl);
+    return of(ADMINS_MOCK).pipe(delay(1000));
+
+    // return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl);
   }
 
   getAdminState(adminId: string) {

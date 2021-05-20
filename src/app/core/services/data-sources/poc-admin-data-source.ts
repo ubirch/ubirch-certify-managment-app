@@ -1,8 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, finalize } from 'rxjs/operators';
-import { ADMINS_MOCK } from '../../mocks/admins.mock';
+import { finalize } from 'rxjs/operators';
 import { Filters } from '../../models/filters';
 import { IListResult } from '../../models/interfaces/list-result.interface';
 import { IPocAdmin } from '../../models/interfaces/poc-admin.interface';
@@ -36,9 +35,7 @@ export class PocAdminDataSource implements DataSource<IPocAdmin> {
     loadAdmins(filters: Filters) {
         this.loadingSubject.next(true);
 
-        // this.service.getAdmins(filters).pipe(
-        of(ADMINS_MOCK).pipe(
-            delay(1000),
+        this.service.getAdmins(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
         ).subscribe(
             adminsResult => {
