@@ -12,10 +12,10 @@
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="downloadCSV()" [ngClass]="{ 'export-btn': true, spinner: exportDisabled }" [disabled]="exportDisabled">
     <mat-icon aria-hidden="false" aria-label="Export pocs to csv">download</mat-icon>
-    {{ 'pocList.actions.export' | translate }} 
+    {{ 'listActions.export' | translate }} 
 </button>
   <button mat-raised-button color="primary" [routerLink]="[ '/views', 'pocs', 'import' ]">
       <mat-icon aria-hidden="false" aria-label="Import pocs">add</mat-icon>
-      {{ 'pocList.actions.import' | translate }} 
+      {{ 'listActions.import' | translate }} 
   </button>
 </form>

@@ -184,7 +184,8 @@
 		"apply": "Apply",
 		"delete": "Delete",
 		"activate": "Activate",
-		"deactivate": "Deactivate"
+		"deactivate": "Deactivate",
+		"identify": "Web-identify"
 	},
 	"dialog": {
 		"defaultTitle": "Confirmation required",
