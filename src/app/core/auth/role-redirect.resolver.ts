@@ -3,11 +3,12 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
 import { POC_ADMIN, TENANT_ADMIN } from '../models/roles';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class RoleRedirectResolver implements Resolve<void> {
     constructor(
-        private keycloak: KeycloakService,
+        private authService: AuthService,
         private router: Router,
     ) { }
 
@@ -15,10 +16,9 @@ export class RoleRedirectResolver implements Resolve<void> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any> | Promise<any> | any {
-        const roles = this.keycloak.getUserRoles();
         let redirect = 'not-authorized';
-        if (roles?.includes(POC_ADMIN)) { redirect = 'poc-employees'; }
-        if (roles?.includes(TENANT_ADMIN)) { redirect = 'pocs'; }
+        if (this.authService.isPocAdmin()) { redirect = 'poc-employees'; }
+        if (this.authService.isTenantAdmin()) { redirect = 'pocs'; }
 
         this.router.navigate(['/views', redirect]);
     }

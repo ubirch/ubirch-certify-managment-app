@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-views',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewsComponent implements OnInit {
 
-  constructor() { }
+  showNav = true;
 
-  ngOnInit() {}
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    console.log(this.showNav);
+    if (this.authService.isPocAdmin()) { this.showNav = false; }
+  }
 
 }

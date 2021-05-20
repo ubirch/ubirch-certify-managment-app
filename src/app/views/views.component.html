@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" style="height: 100vh">
   <main>
     <app-header>
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button (click)="sidenav.toggle()" *ngIf="showNav">
         <mat-icon>menu</mat-icon>
       </button>
     </app-header>
