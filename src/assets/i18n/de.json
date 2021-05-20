@@ -76,13 +76,6 @@
 			"status": "Status"
 		},
 		"actions": {
-			"action": "Action",
-			"import": "Import",
-			"export": "Export",
-			"apply": "Apply",
-			"delete": "Delete",
-			"activate": "Activate",
-			"deactivate": "Deactivate",
 			"deleteConfirmTitle": "Delete items",
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
 		}
@@ -151,19 +144,7 @@
 		}
 	},
 	"adminList": {
-		"headline": "Points of Certification Admins",
-		"actions": {
-			"action": "Action",
-			"import": "Import",
-			"export": "Export",
-			"apply": "Apply",
-			"delete": "Delete",
-			"activate": "Activate",
-			"identify": "Identify",
-			"deactivate": "Deactivate",
-			"deleteConfirmTitle": "Delete items",
-			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
-		}
+		"headline": "Points of Certification Admins"
 	},
 	"adminIdentify": {
 		"headline": "Web-Identify Admin",
@@ -174,6 +155,36 @@
 		"completed": "Completed",
 		"pending": "Pending",
 		"processing": "Processing"
+	},
+	"pocEmployee": {
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"status": "Status",
+		"email": "Email",
+		"state": {
+			"userCreated": "User created",
+			"userRegistration": "User registration",
+			"userActivated": "User activated",
+			"userInactivated": "User inactivated",
+			"errorMessage": "Error Message"
+		}
+	},
+	"employeeList": {
+		"headline": "Points of Certification Employees"
+	},
+	"employeeStatuses": {
+		"completed": "Completed",
+		"pending": "Pending",
+		"processing": "Processing"
+	},
+	"listActions": {
+		"action": "Action",
+		"import": "Import",
+		"export": "Export",
+		"apply": "Apply",
+		"delete": "Delete",
+		"activate": "Activate",
+		"deactivate": "Deactivate"
 	},
 	"dialog": {
 		"defaultTitle": "Confirmation required",

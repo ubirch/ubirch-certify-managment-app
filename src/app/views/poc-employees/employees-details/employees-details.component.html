@@ -1,0 +1,31 @@
+<div *ngIf="employeeState$ | async as state; else spinner" [@fadeInDown]="state">
+  <div gdColumns="1fr 1fr" gdGap="0 1rem">
+    <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userCreated}">{{ icon(state.userCreated) }}</mat-icon>
+      <span>{{ 'pocEmployee.state.userCreated' | translate}}</span>
+    </div>
+    <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userRegistration}">{{ icon(state.userRegistration) }}</mat-icon>
+      <span>{{ 'pocEmployee.state.userRegistration' | translate}}</span>
+    </div>
+    <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userActivated}">{{ icon(state.userActivated) }}</mat-icon>
+      <span>{{ 'pocEmployee.state.userActivated' | translate}}</span>
+    </div>
+    <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userInactivated}">{{ icon(state.userInactivated) }}</mat-icon>
+      <span>{{ 'pocEmployee.state.userInactivated' | translate}}</span>
+    </div>    
+  </div>
+  <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
+    <label>{{ 'pocEmployee.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
+  </div>
+
+</div>
+
+<ng-template #spinner>
+  <mat-spinner *ngIf="employeeState$" [diameter]="50"></mat-spinner>
+</ng-template>
+
+
+

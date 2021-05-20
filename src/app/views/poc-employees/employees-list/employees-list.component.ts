@@ -5,56 +5,51 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
-import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
-import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { Filters } from 'src/app/core/models/filters';
-import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
+import { IPocEmployee } from 'src/app/core/models/interfaces/poc-employee.interface';
+import { PocEmployeeDataSource } from 'src/app/core/services/data-sources/poc-employee-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { PocsService } from 'src/app/core/services/pocs.service';
+import { PocEmployeeService } from 'src/app/core/services/poc-employee.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
-import { ConfirmDialogComponent, ConfirmDialogModel } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-poc-list',
-  templateUrl: './poc-list.component.html',
-  styleUrls: ['./poc-list.component.scss'],
+  selector: 'app-employees-list',
+  templateUrl: './employees-list.component.html',
+  styleUrls: ['./employees-list.component.scss'],
   animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
-export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  dataSource: PocDataSource;
+  dataSource: PocEmployeeDataSource;
   displayColumns: string[] = [
     'select',
-    'externalId',
-    'pocName',
-    'dataSchemaId',
-    'created',
-    'lastUpdated',
-    'status',
-    'actions',
+    'firstName',
+    'lastName',
+    'email',
+    'status'
   ];
-  selection = new SelectionModel<IPoc>(true, []);
-  defaultSortColumn = 'externalId';
+  selection = new SelectionModel<IPocEmployee>(true, []);
+  defaultSortColumn = 'email';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
-  expandedElement: IPoc | null;
+  expandedElement: IPocEmployee | null;
 
   filters: FormGroup;
-  action: FormControl = new FormControl(ListAction.delete);
+  action: FormControl = new FormControl(ListAction.activate);
   actions = [
-    { value: ListAction.delete, label: `listActions.delete` }
+    { value: ListAction.activate, label: `listActions.activate` },
+    { value: ListAction.deactivate, label: `listActions.deactivate` }
   ];
-  PocStatusTranslation = PocStatusTranslation;
+  employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
   exportLoading = false;
 
@@ -65,20 +60,18 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsubscribe$ = new Subject();
 
   constructor(
-    private pocService: PocsService,
+    private employeeService: PocEmployeeService,
     private fb: FormBuilder,
-    private translateService: TranslateService,
     public dialog: MatDialog,
     private errorService: ErrorHandlerService,
-    private exportService: ExportImportService,
     private notificationService: NotificationService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.dataSource = new PocDataSource(this.pocService, this.errorService);
+    this.dataSource = new PocEmployeeDataSource(this.employeeService, this.errorService);
     this.generateFilters();
-    this.loadPocPage();
+    this.loadEmployeesPage();
   }
 
   ngAfterViewInit(): void {
@@ -111,7 +104,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
-        this.loadPocPage();
+        this.loadEmployeesPage();
       }),
       takeUntil(this.unsubscribe$),
     ).subscribe();
@@ -138,44 +131,35 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: IPoc): string {
+  checkboxLabel(row?: IPocEmployee): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.externalId}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.email}`;
   }
 
   applyAction() {
     const selected = this.selection.selected;
     switch (this.action.value) {
-      case ListAction.delete:
+      case ListAction.activate:
         // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
         this.notificationService.warning({
           message: 'global.errors.notImplemented',
           title: 'global.errors.requestDefaultTitle',
           duration: 7000
         });
-        // this.deleteItems(selected);
+        break;
+      case ListAction.deactivate:
+        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
+        this.notificationService.warning({
+          message: 'global.errors.notImplemented',
+          title: 'global.errors.requestDefaultTitle',
+          duration: 7000
+        });
         break;
       default:
         break;
     }
-  }
-
-  export() {
-    this.exportLoading = true;
-    this.exportService.exportPocs().pipe(
-      takeUntil(this.unsubscribe$),
-      finalize(() => this.exportLoading = false)
-    ).subscribe(
-      blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
-      err => this.errorService.handlerResponseError(err)
-    );
-  }
-
-  editPoc(event: MouseEvent, poc: IPoc) {
-    this.router.navigate(['/views', 'pocs', 'edit', poc.id]);
-    event.stopPropagation();
   }
 
   ngOnDestroy(): void {
@@ -185,26 +169,8 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private deleteItems(pocs: IPoc[]) {
-    const message = this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
-    const title = this.translateService.instant('pocList.actions.deleteConfirmTitle');
-    const dialogData = new ConfirmDialogModel(title, message);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '800px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.dataSource.deletePocs(pocs, this.filters.value);
-        this.selection.clear();
-      }
-    });
-  }
-
-  private loadPocPage() {
-    this.dataSource.loadPocs(this.filters.value);
+  private loadEmployeesPage() {
+    this.dataSource.loadEmpoloyees(this.filters.value);
   }
 
   private generateFilters() {
@@ -215,4 +181,5 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       status: ['']
     }));
   }
+
 }

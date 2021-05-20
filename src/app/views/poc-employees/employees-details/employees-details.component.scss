@@ -1,0 +1,16 @@
+:host {
+    flex-grow: 1;
+}
+label {
+    font-weight: bold;
+    padding-right: 0.7rem;
+}
+
+.mat-icon { color: red;}
+.mat-icon.success {color: green;}
+
+button .mat-icon { color: #fff; }
+
+.state-dates {
+    margin: 1rem 0;
+}

@@ -1,4 +1,5 @@
-export enum AdminActions {
+export enum ListAction {
+    delete = 'delete',
     activate = 'activate',
     deactivate = 'deactivate'
 }

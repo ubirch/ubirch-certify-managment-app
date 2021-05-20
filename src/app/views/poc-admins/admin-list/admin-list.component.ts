@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
-import { AdminActions } from 'src/app/core/models/enums/admin-actions.enum';
 import { AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
-import { PocActions } from 'src/app/core/models/enums/poc-actions.enum';
+import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { Filters } from 'src/app/core/models/filters';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { PocAdminDataSource } from 'src/app/core/services/data-sources/poc-admin-data-source';
@@ -33,7 +32,6 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: PocAdminDataSource;
-
   displayColumns: string[] = [
     'select',
     'firstName',
@@ -51,10 +49,10 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   expandedElement: IPocAdmin | null;
 
   filters: FormGroup;
-  action: FormControl = new FormControl(PocActions.delete);
+  action: FormControl = new FormControl(ListAction.delete);
   actions = [
-    { value: AdminActions.activate, label: `adminList.actions.activate` },
-    { value: AdminActions.deactivate, label: `adminList.actions.deactivate` }
+    { value: ListAction.activate, label: `listActions.activate` },
+    { value: ListAction.deactivate, label: `listActions.deactivate` }
   ];
   adminStatusTranslation = AdminStatusTranslation;
   showActions = false;
@@ -156,7 +154,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   applyAction() {
     const selected = this.selection.selected;
     switch (this.action.value) {
-      case AdminActions.activate:
+      case ListAction.activate:
         // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
         this.notificationService.warning({
           message: 'global.errors.notImplemented',
@@ -164,7 +162,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
           duration: 7000
         });
         break;
-      case AdminActions.deactivate:
+      case ListAction.deactivate:
         // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
         this.notificationService.warning({
           message: 'global.errors.notImplemented',

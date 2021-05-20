@@ -1,7 +1,7 @@
-<h2>{{ 'adminList.headline' | translate }}</h2>
+<h2>{{ 'employeeList.headline' | translate }}</h2>
 
 <!-- FILTERS -->
-<app-admin-filters [filters]="filters" [exportDisabled]="exportLoading"></app-admin-filters>
+<app-employees-filters [filters]="filters"></app-employees-filters>
 
 <!-- ACTIONS -->
 <div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
@@ -40,54 +40,36 @@
 
     <!-- firstName -->
     <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.firstName' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.firstName}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocEmployee.firstName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{employee.firstName}}</mat-cell>
     </ng-container>
 
     <!-- lastName -->
     <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.lastName' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.lastName}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocEmployee.lastName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{employee.lastName}}</mat-cell>
     </ng-container>
 
     <!-- state -->
-    <ng-container matColumnDef="state">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.status' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
-    </ng-container>
-
-    <!-- dateOfBirth -->
-    <ng-container matColumnDef="dateOfBirth">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.dateOfBirth' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.dateOfBirth | date:'yyyy-MM-dd' }}</mat-cell>
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocEmployee.status' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{ 'employeeStatuses.' + employeeStatusTranslation[employee.status] | translate }}</mat-cell>
     </ng-container>
 
     <!-- email -->
     <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.email}}</mat-cell>
-    </ng-container>
-
-    <!-- phone -->
-    <ng-container matColumnDef="phone">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.phone' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.phone}}</mat-cell>
-    </ng-container>
-
-    <!-- phone -->
-    <ng-container matColumnDef="pocName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.pocName' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.pocName}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocEmployee.email' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{employee.email}}</mat-cell>
     </ng-container>
 
 
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
-        <mat-cell *matCellDef="let admin">
+        <mat-cell *matCellDef="let employee">
             <div class="element-detail"
-                [@detailExpand]="admin == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
+                [@detailExpand]="employee == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
                 <div class="detail-cols" fxFlex>
-                    <app-admin-details [admin]="admin" [current]="expandedElement === admin"></app-admin-details>
+                    <app-employees-details [employee]="employee" [current]="expandedElement === employee"></app-employees-details>
                 </div>
             </div>
         </mat-cell>
@@ -95,10 +77,10 @@
 
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
 
-    <mat-row *matRowDef="let admin; columns: displayColumns;"
+    <mat-row *matRowDef="let employee; columns: displayColumns;"
         class="element-row"
-        [class.expanded-row]="expandedElement === admin"
-        (click)="expandedElement = expandedElement === admin ? null : admin">
+        [class.expanded-row]="expandedElement === employee"
+        (click)="expandedElement = expandedElement === employee ? null : employee">
     </mat-row>
     <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></mat-row>
 </mat-table>
@@ -107,5 +89,8 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<mat-paginator [length]="dataSource.totalItems$ | async" [pageSize]="defaultPageSize"
-[pageSizeOptions]="pageSizes"></mat-paginator>
+<mat-paginator 
+    [length]="dataSource.totalItems$ | async" 
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizes"
+></mat-paginator>
