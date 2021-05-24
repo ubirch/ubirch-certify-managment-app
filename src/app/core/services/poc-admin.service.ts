@@ -20,9 +20,9 @@ export class PocAdminService {
   selectedAdmin$ = this.selectedAdmin.asObservable();
 
   baseUrl = environment.pocManagerApi;
-  adminStatusUrl = `${this.baseUrl}poc-admins/status`;
+  adminStatusUrl = `${this.baseUrl}poc-admin/status`;
   adminsUrl = `${this.baseUrl}poc-admins`;
-  adminsIdentUrl = `${this.baseUrl}poc-admins/identify`;
+  adminsIdentUrl = `${this.baseUrl}poc-admin/identify`;
 
   constructor(
     private http: HttpClient,
