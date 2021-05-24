@@ -1,5 +1,5 @@
 export interface IWebIdentConfirmation {
-    id: string;
-    initialId: string;
-    completedId: string;
+    pocAdminId: string;
+    webIdentInitiateId: string;
+    webIdentId: string;
 }

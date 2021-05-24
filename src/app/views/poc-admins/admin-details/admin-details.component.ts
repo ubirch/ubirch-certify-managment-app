@@ -5,6 +5,8 @@ import { IPocAdminState } from 'src/app/core/models/interfaces/poc-admin-state.i
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 import { fadeDownIn } from 'src/app/core/utils/animations';
+import { IBirthDate } from '../../../core/models/interfaces/birth-date.interface';
+import { LocaleService } from '../../../core/services/locale.service';
 
 @Component({
   selector: 'app-admin-details',
@@ -26,6 +28,7 @@ export class AdminDetailsComponent {
     private adminService: PocAdminService,
     private router: Router,
     private route: ActivatedRoute,
+    private locale: LocaleService
   ) { }
 
   icon(value: boolean) {
@@ -39,4 +42,12 @@ export class AdminDetailsComponent {
     this.router.navigate(['identify', this.admin.id], { relativeTo: this.route.parent });
   }
 
+  get birthDate(): string {
+      if (!this.admin?.dateOfBirth) {
+          return '';
+      }
+      const givenDate: IBirthDate = this.admin.dateOfBirth;
+      const birthDate: Date = new Date(givenDate.year, givenDate.month - 1, givenDate.day);
+      return birthDate.toLocaleDateString(this.locale.getLanguage());
+  }
 }

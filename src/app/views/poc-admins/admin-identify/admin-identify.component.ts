@@ -55,7 +55,7 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
       const initialId = this.form.get('initialId').value;
       const completedId = this.form.get('completedId').value;
 
-      this.adminService.postWebIdentId({ id, initialId, completedId }).pipe(
+      this.adminService.postWebIdentId({ pocAdminId: id, webIdentInitiateId: initialId, webIdentId: completedId }).pipe(
         takeUntil(this.unsubscribe$)
       ).subscribe(() => {
         this.notification.success({ message: 'adminIdentify.success' });

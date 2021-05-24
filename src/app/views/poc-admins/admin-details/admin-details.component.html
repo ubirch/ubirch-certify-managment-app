@@ -1,5 +1,5 @@
 <div gdColumns="120px 1fr" gdGap="0.2rem 0">
-  <label>{{ 'pocAdmin.dateOfBirth' | translate }}:</label> <span>{{ admin.dateOfBirth }}</span>
+  <label>{{ 'pocAdmin.dateOfBirth' | translate }}:</label> <span>{{ birthDate }}</span>
   <label>{{ 'pocAdmin.phone' | translate }}:</label> <span>{{ admin.phone }}</span>
 </div>
 
@@ -38,7 +38,7 @@
     <div>
       <button mat-raised-button color="primary" (click)="identify()" *ngIf="state.webIdentRequired && !state.webIdentCompleted">
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
-        {{ 'listActions.identify' | translate }} 
+        {{ 'listActions.identify' | translate }}
     </button>
     </div>
 
