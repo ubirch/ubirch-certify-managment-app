@@ -41,7 +41,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     'state',
   ];
   selection = new SelectionModel<IPocAdmin>(true, []);
-  defaultSortColumn = 'email';
+  defaultSortColumn = 'pocName';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPocAdmin | null;
