@@ -43,10 +43,11 @@
       <ng-container *ngIf="admin.webIdentInitiateId">
         <label>{{ 'pocAdmin.webIdentInitiateId' | translate }}:</label> <span>{{ admin.webIdentInitiateId }}</span>
       </ng-container>
-      <ng-container *ngIf="admin.webIdentCompletedId">
-        <label>{{ 'pocAdmin.webIdentCompletedId' | translate }}:</label> <span>{{ admin.webIdentCompletedId }}</span>
+      <ng-container *ngIf="admin.webidentSuccessId">
+        <label>{{ 'pocAdmin.webidentSuccessId' | translate }}:</label> <span>{{ admin.webidentSuccessId }}</span>
       </ng-container>
-      <button 
+    </div>
+    <button 
         *ngIf="state.webIdentRequired && !state.webIdentSuccess" 
         mat-raised-button color="primary" 
         (click)="identify()"
@@ -54,7 +55,6 @@
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
         {{ (state.webIdentInitiated ?  'listActions.completeIdentify' : 'listActions.identify') | translate }}
       </button>
-    </div>
 </div>
 
 

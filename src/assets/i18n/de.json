@@ -134,7 +134,7 @@
 		"completedId": "Web Ident ID",
 		"status": "Status",
 		"webIdentInitiateId": "Web ident initiated ID",
-		"webIdentCompletedId": "Web ident completed ID",
+		"webidentSuccessId": "Web ident completed ID",
 		"state": {
 			"webIdentRequired": "Web ident required",
 			"webIdentInitiated": "Web ident initiated",

@@ -43,11 +43,11 @@ export class AdminDetailsComponent {
   }
 
   get birthDate(): string {
-      if (!this.admin?.dateOfBirth) {
-          return '';
-      }
-      const givenDate: IBirthDate = this.admin.dateOfBirth;
-      const birthDate: Date = new Date(givenDate.year, givenDate.month - 1, givenDate.day);
-      return birthDate.toLocaleDateString(this.locale.getLanguage());
+    if (!this.admin?.dateOfBirth) {
+      return '';
+    }
+    const givenDate: IBirthDate = this.admin.dateOfBirth;
+    const birthDate: Date = new Date(givenDate.year, givenDate.month - 1, givenDate.day);
+    return birthDate.toLocaleDateString(this.locale.getLanguage());
   }
 }

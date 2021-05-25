@@ -35,26 +35,28 @@ export class PocAdminService {
   }
 
   getAdmins(filters: Filters) {
-    return of(ADMINS_MOCK).pipe(delay(1000));
+    // return of(ADMINS_MOCK).pipe(delay(1000));
 
-    // return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl, { params: flattenFilters(filters) as any });
+    return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl, { params: flattenFilters(filters) as any });
   }
 
 
   getAdminState(adminId: string) {
-    return of(ADMIN_STATE_MOCK).pipe(delay(500));
+    // if (adminId === '1') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true }).pipe(delay(500)); }
+    // if (adminId === '3') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true, webIdentSuccess: true }).pipe(delay(500)); }
+    // return of(ADMIN_STATE_MOCK).pipe(delay(500));
 
-    // const url = `${this.adminStatusUrl}/${adminId}`;
-    // return this.http.get<IPocAdminState>(url);
+    const url = `${this.adminStatusUrl}/${adminId}`;
+    return this.http.get<IPocAdminState>(url);
   }
 
   getInitialIdentId(adminId: string) {
-    return of('74575b09-6699-4f09-b1b2-dc8e456e0c97').pipe(delay(500));
+    // return of('74575b09-6699-4f09-b1b2-dc8e456e0c97').pipe(delay(500));
 
-    // const url = `${this.adminsIdentUrl}/initiate-id`;
-    // return this.http.post<IWebIdentInitiateId>(url, {pocAdminId: adminId}).pipe(
-    //     map((val: IWebIdentInitiateId) => val.webInitiateId)
-    // );
+    const url = `${this.adminsIdentUrl}/initiate-id`;
+    return this.http.post<IWebIdentInitiateId>(url, { pocAdminId: adminId }).pipe(
+      map((val: IWebIdentInitiateId) => val.webInitiateId)
+    );
   }
 
   postWebIdentId(confirm: IWebIdentConfirmation) {
