@@ -1,4 +1,4 @@
-<div gdColumns="120px 1fr" gdGap="0.2rem 0">
+<div gdColumns="170px 1fr" gdGap="0.2rem 0">
   <label>{{ 'pocAdmin.dateOfBirth' | translate }}:</label> <span>{{ birthDate }}</span>
   <label>{{ 'pocAdmin.phone' | translate }}:</label> <span>{{ admin.phone }}</span>
 </div>
@@ -36,17 +36,24 @@
         <span>{{ 'pocAdmin.state.invitedToTeamDrive' | translate}}</span>
       </div> -->
     </div>
-    <div gdColumns="120px 1fr" class="state-dates" fxLayoutGap="0.5rem">
+    <div gdColumns="170px 1fr" class="state-dates">
       <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
     </div>
-    <div>
-      <button mat-raised-button color="primary" (click)="identify()" *ngIf="state.webIdentRequired && !state.webIdentSuccess">
+    <div gdColumns="170px 1fr" *ngIf="state.webIdentRequired">
+      <ng-container *ngIf="admin.webIdentInitiateId">
+        <label>{{ 'pocAdmin.webIdentInitiateId' | translate }}:</label> <span>{{ admin.webIdentInitiateId }}</span>
+      </ng-container>
+      <ng-container *ngIf="admin.webIdentCompletedId">
+        <label>{{ 'pocAdmin.webIdentCompletedId' | translate }}:</label> <span>{{ admin.webIdentCompletedId }}</span>
+      </ng-container>
+      <button *ngIf="state.webIdentRequired && !state.webIdentSuccess" mat-raised-button color="primary" (click)="identify()">
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
-        {{ 'listActions.identify' | translate }}
-    </button>
-    </div>
+        {{ (state.webIdentInitiated ?  'listActions.completeIdentify' : 'listActions.identify') | translate }}
+      </button>
 
+    </div>
 </div>
+
 
 <ng-template #spinner>
   <mat-spinner *ngIf="adminState" [diameter]="50"></mat-spinner>

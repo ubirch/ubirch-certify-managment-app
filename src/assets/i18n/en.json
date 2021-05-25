@@ -133,11 +133,13 @@
 		"initialId": "Web Ident initial ID",
 		"completedId": "Web Ident ID",
 		"status": "Status",
+		"webIdentInitiateId": "Web ident initiated ID",
+		"webIdentCompletedId": "Web ident completed ID",
 		"state": {
-			"webIdentRequired": "Web Ident Required",
-			"webIdentInitiated": "Web Ident Initiated",
-			"webIdentSuccess": "Web Ident Success",
-			"certifyUserCreated": "Certify User Created",
+			"webIdentRequired": "Web ident required",
+			"webIdentInitiated": "Web ident initiated",
+			"webIdentSuccess": "Web ident success",
+			"certifyUserCreated": "Certify user created",
 			"pocAdminGroupAssigned": "Poc admin group assigned",
 			"keycloakEmailSent": "Keycloak email sent",
 			"invitedToTeamDrive": "Invited to team drive",
@@ -199,7 +201,8 @@
 		"delete": "Delete",
 		"activate": "Activate",
 		"deactivate": "Deactivate",
-		"identify": "Web-identify"
+		"identify": "Start Web Ident",
+		"completeIdentify": "Complete Web Ident"
 	},
 	"dialog": {
 		"defaultTitle": "Confirmation required",
