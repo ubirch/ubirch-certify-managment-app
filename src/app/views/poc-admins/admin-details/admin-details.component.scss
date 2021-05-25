@@ -11,8 +11,10 @@ label {
 .mat-icon { color: red;}
 .mat-icon.success {color: green;}
 
-button .mat-icon { color: #fff; }
+button.ident-button { margin-top: 0.5rem; } 
+button.ident-button .mat-icon { color: #fff; }
 
 .state-dates {
     margin-top: 1rem;
 }
+

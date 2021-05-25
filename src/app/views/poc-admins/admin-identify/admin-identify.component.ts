@@ -35,9 +35,10 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
       tap(admin => {
         if (!admin) { this.router.navigate(['/views', 'poc-admins']); }
       }),
-      switchMap(admin => this.adminService.getInitialIdentId(admin.id).pipe(
-        map(initialId => [admin, initialId] as AdminIdentity),
-      )),
+      switchMap(admin => {
+        const initialId$ = admin.webIdentInitiateId ? of(admin.webIdentInitiateId) : this.adminService.getInitialIdentId(admin.id);
+        return initialId$.pipe(map(initialId => [admin, initialId] as AdminIdentity));
+      }),
       takeUntil(this.unsubscribe$),
       tap(data => this.generateForm(data)),
       catchError(() => of(null))
