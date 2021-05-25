@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPocCreationState } from 'src/app/core/models/interfaces/poc-creation-state.interface';
+import { IPocState } from 'src/app/core/models/interfaces/poc-state.interface';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { PocsService } from 'src/app/core/services/pocs.service';
 import { fadeDownIn } from 'src/app/core/utils/animations';
@@ -13,7 +13,7 @@ import { fadeDownIn } from 'src/app/core/utils/animations';
 })
 export class PocDetailsComponent {
 
-  pocState: Observable<IPocCreationState>;
+  pocState: Observable<IPocState>;
 
   @Input() poc: IPoc;
   @Input() set current(value: boolean) {

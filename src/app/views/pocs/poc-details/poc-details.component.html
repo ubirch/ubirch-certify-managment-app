@@ -15,21 +15,42 @@
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupCreated}">{{ icon(state.certifyGroupCreated) }}</mat-icon>
-        <span>{{ 'poc.state.userRoleCreated' | translate}}</span>
+        <span>{{ 'poc.state.certifyGroupCreated' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupTenantRoleAssigned}">{{ icon(state.certifyGroupCreated) }}</mat-icon>
-        <span>{{ 'poc.state.userRoleCreated' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupRoleAssigned}">{{ icon(state.certifyGroupRoleAssigned) }}</mat-icon>
+        <span>{{ 'poc.state.certifyGroupRoleAssigned' | translate}}</span>
+      </div>
+
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminGroupCreated}">{{ icon(state.adminGroupCreated) }}</mat-icon>
+        <span>{{ 'poc.state.adminGroupCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminRoleAssigned}">{{ icon(state.adminRoleAssigned) }}</mat-icon>
+        <span>{{ 'poc.state.adminRoleAssigned' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.employeeGroupCreated}">{{ icon(state.employeeGroupCreated) }}</mat-icon>
+        <span>{{ 'poc.state.employeeGroupCreated' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.employeeRoleAssigned}">{{ icon(state.employeeRoleAssigned) }}</mat-icon>
+        <span>{{ 'poc.state.employeeRoleAssigned' | translate}}</span>
       </div>
 
 
 
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedTrustedPocGroup}">{{ icon(state.assignedTrustedPocGroup) }}</mat-icon>
+        <span>{{ 'poc.state.assignedTrustedPocGroup' | translate}}</span>
+      </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDataSchemaGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDataSchemaGroup' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDeviceGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDeviceGroup' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
@@ -53,10 +74,6 @@
         <span>{{ 'poc.state.deviceGroupRoleAssigned' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceGroupTenantRoleAssigned}">{{ icon(state.deviceGroupTenantRoleAssigned) }}</mat-icon>
-        <span>{{ 'poc.state.deviceGroupTenantRoleAssigned' | translate}}</span>
-      </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceCreated}">{{ icon(state.deviceCreated) }}</mat-icon>
         <span>{{ 'poc.state.deviceCreated' | translate}}</span>
       </div>
@@ -65,7 +82,7 @@
         <span>{{ 'poc.state.clientCertRequired' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertRequired}">{{ icon(state.orgUnitCertCreated) }}</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.orgUnitCertCreated}">{{ icon(state.orgUnitCertCreated) }}</mat-icon>
         <span>{{ 'poc.state.orgUnitCertCreated' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">

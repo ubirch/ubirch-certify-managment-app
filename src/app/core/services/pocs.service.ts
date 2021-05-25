@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IListResult } from '../models/interfaces/list-result.interface';
-import { IPocCreationState } from '../models/interfaces/poc-creation-state.interface';
+import { IPocState } from '../models/interfaces/poc-state.interface';
 import { IPoc } from '../models/interfaces/poc.interface';
 import { flattenFilters, Filters } from '../models/filters';
 import { ExportImportService } from './export-import.service';
@@ -35,7 +35,7 @@ export class PocsService {
 
   getPocStatus(pocId: string) {
     const url = `${this.pocStatusUrl}/${pocId}`;
-    return this.http.get<IPocCreationState>(url);
+    return this.http.get<IPocState>(url);
   }
 
   deletePocs(pocs: IPoc[]) {

@@ -5,7 +5,7 @@
 
 <!-- ACTIONS -->
 <div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
-    <label>{{ 'pocList.actions.action' | translate }}</label>
+    <label>{{ 'listActions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">
             <mat-option *ngFor="let action of actions" [value]="action.value" >
