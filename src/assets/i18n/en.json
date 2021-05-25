@@ -135,11 +135,12 @@
 		"status": "Status",
 		"state": {
 			"webIdentRequired": "Web Ident Required",
-			"webIdentPending": "Web Ident Pending",
-			"webIdentCompleted": "Web Ident Completed",
-			"userCreated": "User Created",
-			"userActivated": "User Activated",
-			"userInactivated": "User Inactivated",
+			"webIdentInitiated": "Web Ident Initiated",
+			"webIdentSuccess": "Web Ident Success",
+			"certifyUserCreated": "Certify User Created",
+			"pocAdminGroupAssigned": "Poc admin group assigned",
+			"keycloakEmailSent": "Keycloak email sent",
+			"invitedToTeamDrive": "Invited to team drive",
 			"errorMessage": "Error Message"
 		},
 		"validationErrors": {

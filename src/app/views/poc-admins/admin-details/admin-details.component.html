@@ -12,31 +12,35 @@
         <span>{{ 'pocAdmin.state.webIdentRequired' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentPending}">{{ icon(state.webIdentPending) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.webIdentPending' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentInitiated}">{{ icon(state.webIdentInitiated) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.webIdentInitiated' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentCompleted}">{{ icon(state.webIdentCompleted) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.webIdentCompleted' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentSuccess}">{{ icon(state.webIdentSuccess) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.webIdentSuccess' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userCreated}">{{ icon(state.userCreated) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.userCreated' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyUserCreated}">{{ icon(state.certifyUserCreated) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.certifyUserCreated' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userActivated}">{{ icon(state.userActivated) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.userActivated' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.pocAdminGroupAssigned}">{{ icon(state.pocAdminGroupAssigned) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.pocAdminGroupAssigned' | translate}}</span>
       </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userInactivated}">{{ icon(state.userInactivated) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.userInactivated' | translate}}</span>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.keycloakEmailSent}">{{ icon(state.keycloakEmailSent) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.keycloakEmailSent' | translate}}</span>
       </div>
+      <!-- <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.invitedToTeamDrive}">{{ icon(state.invitedToTeamDrive) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.invitedToTeamDrive' | translate}}</span>
+      </div> -->
     </div>
     <div gdColumns="120px 1fr" class="state-dates" fxLayoutGap="0.5rem">
       <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
     </div>
     <div>
-      <button mat-raised-button color="primary" (click)="identify()" *ngIf="state.webIdentRequired && !state.webIdentCompleted">
+      <button mat-raised-button color="primary" (click)="identify()" *ngIf="state.webIdentRequired && !state.webIdentSuccess">
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>
         {{ 'listActions.identify' | translate }}
     </button>

@@ -1,9 +1,12 @@
 export interface IPocAdminState {
     webIdentRequired: boolean;
-    webIdentPending: boolean;
-    webIdentCompleted: boolean;
-    userCreated: boolean;
-    userActivated: boolean;
-    userInactivated: boolean;
+    webIdentInitiated: boolean;
+    webIdentSuccess: boolean;
+    certifyUserCreated: boolean;
+    pocAdminGroupAssigned: boolean;
+    keycloakEmailSent: boolean;
+    invitedToTeamDrive: boolean;
     errorMessage: string;
 }
+
+

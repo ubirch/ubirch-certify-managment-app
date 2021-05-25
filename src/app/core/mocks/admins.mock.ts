@@ -211,10 +211,11 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
 
 export const ADMIN_STATE_MOCK: IPocAdminState = {
     webIdentRequired: true,
-    webIdentPending: false,
-    webIdentCompleted: false,
-    userCreated: false,
-    userInactivated: false,
-    userActivated: false,
-    errorMessage: 'User needs to be Web Identified',
+    webIdentInitiated: false,
+    webIdentSuccess: false,
+    certifyUserCreated: true,
+    invitedToTeamDrive: false,
+    keycloakEmailSent: true,
+    pocAdminGroupAssigned: true,
+    errorMessage: 'User needs to be Web Identified'
 };
