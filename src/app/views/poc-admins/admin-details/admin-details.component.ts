@@ -47,7 +47,6 @@ export class AdminDetailsComponent {
       return '';
     }
     const givenDate: IBirthDate = this.admin.dateOfBirth;
-    const birthDate: Date = new Date(givenDate.year, givenDate.month - 1, givenDate.day);
-    return birthDate.toLocaleDateString(this.locale.getLanguage());
+    return this.locale.toLocaleBirthDate(givenDate);
   }
 }
