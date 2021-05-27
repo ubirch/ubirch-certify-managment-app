@@ -8,4 +8,5 @@ export const environment = {
     production: true,
     keycloak: keycloakConfig,
     pocManagerApi: 'https://api.poc.dev.ubirch.com/tenant-admin/',
+    pocAdminApi: 'https://api.poc.dev.ubirch.com/poc-admin/',
 };

@@ -8,5 +8,6 @@ const keycloakConfig: any = {
 export const environment = {
   production: true,
   keycloak: keycloakConfig,
-  pocManagerApi: '@@POC_MANAGER_API@@'
+  pocManagerApi: '@@POC_MANAGER_API@@',
+  pocAdminApi: '@@POC_ADMIN_API@@'
 };

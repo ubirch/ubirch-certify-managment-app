@@ -15,10 +15,10 @@ import { ExportImportService } from './export-import.service';
 })
 export class PocEmployeeService {
 
-  baseUrl = environment.pocManagerApi;
-  employeesStatusUrl = `${this.baseUrl}poc-employees/status`;
-  employeesUrl = `${this.baseUrl}poc-employees`;
-  importEmployeesUrl = `${this.baseUrl}poc-employees/create`;
+  baseUrl = environment.pocAdminApi;
+  employeesStatusUrl = `${this.baseUrl}employee/status`;
+  employeesUrl = `${this.baseUrl}employee`;
+  importEmployeesUrl = `${this.baseUrl}employee/create`;
 
   constructor(
     private http: HttpClient,
@@ -34,7 +34,6 @@ export class PocEmployeeService {
     return of(EMPLOYEE_STATE_MOCK).pipe(delay(500));
     // return this.http.get<IPocEmployeeState>(`${this.employeesStatusUrl}/${employeeId}` );
   }
-
 
   importFile(file: File) {
     return this.importService.uploadFile(file, this.importEmployeesUrl);
