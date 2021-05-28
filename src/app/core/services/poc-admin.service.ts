@@ -20,7 +20,8 @@ export class PocAdminService {
   private selectedAdmin = new BehaviorSubject<IPocAdmin>(null);
   selectedAdmin$ = this.selectedAdmin.asObservable();
 
-  baseUrl = environment.pocManagerApi;
+  tenantAdminPath = 'tenant-admin/';
+  baseUrl = environment.pocManagerApi + this.tenantAdminPath;
   adminStatusUrl = `${this.baseUrl}poc-admin/status`;
   adminsUrl = `${this.baseUrl}poc-admins`;
   adminsIdentUrl = `${this.baseUrl}webident`;

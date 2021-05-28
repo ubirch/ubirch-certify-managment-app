@@ -13,7 +13,8 @@ import { ExportImportService } from './export-import.service';
 })
 export class PocsService {
 
-  baseUrl = environment.pocManagerApi;
+  tenantAdminPath = 'tenant-admin/';
+  baseUrl = environment.pocManagerApi + this.tenantAdminPath;
   pocStatusUrl = `${this.baseUrl}pocStatus`;
   pocsUrl = `${this.baseUrl}pocs`;
   uploadUrl = `${this.baseUrl}pocs/create`;

@@ -68,9 +68,6 @@
         <mat-cell *matCellDef="let employee">
             <div class="element-detail"
                 [@detailExpand]="employee == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
-                <div class="detail-cols" fxFlex>
-                    <app-employees-details [employee]="employee" [current]="expandedElement === employee"></app-employees-details>
-                </div>
             </div>
         </mat-cell>
     </ng-container>
@@ -79,8 +76,7 @@
 
     <mat-row *matRowDef="let employee; columns: displayColumns;"
         class="element-row"
-        [class.expanded-row]="expandedElement === employee"
-        (click)="expandedElement = expandedElement === employee ? null : employee">
+        [class.expanded-row]="expandedElement === employee">
     </mat-row>
     <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></mat-row>
 </mat-table>
@@ -89,8 +85,8 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<mat-paginator 
-    [length]="dataSource.totalItems$ | async" 
+<mat-paginator
+    [length]="dataSource.totalItems$ | async"
     [pageSize]="defaultPageSize"
     [pageSizeOptions]="pageSizes"
 ></mat-paginator>
