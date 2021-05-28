@@ -4,10 +4,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { Filters } from 'src/app/core/models/filters';
@@ -47,14 +47,14 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   expandedElement: IPocAdmin | null;
 
   filters: FormGroup;
-  action: FormControl = new FormControl(ListAction.delete);
+  action: FormControl = new FormControl(ListAction.activate);
   actions = [
     { value: ListAction.activate, label: `listActions.activate` },
     { value: ListAction.deactivate, label: `listActions.deactivate` }
   ];
   adminStatusTranslation = AdminStatusTranslation;
   showActions = false;
-  exportLoading = false;
+  actionLoding = false;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
@@ -68,6 +68,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     public dialog: MatDialog,
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -151,20 +152,16 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     const selected = this.selection.selected;
     switch (this.action.value) {
       case ListAction.activate:
-        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
-        this.notificationService.warning({
-          message: 'global.errors.notImplemented',
-          title: 'global.errors.requestDefaultTitle',
-          duration: 7000
-        });
+        this.actionLoding = true;
+        this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.activate)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
         break;
       case ListAction.deactivate:
-        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
-        this.notificationService.warning({
-          message: 'global.errors.notImplemented',
-          title: 'global.errors.requestDefaultTitle',
-          duration: 7000
-        });
+        this.actionLoding = true;
+        this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.deactivate)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
         break;
       default:
         break;
@@ -182,6 +179,34 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.filters.addControl('filterColumns', this.fb.group({
       status: ['']
     }));
+  }
+
+  private handleActivationResponse({ ok, nok }, action: ListAction) {
+    if (nok?.length > 0) {
+      if (ok?.length === 0) {
+        this.notificationService.error({
+          message: `pocAdmin.actionMessages.${action}Error`,
+          title: `pocAdmin.actionMessages.${action}ErrorTitle`,
+          duration: 7000
+        });
+      } else {
+        this.notificationService.warning({
+          message: this.translate.instant(`pocAdmin.actionMessages.${action}Warning`, { count: nok.length }),
+          title: `pocAdmin.actionMessages.${action}WarningTitle`,
+          duration: 7000
+        });
+        this.selection.clear();
+        this.loadAdminsPage();
+      }
+    } else {
+      this.notificationService.success({
+        message: this.translate.instant(`pocAdmin.actionMessages.${action}Success`, { count: nok.length }),
+        title: `pocAdmin.actionMessages.${action}SuccessTitle`,
+        duration: 7000
+      });
+      this.loadAdminsPage();
+      this.selection.clear();
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 <h2>{{ 'adminList.headline' | translate }}</h2>
 
 <!-- FILTERS -->
-<app-admin-filters [filters]="filters" [exportDisabled]="exportLoading"></app-admin-filters>
+<app-admin-filters [filters]="filters"></app-admin-filters>
 
 <!-- ACTIONS -->
 <div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
@@ -13,7 +13,7 @@
             </mat-option>
         </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
+        <button [disabled]="actionLoding" [ngClass]="{spinner: actionLoding, 'spinner-centerd': true}" mat-raised-button color="primary" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
