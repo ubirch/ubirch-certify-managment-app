@@ -26,13 +26,13 @@ export class PocEmployeeService {
   ) { }
 
   getEmployees(filters: Filters) {
-    return of(EMPLOYEES_MOCK).pipe(delay(500));
-    // return this.http.get<IListResult<IPocEmployee>>(this.employeesUrl, { params: flattenFilters(filters) as any });
+//    return of(EMPLOYEES_MOCK).pipe(delay(500));
+    return this.http.get<IListResult<IPocEmployee>>(this.employeesUrl, { params: flattenFilters(filters) as any });
   }
 
   getEmployeeState(employeeId: string) {
-    return of(EMPLOYEE_STATE_MOCK).pipe(delay(500));
-    // return this.http.get<IPocEmployeeState>(`${this.employeesStatusUrl}/${employeeId}` );
+//    return of(EMPLOYEE_STATE_MOCK).pipe(delay(500));
+    return this.http.get<IPocEmployeeState>(`${this.employeesStatusUrl}/${employeeId}` );
   }
 
 
