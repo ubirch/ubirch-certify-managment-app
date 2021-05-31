@@ -13,7 +13,6 @@ export class ViewsComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    console.log(this.showNav);
     if (this.authService.isPocAdmin()) { this.showNav = false; }
   }
 

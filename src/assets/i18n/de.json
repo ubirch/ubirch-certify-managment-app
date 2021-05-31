@@ -147,6 +147,20 @@
 		},
 		"validationErrors": {
 			"completedId": "Web Ident is reuiqred"
+		},
+		"actionMessages": {
+			"activateSuccess": "Admins have been successfully activated",
+			"activateSuccessTitle": "Activation success",
+			"deactivateSuccess": "Admins have been successfully deactivated",
+			"deactivateSuccessTitle": "Deactivation success",
+			"activateWarning": "{{ count }} admin(s) failed to activate",
+			"activateWarningTitle": "Activation warning",
+			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
+			"deactivateWarningTitle": "Deactivation warning",
+			"activateError": "Admins failed to activate",
+			"activateErrorTitle": "Activation error",
+			"deactivateError": "Admins failed to deactivate",
+			"deactivateErrorTitle": "Deactivation error"
 		}
 	},
 	"adminList": {
