@@ -15,7 +15,7 @@ export class PocEmployeeService {
     pocAdminPath = 'poc-admin/';
     baseUrl = environment.pocManagerApi + this.pocAdminPath;
     employeesStatusUrl = `${this.baseUrl}employee/status`;
-    employeesUrl = `${this.baseUrl}employee`;
+    employeesUrl = `${this.baseUrl}employees`;
     importEmployeesUrl = `${this.baseUrl}employees/create`;
 
     constructor(
