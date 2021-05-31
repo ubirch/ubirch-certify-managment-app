@@ -5,8 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { Filters } from 'src/app/core/models/filters';
@@ -52,6 +54,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
   ];
   employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
+  actionLoding = false;
   exportLoading = false;
 
   get search() { return this.filters.get('search'); }
@@ -67,6 +70,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
     private router: Router,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -143,20 +147,16 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     const selected = this.selection.selected;
     switch (this.action.value) {
       case ListAction.activate:
-        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
-        this.notificationService.warning({
-          message: 'global.errors.notImplemented',
-          title: 'global.errors.requestDefaultTitle',
-          duration: 7000
-        });
+        this.actionLoding = true;
+        this.employeeService.changeActiveStateForAdmins(selected, AcitvateAction.activate)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
         break;
       case ListAction.deactivate:
-        // TODO: Remove notification when DELETE endpoint is implemented and uncomment deleteItems
-        this.notificationService.warning({
-          message: 'global.errors.notImplemented',
-          title: 'global.errors.requestDefaultTitle',
-          duration: 7000
-        });
+        this.actionLoding = true;
+        this.employeeService.changeActiveStateForAdmins(selected, AcitvateAction.deactivate)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
         break;
       default:
         break;
@@ -181,6 +181,34 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     this.filters.addControl('filterColumns', this.fb.group({
       status: ['']
     }));
+  }
+
+  private handleActivationResponse({ ok, nok }, action: ListAction) {
+    if (nok?.length > 0) {
+      if (ok?.length === 0) {
+        this.notificationService.error({
+          message: `pocEmployee.actionMessages.${action}Error`,
+          title: `pocEmployee.actionMessages.${action}ErrorTitle`,
+          duration: 7000
+        });
+      } else {
+        this.notificationService.warning({
+          message: this.translate.instant(`pocEmployee.actionMessages.${action}Warning`, { count: nok.length }),
+          title: `pocEmployee.actionMessages.${action}WarningTitle`,
+          duration: 7000
+        });
+        this.selection.clear();
+        this.loadEmployeesPage();
+      }
+    } else {
+      this.notificationService.success({
+        message: this.translate.instant(`pocEmployee.actionMessages.${action}Success`, { count: nok.length }),
+        title: `pocEmployee.actionMessages.${action}SuccessTitle`,
+        duration: 7000
+      });
+      this.loadEmployeesPage();
+      this.selection.clear();
+    }
   }
 
 }

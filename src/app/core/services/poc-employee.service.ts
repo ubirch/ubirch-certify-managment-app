@@ -1,11 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { from, of } from 'rxjs';
+import { catchError, map, mergeMap, reduce } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AcitvateAction } from '../models/enums/acitvate-action.enum';
 import { Filters, flattenFilters } from '../models/filters';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPocEmployeeState } from '../models/interfaces/poc-employee-state.interface';
 import { IPocEmployee } from '../models/interfaces/poc-employee.interface';
 import { ExportImportService } from './export-import.service';
+
+interface IEmployeeActionState {
+    employee: IPocEmployee;
+    success: boolean;
+}
+
 
 @Injectable({
     providedIn: 'root',
@@ -36,6 +45,31 @@ export class PocEmployeeService {
 
     importFile(file: File) {
         return this.importService.uploadFile(file, this.importEmployeesUrl);
+    }
+
+    changeActiveState(employeeId: string, activate: AcitvateAction) {
+        const url = `${this.baseUrl}poc-employee/${employeeId}/active/${activate}`;
+        return this.http.put(url, null);
+    }
+
+    changeActiveStateForAdmins(employees: IPocEmployee[], activate: AcitvateAction) {
+
+        return from(employees).pipe(
+            mergeMap(
+                employee => this.changeActiveState(employee.id, activate).pipe(
+                    map(() => ({ employee, success: true })),
+                    catchError(() => of({ employee, success: false })),
+                )
+            ),
+            reduce(
+                (acc, current: IEmployeeActionState) => {
+                    if (current.success) { acc.ok = [...acc.ok, current.employee]; }
+                    else { acc.nok = [...acc.nok, current.employee]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocEmployee[], nok: IPocEmployee[] }
+            )
+        );
+
     }
 
 }

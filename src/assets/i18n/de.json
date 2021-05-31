@@ -188,6 +188,20 @@
 			"userActivated": "User activated",
 			"userInactivated": "User inactivated",
 			"errorMessage": "Error Message"
+		},
+		"actionMessages": {
+			"activateSuccess": "Empoloyees have been successfully activated",
+			"activateSuccessTitle": "Activation success",
+			"deactivateSuccess": "Empoloyees have been successfully deactivated",
+			"deactivateSuccessTitle": "Deactivation success",
+			"activateWarning": "{{ count }} employee(s) failed to activate",
+			"activateWarningTitle": "Activation warning",
+			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
+			"deactivateWarningTitle": "Deactivation warning",
+			"activateError": "Empoloyees failed to activate",
+			"activateErrorTitle": "Activation error",
+			"deactivateError": "Empoloyees failed to deactivate",
+			"deactivateErrorTitle": "Deactivation error"
 		}
 	},
 	"employeeList": {
