@@ -10,6 +10,7 @@ export interface IPocAdmin {
     phone: string;
     pocName: string;
     state: AdminStatus;
+    active: boolean;
     webIdentInitiateId?: string;
     webIdentSuccessId?: string;
 }

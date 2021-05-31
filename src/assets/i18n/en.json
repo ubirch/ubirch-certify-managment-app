@@ -133,6 +133,7 @@
 		"initialId": "Web Ident initial ID",
 		"completedId": "Web Ident ID",
 		"status": "Status",
+		"active": "Active",
 		"webIdentInitiateId": "Web ident initiated ID",
 		"webidentSuccessId": "Web ident completed ID",
 		"state": {

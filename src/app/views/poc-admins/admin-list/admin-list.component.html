@@ -68,6 +68,14 @@
         <mat-cell *matCellDef="let admin">{{admin.pocName}}</mat-cell>
     </ng-container>
 
+     <!-- active -->
+     <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.active' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <mat-checkbox class="example-margin" [disabled]="true" [(ngModel)]="admin.active"></mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
 
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">

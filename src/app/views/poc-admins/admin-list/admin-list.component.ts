@@ -38,6 +38,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     'lastName',
     'email',
     'pocName',
+    'active',
     'state',
   ];
   selection = new SelectionModel<IPocAdmin>(true, []);
