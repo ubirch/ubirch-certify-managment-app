@@ -22,34 +22,32 @@
         <span>{{ 'poc.state.certifyGroupRoleAssigned' | translate}}</span>
       </div>
 
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.adminGroupCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminGroupCreated}">{{ icon(state.adminGroupCreated) }}</mat-icon>
         <span>{{ 'poc.state.adminGroupCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.adminRoleAssigned !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminRoleAssigned}">{{ icon(state.adminRoleAssigned) }}</mat-icon>
         <span>{{ 'poc.state.adminRoleAssigned' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.employeeGroupCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.employeeGroupCreated}">{{ icon(state.employeeGroupCreated) }}</mat-icon>
         <span>{{ 'poc.state.employeeGroupCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.employeeRoleAssigned !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.employeeRoleAssigned}">{{ icon(state.employeeRoleAssigned) }}</mat-icon>
         <span>{{ 'poc.state.employeeRoleAssigned' | translate}}</span>
       </div>
 
-
-
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.assignedTrustedPocGroup !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedTrustedPocGroup}">{{ icon(state.assignedTrustedPocGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedTrustedPocGroup' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.assignedDataSchemaGroup !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDataSchemaGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDataSchemaGroup' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.assignedDeviceGroup !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDeviceGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDeviceGroup' | translate}}</span>
       </div>
@@ -77,7 +75,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceCreated}">{{ icon(state.deviceCreated) }}</mat-icon>
         <span>{{ 'poc.state.deviceCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.clientCertRequired !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertRequired}">{{ icon(state.clientCertRequired) }}</mat-icon>
         <span>{{ 'poc.state.clientCertRequired' | translate}}</span>
       </div>
@@ -85,7 +83,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.orgUnitCertCreated}">{{ icon(state.orgUnitCertCreated) }}</mat-icon>
         <span>{{ 'poc.state.orgUnitCertCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.logoRequired !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoRequired}">{{ icon(state.logoRequired) }}</mat-icon>
         <span>{{ 'poc.state.logoRequired' | translate}}</span>
       </div>
@@ -97,11 +95,11 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoStored}">{{ icon(state.logoStored) }}</mat-icon>
         <span>{{ 'poc.state.logoStored' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.certifyApiProvided !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyApiProvided}">{{ icon(state.certifyApiProvided) }}</mat-icon>
         <span>{{ 'poc.state.certifyApiProvided' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.goClientProvided !== undefined">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.goClientProvided}">{{ icon(state.goClientProvided) }}</mat-icon>
         <span>{{ 'poc.state.goClientProvided' | translate}}</span>
       </div>
