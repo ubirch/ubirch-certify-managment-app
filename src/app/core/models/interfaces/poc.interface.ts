@@ -18,7 +18,6 @@ export interface IPoc {
     manager?: IPerson;
     roleName: string;
 
-    dataSchemaId?: string;
     certifyApp?: boolean;
     clientCertRequired: boolean;
     pocAddons: IPocAddons;

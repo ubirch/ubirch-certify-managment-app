@@ -37,7 +37,6 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'select',
     'externalId',
     'pocName',
-    'dataSchemaId',
     'created',
     'lastUpdated',
     'status',

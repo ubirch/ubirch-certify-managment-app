@@ -56,12 +56,6 @@
         <mat-cell *matCellDef="let poc">{{poc.pocName}}</mat-cell>
     </ng-container>
 
-    <!-- folderIdentifier -->
-    <ng-container matColumnDef="dataSchemaId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.dataSchemaId' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let poc">{{poc.dataSchemaId}}</mat-cell>
-    </ng-container>
-
     <!-- createdAt -->
     <ng-container matColumnDef="created">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.created' | translate }}</mat-header-cell>
