@@ -53,7 +53,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PocListComponent } from '../views/pocs/poc-list/poc-list.component';
@@ -79,6 +79,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     TranslateModule,
 
     // A11yModule,
@@ -131,6 +132,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
 
     MatIconModule,
     MatInputModule,

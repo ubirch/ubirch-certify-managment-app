@@ -35,7 +35,8 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     'firstName',
     'lastName',
     'email',
-    'status'
+    'active',
+    'status',
   ];
   selection = new SelectionModel<IPocEmployee>(true, []);
   defaultSortColumn = 'email';

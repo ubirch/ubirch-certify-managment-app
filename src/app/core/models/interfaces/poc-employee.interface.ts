@@ -3,5 +3,6 @@ import { IPerson } from './person.interface';
 
 export interface IPocEmployee extends IPerson {
     id: string;
+    active: boolean;
     status: EmployeeStatus;
 }

@@ -40,9 +40,9 @@ export class PocEmployeeDataSource implements DataSource<IPocEmployee> {
         this.employeeService.getEmployees(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
         ).subscribe(
-            adminsResult => {
-                this.employeeSubject.next(adminsResult.records ?? []);
-                this.totalItemsSubject.next(adminsResult.total ?? 0);
+            employeesResult => {
+                this.employeeSubject.next(employeesResult.records ?? []);
+                this.totalItemsSubject.next(employeesResult.total ?? 0);
             },
             (err: HttpErrorResponse) => {
                 this.errorService.handlerResponseError(err);

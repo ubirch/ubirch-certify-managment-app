@@ -181,6 +181,7 @@
 		"lastName": "Last Name",
 		"status": "Status",
 		"email": "Email",
+		"active": "Active",
 		"state": {
 			"userCreated": "User created",
 			"userRegistration": "User registration",
