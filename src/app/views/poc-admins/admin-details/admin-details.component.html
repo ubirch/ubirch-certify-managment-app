@@ -7,27 +7,27 @@
 
 <div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state">
     <div gdColumns="1fr 1fr" gdGap="0 1rem">
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.webIdentRequired !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentRequired}">{{ icon(state.webIdentRequired) }}</mat-icon>
         <span>{{ 'pocAdmin.state.webIdentRequired' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.webIdentInitiated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentInitiated}">{{ icon(state.webIdentInitiated) }}</mat-icon>
         <span>{{ 'pocAdmin.state.webIdentInitiated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.webIdentSuccess !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentSuccess}">{{ icon(state.webIdentSuccess) }}</mat-icon>
         <span>{{ 'pocAdmin.state.webIdentSuccess' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.certifyUserCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyUserCreated}">{{ icon(state.certifyUserCreated) }}</mat-icon>
         <span>{{ 'pocAdmin.state.certifyUserCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.pocAdminGroupAssigned !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.pocAdminGroupAssigned}">{{ icon(state.pocAdminGroupAssigned) }}</mat-icon>
         <span>{{ 'pocAdmin.state.pocAdminGroupAssigned' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.keycloakEmailSent !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.keycloakEmailSent}">{{ icon(state.keycloakEmailSent) }}</mat-icon>
         <span>{{ 'pocAdmin.state.keycloakEmailSent' | translate}}</span>
       </div>
