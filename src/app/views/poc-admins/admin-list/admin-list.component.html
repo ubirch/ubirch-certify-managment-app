@@ -21,7 +21,7 @@
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
-        <mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
             <mat-checkbox (change)="$event ? masterToggle() : null"
                             [checked]="selection.hasValue() && isAllSelected()"
                             [indeterminate]="selection.hasValue() && !isAllSelected()"
@@ -40,25 +40,19 @@
 
     <!-- firstName -->
     <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.firstName' | translate }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.firstName' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{admin.firstName}}</mat-cell>
     </ng-container>
 
     <!-- lastName -->
     <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.lastName' | translate }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.lastName' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{admin.lastName}}</mat-cell>
-    </ng-container>
-
-    <!-- state -->
-    <ng-container matColumnDef="state">
-        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.status' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
     </ng-container>
 
     <!-- email -->
     <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{admin.email}}</mat-cell>
     </ng-container>
 
@@ -74,6 +68,12 @@
         <mat-cell *matCellDef="let admin">
             <mat-checkbox class="example-margin" [disabled]="true" [(ngModel)]="admin.active"></mat-checkbox>
         </mat-cell>
+    </ng-container>
+
+     <!-- status -->
+     <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.status' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
     </ng-container>
 
 
