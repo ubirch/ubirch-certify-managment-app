@@ -36,6 +36,7 @@ export class PocEditComponent implements OnInit {
       filter(pocId => !!pocId),
       switchMap(pocId => this.pocService.getPoc(pocId))
     ).subscribe((res: any) => {
+      // TODO: FIX WHEN ENDPOINT IS WORKING CORRECTLY - required IPoc object
       this.poc = res.records[0];
       this.generateForm();
     });
@@ -44,7 +45,7 @@ export class PocEditComponent implements OnInit {
   generateForm() {
     this.form = this.fb.group({
       address: this.fb.group({
-        street: this.fb.control(+this.poc.address.street, [Validators.required, Validators.minLength(3)]),
+        street: this.fb.control(this.poc.address.street, [Validators.required, Validators.minLength(3)]),
         houseNumber: this.fb.control(this.poc.address.houseNumber, [Validators.required]),
         additionalAddress: this.fb.control(this.poc.address.additionalAddress),
         zipcode: this.fb.control(this.poc.address.zipcode, [Validators.required, Validators.minLength(5)]),
@@ -64,7 +65,8 @@ export class PocEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.pocService.putPoc(this.form.value).subscribe(
+    const poc: IPoc = { ...this.form.value, id: this.poc.id };
+    this.pocService.putPoc(poc).subscribe(
       _ => {
         this.notificationService.success({
           message: this.translateService.instant('pocEdit.notifications.success'),

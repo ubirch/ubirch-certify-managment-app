@@ -16,6 +16,7 @@ export class PocsService {
   tenantAdminPath = 'tenant-admin/';
   baseUrl = environment.pocManagerApi + this.tenantAdminPath;
   pocStatusUrl = `${this.baseUrl}pocStatus`;
+  editUrl = `${this.baseUrl}poc`;
   pocsUrl = `${this.baseUrl}pocs`;
   uploadUrl = `${this.baseUrl}pocs/create`;
   downloadUrl = `${this.baseUrl}devices`;
@@ -26,8 +27,8 @@ export class PocsService {
   ) { }
 
   getPoc(id: string) {
-    const url = `${this.pocsUrl}/${id}`;
-    return this.http.get<IPoc>(this.pocsUrl);
+    const url = `${this.editUrl}/${id}`;
+    return this.http.get<IPoc>(url);
   }
 
   getPocs(filters: Filters): Observable<IListResult<IPoc>> {
@@ -44,7 +45,8 @@ export class PocsService {
   }
 
   putPoc(poc: Partial<IPoc>) {
-    return this.http.put(this.pocsUrl, poc);
+    const url = `${this.editUrl}/${poc.id}`;
+    return this.http.put(url, poc);
   }
 
   importFile(file: File) {
