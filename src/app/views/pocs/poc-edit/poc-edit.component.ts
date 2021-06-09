@@ -36,8 +36,7 @@ export class PocEditComponent implements OnInit {
       filter(pocId => !!pocId),
       switchMap(pocId => this.pocService.getPoc(pocId))
     ).subscribe((res: any) => {
-      // TODO: FIX WHEN ENDPOINT IS WORKING CORRECTLY - required IPoc object
-      this.poc = res.records[0];
+      this.poc = res;
       this.generateForm();
     });
   }
