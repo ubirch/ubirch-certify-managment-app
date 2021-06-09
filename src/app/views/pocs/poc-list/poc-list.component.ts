@@ -1,7 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -19,7 +18,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { PocsService } from 'src/app/core/services/pocs.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
-import { ConfirmDialogComponent, ConfirmDialogModel } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-poc-list',
@@ -67,7 +66,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     private pocService: PocsService,
     private fb: FormBuilder,
     private translateService: TranslateService,
-    public dialog: MatDialog,
+    public confirmService: ConfirmDialogService,
     private errorService: ErrorHandlerService,
     private exportService: ExportImportService,
     private notificationService: NotificationService,
@@ -185,16 +184,10 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private deleteItems(pocs: IPoc[]) {
-    const message = this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length });
-    const title = this.translateService.instant('pocList.actions.deleteConfirmTitle');
-    const dialogData = new ConfirmDialogModel(title, message);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '800px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
+    this.confirmService.open({
+      message: this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length }),
+      title: 'pocList.actions.deleteConfirmTitle',
+    }).subscribe(dialogResult => {
       if (dialogResult) {
         this.dataSource.deletePocs(pocs, this.filters.value);
         this.selection.clear();

@@ -1,15 +1,15 @@
-import { formatDate } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { DateFormats } from 'src/app/core/models/enums/date-format.enum';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
+import { IWebIdentConfirmation } from 'src/app/core/models/interfaces/web-ident-confirmation.interface';
 import { LocaleService } from 'src/app/core/services/locale.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 
 type AdminIdentity = [IPocAdmin, string];
 
@@ -32,6 +32,7 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private notification: NotificationService,
     private localeService: LocaleService,
+    private confirmService: ConfirmDialogService,
   ) { }
 
   ngOnInit() {
@@ -56,16 +57,20 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
 
   confirm() {
     if (this.form.valid) {
-      const id = this.form.get('id').value;
-      const initialId = this.form.get('initialId').value;
-      const completedId = this.form.get('completedId').value;
+      this.confirmService.open({
+        message: 'adminIdentify.confirmText',
+        yes: 'dialog.yesSureLabel',
+        no: 'global.cancel',
+      })
+        .subscribe(dialogResult => {
+          if (dialogResult) {
+            const pocAdminId = this.form.get('id').value;
+            const webIdentInitiateId = this.form.get('initialId').value;
+            const webIdentId = this.form.get('completedId').value;
 
-      this.adminService.postWebIdentId({ pocAdminId: id, webIdentInitiateId: initialId, webIdentId: completedId }).pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(() => {
-        this.notification.success({ message: 'adminIdentify.success' });
-        this.backToList();
-      });
+            this.postWebIdent({ pocAdminId, webIdentInitiateId, webIdentId });
+          }
+        });
     }
   }
 
@@ -94,5 +99,14 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
     this.router.navigate(['../..'], { relativeTo: this.route });
   }
 
+  private postWebIdent(ident: IWebIdentConfirmation) {
+    this.adminService.postWebIdentId(ident).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(() => {
+      this.notification.success({ message: 'adminIdentify.success' });
+      this.backToList();
+    });
+
+  }
 }
 

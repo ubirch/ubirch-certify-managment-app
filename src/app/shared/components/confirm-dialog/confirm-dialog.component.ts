@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfirmDialogModel } from './confirm-dialog.model';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -16,11 +17,3 @@ export class ConfirmDialogComponent {
   onDismiss(): void { this.dialogRef.close(false); }
 }
 
-export class ConfirmDialogModel {
-  constructor(
-    public title: string = 'dialog.defaultTitle',
-    public message: string = 'dialog.defaultMessage',
-    public yes: string = 'dialog.yesLabel',
-    public no: string = 'dialog.noLabel',
-  ) { }
-}

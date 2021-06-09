@@ -170,7 +170,8 @@
 	"adminIdentify": {
 		"headline": "Web-Identify Admin",
 		"copyMessage": "{{field}} successfully copied",
-		"success": "User has been successfully identified"
+		"success": "User has been successfully identified",
+		"confirmText": "Are you sure that you want to confirm the identity of this person and that you checked the correctness of the data?"
 	},
 	"adminStatuses": {
 		"completed": "Completed",
@@ -238,6 +239,7 @@
 		"defaultTitle": "Confirmation required",
 		"defaultMessage": "Are you sure you want to proceed?",
 		"yesLabel": "Yes",
-		"noLabel": "No"
+		"noLabel": "No",
+		"yesSureLabel": "Yes, I am sure"
 	}
 }
