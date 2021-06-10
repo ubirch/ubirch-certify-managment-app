@@ -8,7 +8,7 @@
 		"confirm": "Confirm",
 		"errors": {
 			"requestDefaultTitle": "Request error",
-			"requestDefault": "There was an error while processing your request. Pleaase try again",
+			"requestDefault": "There was an error while processing your request. Please try again",
 			"400Title": "Bad request",
 			"400": "Sorry. We were unable to process the request. Request data seems to be invalid",
 			"401Title": "Session expired",
