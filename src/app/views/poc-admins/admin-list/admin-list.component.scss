@@ -19,23 +19,26 @@
     }
 }
 
+.mat-header-cell,
+.mat-cell {  padding: 0 0.5rem; }
 .mat-column-select {
     overflow: initial;
     flex-grow: 0;
-    flex-shrink: 1;
+    flex-basis: 80px;
+    justify-content: center;
+}
+.mat-column-status,
+.mat-column-active { flex-grow: 0;}
+.mat-column-active { flex-basis: 80px; }
+.mat-column-email { flex: 2; }
+.mat-column-status { 
     flex-basis: 100px;
 }
-
-.mat-column-status {
-    flex-basis: 120px;
+.mat-column-actions {
+    flex-basis: 80px;
+    padding: 1rem;
     flex-grow: 0;
 }
-
-// .mat-column-actions {
-//     flex-basis: auto;
-//     padding: 1rem;
-//     flex-grow: 0;
-// }
 
 .element-row {
     cursor: pointer;

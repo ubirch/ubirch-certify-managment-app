@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, merge, Observable, of, partition } from 'rxjs';
-import { catchError, map, mergeMap, reduce, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, of } from 'rxjs';
+import { catchError, map, mergeMap, reduce } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AcitvateAction } from '../models/enums/acitvate-action.enum';
 import { Filters, flattenFilters } from '../models/filters';
@@ -21,14 +21,13 @@ interface IAdminActionState {
   providedIn: 'root'
 })
 export class PocAdminService {
-
   private selectedAdmin = new BehaviorSubject<IPocAdmin>(null);
   selectedAdmin$ = this.selectedAdmin.asObservable();
 
   tenantAdminPath = 'tenant-admin/';
   baseUrl = environment.pocManagerApi + this.tenantAdminPath;
   adminStatusUrl = `${this.baseUrl}poc-admin/status`;
-  activationUrl = `${this.baseUrl}poc-admin`;
+  adminUrl = `${this.baseUrl}poc-admin`;
   adminsUrl = `${this.baseUrl}poc-admins`;
   adminsIdentUrl = `${this.baseUrl}webident`;
 
@@ -39,6 +38,16 @@ export class PocAdminService {
 
   setSelected(admin: IPocAdmin) {
     this.selectedAdmin.next(admin);
+  }
+
+  getAdmin(adminId: string): any {
+    return this.http.get<IListResult<IPocAdmin>>(
+      this.adminsUrl,
+      { params: flattenFilters({ ...new Filters(), sortColumn: 'email', pageSize: 100 }) as any }
+    )
+      .pipe(
+        map(a => a.records.find(adm => adm.id === adminId)),
+      );
   }
 
   getAdmins(filters: Filters) {
@@ -66,6 +75,11 @@ export class PocAdminService {
     );
   }
 
+  putPocAdmin(admin: IPocAdmin) {
+    const url = `${this.adminUrl}/${admin.id}`
+    return this.http.put(url, admin);
+  }
+
   postWebIdentId(confirm: IWebIdentConfirmation) {
     const url = `${this.adminsIdentUrl}/id`;
 
@@ -75,7 +89,7 @@ export class PocAdminService {
   }
 
   changeActiveState(adminId: string, activate: AcitvateAction) {
-    const url = `${this.activationUrl}/${adminId}/active/${activate}`;
+    const url = `${this.adminUrl}/${adminId}/active/${activate}`;
     return this.http.put(url, null);
   }
 

@@ -97,7 +97,7 @@
               </div>
             </ng-container>
 
-            <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+            <div fxLayout="column" fxLayoutGap="1rem" class="actions">
               <button mat-raised-button color="primary" class="mat-btn-big" (click)="submitForm()" [disabled]="form.invalid || form.pending">{{ 'global.update' | translate }}</button>
               <button mat-raised-button [routerLink]="[ '/views', 'pocs' ]">
                 <mat-icon aria-hidden="false" aria-label="Import pocs">chevron_left</mat-icon>

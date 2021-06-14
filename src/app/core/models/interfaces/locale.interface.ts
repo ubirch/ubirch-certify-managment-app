@@ -5,4 +5,3 @@ export interface ILocale {
     dateFormat: DateTimeLocaleFormat;
     datePlaceholder: string;
 }
-

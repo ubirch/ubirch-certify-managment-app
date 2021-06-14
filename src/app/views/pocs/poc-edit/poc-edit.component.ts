@@ -26,9 +26,7 @@ export class PocEditComponent implements OnInit {
     private translateService: TranslateService,
     private fb: FormBuilder,
     private router: Router,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.route.paramMap.pipe(

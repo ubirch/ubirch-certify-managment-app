@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
@@ -40,6 +41,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     'pocName',
     'active',
     'state',
+    'actions'
   ];
   selection = new SelectionModel<IPocAdmin>(true, []);
   defaultSortColumn = 'email';
@@ -70,6 +72,8 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
     private translate: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -167,6 +171,11 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
       default:
         break;
     }
+  }
+
+  editPocAdmin(event: MouseEvent, poc: IPocAdmin) {
+    this.router.navigate(['edit', poc.id], { relativeTo: this.route });
+    event.stopPropagation();
   }
 
   private loadAdminsPage() {

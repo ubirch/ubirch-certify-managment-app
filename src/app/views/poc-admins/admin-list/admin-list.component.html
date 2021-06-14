@@ -21,7 +21,7 @@
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? masterToggle() : null"
                             [checked]="selection.hasValue() && isAllSelected()"
                             [indeterminate]="selection.hasValue() && !isAllSelected()"
@@ -74,6 +74,16 @@
      <ng-container matColumnDef="state">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.status' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">{{ 'adminStatuses.' + adminStatusTranslation[admin.state] | translate }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <button color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editPocAdmin($event, admin)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
     </ng-container>
 
 
