@@ -1,0 +1,25 @@
+
+<mat-form-field fxFlex class="date-picker date-picker--certificate" [ngClass]="{ 'error': hostControl?.errors && hostControl?.touched }">
+    <input type="text" 
+      matInput 
+      [formControl]="input"
+      [placeholder]="placeholder"
+      [mask]="mask" 
+      [showMaskTyped]="maskEnabled" 
+      [dropSpecialCharacters]="false"
+      [leadZeroDateTime]="true" 
+      [disabled]="disabled"
+      (input)="inputChanged($event.target.value)" 
+      (paste)="inputChanged($event.target.value)"
+      (focus)="showMask()" 
+      (blur)="hideMask()" 
+    />
+    <mat-error *ngIf="hostControl?.errors && invalidMessage">
+      {{ invalidMessage | translate }}
+    </mat-error>
+    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [ngModel]="date" [disabled]="disabled"
+    (dateChange)="dateValueChanged($event.value)" tabindex="-1" [hidden]="true" />
+    <mat-datepicker-toggle matSuffix [for]="picker" class="toggle" tabindex="-1">
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker [touchUi]="touchUI"></mat-datepicker>
+  </mat-form-field>

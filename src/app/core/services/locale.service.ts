@@ -1,12 +1,39 @@
 import { Injectable } from '@angular/core';
+
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeEn from '@angular/common/locales/en';
+
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
+import { BehaviorSubject } from 'rxjs';
+import { DateTimeLocaleFormat } from '../models/enums/date-time-locale-format.enum';
 import { IBirthDate } from '../models/interfaces/birth-date.interface';
+import { ILocale } from '../models/interfaces/locale.interface';
+
+registerLocaleData(localeDe, 'de');
+registerLocaleData(localeEn, 'en');
+
+const LOCALES: { [key: string]: ILocale } = {
+  en: {
+    language: 'en',
+    dateFormat: DateTimeLocaleFormat.enDisplayShort,
+    datePlaceholder: DateTimeLocaleFormat.enDisplayShortPlaceholder,
+  } as ILocale,
+  de: {
+    language: 'de',
+    dateFormat: DateTimeLocaleFormat.deDisplayShort,
+    datePlaceholder: DateTimeLocaleFormat.deDisplayShortPlaceholder
+  } as ILocale,
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocaleService {
+
+  private currentLocale$ = new BehaviorSubject<ILocale>(LOCALES.de);
+  public current$ = this.currentLocale$.asObservable();
 
   constructor(
     private translate: TranslateService,
@@ -29,6 +56,8 @@ export class LocaleService {
     } else {
       this.translate.use(languageCookie);
     }
+
+    this.changeLocale(languageCookie || defaultLang);
   }
 
   getLanguage() {
@@ -38,6 +67,11 @@ export class LocaleService {
   changeLanguage(lang: string) {
     this.translate.use(lang);
     this.cookieService.set('languageCookie', lang);
+    this.changeLocale(lang);
+  }
+
+  changeLocale(lang: string) {
+    this.currentLocale$.next(LOCALES[lang]);
   }
 
   toLocaleBirthDate(date: IBirthDate) {

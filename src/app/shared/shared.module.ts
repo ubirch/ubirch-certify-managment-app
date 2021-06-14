@@ -56,34 +56,69 @@ import { LanguageSelectComponent } from './components/language-select/language-s
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { PocListComponent } from '../views/pocs/poc-list/poc-list.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
+import { MatDatepickerComponent } from './components/mat-datepicker/mat-datepicker.component';
+import { NgxMaskModule } from 'ngx-mask';
 
+
+const COMPONENTS = [
+  HeaderComponent,
+  FooterComponent,
+  LanguageSelectComponent,
+  ConfirmDialogComponent,
+  FileUploadComponent,
+  NotificationComponent,
+  NotificationInlineComponent,
+  FileSizePipe,
+  MatDatepickerComponent
+];
+
+const ANGULAR_EXPORT_MODULES = [
+  CommonModule,
+  HttpClientModule,
+  ReactiveFormsModule,
+  FormsModule,
+];
+
+const LIB_EXPORT_MODULES = [
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatDialogModule,
+  MatCardModule,
+  MatSnackBarModule,
+  MatDividerModule,
+  MatSidenavModule,
+  ClipboardModule,
+
+  FlexLayoutModule,
+  TranslateModule,
+];
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    FooterComponent,
-    LanguageSelectComponent,
-    ConfirmDialogComponent,
-    FileUploadComponent,
-    NotificationComponent,
-    NotificationInlineComponent,
-    FileSizePipe
+    COMPONENTS,
   ],
   imports: [
-    CommonModule,
+    ANGULAR_EXPORT_MODULES,
+    LIB_EXPORT_MODULES,
     RouterModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
     TranslateModule,
 
+
     // A11yModule,
-    ClipboardModule,
     // CdkStepperModule,
     // CdkTableModule,
     // CdkTreeModule,
@@ -91,34 +126,15 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     // MatAutocompleteModule,
     // MatBadgeModule,
     // MatBottomSheetModule,
-    MatButtonModule,
     // MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
     // MatChipsModule,
     // MatStepperModule,
-    // MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
     // MatExpansionModule,
     // MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    // MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
     // MatRadioModule,
     // MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
     // MatSliderModule,
     // MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
     // MatTabsModule,
     // MatToolbarModule,
     // MatTooltipModule,
@@ -126,43 +142,15 @@ import { NotificationInlineComponent } from './components/notification-inline/no
     // OverlayModule,
     // PortalModule,
     // ScrollingModule,
-    FlexLayoutModule,
+
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaskModule,
   ],
   exports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatDividerModule,
-    MatSidenavModule,
-    ClipboardModule,
-
-    FlexLayoutModule,
-    TranslateModule,
-
-    HeaderComponent,
-    FooterComponent,
-    ConfirmDialogComponent,
-    FileUploadComponent,
-    NotificationComponent,
-    NotificationInlineComponent,
-    FileSizePipe,
+    ANGULAR_EXPORT_MODULES,
+    LIB_EXPORT_MODULES,
+    COMPONENTS,
   ]
 })
 export class SharedModule { }
