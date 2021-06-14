@@ -11,14 +11,13 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormControl, NgControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NgForm, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { formatDate } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Platform } from '@ionic/angular';
-import { DateAdapter } from '@angular/material/core';
-import { LocaleService } from 'src/app/core/services/locale.service';
+import { DateAdapter, ErrorStateMatcher } from '@angular/material/core';
 
 interface DateTimeUnits {
   year: number;
@@ -84,13 +83,17 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
   get minDate(): Date { return this.min === 'now' ? new Date() : this.min; }
   // get placeholder() { return this.localeService.datePlaceholder; }
 
+  dateInputStateMatcher: DateInputStateMatcher;
+
   @HostBinding('class.focused') get focusClass() { return this.inputFocused; }
 
   constructor(
     private injector: Injector,
     private platform: Platform,
     private dataAdapater: DateAdapter<any>,
-  ) { }
+  ) {
+    this.dateInputStateMatcher = new DateInputStateMatcher(this);
+  }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -218,7 +221,6 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
   }
 
   private updateDisplayDate() {
-    console.log(this.date, this.displayFormat, this.language);
     const displayDate = this.date ? formatDate(this.date, this.displayFormat, this.language) : '';
     this.input.setValue(displayDate);
   }
@@ -236,5 +238,13 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
     if (this.localeChanged$) { this.localeChanged$.unsubscribe(); }
   }
 
+}
+
+export class DateInputStateMatcher implements ErrorStateMatcher {
+  constructor(private datePickerComponent: MatDatepickerComponent) { }
+
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    return !!this.datePickerComponent.hostControl.errors;
+  }
 }
 

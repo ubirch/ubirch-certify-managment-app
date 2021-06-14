@@ -13,8 +13,9 @@
       (paste)="inputChanged($event.target.value)"
       (focus)="showMask()" 
       (blur)="hideMask()" 
+      [errorStateMatcher]="dateInputStateMatcher"
     />
-    <mat-error *ngIf="hostControl?.errors && invalidMessage">
+    <mat-error *ngIf="invalidMessage">
       {{ invalidMessage | translate }}
     </mat-error>
     <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [ngModel]="date" [disabled]="disabled"
