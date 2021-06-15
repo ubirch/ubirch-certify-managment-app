@@ -52,8 +52,10 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       (err) => {
         if (err instanceof ErrorBase) {
           this.notificationService.error({ message: err.message, title: err.title });
-          this.router.navigate(['../../'], { relativeTo: this.route });
+        } else {
+          this.errorService.handlerResponseError(err);
         }
+        this.router.navigate(['../../'], { relativeTo: this.route });
       }
     );
   }
