@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, Subscription } from 'rxjs';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { LocaleService } from 'src/app/core/services/locale.service';
@@ -38,10 +39,23 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       map((params: ParamMap) => params.get('id')),
       filter(adminId => !!adminId),
       switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
+      tap(
+        (admin: IPocAdmin) => {
+          if (!admin.webIdentRequired || admin.webIdentInitiateId) {
+            throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
+          }
+        }
+      ),
       takeUntil(this.unsubscribe$)
-    ).subscribe((admin: IPocAdmin) => {
-      this.generateForm(admin);
-    });
+    ).subscribe(
+      (admin: IPocAdmin) => this.generateForm(admin),
+      (err) => {
+        if (err instanceof ErrorBase) {
+          this.notificationService.error({ message: err.message, title: err.title });
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        }
+      }
+    );
   }
 
   generateForm(admin: IPocAdmin) {
@@ -65,8 +79,8 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     this.pocAdminService.putPocAdmin(admin).subscribe(
       _ => {
         this.notificationService.success({
-          message: this.translateService.instant('pocEdit.notifications.success'),
-          title: this.translateService.instant('pocEdit.notifications.successTitle'),
+          message: this.translateService.instant('adminEdit.notifications.success'),
+          title: this.translateService.instant('adminEdit.notifications.successTitle'),
         });
         this.router.navigate(['views/', 'poc-admins']);
       },

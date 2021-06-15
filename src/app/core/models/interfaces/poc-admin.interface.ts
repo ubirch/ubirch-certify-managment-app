@@ -11,6 +11,7 @@ export interface IPocAdmin {
     pocName: string;
     state: AdminStatus;
     active: boolean;
+    webIdentRequired: boolean;
     webIdentInitiateId?: string;
     webIdentSuccessId?: string;
 }

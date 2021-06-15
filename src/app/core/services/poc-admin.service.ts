@@ -41,13 +41,8 @@ export class PocAdminService {
   }
 
   getAdmin(adminId: string): any {
-    return this.http.get<IListResult<IPocAdmin>>(
-      this.adminsUrl,
-      { params: flattenFilters({ ...new Filters(), sortColumn: 'email', pageSize: 100 }) as any }
-    )
-      .pipe(
-        map(a => a.records.find(adm => adm.id === adminId)),
-      );
+    const url = `${this.adminUrl}/${adminId}`;
+    return this.http.get<IPocAdmin>(url);
   }
 
   getAdmins(filters: Filters) {
@@ -76,7 +71,7 @@ export class PocAdminService {
   }
 
   putPocAdmin(admin: IPocAdmin) {
-    const url = `${this.adminUrl}/${admin.id}`
+    const url = `${this.adminUrl}/${admin.id}`;
     return this.http.put(url, admin);
   }
 

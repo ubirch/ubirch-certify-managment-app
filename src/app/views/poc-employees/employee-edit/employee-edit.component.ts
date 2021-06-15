@@ -57,8 +57,8 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     this.employeeService.putPocEmployee(employee).subscribe(
       _ => {
         this.notificationService.success({
-          message: this.translateService.instant('pocEdit.notifications.success'),
-          title: this.translateService.instant('pocEdit.notifications.successTitle'),
+          message: this.translateService.instant('employeeEdit.notifications.success'),
+          title: this.translateService.instant('employeeEdit.notifications.successTitle'),
         });
         this.router.navigate(['views/', 'poc-employees']);
       },

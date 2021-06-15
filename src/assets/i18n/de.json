@@ -184,7 +184,9 @@
 		},
 		"notifications": {
 			"successTitle": "Update success",
-			"success": "Admin has been successfully updated"
+			"success": "Admin has been successfully updated",
+			"editNotAllowedTitle": "Admin edit error",
+			"editNotAllowed": "The admin record can't be updated"
 		}
 	},
 	"adminStatuses": {
