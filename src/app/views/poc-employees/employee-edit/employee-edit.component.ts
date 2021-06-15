@@ -37,9 +37,13 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       filter(employeeId => !!employeeId),
       switchMap(employeeId => this.employeeService.getEmployee(employeeId)),
       takeUntil(this.unsubscribe$)
-    ).subscribe((employee: IPocEmployee) => {
-      this.generateForm(employee);
-    });
+    ).subscribe(
+      (employee: IPocEmployee) => this.generateForm(employee),
+      (err) => {
+        this.errorService.handlerResponseError(err);
+        this.router.navigate(['../../'], { relativeTo: this.route });
+      }
+    );
   }
 
   generateForm(employee: IPocEmployee) {

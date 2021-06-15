@@ -33,10 +33,16 @@ export class PocEditComponent implements OnInit {
       map((params: ParamMap) => params.get('id')),
       filter(pocId => !!pocId),
       switchMap(pocId => this.pocService.getPoc(pocId))
-    ).subscribe((res: any) => {
-      this.poc = res;
-      this.generateForm();
-    });
+    ).subscribe(
+      (res: any) => {
+        this.poc = res;
+        this.generateForm();
+      },
+      (err) => {
+        this.errorService.handlerResponseError(err);
+        this.router.navigate(['../../'], { relativeTo: this.route });
+      }
+    );
   }
 
   generateForm() {
