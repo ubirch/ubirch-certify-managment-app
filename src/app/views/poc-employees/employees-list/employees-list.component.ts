@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
@@ -39,6 +39,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     'email',
     'active',
     'status',
+    'actions',
   ];
   selection = new SelectionModel<IPocEmployee>(true, []);
   defaultSortColumn = 'email';
@@ -70,6 +71,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
     private router: Router,
+    private route: ActivatedRoute,
     private translate: TranslateService,
   ) { }
 
@@ -168,6 +170,11 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
       this.unsubscribe$.next();
       this.unsubscribe$.complete();
     }
+  }
+
+  editEmployee(event: MouseEvent, employee: IPocEmployee) {
+    this.router.navigate(['edit', employee.id], { relativeTo: this.route });
+    event.stopPropagation();
   }
 
   private loadEmployeesPage() {

@@ -6,6 +6,7 @@ import { EmployeesImportComponent } from './employees-import/employees-import.co
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeesFiltersComponent } from './employees-filters/employees-filters.component';
 import { EmployeesDetailsComponent } from './employees-details/employees-details.component';
+import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { EmployeesDetailsComponent } from './employees-details/employees-details
     EmployeesImportComponent,
     EmployeesFiltersComponent,
     EmployeesDetailsComponent,
+    EmployeeEditComponent,
   ],
   imports: [
     SharedModule,

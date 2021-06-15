@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, reduce } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AcitvateAction } from '../models/enums/acitvate-action.enum';
@@ -33,6 +33,11 @@ export class PocEmployeeService {
     ) {
     }
 
+    getEmployee(employeeId: string): Observable<IPocEmployee> {
+        const url = `${this.employeesUrl}/${employeeId}`;
+        return this.http.get<IPocEmployee>(url);
+    }
+
     getEmployees(filters: Filters) {
         //    return of(EMPLOYEES_MOCK).pipe(delay(500));
         return this.http.get<IListResult<IPocEmployee>>(this.employeesUrl, { params: flattenFilters(filters) as any });
@@ -41,6 +46,11 @@ export class PocEmployeeService {
     getEmployeeState(employeeId: string) {
         //    return of(EMPLOYEE_STATE_MOCK).pipe(delay(500));
         return this.http.get<IPocEmployeeState>(`${this.employeesStatusUrl}/${employeeId}`);
+    }
+
+    putPocEmployee(employee: IPocEmployee): Observable<any> {
+        const url = `${this.employeesUrl}/${employee.id}`;
+        return this.http.put(url, employee);
     }
 
     importFile(file: File) {

@@ -70,6 +70,16 @@
         </mat-cell>
     </ng-container>
 
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <button *ngIf="!admin.webIdentInitiateId" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editEmployee($event, admin)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
 
     <mat-row *matRowDef="let employee; columns: displayColumns;"
