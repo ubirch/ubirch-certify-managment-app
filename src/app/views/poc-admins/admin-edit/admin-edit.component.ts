@@ -51,7 +51,10 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       lastName: [admin.lastName, [Validators.required, Validators.minLength(2)]],
       dateOfBirth: [getFormatedBirthDate(admin.dateOfBirth), [Validators.required]],
       email: [admin.email, [Validators.required, Validators.email]],
-      phone: [admin.phone, [Validators.required]],
+      phone: [admin.phone, [
+        Validators.required,
+        Validators.pattern(/^(\+|00)[0-9]{1,3}[ \-0-9]{4,14}$/g)
+      ]],
     });
   }
 
@@ -73,7 +76,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
           message: this.translateService.instant('pocEdit.notifications.success'),
           title: this.translateService.instant('pocEdit.notifications.successTitle'),
         });
-        this.router.navigate(['views/', 'pocs']);
+        this.router.navigate(['views/', 'poc-admins']);
       },
       err => this.errorService.handlerResponseError(err)
     );

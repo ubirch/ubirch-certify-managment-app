@@ -43,6 +43,7 @@
             <div fxLayout>
                 <mat-form-field fxFlex>
                     <input matInput placeholder="{{ 'pocAdmin.phone' | translate }}" formControlName="phone">
+                    <mat-hint>ie. +49123456789 or 0049123456789</mat-hint>
                     <mat-error *ngIf="form.get('phone').errors">
                         {{ 'adminEdit.validationErrors.phone' | translate }}
                     </mat-error>

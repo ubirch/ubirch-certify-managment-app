@@ -176,7 +176,7 @@
 	"adminEdit": {
 		"headline": "Admin Edit",
 		"validationErrors": {
-			"phone": "Phone number is required",
+			"phone": "A valid phone number prefixed with country code (ie. 0049 or +49) is required  ",
 			"firstName": "First name is required (min 2 characters)",
 			"lastName": "Last name is required (min 2 characters)",
 			"email": "Valid email address is required",
