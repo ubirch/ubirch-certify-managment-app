@@ -58,17 +58,9 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getName() {
-    if (!this.form) { return ''; }
-    const fn = this.form?.get('firstName') || '';
-    const ln = this.form?.get('lastName') || '';
-    return `${fn} ${ln}`;
-  }
-
   submitForm() {
     const dob = this.form.get('dateOfBirth').value;
     const admin = { ...this.form.value, dateOfBirth: birthDateFromString(dob) };
-    console.log(admin);
 
     this.pocAdminService.putPocAdmin(admin).subscribe(
       _ => {

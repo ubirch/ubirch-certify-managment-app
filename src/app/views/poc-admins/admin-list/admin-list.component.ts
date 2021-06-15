@@ -173,7 +173,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  editPocAdmin(event: MouseEvent, poc: IPocAdmin) {
+  editAdmin(event: MouseEvent, poc: IPocAdmin) {
     this.router.navigate(['edit', poc.id], { relativeTo: this.route });
     event.stopPropagation();
   }

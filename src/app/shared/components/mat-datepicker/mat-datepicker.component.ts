@@ -116,22 +116,23 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
   }
 
   // Value typed in
-  inputChanged(input: string): void {
+  inputChanged(input: EventTarget): void {
+    let value = (input as HTMLInputElement).value;
     if (this.strict) {
-      const dateChunks = this.chunkDateString(input, this.displayFormat);
+      const dateChunks = this.chunkDateString(value, this.displayFormat);
       // fix month
       if (dateChunks.month > 12) {
         const monthPos = this.displayFormat.indexOf('M');
         dateChunks.month = 12;
-        input = input.slice(0, monthPos) + dateChunks.month + input.slice(monthPos + 2);
+        value = value.slice(0, monthPos) + dateChunks.month + value.slice(monthPos + 2);
       }
       // fix day
       if (dateChunks.day > 31) {
         const dayPos = this.displayFormat.indexOf('d');
         dateChunks.day = 31;
-        input = input.slice(0, dayPos) + dateChunks.day + input.slice(dayPos + 2);
+        value = value.slice(0, dayPos) + dateChunks.day + value.slice(dayPos + 2);
       }
-      this.input.setValue(input);
+      this.input.setValue(value);
     }
     this.changed();
   }
