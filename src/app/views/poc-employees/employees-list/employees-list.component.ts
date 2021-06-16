@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { merge, Subject } from 'rxjs';
+import { merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
@@ -20,6 +20,7 @@ import { PocEmployeeService } from 'src/app/core/services/poc-employee.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
+import { ListComponent } from 'src/app/shared/components/list/list.component';
 
 @Component({
   selector: 'app-employees-list',
@@ -27,8 +28,7 @@ import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/c
   styleUrls: ['./employees-list.component.scss'],
   animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
-export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit {
-
+export class EmployeesListComponent extends ListComponent<IPocEmployee> implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -43,19 +43,12 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     'createdAt',
     'actions',
   ];
-  selection = new SelectionModel<IPocEmployee>(true, []);
   defaultSortColumn = 'email';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPocEmployee | null;
 
   filters: FormGroup;
-  action: FormControl = new FormControl(ListAction.activate);
-  actions = [
-    { value: ListAction.activate, label: `listActions.activate` },
-    { value: ListAction.deactivate, label: `listActions.deactivate` },
-    { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
-  ];
   employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
   actionLoding = false;
@@ -64,27 +57,39 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
   get statusFilter() { return this.columnFilters?.controls?.status; }
-  get selectedCount() { return this.selection?.selected?.length; }
-
-  private unsubscribe$ = new Subject();
 
   constructor(
-    private employeeService: PocEmployeeService,
-    private fb: FormBuilder,
-    public dialog: MatDialog,
-    private errorService: ErrorHandlerService,
-    private notificationService: NotificationService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private translate: TranslateService,
-    private confirmService: ConfirmDialogService,
-    private translateService: TranslateService,
-  ) { }
+    protected employeeService: PocEmployeeService,
+    protected fb: FormBuilder,
+    protected errorService: ErrorHandlerService,
+    protected notificationService: NotificationService,
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected translate: TranslateService,
+    protected confirmService: ConfirmDialogService,
+    protected translateService: TranslateService,
+  ) {
+    super(
+      fb,
+      errorService,
+      notificationService,
+      router,
+      confirmService,
+      translateService
+    );
+
+    this.actions = [
+      { value: ListAction.activate, label: `listActions.activate` },
+      { value: ListAction.deactivate, label: `listActions.deactivate` },
+      { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
+    ];
+    this.action = new FormControl(ListAction.activate);
+  }
 
   ngOnInit() {
     this.dataSource = new PocEmployeeDataSource(this.employeeService, this.errorService);
     this.generateFilters();
-    this.loadEmployeesPage();
+    this.loadItemsPage();
   }
 
   ngAfterViewInit(): void {
@@ -118,38 +123,16 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
       tap(filters => {
         this.filters.patchValue(filters);
         this.selection.clear();
-        this.loadEmployeesPage();
+        this.loadItemsPage();
       }),
       takeUntil(this.unsubscribe$),
     ).subscribe();
 
     this.selection.changed
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        v => this.showActions = this.selection.selected?.length > 0
-      );
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource?.data?.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: IPocEmployee): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.email}`;
+      .pipe(
+        tap(v => this.showActions = this.selection.selected?.length > 0),
+        takeUntil(this.unsubscribe$),
+      ).subscribe();
   }
 
   applyAction() {
@@ -193,19 +176,12 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.unsubscribe$) {
-      this.unsubscribe$.next();
-      this.unsubscribe$.complete();
-    }
-  }
-
   editEmployee(event: MouseEvent, employee: IPocEmployee) {
     this.router.navigate(['edit', employee.id], { relativeTo: this.route });
     event.stopPropagation();
   }
 
-  private loadEmployeesPage() {
+  protected loadItemsPage() {
     this.dataSource.loadEmpoloyees(this.filters.value);
   }
 
@@ -216,34 +192,6 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     this.filters.addControl('filterColumns', this.fb.group({
       status: ['']
     }));
-  }
-
-  private handleActionResponse({ ok, nok }, action: ListAction) {
-    if (nok?.length > 0) {
-      if (ok?.length === 0) {
-        this.notificationService.error({
-          message: `pocEmployee.actionMessages.${action}Error`,
-          title: `pocEmployee.actionMessages.${action}ErrorTitle`,
-          duration: 7000
-        });
-      } else {
-        this.notificationService.warning({
-          message: this.translate.instant(`pocEmployee.actionMessages.${action}Warning`, { count: nok.length }),
-          title: `pocEmployee.actionMessages.${action}WarningTitle`,
-          duration: 7000
-        });
-        this.selection.clear();
-        this.loadEmployeesPage();
-      }
-    } else {
-      this.notificationService.success({
-        message: this.translate.instant(`pocEmployee.actionMessages.${action}Success`, { count: nok.length }),
-        title: `pocEmployee.actionMessages.${action}SuccessTitle`,
-        duration: 7000
-      });
-      this.loadEmployeesPage();
-      this.selection.clear();
-    }
   }
 
 }

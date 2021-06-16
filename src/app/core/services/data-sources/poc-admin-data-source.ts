@@ -8,7 +8,11 @@ import { IPocAdmin } from '../../models/interfaces/poc-admin.interface';
 import { ErrorHandlerService } from '../error-handler.service';
 import { PocAdminService } from '../poc-admin.service';
 
-export class PocAdminDataSource implements DataSource<IPocAdmin> {
+export interface IListDataSource<T> extends DataSource<T> {
+    readonly data: T[];
+}
+
+export class PocAdminDataSource implements IListDataSource<IPocAdmin> {
     private adminSubject = new BehaviorSubject<IPocAdmin[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
     private totalItemsSubject = new BehaviorSubject<number>(0);

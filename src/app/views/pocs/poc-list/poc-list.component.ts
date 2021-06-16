@@ -1,12 +1,11 @@
-import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, take, takeUntil, tap } from 'rxjs/operators';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
@@ -19,6 +18,7 @@ import { PocsService } from 'src/app/core/services/pocs.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
+import { ListComponent } from 'src/app/shared/components/list/list.component';
 
 @Component({
   selector: 'app-poc-list',
@@ -26,8 +26,7 @@ import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/c
   styleUrls: ['./poc-list.component.scss'],
   animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
-export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class PocListComponent extends ListComponent<IPoc> implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -41,43 +40,48 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     'status',
     'actions',
   ];
-  selection = new SelectionModel<IPoc>(true, []);
   defaultSortColumn = 'externalId';
   defaultPageSize = DEFAULT_PAGE_SIZE;
   pageSizes = PAGE_SIZES;
   expandedElement: IPoc | null;
 
   filters: FormGroup;
-  action: FormControl = new FormControl(ListAction.delete);
-  actions = [
-    { value: ListAction.delete, label: `listActions.delete` }
-  ];
   PocStatusTranslation = PocStatusTranslation;
-  showActions = false;
   exportLoading = false;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
   get statusFilter() { return this.columnFilters?.controls?.status; }
-  get selectedCount() { return this.selection?.selected?.length; }
-
-  private unsubscribe$ = new Subject();
 
   constructor(
-    private pocService: PocsService,
-    private fb: FormBuilder,
-    private translateService: TranslateService,
-    public confirmService: ConfirmDialogService,
-    private errorService: ErrorHandlerService,
-    private exportService: ExportImportService,
-    private notificationService: NotificationService,
-    private router: Router,
-  ) { }
+    protected pocService: PocsService,
+    protected fb: FormBuilder,
+    protected translateService: TranslateService,
+    protected confirmService: ConfirmDialogService,
+    protected errorService: ErrorHandlerService,
+    protected exportService: ExportImportService,
+    protected notificationService: NotificationService,
+    protected router: Router,
+  ) {
+    super(
+      fb,
+      errorService,
+      notificationService,
+      router,
+      confirmService,
+      translateService
+    );
+
+    this.actions = [
+      { value: ListAction.delete, label: `listActions.delete` }
+    ];
+    this.action = new FormControl(ListAction.delete);
+  }
 
   ngOnInit() {
     this.dataSource = new PocDataSource(this.pocService, this.errorService);
     this.generateFilters();
-    this.loadPocPage();
+    this.loadItemsPage();
   }
 
   ngAfterViewInit(): void {
@@ -111,38 +115,16 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
       tap(filters => {
         this.filters.patchValue(filters);
         this.selection.clear();
-        this.loadPocPage();
+        this.loadItemsPage();
       }),
       takeUntil(this.unsubscribe$),
     ).subscribe();
 
     this.selection.changed
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        v => this.showActions = this.selection.selected?.length > 0
-      );
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource?.data?.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: IPoc): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.externalId}`;
+      .pipe(
+        tap(v => this.showActions = this.selection.selected?.length > 0),
+        takeUntil(this.unsubscribe$),
+      ).subscribe();
   }
 
   applyAction() {
@@ -178,26 +160,21 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     event.stopPropagation();
   }
 
-  ngOnDestroy(): void {
-    if (this.unsubscribe$) {
-      this.unsubscribe$.next();
-      this.unsubscribe$.complete();
-    }
-  }
-
   private deleteItems(pocs: IPoc[]) {
     this.confirmService.open({
       message: this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length }),
       title: 'pocList.actions.deleteConfirmTitle',
-    }).subscribe(dialogResult => {
-      if (dialogResult) {
-        this.dataSource.deletePocs(pocs, this.filters.value);
-        this.selection.clear();
-      }
-    });
+    }).pipe(
+      take(1),
+      tap(dialogResult => {
+        if (dialogResult) {
+          return this.dataSource.deletePocs(pocs, this.filters.value);
+        }
+      })
+    ).subscribe();
   }
 
-  private loadPocPage() {
+  protected loadItemsPage() {
     this.dataSource.loadPocs(this.filters.value);
   }
 
