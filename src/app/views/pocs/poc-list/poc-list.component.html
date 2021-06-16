@@ -105,5 +105,11 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<mat-paginator [length]="dataSource.totalItems$ | async" [pageSize]="defaultPageSize"
-[pageSizeOptions]="pageSizes"></mat-paginator>
+<div class="table-footer">
+    <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}: {{ selectedCount }}</div>
+    <mat-paginator 
+        [length]="dataSource.totalItems$ | async" 
+        [pageSize]="defaultPageSize" 
+        [pageSizeOptions]="pageSizes">
+    </mat-paginator>
+</div>

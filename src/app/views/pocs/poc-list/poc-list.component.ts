@@ -59,6 +59,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
   get statusFilter() { return this.columnFilters?.controls?.status; }
+  get selectedCount() { return this.selection?.selected?.length; }
 
   private unsubscribe$ = new Subject();
 
