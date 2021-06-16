@@ -70,6 +70,12 @@
         </mat-cell>
     </ng-container>
 
+    <!-- createdAt -->
+    <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocEmployee.createdAt' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{employee.created | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+    </ng-container>
+
     <!-- Actions -->
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>

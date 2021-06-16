@@ -134,6 +134,7 @@
 		"completedId": "Web Ident ID",
 		"status": "Status",
 		"active": "Active",
+		"createdAt": "Created",
 		"webIdentInitiateId": "Web ident initiated ID",
 		"webidentSuccessId": "Web ident completed ID",
 		"state": {
@@ -200,6 +201,7 @@
 		"status": "Status",
 		"email": "Email",
 		"active": "Active",
+		"createdAt": "Created",
 		"state": {
 			"userCreated": "User created",
 			"userRegistration": "User registration",

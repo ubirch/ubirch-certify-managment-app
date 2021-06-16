@@ -41,7 +41,8 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     'pocName',
     'active',
     'state',
-    'actions'
+    'createdAt',
+    'actions',
   ];
   selection = new SelectionModel<IPocAdmin>(true, []);
   defaultSortColumn = 'email';

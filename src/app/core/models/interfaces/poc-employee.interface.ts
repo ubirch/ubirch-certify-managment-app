@@ -5,4 +5,5 @@ export interface IPocEmployee extends IPerson {
     id: string;
     active: boolean;
     status: EmployeeStatus;
+    createdAt: Date;
 }

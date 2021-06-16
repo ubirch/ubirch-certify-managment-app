@@ -39,6 +39,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     'email',
     'active',
     'status',
+    'createdAt',
     'actions',
   ];
   selection = new SelectionModel<IPocEmployee>(true, []);
