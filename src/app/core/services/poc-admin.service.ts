@@ -83,6 +83,29 @@ export class PocAdminService {
     );
   }
 
+  revoke2FA(adminId: string) {
+    const url = `${this.adminUrl}/${adminId}/2fa-token`;
+    return this.http.delete(url);
+  }
+
+  revoke2FAForAdmins(admins: IPocAdmin[]) {
+    return from(admins).pipe(
+      mergeMap(
+        admin => this.revoke2FA(admin.id).pipe(
+          map(() => ({ admin, success: true })),
+          catchError(() => of({ admin, success: false })),
+        )
+      ),
+      reduce(
+        (acc, current: IAdminActionState) => {
+          if (current.success) { acc.ok = [...acc.ok, current.admin]; }
+          else { acc.nok = [...acc.nok, current.admin]; }
+          return acc;
+        }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
+      )
+    );
+  }
+
   changeActiveState(adminId: string, activate: AcitvateAction) {
     const url = `${this.adminUrl}/${adminId}/active/${activate}`;
     return this.http.put(url, null);

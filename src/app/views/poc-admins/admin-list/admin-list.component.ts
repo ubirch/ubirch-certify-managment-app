@@ -54,7 +54,8 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
   action: FormControl = new FormControl(ListAction.activate);
   actions = [
     { value: ListAction.activate, label: `listActions.activate` },
-    { value: ListAction.deactivate, label: `listActions.deactivate` }
+    { value: ListAction.deactivate, label: `listActions.deactivate` },
+    { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
   ];
   adminStatusTranslation = AdminStatusTranslation;
   showActions = false;
@@ -163,13 +164,19 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.actionLoding = true;
         this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.activate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
       case ListAction.deactivate:
         this.actionLoding = true;
         this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.deactivate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+        break;
+      case ListAction.revoke2FA:
+        this.actionLoding = true;
+        this.adminService.revoke2FAForAdmins(selected)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
       default:
         break;
@@ -194,7 +201,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     }));
   }
 
-  private handleActivationResponse({ ok, nok }, action: ListAction) {
+  private handleActionResponse({ ok, nok }, action: ListAction) {
     if (nok?.length > 0) {
       if (ok?.length === 0) {
         this.notificationService.error({

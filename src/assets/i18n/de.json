@@ -215,14 +215,20 @@
 			"activateSuccessTitle": "Activation success",
 			"deactivateSuccess": "Empoloyees have been successfully deactivated",
 			"deactivateSuccessTitle": "Deactivation success",
+			"revoke2FASuccess": "Empoloyees access have been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
 			"activateWarning": "{{ count }} employee(s) failed to activate",
 			"activateWarningTitle": "Activation warning",
 			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
+			"revoke2FAWarning": "{{ count }} access failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning",
 			"activateError": "Empoloyees failed to activate",
 			"activateErrorTitle": "Activation error",
 			"deactivateError": "Empoloyees failed to deactivate",
-			"deactivateErrorTitle": "Deactivation error"
+			"deactivateErrorTitle": "Deactivation error",
+			"revoke2FAError": "Access revoke failed",
+			"revoke2FAErrorTitle": "Revoke error"
 		}
 	},
 	"employeeList": {
@@ -264,6 +270,7 @@
 		"activate": "Activate",
 		"deactivate": "Deactivate",
 		"identify": "Start Web Ident",
+		"revoke2FA": "Revoke access",
 		"completeIdentify": "Complete Web Ident"
 	},
 	"dialog": {

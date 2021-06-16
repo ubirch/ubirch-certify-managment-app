@@ -20,7 +20,6 @@ interface IEmployeeActionState {
     providedIn: 'root',
 })
 export class PocEmployeeService {
-
     pocAdminPath = 'poc-admin/';
     baseUrl = environment.pocManagerApi + this.pocAdminPath;
     employeesStatusUrl = `${this.baseUrl}employee/status`;
@@ -57,12 +56,35 @@ export class PocEmployeeService {
         return this.importService.uploadFile(file, this.importEmployeesUrl);
     }
 
+    revoke2FA(employeeId: string) {
+        const url = `${this.baseUrl}poc-employee/${employeeId}/2fa-token`;
+        return this.http.delete(url);
+    }
+
+    revoke2FAForEmployees(employees: IPocEmployee[]) {
+        return from(employees).pipe(
+            mergeMap(
+                employee => this.revoke2FA(employee.id).pipe(
+                    map(() => ({ employee, success: true })),
+                    catchError(() => of({ employee, success: false })),
+                )
+            ),
+            reduce(
+                (acc, current: IEmployeeActionState) => {
+                    if (current.success) { acc.ok = [...acc.ok, current.employee]; }
+                    else { acc.nok = [...acc.nok, current.employee]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocEmployee[], nok: IPocEmployee[] }
+            )
+        );
+    }
+
     changeActiveState(employeeId: string, activate: AcitvateAction) {
         const url = `${this.baseUrl}poc-employee/${employeeId}/active/${activate}`;
         return this.http.put(url, null);
     }
 
-    changeActiveStateForAdmins(employees: IPocEmployee[], activate: AcitvateAction) {
+    changeActiveStateForEmployees(employees: IPocEmployee[], activate: AcitvateAction) {
 
         return from(employees).pipe(
             mergeMap(

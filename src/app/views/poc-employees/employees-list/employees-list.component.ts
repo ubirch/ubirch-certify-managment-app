@@ -52,7 +52,8 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
   action: FormControl = new FormControl(ListAction.activate);
   actions = [
     { value: ListAction.activate, label: `listActions.activate` },
-    { value: ListAction.deactivate, label: `listActions.deactivate` }
+    { value: ListAction.deactivate, label: `listActions.deactivate` },
+    { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
   ];
   employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
@@ -153,15 +154,21 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     switch (this.action.value) {
       case ListAction.activate:
         this.actionLoding = true;
-        this.employeeService.changeActiveStateForAdmins(selected, AcitvateAction.activate)
+        this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.activate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
       case ListAction.deactivate:
         this.actionLoding = true;
-        this.employeeService.changeActiveStateForAdmins(selected, AcitvateAction.deactivate)
+        this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.deactivate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActivationResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+        break;
+      case ListAction.revoke2FA:
+        this.actionLoding = true;
+        this.employeeService.revoke2FAForEmployees(selected)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
       default:
         break;
@@ -193,7 +200,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     }));
   }
 
-  private handleActivationResponse({ ok, nok }, action: ListAction) {
+  private handleActionResponse({ ok, nok }, action: ListAction) {
     if (nok?.length > 0) {
       if (ok?.length === 0) {
         this.notificationService.error({
