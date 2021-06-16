@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
@@ -19,6 +19,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 
 
 @Component({
@@ -77,6 +78,8 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
+    private confirmService: ConfirmDialogService,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -173,10 +176,22 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
           .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
       case ListAction.revoke2FA:
-        this.actionLoding = true;
-        this.adminService.revoke2FAForAdmins(selected)
-          .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+        this.confirmService.open({
+          message: this.translateService.instant('adminList.actions.revoke2FA', { count: this.selection.selected.length }),
+          title: 'adminList.actions.revoke2FATitle',
+        }).pipe(
+          take(1),
+          switchMap(dialogResult => {
+            if (dialogResult) {
+              this.actionLoding = true;
+              return this.adminService.revoke2FAForAdmins(selected)
+                .pipe(
+                  tap(resp => this.handleActionResponse(resp, this.action.value)),
+                  finalize(() => this.actionLoding = false)
+                );
+            }
+          })
+        ).subscribe();
         break;
       default:
         break;

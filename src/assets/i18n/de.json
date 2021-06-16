@@ -156,18 +156,28 @@
 			"activateSuccessTitle": "Activation success",
 			"deactivateSuccess": "Admins have been successfully deactivated",
 			"deactivateSuccessTitle": "Deactivation success",
+			"revoke2FASuccess": "Admin access has been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
 			"activateWarning": "{{ count }} admin(s) failed to activate",
 			"activateWarningTitle": "Activation warning",
 			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
+			"revoke2FAWarning": "{{ count }} access failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning",
 			"activateError": "Admins failed to activate",
 			"activateErrorTitle": "Activation error",
 			"deactivateError": "Admins failed to deactivate",
-			"deactivateErrorTitle": "Deactivation error"
+			"deactivateErrorTitle": "Deactivation error",
+			"revoke2FAError": "Access revoke failed",
+			"revoke2FAErrorTitle": "Revoke error"
 		}
 	},
 	"adminList": {
-		"headline": "Points of Certification Admins"
+		"headline": "Points of Certification Admins",
+		"actions": {
+			"revoke2FATitle": "Revoke access",
+			"revoke2FA": "Are you sure you want to revoke access for {{count}} item(s)?"
+		}
 	},
 	"adminIdentify": {
 		"headline": "Web-Identify Admin",
@@ -215,7 +225,7 @@
 			"activateSuccessTitle": "Activation success",
 			"deactivateSuccess": "Empoloyees have been successfully deactivated",
 			"deactivateSuccessTitle": "Deactivation success",
-			"revoke2FASuccess": "Empoloyees access have been revoked",
+			"revoke2FASuccess": "Empoloyees access has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"activateWarning": "{{ count }} employee(s) failed to activate",
 			"activateWarningTitle": "Activation warning",
@@ -232,7 +242,11 @@
 		}
 	},
 	"employeeList": {
-		"headline": "Points of Certification Employees"
+		"headline": "Points of Certification Employees",
+		"actions": {
+			"revoke2FATitle": "Revoke access",
+			"revoke2FA": "Are you sure you want to revoke access for {{count}} item(s)?"
+		}
 	},
 	"employeeEdit": {
 		"headline": "Employee Edit",

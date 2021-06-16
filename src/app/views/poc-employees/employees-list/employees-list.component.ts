@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
@@ -19,6 +19,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { PocEmployeeService } from 'src/app/core/services/poc-employee.service';
 import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
+import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-employees-list',
@@ -76,6 +77,8 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
+    private confirmService: ConfirmDialogService,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit() {
@@ -152,23 +155,38 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
   applyAction() {
     const selected = this.selection.selected;
     switch (this.action.value) {
+
       case ListAction.activate:
         this.actionLoding = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.activate)
           .pipe(finalize(() => this.actionLoding = false))
           .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
+
       case ListAction.deactivate:
         this.actionLoding = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.deactivate)
           .pipe(finalize(() => this.actionLoding = false))
           .subscribe(resp => this.handleActionResponse(resp, this.action.value));
         break;
+
       case ListAction.revoke2FA:
-        this.actionLoding = true;
-        this.employeeService.revoke2FAForEmployees(selected)
-          .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+        this.confirmService.open({
+          message: this.translateService.instant('employeeList.actions.revoke2FA', { count: this.selection.selected.length }),
+          title: 'employeeList.actions.revoke2FATitle',
+        }).pipe(
+          take(1),
+          switchMap(dialogResult => {
+            if (dialogResult) {
+              this.actionLoding = true;
+              return this.employeeService.revoke2FAForEmployees(selected)
+                .pipe(
+                  tap(resp => this.handleActionResponse(resp, this.action.value)),
+                  finalize(() => this.actionLoding = false)
+                );
+            }
+          })
+        ).subscribe();
         break;
       default:
         break;
