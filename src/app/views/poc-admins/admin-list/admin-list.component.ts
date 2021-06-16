@@ -113,6 +113,7 @@ export class AdminListComponent implements OnInit, OnDestroy, AfterViewInit {
     merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
+        this.selection.clear();
         this.loadAdminsPage();
       }),
       takeUntil(this.unsubscribe$),

@@ -109,6 +109,7 @@ export class PocListComponent implements OnInit, AfterViewInit, OnDestroy {
     merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
+        this.selection.clear();
         this.loadPocPage();
       }),
       takeUntil(this.unsubscribe$),

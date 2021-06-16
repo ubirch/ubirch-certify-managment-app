@@ -112,6 +112,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy, AfterViewInit 
     merge(search$, sort$, paginate$, status$).pipe(
       tap(filters => {
         this.filters.patchValue(filters);
+        this.selection.clear();
         this.loadEmployeesPage();
       }),
       takeUntil(this.unsubscribe$),
