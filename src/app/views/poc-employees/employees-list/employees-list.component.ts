@@ -79,11 +79,11 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
     );
 
     this.actions = [
-      { value: ListAction.activate, label: `listActions.activate` },
-      { value: ListAction.deactivate, label: `listActions.deactivate` },
-      { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
+      { value: ListAction.activate, label: `listActions.activate`, predicate: (employee: IPocEmployee) => !employee.active },
+      { value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (employee: IPocEmployee) => employee.active },
+      { value: ListAction.revoke2FA, label: `listActions.revoke2FA`, predicate: (employee: IPocEmployee) => true },
     ];
-    this.action = new FormControl(ListAction.activate);
+    this.action = new FormControl();
   }
 
   ngOnInit() {

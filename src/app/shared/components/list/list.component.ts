@@ -18,7 +18,7 @@ export abstract class ListComponent<T> implements OnDestroy {
   dataSource: IListDataSource<T>;
 
   action: FormControl;
-  actions: IAction[];
+  actions: IAction<T>[];
   showActions = false;
 
   protected unsubscribe$ = new Subject();
@@ -96,4 +96,15 @@ export abstract class ListComponent<T> implements OnDestroy {
       this.clearSelection();
     }
   }
+
+  getActions(): IAction<T>[] {
+    const actions = this.actions
+      .filter(a => this.selection.selected.some((item: T) => a.predicate?.(item)));
+
+    const action = actions.find(a => a.value === this.action?.value);
+    if (!action) { this.action.setValue(actions?.[0]?.value); }
+
+    return actions;
+  }
+
 }

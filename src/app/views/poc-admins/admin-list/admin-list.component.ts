@@ -76,12 +76,11 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
     );
 
     this.actions = [
-      { value: ListAction.activate, label: `listActions.activate` },
-      { value: ListAction.deactivate, label: `listActions.deactivate` },
-      { value: ListAction.revoke2FA, label: `listActions.revoke2FA` },
+      { value: ListAction.activate, label: `listActions.activate`, predicate: (admin: IPocAdmin) => !admin.active },
+      { value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (admin: IPocAdmin) => admin.active },
+      { value: ListAction.revoke2FA, label: `listActions.revoke2FA`, predicate: (admin: IPocAdmin) => true },
     ];
-
-    this.action = new FormControl(ListAction.activate);
+    this.action = new FormControl();
   }
 
   ngOnInit() {

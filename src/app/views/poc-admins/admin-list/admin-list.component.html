@@ -8,12 +8,12 @@
     <label>{{ 'listActions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">
-            <mat-option *ngFor="let action of actions" [value]="action.value" >
+            <mat-option *ngFor="let action of getActions()" [value]="action.value" >
             {{ action.label | translate }}
             </mat-option>
         </mat-select>
         </mat-form-field>
-        <button [disabled]="actionLoding" [ngClass]="{spinner: actionLoding, 'spinner-centerd': true}" mat-raised-button color="primary" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
+        <button [disabled]="actionLoding || !action" [ngClass]="{spinner: actionLoding, 'spinner-centerd': true}" mat-raised-button color="primary" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows

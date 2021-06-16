@@ -176,7 +176,7 @@
 		"headline": "Points of Certification Admins",
 		"actions": {
 			"revoke2FATitle": "Revoke access",
-			"revoke2FA": "Are you sure you want to revoke access for {{count}} item(s)?"
+			"revoke2FA": "Are you sure you want to revoke access for {{count}} admin(s)?"
 		}
 	},
 	"adminIdentify": {
@@ -245,7 +245,7 @@
 		"headline": "Points of Certification Employees",
 		"actions": {
 			"revoke2FATitle": "Revoke access",
-			"revoke2FA": "Are you sure you want to revoke access for {{count}} item(s)?"
+			"revoke2FA": "Are you sure you want to revoke access for {{count}} employee(s)?"
 		}
 	},
 	"employeeEdit": {

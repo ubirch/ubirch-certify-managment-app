@@ -73,9 +73,9 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     );
 
     this.actions = [
-      { value: ListAction.delete, label: `listActions.delete` }
+      { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true }
     ];
-    this.action = new FormControl(ListAction.delete);
+    this.action = new FormControl();
   }
 
   ngOnInit() {
