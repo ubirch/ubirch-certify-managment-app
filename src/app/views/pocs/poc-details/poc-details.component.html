@@ -7,7 +7,7 @@
 
 <mat-divider></mat-divider>
 
-<div *ngIf="pocState | async as state; else spinner" [@fadeInDown]="state">
+<div *ngIf="pocState | async as state; else spinner" [@fadeInDown]="state" class="state-details">
     <div gdColumns="1fr 1fr" gdGap="0 1rem">
       <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyRoleCreated}">{{ icon(state.certifyRoleCreated) }}</mat-icon>
@@ -108,7 +108,10 @@
     <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
       <label>{{ 'poc.state.lastUpdated' | translate }}:</label><span>{{ state.lastUpdated | date:'yyyy-MM-dd hh:mm' }}</span>
       <label>{{ 'poc.state.created' | translate }}:</label><span>{{ state.created | date:'yyyy-MM-dd hh:mm' }}</span>
-      <label>{{ 'poc.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
+      <ng-container *ngIf="state.errorMessage">
+        <label >{{ 'poc.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
+      </ng-container>
+      
     </div>
 
 </div>

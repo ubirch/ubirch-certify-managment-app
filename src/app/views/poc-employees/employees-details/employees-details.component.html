@@ -1,4 +1,4 @@
-<div *ngIf="employeeState$ | async as state; else spinner" [@fadeInDown]="state">
+<div *ngIf="employeeState$ | async as state; else spinner" [@fadeInDown]="state" class="state-details">
   <div gdColumns="1fr 1fr" gdGap="0 1rem">
     <div fxLayoutAlign="start center" fxLayoutGap="1rem">
       <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.userCreated}">{{ icon(state.userCreated) }}</mat-icon>
@@ -17,7 +17,7 @@
       <span>{{ 'pocEmployee.state.userInactivated' | translate}}</span>
     </div>    
   </div>
-  <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
+  <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem" *ngIf="state.errorMessage">
     <label>{{ 'pocEmployee.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
   </div>
 

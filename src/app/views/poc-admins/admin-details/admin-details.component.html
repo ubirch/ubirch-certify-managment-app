@@ -5,7 +5,7 @@
 
 <mat-divider></mat-divider>
 
-<div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state">
+<div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state" class="state-details">
     <div gdColumns="1fr 1fr" gdGap="0 1rem">
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.webIdentRequired !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentRequired}">{{ icon(state.webIdentRequired) }}</mat-icon>
@@ -36,7 +36,7 @@
         <span>{{ 'pocAdmin.state.invitedToTeamDrive' | translate}}</span>
       </div> -->
     </div>
-    <div gdColumns="170px 1fr" class="state-dates">
+    <div gdColumns="170px 1fr" class="state-dates" *ngIf="state.errorMessage">
       <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
     </div>
     <div gdColumns="170px 1fr" *ngIf="state.webIdentRequired">

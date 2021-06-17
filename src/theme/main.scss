@@ -45,6 +45,7 @@ snack-bar-container.mat-snack-bar-container {
     margin-left: -10px;
 }
 
+// LIST
 .table-footer  {
     position: relative;
 
@@ -58,3 +59,7 @@ snack-bar-container.mat-snack-bar-container {
     }
     .select-count span { opacity: 0.87; }
 }
+
+// LIST - STATE DETAILS 
+.state-details .mat-icon { color: #888; }
+.state-details .mat-icon.success { color: green; }
