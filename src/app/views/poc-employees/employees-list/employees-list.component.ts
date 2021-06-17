@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { merge } from 'rxjs';
+import { merge, NEVER } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
@@ -168,6 +168,7 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
                   finalize(() => this.actionLoding = false)
                 );
             }
+            return NEVER;
           })
         ).subscribe();
         break;

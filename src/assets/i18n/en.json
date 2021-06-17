@@ -156,27 +156,27 @@
 			"activateSuccessTitle": "Activation success",
 			"deactivateSuccess": "Admins have been successfully deactivated",
 			"deactivateSuccessTitle": "Deactivation success",
-			"revoke2FASuccess": "Admin access has been revoked",
+			"revoke2FASuccess": "Admin 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"activateWarning": "{{ count }} admin(s) failed to activate",
 			"activateWarningTitle": "Activation warning",
 			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAWarning": "{{ count }} access failed to be revoked",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
 			"revoke2FAWarningTitle": "Revoke warning",
 			"activateError": "Admins failed to activate",
 			"activateErrorTitle": "Activation error",
 			"deactivateError": "Admins failed to deactivate",
 			"deactivateErrorTitle": "Deactivation error",
-			"revoke2FAError": "Access revoke failed",
+			"revoke2FAError": "2FA access token revoke failed",
 			"revoke2FAErrorTitle": "Revoke error"
 		}
 	},
 	"adminList": {
 		"headline": "Points of Certification Admins",
 		"actions": {
-			"revoke2FATitle": "Revoke access",
-			"revoke2FA": "Are you sure you want to revoke access for {{count}} admin(s)?"
+			"revoke2FATitle": "Revoke 2FA token",
+			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} admin(s)?"
 		}
 	},
 	"adminIdentify": {
@@ -225,27 +225,27 @@
 			"activateSuccessTitle": "Activation success",
 			"deactivateSuccess": "Empoloyees have been successfully deactivated",
 			"deactivateSuccessTitle": "Deactivation success",
-			"revoke2FASuccess": "Empoloyees access has been revoked",
+			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"activateWarning": "{{ count }} employee(s) failed to activate",
 			"activateWarningTitle": "Activation warning",
 			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAWarning": "{{ count }} access failed to be revoked",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
 			"revoke2FAWarningTitle": "Revoke warning",
 			"activateError": "Empoloyees failed to activate",
 			"activateErrorTitle": "Activation error",
 			"deactivateError": "Empoloyees failed to deactivate",
 			"deactivateErrorTitle": "Deactivation error",
-			"revoke2FAError": "Access revoke failed",
+			"revoke2FAError": "2FA access token revoke failed",
 			"revoke2FAErrorTitle": "Revoke error"
 		}
 	},
 	"employeeList": {
 		"headline": "Points of Certification Employees",
 		"actions": {
-			"revoke2FATitle": "Revoke access",
-			"revoke2FA": "Are you sure you want to revoke access for {{count}} employee(s)?"
+			"revoke2FATitle": "Revoke 2FA token",
+			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} employee(s)?"
 		}
 	},
 	"employeeEdit": {
@@ -284,7 +284,7 @@
 		"activate": "Activate",
 		"deactivate": "Deactivate",
 		"identify": "Start Web Ident",
-		"revoke2FA": "Revoke access",
+		"revoke2FA": "Revoke 2FA token",
 		"completeIdentify": "Complete Web Ident"
 	},
 	"dialog": {

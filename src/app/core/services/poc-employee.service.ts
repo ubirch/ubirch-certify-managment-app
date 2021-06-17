@@ -57,7 +57,7 @@ export class PocEmployeeService {
     }
 
     revoke2FA(employeeId: string) {
-        const url = `${this.baseUrl}poc-employee/${employeeId}/2fa-token`;
+        const url = `${this.employeesUrl}/${employeeId}/2fa-token`;
         return this.http.delete(url);
     }
 
