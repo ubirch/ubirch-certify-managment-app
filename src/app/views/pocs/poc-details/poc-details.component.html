@@ -1,4 +1,13 @@
 
+<div class="actions">
+  <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'create', poc.id]">
+    <mat-icon aria-hidden="false" aria-label="Add admin">add</mat-icon>
+    {{ 'listActions.addAdmin' | translate }} 
+  </button>
+</div>
+
+<mat-divider></mat-divider>
+
 <div gdColumns="1fr 1fr">
   <div>
     <label>{{ 'poc.deviceId' | translate }}:</label> <span>{{ poc.deviceId }}</span>

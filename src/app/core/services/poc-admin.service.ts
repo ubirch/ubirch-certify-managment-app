@@ -21,6 +21,7 @@ interface IAdminActionState {
   providedIn: 'root'
 })
 export class PocAdminService {
+
   private selectedAdmin = new BehaviorSubject<IPocAdmin>(null);
   selectedAdmin$ = this.selectedAdmin.asObservable();
 
@@ -68,6 +69,11 @@ export class PocAdminService {
     return this.http.post<IWebIdentInitiateId>(url, { pocAdminId: adminId }).pipe(
       map((val: IWebIdentInitiateId) => val.webInitiateId)
     );
+  }
+
+  postPocAdmin(admin: IPocAdmin) {
+    const url = `${this.adminUrl}/create`;
+    return this.http.post(url, admin);
   }
 
   putPocAdmin(admin: IPocAdmin) {

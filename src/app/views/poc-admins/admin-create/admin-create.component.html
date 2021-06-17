@@ -1,0 +1,2 @@
+<h2>{{ 'adminCreate.headline' | translate }}</h2>
+<app-admin-form [pocId]="pocId$ | async" (submitted)="createAdmin($event)"></app-admin-form>

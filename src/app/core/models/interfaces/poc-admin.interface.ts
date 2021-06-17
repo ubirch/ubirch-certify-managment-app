@@ -9,6 +9,7 @@ export interface IPocAdmin {
     email: string;
     phone: string;
     pocName: string;
+    pocId?: string;
     state: AdminStatus;
     active: boolean;
     createdAt: Date;

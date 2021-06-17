@@ -11,14 +11,14 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 
 @Component({
-  selector: 'app-admin-edit',
-  templateUrl: './admin-edit.component.html',
-  styleUrls: ['./admin-edit.component.scss'],
+  selector: 'app-admin-create',
+  templateUrl: './admin-create.component.html',
+  styleUrls: ['./admin-create.component.scss'],
 })
-export class AdminEditComponent implements OnInit, OnDestroy {
+export class AdminCreateComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject();
-  public admin$: Observable<IPocAdmin>;
+  public pocId$: Observable<string>;
 
   constructor(
     private pocAdminService: PocAdminService,
@@ -31,17 +31,9 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.admin$ = this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('id')),
-      filter(adminId => !!adminId),
-      switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
-      tap(
-        (admin: IPocAdmin) => {
-          if (!admin.webIdentRequired || admin.webIdentInitiateId) {
-            throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
-          }
-        }
-      ),
+    this.pocId$ = this.route.paramMap.pipe(
+      map((params: ParamMap) => params.get('pocId')),
+      filter(pocId => !!pocId),
       takeUntil(this.unsubscribe$),
       catchError((err) => {
         if (err instanceof ErrorBase) {
@@ -51,15 +43,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         }
         this.router.navigate(['../../'], { relativeTo: this.route });
         return NEVER;
-      })
-    );
+      }));
   }
 
-  updateAdmin(admin: IPocAdmin) {
-    const successMsg = 'adminEdit.notifications.success';
-    const successTitleMsg = 'adminEdit.notifications.successTitle';
+  createAdmin(admin: IPocAdmin) {
+    const successMsg = 'adminCreate.notifications.success';
+    const successTitleMsg = 'adminCreate.notifications.successTitle';
 
-    this.pocAdminService.putPocAdmin(admin).subscribe(
+    this.pocAdminService.postPocAdmin(admin).subscribe(
       _ => {
         this.notificationService.success({
           message: this.translateService.instant(successMsg),
@@ -70,7 +61,6 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       err => this.errorService.handlerResponseError(err)
     );
   }
-
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();

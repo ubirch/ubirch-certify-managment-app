@@ -6,8 +6,9 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { AdminDetailsComponent } from './admin-details/admin-details.component';
 import { AdminFiltersComponent } from './admin-filters/admin-filters.component';
 import { AdminIdentifyComponent } from './admin-identify/admin-identify.component';
+import { AdminFormComponent } from './admin-form/admin-form.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AdminCreateComponent } from './admin-create/admin-create.component';
 
 
 @NgModule({
@@ -16,10 +17,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminDetailsComponent,
     AdminFiltersComponent,
     AdminIdentifyComponent,
+    AdminFormComponent,
     AdminEditComponent,
+    AdminCreateComponent,
   ],
   imports: [
-    ReactiveFormsModule,
     SharedModule,
     PocAdminsRoutingModule
   ]

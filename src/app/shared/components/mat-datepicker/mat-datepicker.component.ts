@@ -245,7 +245,7 @@ export class DateInputStateMatcher implements ErrorStateMatcher {
   constructor(private datePickerComponent: MatDatepickerComponent) { }
 
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!this.datePickerComponent.hostControl.errors;
+    return !!this.datePickerComponent.hostControl.errors && this.datePickerComponent.hostControl.touched;
   }
 }
 

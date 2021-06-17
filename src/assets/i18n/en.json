@@ -6,6 +6,7 @@
 		"update": "Update",
 		"cancel": "Cancel",
 		"confirm": "Confirm",
+		"create": "Create",
 		"selected": "Selected",
 		"errors": {
 			"requestDefaultTitle": "Request error",
@@ -201,6 +202,15 @@
 			"editNotAllowed": "The admin record can't be updated"
 		}
 	},
+	"adminCreate": {
+		"headline": "Admin Create",
+		"notifications": {
+			"successTitle": "Creation success",
+			"success": "Admin has been successfully created",
+			"editNotAllowedTitle": "Admin creation error",
+			"editNotAllowed": "The admin record failed to create"
+		}
+	},
 	"adminStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
@@ -285,7 +295,8 @@
 		"deactivate": "Deactivate",
 		"identify": "Start Web Ident",
 		"revoke2FA": "Revoke 2FA token",
-		"completeIdentify": "Complete Web Ident"
+		"completeIdentify": "Complete Web Ident",
+		"addAdmin": "Add Admin"
 	},
 	"dialog": {
 		"defaultTitle": "Confirmation required",
