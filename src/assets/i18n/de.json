@@ -285,6 +285,16 @@
 			"errorTitle": "File upload failed"
 		}
 	},
+	"address": {
+		"street": "Street",
+		"houseNumber": "House Number",
+		"zipcode": "Zip Code",
+		"city": "City",
+		"country": "Country",
+		"phone": "Phone",
+		"firstName": "First Name",
+		"lastName": "Last Name"
+	},
 	"listActions": {
 		"action": "Action",
 		"import": "Import",
