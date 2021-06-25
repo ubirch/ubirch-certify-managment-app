@@ -9,13 +9,30 @@ ADD . ./
 RUN ng build --configuration=production
 
 
-FROM nginx:latest
+FROM bitnami/nginx:latest
 ENV \
     KEYCLOAK_REALM=ubirch-certificator \
     KEYCLOAK_URL=https://id.certify.dev.ubirch.com/auth/ \
     KEYCLOAK_CLIENT_ID=poc-manager-user-access-local \
     POC_MANAGER_API=https://api.poc.dev.ubirch.com/tenant-admin/
 
-COPY docker/replace-markers.sh /docker-entrypoint.d/
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/www/ /usr/share/nginx/html/
+# this is necessary for the startup script
+# that creates config from environment vars
+
+USER root
+COPY docker/entrypoint.sh /entrypoint.sh
+COPY nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/nginx.conf
+COPY --from=builder /app/www/ /template_app
+RUN chown 1001 /template_app
+COPY docker/replace-markers.sh /replace-markers.sh
+RUN chmod 555 /replace-markers.sh
+RUN mkdir /www && chown 1001 /www
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod 555 /entrypoint.sh
+
+USER 1001
+
+EXPOSE 8081
+
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]
