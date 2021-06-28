@@ -1,7 +1,9 @@
 <nav class="container" fxLayout fxLayoutAlign="center center">
   <div class="left" fxLayout fxLayoutAlign="center center" fxLayoutGap="2rem">
     <ng-content></ng-content>
-    <img src="assets/images/logo.svg" alt="Ubirch" id="logo">
+    <a [routerLink]="[ '/' ]" routerLinkActive="active">
+      <img src="assets/images/logo.svg" alt="Ubirch" id="logo">
+    </a>
   </div>
   <h1>PoC Manager</h1>
   <div class="right" fxLayout fxLayoutGap="1rem">
