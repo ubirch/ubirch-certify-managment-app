@@ -79,7 +79,7 @@
     <!-- createdAt -->
     <ng-container matColumnDef="createdAt">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.createdAt' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.created | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+        <mat-cell *matCellDef="let admin">{{admin.createdAt | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
     </ng-container>
 
     <!-- Actions -->
