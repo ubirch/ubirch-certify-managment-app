@@ -1,274 +1,82 @@
 {
-	"global": {
-		"login": "Login",
-		"logout": "Logout",
-		"back": "Back",
-		"update": "Update",
-		"cancel": "Cancel",
-		"confirm": "Confirm",
-		"create": "Create",
-		"selected": "Selected",
-		"errors": {
-			"requestDefaultTitle": "Request error",
-			"requestDefault": "There was an error while processing your request. Please try again",
-			"400Title": "Bad request",
-			"400": "Sorry. We were unable to process the request. Request data seems to be invalid",
-			"401Title": "Session expired",
-			"401": "Seems like your session has expired. Please log in again to continue",
-			"403Title": "Unauthorized",
-			"403": "Sorry. We were unable to authorize this request",
-			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented"
-		}
-	},
-	"import": {
-		"headline": "Points of Certification Import",
-		"uploadPrompt": "Select or drop a .csv file below and click \"Upload\" button.",
-		"upload": "Upload",
-		"downloadFile": "Download File",
-		"filePlaceholder": "No files selected",
-		"selectBtn": "Select File",
-		"notifications": {
-			"success": "POCs have been successfully processed",
-			"partial": "There were some errors while processing your .csv file. Download output file for details.",
-			"partialTitle": "POC import incomplete",
-			"error": "Ooops, we are unable to process the file. Please try again later.",
-			"errorTitle": "File upload failed"
-		}
-	},
-	"poc": {
-		"externalId": "Id",
-		"pocName": "Name",
-		"deviceId": "Device Id",
-		"dataSchemaId": "Schema Id",
-		"created": "Created",
-		"lastUpdated": "Updated",
-		"status": "Status",
-		"state": {
-			"certifyRoleCreated": "Certify role created",
-			"certifyGroupCreated": "Certify group created",
-			"certifyGroupRoleAssigned": "Certify group role assigned",
-			"adminGroupCreated": "Admin group created",
-			"adminRoleAssigned": "Admin role assigned",
-			"employeeGroupCreated": "Employee group created",
-			"employeeRoleAssigned": "Employee role assigned",
-			"deviceRoleCreated": "Device role created",
-			"deviceGroupCreated": "Device group created",
-			"deviceGroupRoleAssigned": "Device group role assigned",
-			"deviceCreated": "Device created",
-			"assignedDataSchemaGroup": "Assigned data schema group",
-			"assignedTrustedPocGroup": "Assigned trusted poc group",
-			"assignedDeviceGroup": "Assigned device group",
-			"clientCertRequired": "Client cert required",
-			"orgUnitCertCreated": "Org unit cert created",
-			"clientCertCreated": "Client cert created",
-			"clientCertProvided": "Client cert provided",
-			"logoRequired": "Logo required",
-			"logoReceived": "Logo received",
-			"logoStored": "Logo stored",
-			"goClientProvided": "Go client provided",
-			"certifyApiProvided": "Certify api provided",
-			"errorMessage": "Error Message",
-			"lastUpdated": "Last Updated",
-			"created": "Created"
-		}
-	},
-	"pocList": {
-		"headline": "Points of Certification",
-		"filters": {
-			"filters": "Filters",
-			"search": "Search",
-			"searchPlaceholder": "min 3 characters",
-			"status": "Status"
-		},
-		"actions": {
-			"deleteConfirmTitle": "Delete items",
-			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?"
-		}
-	},
-	"pocEdit": {
-		"headline": "Point of Certification Edit",
-		"fields": {
-			"main": "Main",
-			"address": "Address",
-			"manager": "Manager",
-			"street": "Street",
-			"houseNumber": "House number",
-			"additionalAddress": "Additional Address",
-			"zipcode": "Zipcode",
-			"city": "City",
-			"county": "County",
-			"federalState": "Federal State",
-			"country": "Country",
-			"phone": "Phone",
-			"firstName": "First Name",
-			"lastName": "Last Name",
-			"email": "Email"
-		},
-		"validationErrors": {
-			"street": "Street is required (min. 3 characters)",
-			"houseNumber": "House number is required",
-			"zipcode": "Zipcode is required (min. 5 characters)",
-			"city": "City is required (min. 3 characters)",
-			"country": "Country is required (min. 2 characters)",
-			"phone": "Phone number is required",
-			"firstName": "First name is required (min 2 characters)",
-			"lastName": "Last name is required (min 2 characters)",
-			"email": "Valid email address is required"
-		},
-		"notifications": {
-			"successTitle": "Update success",
-			"success": "PoC has been successfully updated"
-		}
-	},
-	"pocStatuses": {
-		"completed": "Completed",
-		"pending": "Pending",
-		"processing": "Processing"
-	},
-	"pocAdmin": {
+	"address": {
+		"city": "City",
+		"country": "Country",
 		"firstName": "First Name",
+		"houseNumber": "House Number",
 		"lastName": "Last Name",
-		"dateOfBirth": "Date of Birth",
-		"email": "Email",
 		"phone": "Phone",
-		"pocName": "PoC Name",
-		"initialId": "Web Ident initial ID",
-		"completedId": "Web Ident ID",
-		"status": "Status",
-		"active": "Active",
-		"createdAt": "Created",
-		"webIdentInitiateId": "Web ident initiated ID",
-		"webidentSuccessId": "Web ident completed ID",
-		"state": {
-			"webIdentRequired": "Web ident required",
-			"webIdentInitiated": "Web ident initiated",
-			"webIdentSuccess": "Web ident success",
-			"certifyUserCreated": "Certify user created",
-			"pocAdminGroupAssigned": "Poc admin group assigned",
-			"keycloakEmailSent": "Keycloak email sent",
-			"invitedToTeamDrive": "Invited to team drive",
-			"errorMessage": "Error Message"
-		},
-		"validationErrors": {
-			"completedId": "Web Ident is reuiqred"
-		},
-		"actionMessages": {
-			"activateSuccess": "Admins have been successfully activated",
-			"activateSuccessTitle": "Activation success",
-			"deactivateSuccess": "Admins have been successfully deactivated",
-			"deactivateSuccessTitle": "Deactivation success",
-			"revoke2FASuccess": "Admin 2FA access token has been revoked",
-			"revoke2FASuccessTitle": "Revoke success",
-			"activateWarning": "{{ count }} admin(s) failed to activate",
-			"activateWarningTitle": "Activation warning",
-			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
-			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning",
-			"activateError": "Admins failed to activate",
-			"activateErrorTitle": "Activation error",
-			"deactivateError": "Admins failed to deactivate",
-			"deactivateErrorTitle": "Deactivation error",
-			"revoke2FAError": "2FA access token revoke failed",
-			"revoke2FAErrorTitle": "Revoke error"
-		}
-	},
-	"adminList": {
-		"headline": "Points of Certification Admins",
-		"actions": {
-			"revoke2FATitle": "Revoke 2FA token",
-			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} admin(s)?"
-		}
-	},
-	"adminIdentify": {
-		"headline": "Web-Identify Admin",
-		"copyMessage": "{{field}} successfully copied",
-		"success": "User has been successfully identified",
-		"confirmText": "Are you sure that you want to confirm the identity of this person and that you checked the correctness of the data?"
-	},
-	"adminEdit": {
-		"headline": "Admin Edit",
-		"validationErrors": {
-			"phone": "A valid phone number prefixed with country code (ie. 0049 or +49) is required  ",
-			"firstName": "First name is required (min 2 characters)",
-			"lastName": "Last name is required (min 2 characters)",
-			"email": "Valid email address is required",
-			"dateOfBirth": "Please provide a valid birthdate"
-		},
-		"notifications": {
-			"successTitle": "Update success",
-			"success": "Admin has been successfully updated",
-			"editNotAllowedTitle": "Admin edit error",
-			"editNotAllowed": "The admin record can't be updated"
-		}
+		"street": "Street",
+		"zipcode": "Zip Code"
 	},
 	"adminCreate": {
 		"headline": "Admin Create",
 		"notifications": {
-			"successTitle": "Creation success",
-			"success": "Admin has been successfully created",
+			"editNotAllowed": "The admin record failed to create",
 			"editNotAllowedTitle": "Admin creation error",
-			"editNotAllowed": "The admin record failed to create"
+			"success": "Admin has been successfully created",
+			"successTitle": "Creation success"
 		}
+	},
+	"adminEdit": {
+		"headline": "Admin Edit",
+		"notifications": {
+			"editNotAllowed": "The admin record can't be updated",
+			"editNotAllowedTitle": "Admin edit error",
+			"success": "Admin has been successfully updated",
+			"successTitle": "Update success"
+		},
+		"validationErrors": {
+			"dateOfBirth": "Please provide a valid birthdate",
+			"email": "Valid email address is required",
+			"firstName": "First name is required (min 2 characters)",
+			"lastName": "Last name is required (min 2 characters)",
+			"phone": "A valid phone number prefixed with country code (ie. 0049 or +49) is required  "
+		}
+	},
+	"adminIdentify": {
+		"confirmText": "Are you sure that you want to confirm the identity of this person and that you checked the correctness of the data?",
+		"copyMessage": "{{field}} successfully copied",
+		"headline": "Web-Identify Admin",
+		"success": "User has been successfully identified"
+	},
+	"adminList": {
+		"actions": {
+			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} admin(s)?",
+			"revoke2FATitle": "Revoke 2FA token"
+		},
+		"headline": "Points of Certification Admins"
 	},
 	"adminStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
 		"processing": "Processing"
 	},
-	"pocEmployee": {
-		"firstName": "First Name",
-		"lastName": "Last Name",
-		"status": "Status",
-		"email": "Email",
-		"active": "Active",
-		"createdAt": "Created",
-		"state": {
-			"userCreated": "User created",
-			"userRegistration": "User registration",
-			"userActivated": "User activated",
-			"userInactivated": "User inactivated",
-			"errorMessage": "Error Message"
-		},
-		"actionMessages": {
-			"activateSuccess": "Empoloyees have been successfully activated",
-			"activateSuccessTitle": "Activation success",
-			"deactivateSuccess": "Empoloyees have been successfully deactivated",
-			"deactivateSuccessTitle": "Deactivation success",
-			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
-			"revoke2FASuccessTitle": "Revoke success",
-			"activateWarning": "{{ count }} employee(s) failed to activate",
-			"activateWarningTitle": "Activation warning",
-			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
-			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning",
-			"activateError": "Empoloyees failed to activate",
-			"activateErrorTitle": "Activation error",
-			"deactivateError": "Empoloyees failed to deactivate",
-			"deactivateErrorTitle": "Deactivation error",
-			"revoke2FAError": "2FA access token revoke failed",
-			"revoke2FAErrorTitle": "Revoke error"
-		}
-	},
-	"employeeList": {
-		"headline": "Points of Certification Employees",
-		"actions": {
-			"revoke2FATitle": "Revoke 2FA token",
-			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} employee(s)?"
-		}
+	"dialog": {
+		"defaultMessage": "Are you sure you want to proceed?",
+		"defaultTitle": "Confirmation required",
+		"noLabel": "No",
+		"yesLabel": "Yes",
+		"yesSureLabel": "Yes, I am sure"
 	},
 	"employeeEdit": {
 		"headline": "Employee Edit",
-		"validationErrors": {
-			"firstName": "First name is required (min 2 characters)",
-			"lastName": "Last name is required (min 2 characters)",
-			"email": "Valid email address is required"
-		},
 		"notifications": {
-			"successTitle": "Update success",
-			"success": "Employee has been successfully updated"
+			"success": "Employee has been successfully updated",
+			"successTitle": "Update success"
+		},
+		"validationErrors": {
+			"email": "Valid email address is required",
+			"firstName": "First name is required (min 2 characters)",
+			"lastName": "Last name is required (min 2 characters)"
 		}
+	},
+	"employeeList": {
+		"actions": {
+			"revoke2FA": "Are you sure you want to revoke 2FA token for {{count}} employee(s)?",
+			"revoke2FATitle": "Revoke 2FA token"
+		},
+		"headline": "Points of Certification Employees"
 	},
 	"employeeStatuses": {
 		"completed": "Completed",
@@ -278,41 +86,233 @@
 	"employeesImport": {
 		"headline": "Point of Certification Employees Import",
 		"notifications": {
-			"success": "Employees import have been successfully processed",
+			"error": "Ooops, we are unable to process the file. Please try again later.",
+			"errorTitle": "File upload failed",
 			"partial": "There were some errors while processing your .csv file. Download output file for details.",
 			"partialTitle": "Employees import incomplete",
-			"error": "Ooops, we are unable to process the file. Please try again later.",
-			"errorTitle": "File upload failed"
+			"success": "Employees import have been successfully processed"
 		}
 	},
-	"address": {
-		"street": "Street",
-		"houseNumber": "House Number",
-		"zipcode": "Zip Code",
-		"city": "City",
-		"country": "Country",
-		"phone": "Phone",
-		"firstName": "First Name",
-		"lastName": "Last Name"
+	"global": {
+		"back": "Back",
+		"cancel": "Cancel",
+		"confirm": "Confirm",
+		"create": "Create",
+		"errors": {
+			"400": "Sorry. We were unable to process the request. Request data seems to be invalid",
+			"401": "Seems like your session has expired. Please log in again to continue",
+			"403": "Sorry. We were unable to authorize this request",
+			"400Title": "Bad request",
+			"401Title": "Session expired",
+			"403Title": "Unauthorized",
+			"notImplemented": "Sorry we're unable to process the request. Method not yet implemented",
+			"requestDefault": "There was an error while processing your request. Please try again",
+			"requestDefaultTitle": "Request error"
+		},
+		"login": "Login",
+		"logout": "Logout",
+		"selected": "Selected",
+		"update": "Update"
+	},
+	"import": {
+		"downloadFile": "Download File",
+		"filePlaceholder": "No files selected",
+		"headline": "Points of Certification Import",
+		"notifications": {
+			"error": "Ooops, we are unable to process the file. Please try again later.",
+			"errorTitle": "File upload failed",
+			"partial": "There were some errors while processing your .csv file. Download output file for details.",
+			"partialTitle": "POC import incomplete",
+			"success": "POCs have been successfully processed"
+		},
+		"selectBtn": "Select File",
+		"upload": "Upload",
+		"uploadPrompt": "Select or drop a .csv file below and click \"Upload\" button."
 	},
 	"listActions": {
 		"action": "Action",
-		"import": "Import",
-		"export": "Export",
-		"apply": "Apply",
-		"delete": "Delete",
 		"activate": "Activate",
-		"deactivate": "Deactivate",
-		"identify": "Start Web Ident",
-		"revoke2FA": "Revoke 2FA token",
+		"addAdmin": "Add Admin",
+		"apply": "Apply",
 		"completeIdentify": "Complete Web Ident",
-		"addAdmin": "Add Admin"
+		"deactivate": "Deactivate",
+		"delete": "Delete",
+		"export": "Export",
+		"identify": "Start Web Ident",
+		"import": "Import",
+		"revoke2FA": "Revoke 2FA token"
 	},
-	"dialog": {
-		"defaultTitle": "Confirmation required",
-		"defaultMessage": "Are you sure you want to proceed?",
-		"yesLabel": "Yes",
-		"noLabel": "No",
-		"yesSureLabel": "Yes, I am sure"
+	"poc": {
+		"created": "Created",
+		"dataSchemaId": "Schema Id",
+		"deviceId": "Device Id",
+		"externalId": "Id",
+		"lastUpdated": "Updated",
+		"pocName": "Name",
+		"state": {
+			"adminGroupCreated": "Admin group created",
+			"adminRoleAssigned": "Admin role assigned",
+			"assignedDataSchemaGroup": "Assigned data schema group",
+			"assignedDeviceGroup": "Assigned device group",
+			"assignedTrustedPocGroup": "Assigned trusted poc group",
+			"certifyApiProvided": "Certify api provided",
+			"certifyGroupCreated": "Certify group created",
+			"certifyGroupRoleAssigned": "Certify group role assigned",
+			"certifyRoleCreated": "Certify role created",
+			"clientCertCreated": "Client cert created",
+			"clientCertProvided": "Client cert provided",
+			"clientCertRequired": "Client cert required",
+			"created": "Created",
+			"deviceCreated": "Device created",
+			"deviceGroupCreated": "Device group created",
+			"deviceGroupRoleAssigned": "Device group role assigned",
+			"deviceRoleCreated": "Device role created",
+			"employeeGroupCreated": "Employee group created",
+			"employeeRoleAssigned": "Employee role assigned",
+			"errorMessage": "Error Message",
+			"goClientProvided": "Go client provided",
+			"lastUpdated": "Last Updated",
+			"logoReceived": "Logo received",
+			"logoRequired": "Logo required",
+			"logoStored": "Logo stored",
+			"orgUnitCertCreated": "Org unit cert created"
+		},
+		"status": "Status"
+	},
+	"pocAdmin": {
+		"actionMessages": {
+			"activateError": "Admins failed to activate",
+			"activateErrorTitle": "Activation error",
+			"activateSuccess": "Admins have been successfully activated",
+			"activateSuccessTitle": "Activation success",
+			"activateWarning": "{{ count }} admin(s) failed to activate",
+			"activateWarningTitle": "Activation warning",
+			"deactivateError": "Admins failed to deactivate",
+			"deactivateErrorTitle": "Deactivation error",
+			"deactivateSuccess": "Admins have been successfully deactivated",
+			"deactivateSuccessTitle": "Deactivation success",
+			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
+			"deactivateWarningTitle": "Deactivation warning",
+			"revoke2FAError": "2FA access token revoke failed",
+			"revoke2FAErrorTitle": "Revoke error",
+			"revoke2FASuccess": "Admin 2FA access token has been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning"
+		},
+		"active": "Active",
+		"completedId": "Web Ident ID",
+		"createdAt": "Created",
+		"dateOfBirth": "Date of Birth",
+		"email": "Email",
+		"firstName": "First Name",
+		"initialId": "Web Ident initial ID",
+		"lastName": "Last Name",
+		"phone": "Phone",
+		"pocName": "PoC Name",
+		"state": {
+			"certifyUserCreated": "Certify user created",
+			"errorMessage": "Error Message",
+			"invitedToTeamDrive": "Invited to team drive",
+			"keycloakEmailSent": "Keycloak email sent",
+			"pocAdminGroupAssigned": "Poc admin group assigned",
+			"webIdentInitiated": "Web ident initiated",
+			"webIdentRequired": "Web ident required",
+			"webIdentSuccess": "Web ident success"
+		},
+		"status": "Status",
+		"validationErrors": {
+			"completedId": "Web Ident is reuiqred"
+		},
+		"webIdentInitiateId": "Web ident initiated ID",
+		"webidentSuccessId": "Web ident completed ID"
+	},
+	"pocEdit": {
+		"fields": {
+			"additionalAddress": "Additional Address",
+			"address": "Address",
+			"city": "City",
+			"country": "Country",
+			"county": "County",
+			"email": "Email",
+			"federalState": "Federal State",
+			"firstName": "First Name",
+			"houseNumber": "House number",
+			"lastName": "Last Name",
+			"main": "Main",
+			"manager": "Manager",
+			"phone": "Phone",
+			"street": "Street",
+			"zipcode": "Zipcode"
+		},
+		"headline": "Point of Certification Edit",
+		"notifications": {
+			"success": "PoC has been successfully updated",
+			"successTitle": "Update success"
+		},
+		"validationErrors": {
+			"city": "City is required (min. 3 characters)",
+			"country": "Country is required (min. 2 characters)",
+			"email": "Valid email address is required",
+			"firstName": "First name is required (min 2 characters)",
+			"houseNumber": "House number is required",
+			"lastName": "Last name is required (min 2 characters)",
+			"phone": "Phone number is required",
+			"street": "Street is required (min. 3 characters)",
+			"zipcode": "Zipcode is required (min. 5 characters)"
+		}
+	},
+	"pocEmployee": {
+		"actionMessages": {
+			"activateError": "Empoloyees failed to activate",
+			"activateErrorTitle": "Activation error",
+			"activateSuccess": "Empoloyees have been successfully activated",
+			"activateSuccessTitle": "Activation success",
+			"activateWarning": "{{ count }} employee(s) failed to activate",
+			"activateWarningTitle": "Activation warning",
+			"deactivateError": "Empoloyees failed to deactivate",
+			"deactivateErrorTitle": "Deactivation error",
+			"deactivateSuccess": "Empoloyees have been successfully deactivated",
+			"deactivateSuccessTitle": "Deactivation success",
+			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
+			"deactivateWarningTitle": "Deactivation warning",
+			"revoke2FAError": "2FA access token revoke failed",
+			"revoke2FAErrorTitle": "Revoke error",
+			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning"
+		},
+		"active": "Active",
+		"createdAt": "Created",
+		"email": "Email",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"state": {
+			"errorMessage": "Error Message",
+			"userActivated": "User activated",
+			"userCreated": "User created",
+			"userInactivated": "User inactivated",
+			"userRegistration": "User registration"
+		},
+		"status": "Status"
+	},
+	"pocList": {
+		"actions": {
+			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?",
+			"deleteConfirmTitle": "Delete items"
+		},
+		"filters": {
+			"filters": "Filters",
+			"search": "Search",
+			"searchPlaceholder": "min 3 characters",
+			"status": "Status"
+		},
+		"headline": "Points of Certification"
+	},
+	"pocStatuses": {
+		"completed": "Completed",
+		"pending": "Pending",
+		"processing": "Processing"
 	}
 }
