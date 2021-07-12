@@ -1,4 +1,23 @@
 {
+	"address": {
+		"city": "City",
+		"country": "Country",
+		"firstName": "First Name",
+		"houseNumber": "House Number",
+		"lastName": "Last Name",
+		"phone": "Phone",
+		"street": "Street",
+		"zipcode": "Zip Code"
+	},
+	"adminCreate": {
+		"headline": "Admin Create",
+		"notifications": {
+			"editNotAllowed": "The admin record failed to create",
+			"editNotAllowedTitle": "Admin creation error",
+			"success": "Admin has been successfully created",
+			"successTitle": "Creation success"
+		}
+	},
 	"adminEdit": {
 		"headline": "Administrator bearbeiten",
 		"notifications": {
@@ -78,6 +97,7 @@
 		"back": "Zurück",
 		"cancel": "Abbrechen",
 		"confirm": "Bestätigen",
+		"create": "Create",
 		"errors": {
 			"400": "Es tut uns leid. Wir konnten die Anfrage nicht bearbeiten. Die Anfragedaten scheinen ungültig zu sein",
 			"401": "Es scheint, dass Ihre Sitzung abgelaufen ist. Bitte melden Sie sich erneut an, um fortzufahren",
@@ -112,6 +132,7 @@
 	"listActions": {
 		"action": "Aktion",
 		"activate": "Aktivieren",
+		"addAdmin": "Add Admin",
 		"apply": "Anwenden",
 		"completeIdentify": "Vervollständige Web Ident",
 		"deactivate": "Deaktivieren",
