@@ -1,21 +1,21 @@
 {
 	"address": {
-		"city": "City",
-		"country": "Country",
-		"firstName": "First Name",
-		"houseNumber": "House Number",
-		"lastName": "Last Name",
-		"phone": "Phone",
-		"street": "Street",
-		"zipcode": "Zip Code"
+		"city": "Stadt",
+		"country": "Land",
+		"firstName": "Vorname",
+		"houseNumber": "Hausnummer",
+		"lastName": "Nachname",
+		"phone": "Telefon",
+		"street": "Straße",
+		"zipcode": "Postleitzahl"
 	},
 	"adminCreate": {
-		"headline": "Admin Create",
+		"headline": "Admin erstellen",
 		"notifications": {
-			"editNotAllowed": "The admin record failed to create",
-			"editNotAllowedTitle": "Admin creation error",
-			"success": "Admin has been successfully created",
-			"successTitle": "Creation success"
+			"editNotAllowed": "Der Admin-Datensatz konnte nicht erstellt werden",
+			"editNotAllowedTitle": "Fehler bei der Administratorerstellung",
+			"success": "Admin wurde erfolgreich erstellt",
+			"successTitle": " Erstellung erfolgreich"
 		}
 	},
 	"adminEdit": {
@@ -89,8 +89,8 @@
 			"error": "Ooops, wir können die Datei nicht verarbeiten. Bitte versuchen Sie es später noch einmal.",
 			"errorTitle": "Dateiupload fehlgeschlagen",
 			"partial": "Bei der Verarbeitung Ihrer .csv-Datei sind einige Fehler aufgetreten. Laden Sie die Ausgabedatei für Details herunter.",
-			"partialTitle": "Employees import incomplete",
-			"success": "Employees import have been successfully processed"
+			"partialTitle": "Mitarbeiter importieren unvollständig",
+			"success": "Der Import von Mitarbeitern wurde erfolgreich verarbeitet"
 		}
 	},
 	"global": {
@@ -216,7 +216,7 @@
 			"invitedToTeamDrive": "Eingeladen zu team drive",
 			"keycloakEmailSent": "Keycloak E-Mail gesendet",
 			"pocAdminGroupAssigned": "Poc-Admin-Gruppe zugewiesen",
-			"webIdentInitiated": "Web ident initiated",
+			"webIdentInitiated": "Web-Ident initiiert",
 			"webIdentRequired": "Webkennung erforderlich",
 			"webIdentSuccess": "Web ident Erfolgreich"
 		},
