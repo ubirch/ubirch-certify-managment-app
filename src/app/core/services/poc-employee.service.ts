@@ -15,7 +15,6 @@ interface IEmployeeActionState {
     success: boolean;
 }
 
-
 @Injectable({
     providedIn: 'root',
 })
@@ -101,7 +100,29 @@ export class PocEmployeeService {
                 }, { ok: [], nok: [] } as { ok: IPocEmployee[], nok: IPocEmployee[] }
             )
         );
+    }
 
+    retryEmployees(employees: IPocEmployee[]) {
+        return from(employees).pipe(
+            mergeMap(
+                employee => this.retryEmployee(employee.id).pipe(
+                    map(() => ({ employee, success: true })),
+                    catchError(() => of({ employee, success: false })),
+                )
+            ),
+            reduce(
+                (acc, current: IEmployeeActionState) => {
+                    if (current.success) { acc.ok = [...acc.ok, current.employee]; }
+                    else { acc.nok = [...acc.nok, current.employee]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocEmployee[], nok: IPocEmployee[] }
+            )
+        );
+    }
+
+    retryEmployee(employeeId: string) {
+        const url = `${this.baseUrl}employees/retry/${employeeId}`;
+        return this.http.put(url, null);
     }
 
 }

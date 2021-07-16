@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AdminStatus, AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
 
@@ -11,6 +11,6 @@ export class AdminFiltersComponent {
   @Input() filters: FormGroup;
   @Input() exportDisabled = false;
 
-  statuses: string[] = [AdminStatus.completed, AdminStatus.pending, AdminStatus.processing];
+  statuses: string[] = [AdminStatus.completed, AdminStatus.pending, AdminStatus.processing, AdminStatus.aborted];
   AdminStatusTranslation = AdminStatusTranslation;
 }

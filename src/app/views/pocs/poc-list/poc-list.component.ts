@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, take, takeUntil, tap } from 'rxjs/operators';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
-import { PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
+import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { Filters } from 'src/app/core/models/filters';
 import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
@@ -48,6 +48,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
   filters: FormGroup;
   PocStatusTranslation = PocStatusTranslation;
   exportLoading = false;
+  actionLoading = false;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
@@ -73,7 +74,8 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     );
 
     this.actions = [
-      { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true }
+      { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true },
+      { value: ListAction.retry, label: `listActions.retry`, predicate: (poc: IPoc) => poc.status === PocStatus.aborted },
     ];
     this.action = new FormControl();
   }
@@ -139,6 +141,12 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         });
         // this.deleteItems(selected);
         break;
+      case ListAction.retry:
+        this.actionLoading = true;
+        this.pocService.retryPOCs(selected)
+          .pipe(finalize(() => this.actionLoading = false))
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'poc'));
+        break;
       default:
         break;
     }
@@ -160,19 +168,19 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     event.stopPropagation();
   }
 
-  private deleteItems(pocs: IPoc[]) {
-    this.confirmService.open({
-      message: this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length }),
-      title: 'pocList.actions.deleteConfirmTitle',
-    }).pipe(
-      take(1),
-      tap(dialogResult => {
-        if (dialogResult) {
-          return this.dataSource.deletePocs(pocs, this.filters.value);
-        }
-      })
-    ).subscribe();
-  }
+  // private deleteItems(pocs: IPoc[]) {
+  //   this.confirmService.open({
+  //     message: this.translateService.instant('pocList.actions.deleteConfirmMessage', { count: this.selection.selected.length }),
+  //     title: 'pocList.actions.deleteConfirmTitle',
+  //   }).pipe(
+  //     take(1),
+  //     tap(dialogResult => {
+  //       if (dialogResult) {
+  //         return this.dataSource.deletePocs(pocs, this.filters.value);
+  //       }
+  //     })
+  //   ).subscribe();
+  // }
 
   protected loadItemsPage() {
     this.dataSource.loadPocs(this.filters.value);

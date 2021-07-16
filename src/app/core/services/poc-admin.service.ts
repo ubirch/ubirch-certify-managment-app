@@ -134,7 +134,29 @@ export class PocAdminService {
         }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
       )
     );
+  }
 
+  retryAdmins(admins: IPocAdmin[]) {
+    return from(admins).pipe(
+      mergeMap(
+        admin => this.retryAdmin(admin.id).pipe(
+          map(() => ({ admin, success: true })),
+          catchError(() => of({ admin, success: false })),
+        )
+      ),
+      reduce(
+        (acc, current: IAdminActionState) => {
+          if (current.success) { acc.ok = [...acc.ok, current.admin]; }
+          else { acc.nok = [...acc.nok, current.admin]; }
+          return acc;
+        }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
+      )
+    );
+  }
+
+  retryAdmin(adminId: string) {
+    const url = `${this.baseUrl}poc-admin/retry/${adminId}`;
+    return this.http.put(url, null);
   }
 
 }

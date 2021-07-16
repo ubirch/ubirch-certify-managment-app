@@ -50,7 +50,8 @@
 	"adminStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing"
+		"processing": "Processing",
+		"aborted": "Aborted"
 	},
 	"dialog": {
 		"defaultMessage": "Are you sure you want to proceed?",
@@ -81,7 +82,8 @@
 	"employeeStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing"
+		"processing": "Processing",
+		"aborted": "Aborted"
 	},
 	"employeesImport": {
 		"headline": "Point of Certification Employees Import",
@@ -134,6 +136,7 @@
 		"activate": "Activate",
 		"addAdmin": "Add Admin",
 		"apply": "Apply",
+		"retry": "Retry",
 		"completeIdentify": "Complete Web Ident",
 		"deactivate": "Deactivate",
 		"delete": "Delete",
@@ -143,6 +146,14 @@
 		"revoke2FA": "Revoke 2FA token"
 	},
 	"poc": {
+		"actionMessages": {
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "PoC retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} pocs failed to retry",
+			"retryWarningTitle": "Retry warning"
+		},
 		"created": "Created",
 		"dataSchemaId": "Schema Id",
 		"deviceId": "Device Id",
@@ -198,7 +209,13 @@
 			"revoke2FASuccess": "Admin 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning"
+			"revoke2FAWarningTitle": "Revoke warning",
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "Admin retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} admins failed to retry",
+			"retryWarningTitle": "Retry warning"
 		},
 		"active": "Active",
 		"completedId": "Web Ident ID",
@@ -281,7 +298,13 @@
 			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning"
+			"revoke2FAWarningTitle": "Revoke warning",
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "Employee retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} employees failed to retry",
+			"retryWarningTitle": "Retry warning"
 		},
 		"active": "Active",
 		"createdAt": "Created",
@@ -313,6 +336,7 @@
 	"pocStatuses": {
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing"
+		"processing": "Processing",
+		"aborted": "Aborted"
 	}
 }

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge, NEVER } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
-import { AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
+import { AdminStatus, AdminStatusTranslation } from 'src/app/core/models/enums/admin-status.enum';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { Filters } from 'src/app/core/models/filters';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
@@ -79,6 +79,7 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
       { value: ListAction.activate, label: `listActions.activate`, predicate: (admin: IPocAdmin) => !admin.active },
       { value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (admin: IPocAdmin) => admin.active },
       { value: ListAction.revoke2FA, label: `listActions.revoke2FA`, predicate: (admin: IPocAdmin) => true },
+      { value: ListAction.retry, label: `listActions.retry`, predicate: (admin: IPocAdmin) => admin.state === AdminStatus.aborted },
     ];
     this.action = new FormControl();
   }
@@ -139,13 +140,19 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
         this.actionLoding = true;
         this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.activate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocAdmin'));
         break;
       case ListAction.deactivate:
         this.actionLoding = true;
         this.adminService.changeActiveStateForAdmins(selected, AcitvateAction.deactivate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocAdmin'));
+        break;
+      case ListAction.retry:
+        this.actionLoding = true;
+        this.adminService.retryAdmins(selected)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocAdmin'));
         break;
       case ListAction.revoke2FA:
         this.confirmService.open({
@@ -158,7 +165,7 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
               this.actionLoding = true;
               return this.adminService.revoke2FAForAdmins(selected)
                 .pipe(
-                  tap(resp => this.handleActionResponse(resp, this.action.value)),
+                  tap(resp => this.handleActionResponse(resp, this.action.value, 'pocAdmin')),
                   finalize(() => this.actionLoding = false)
                 );
             }

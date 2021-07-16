@@ -1,7 +1,5 @@
-import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge, NEVER } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
-import { EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
+import { EmployeeStatus, EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { Filters } from 'src/app/core/models/filters';
 import { IPocEmployee } from 'src/app/core/models/interfaces/poc-employee.interface';
@@ -82,6 +80,11 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
       { value: ListAction.activate, label: `listActions.activate`, predicate: (employee: IPocEmployee) => !employee.active },
       { value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (employee: IPocEmployee) => employee.active },
       { value: ListAction.revoke2FA, label: `listActions.revoke2FA`, predicate: (employee: IPocEmployee) => true },
+      {
+        value: ListAction.retry,
+        label: `listActions.retry`,
+        predicate: (employee: IPocEmployee) => employee.status === EmployeeStatus.aborted
+      },
     ];
     this.action = new FormControl();
   }
@@ -143,14 +146,21 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
         this.actionLoding = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.activate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
         break;
 
       case ListAction.deactivate:
         this.actionLoding = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.deactivate)
           .pipe(finalize(() => this.actionLoding = false))
-          .subscribe(resp => this.handleActionResponse(resp, this.action.value));
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
+        break;
+
+      case ListAction.retry:
+        this.actionLoding = true;
+        this.employeeService.retryEmployees(selected)
+          .pipe(finalize(() => this.actionLoding = false))
+          .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
         break;
 
       case ListAction.revoke2FA:
@@ -164,7 +174,7 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
               this.actionLoding = true;
               return this.employeeService.revoke2FAForEmployees(selected)
                 .pipe(
-                  tap(resp => this.handleActionResponse(resp, this.action.value)),
+                  tap(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee')),
                   finalize(() => this.actionLoding = false)
                 );
             }

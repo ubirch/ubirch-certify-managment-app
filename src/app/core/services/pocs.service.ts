@@ -1,17 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPocState } from '../models/interfaces/poc-state.interface';
 import { IPoc } from '../models/interfaces/poc.interface';
 import { flattenFilters, Filters } from '../models/filters';
 import { ExportImportService } from './export-import.service';
+import { catchError, map, mergeMap, reduce } from 'rxjs/operators';
+
+interface IPocActionState {
+  poc: IPoc;
+  success: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class PocsService {
+
 
   tenantAdminPath = 'tenant-admin/';
   baseUrl = environment.pocManagerApi + this.tenantAdminPath;
@@ -55,6 +62,29 @@ export class PocsService {
 
   exportPocs() {
     return this.http.get(this.downloadUrl, { responseType: 'blob' });
+  }
+
+  retryPOCs(pocs: IPoc[]) {
+    return from(pocs).pipe(
+      mergeMap(
+        poc => this.retryPOC(poc.id).pipe(
+          map(() => ({ poc, success: true })),
+          catchError(() => of({ poc, success: false })),
+        )
+      ),
+      reduce(
+        (acc, current: IPocActionState) => {
+          if (current.success) { acc.ok = [...acc.ok, current.poc]; }
+          else { acc.nok = [...acc.nok, current.poc]; }
+          return acc;
+        }, { ok: [], nok: [] } as { ok: IPoc[], nok: IPoc[] }
+      )
+    );
+  }
+
+  retryPOC(pocId: string) {
+    const url = `${this.baseUrl}poc/retry/${pocId}`;
+    return this.http.put(url, null);
   }
 
 }

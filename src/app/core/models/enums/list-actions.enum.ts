@@ -3,4 +3,5 @@ export enum ListAction {
     activate = 'activate',
     deactivate = 'deactivate',
     revoke2FA = 'revoke2FA',
+    retry = 'retry',
 }

@@ -69,18 +69,18 @@ export abstract class ListComponent<T> implements OnDestroy {
     if (this.selection?.hasValue()) { this.selection.clear(); }
   }
 
-  protected handleActionResponse({ ok, nok }, action: ListAction) {
+  protected handleActionResponse({ ok, nok }, action: ListAction, prefix: string) {
     if (nok?.length > 0) {
       if (ok?.length === 0) {
         this.notificationService.error({
-          message: `pocAdmin.actionMessages.${action}Error`,
-          title: `pocAdmin.actionMessages.${action}ErrorTitle`,
+          message: `${prefix}.actionMessages.${action}Error`,
+          title: `${prefix}.actionMessages.${action}ErrorTitle`,
           duration: 7000
         });
       } else {
         this.notificationService.warning({
-          message: this.translateService.instant(`pocAdmin.actionMessages.${action}Warning`, { count: nok.length }),
-          title: `pocAdmin.actionMessages.${action}WarningTitle`,
+          message: this.translateService.instant(`${prefix}.actionMessages.${action}Warning`, { count: nok.length }),
+          title: `${prefix}.actionMessages.${action}WarningTitle`,
           duration: 7000
         });
         this.clearSelection();
@@ -88,8 +88,8 @@ export abstract class ListComponent<T> implements OnDestroy {
       }
     } else {
       this.notificationService.success({
-        message: this.translateService.instant(`pocAdmin.actionMessages.${action}Success`, { count: nok.length }),
-        title: `pocAdmin.actionMessages.${action}SuccessTitle`,
+        message: this.translateService.instant(`${prefix}.actionMessages.${action}Success`, { count: nok.length }),
+        title: `${prefix}.actionMessages.${action}SuccessTitle`,
         duration: 7000
       });
       this.loadItemsPage();

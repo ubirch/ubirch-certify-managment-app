@@ -14,7 +14,7 @@ export class PocListFiltersComponent {
   @Output() exportClicked = new EventEmitter();
 
 
-  statuses: string[] = [PocStatus.completed, PocStatus.pending, PocStatus.processing];
+  statuses: string[] = [PocStatus.completed, PocStatus.pending, PocStatus.processing, PocStatus.aborted];
   PocStatusTranslation = PocStatusTranslation;
 
   downloadCSV() {

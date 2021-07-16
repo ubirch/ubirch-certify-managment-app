@@ -50,7 +50,8 @@
 	"adminStatuses": {
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung"
+		"processing": "In Bearbeitung",
+		"aborted": "Aborted"
 	},
 	"dialog": {
 		"defaultMessage": "Sind Sie sicher, dass Sie fortfahren wollen?",
@@ -81,7 +82,8 @@
 	"employeeStatuses": {
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung"
+		"processing": "In Bearbeitung",
+		"aborted": "Aborted"
 	},
 	"employeesImport": {
 		"headline": "Punkt der Zertifizierung Mitarbeiter Import",
@@ -143,6 +145,14 @@
 		"revoke2FA": "2FA-Token widerrufen"
 	},
 	"poc": {
+		"actionMessages": {
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "PoC retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} pocs failed to retry",
+			"retryWarningTitle": "Retry warning"
+		},
 		"created": "Erstellt",
 		"dataSchemaId": "Schema-Id",
 		"deviceId": "Geräte-ID",
@@ -198,7 +208,13 @@
 			"revoke2FASuccess": "Admin 2FA-Zugangstoken wurde entzogen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung"
+			"revoke2FAWarningTitle": "Revoke Warnung",
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "Admin retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} admins failed to retry",
+			"retryWarningTitle": "Retry warning"
 		},
 		"active": "Aktiv",
 		"completedId": "Web Ident ID",
@@ -281,7 +297,13 @@
 			"revoke2FASuccess": "Empoloyee 2FA-Zugangs-Token wurde widerrufen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung"
+			"revoke2FAWarningTitle": "Revoke Warnung",
+			"retryError": "There was an error when retrying",
+			"retryErrorTitle": "Retry error",
+			"retrySuccess": "Employee retry has been sucessfully triggered",
+			"retrySuccessTitle": "Retry trigger success",
+			"retryWarning": "{{ count }} employees failed to retry",
+			"retryWarningTitle": "Retry warning"
 		},
 		"active": "Aktiv",
 		"createdAt": "Erstellt",
@@ -313,6 +335,7 @@
 	"pocStatuses": {
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung"
+		"processing": "In Bearbeitung",
+		"aborted": "Aborted"
 	}
 }
