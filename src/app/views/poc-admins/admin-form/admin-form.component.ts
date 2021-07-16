@@ -44,7 +44,7 @@ export class AdminFormComponent implements OnChanges {
       email: [admin?.email, [Validators.required, Validators.email]],
       phone: [admin?.phone, [
         Validators.required,
-        Validators.pattern(/^(\+|00)[0-9]{1,3}[ \-0-9]{4,14}$/g)
+        Validators.pattern(/^(\+|00)[0-9]{1,3}[ \-0-9]{4,14}$/)
       ]],
     });
 
