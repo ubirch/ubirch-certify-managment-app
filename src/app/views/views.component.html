@@ -9,15 +9,7 @@
     <mat-sidenav-container id="main-wrap">
       <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
                    [fixedInViewport]="true" mode="over" [opened]="false">
-                   
-                   <mat-nav-list>
-                      <mat-list-item>
-                        <a [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" (click)="sidenav.close()">PoCs</a>
-                      </mat-list-item>
-                      <mat-list-item>
-                        <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active" (click)="sidenav.close()">PoC Admins</a>
-                      </mat-list-item>
-                  </mat-nav-list>
+        <app-side-nav (click)="sidenav.close()"></app-side-nav>
       </mat-sidenav>
       
       <mat-sidenav-content class="container">

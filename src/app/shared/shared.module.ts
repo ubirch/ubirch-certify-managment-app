@@ -62,6 +62,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { NotificationInlineComponent } from './components/notification-inline/notification-inline.component';
 import { MatDatepickerComponent } from './components/mat-datepicker/mat-datepicker.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { UserInRoleDirective } from './directives/user-in-role.directive';
 
 
 const COMPONENTS = [
@@ -110,6 +111,7 @@ const LIB_EXPORT_MODULES = [
 @NgModule({
   declarations: [
     COMPONENTS,
+    UserInRoleDirective,
   ],
   imports: [
     ANGULAR_EXPORT_MODULES,

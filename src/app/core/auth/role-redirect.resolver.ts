@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
-import { POC_ADMIN, TENANT_ADMIN } from '../models/roles';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })

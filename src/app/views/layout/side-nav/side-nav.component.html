@@ -1,0 +1,11 @@
+<mat-nav-list>
+    <mat-list-item>
+      <a [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" >PoCs</a>
+    </mat-list-item>
+    <mat-list-item>
+      <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active">PoC Admins</a>
+    </mat-list-item>
+    <mat-list-item *ngIf="authService.isTenantAdmin()">
+      <a (click)="showTokenDialog($event)">{{ 'tokenUpdate.navLabel' | translate }}</a>
+    </mat-list-item>
+</mat-nav-list>

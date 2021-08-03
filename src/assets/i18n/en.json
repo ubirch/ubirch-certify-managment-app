@@ -338,5 +338,12 @@
 		"pending": "Pending",
 		"processing": "Processing",
 		"aborted": "Aborted"
+	},
+	"tokenUpdate": {
+		"creationToken": "Creation Token",
+		"navLabel": "Update Creation Token",
+		"invalidToken": "Please provide a valid Creation Token",
+		"success": "Creation Token successfully updated",
+		"successTitle": "Token updated"
 	}
 }

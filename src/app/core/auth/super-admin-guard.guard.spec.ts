@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { TENANT_ADMIN } from '../models/roles';
+import { TENANT_ADMIN_ROLE } from '../models/roles';
 import { fakeRouterState } from './fake-router-snapshot';
 
 import { NOT_AUTHORIZED_URL, RoleGuard } from './role-admin.guard';
@@ -37,7 +37,7 @@ describe('TenantAdminGuardGuard', () => {
 
 
     it('should allow user with tenant_admin role', async () => {
-        serviceSpy.getUserRoles.and.returnValue(['dummy_role', TENANT_ADMIN]);
+        serviceSpy.getUserRoles.and.returnValue(['dummy_role', TENANT_ADMIN_ROLE]);
         const allowed = await guard.canActivate(dummyRoute, fakeRouterState(''));
         expect(allowed).toBe(true);
     });
