@@ -48,10 +48,10 @@
 		"headline": "Points of Certification Admins"
 	},
 	"adminStatuses": {
+		"aborted": "Aborted",
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing",
-		"aborted": "Aborted"
+		"processing": "Processing"
 	},
 	"dialog": {
 		"defaultMessage": "Are you sure you want to proceed?",
@@ -80,10 +80,10 @@
 		"headline": "Points of Certification Employees"
 	},
 	"employeeStatuses": {
+		"aborted": "Aborted",
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing",
-		"aborted": "Aborted"
+		"processing": "Processing"
 	},
 	"employeesImport": {
 		"headline": "Point of Certification Employees Import",
@@ -136,13 +136,13 @@
 		"activate": "Activate",
 		"addAdmin": "Add Admin",
 		"apply": "Apply",
-		"retry": "Retry",
 		"completeIdentify": "Complete Web Ident",
 		"deactivate": "Deactivate",
 		"delete": "Delete",
 		"export": "Export",
 		"identify": "Start Web Ident",
 		"import": "Import",
+		"retry": "Retry",
 		"revoke2FA": "Revoke 2FA token"
 	},
 	"poc": {
@@ -204,18 +204,18 @@
 			"deactivateSuccessTitle": "Deactivation success",
 			"deactivateWarning": "{{ count }} admin(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAError": "2FA access token revoke failed",
-			"revoke2FAErrorTitle": "Revoke error",
-			"revoke2FASuccess": "Admin 2FA access token has been revoked",
-			"revoke2FASuccessTitle": "Revoke success",
-			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning",
 			"retryError": "There was an error when retrying",
 			"retryErrorTitle": "Retry error",
 			"retrySuccess": "Admin retry has been sucessfully triggered",
 			"retrySuccessTitle": "Retry trigger success",
 			"retryWarning": "{{ count }} admins failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"retryWarningTitle": "Retry warning",
+			"revoke2FAError": "2FA access token revoke failed",
+			"revoke2FAErrorTitle": "Revoke error",
+			"revoke2FASuccess": "Admin 2FA access token has been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning"
 		},
 		"active": "Active",
 		"completedId": "Web Ident ID",
@@ -293,18 +293,18 @@
 			"deactivateSuccessTitle": "Deactivation success",
 			"deactivateWarning": "{{ count }} employee(s) failed to deactivate",
 			"deactivateWarningTitle": "Deactivation warning",
-			"revoke2FAError": "2FA access token revoke failed",
-			"revoke2FAErrorTitle": "Revoke error",
-			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
-			"revoke2FASuccessTitle": "Revoke success",
-			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning",
 			"retryError": "There was an error when retrying",
 			"retryErrorTitle": "Retry error",
 			"retrySuccess": "Employee retry has been sucessfully triggered",
 			"retrySuccessTitle": "Retry trigger success",
 			"retryWarning": "{{ count }} employees failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"retryWarningTitle": "Retry warning",
+			"revoke2FAError": "2FA access token revoke failed",
+			"revoke2FAErrorTitle": "Revoke error",
+			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
+			"revoke2FASuccessTitle": "Revoke success",
+			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
+			"revoke2FAWarningTitle": "Revoke warning"
 		},
 		"active": "Active",
 		"createdAt": "Created",
@@ -334,15 +334,15 @@
 		"headline": "Points of Certification"
 	},
 	"pocStatuses": {
+		"aborted": "Aborted",
 		"completed": "Completed",
 		"pending": "Pending",
-		"processing": "Processing",
-		"aborted": "Aborted"
+		"processing": "Processing"
 	},
 	"tokenUpdate": {
 		"creationToken": "Creation Token",
-		"navLabel": "Update Creation Token",
 		"invalidToken": "Please provide a valid Creation Token",
+		"navLabel": "Update Creation Token",
 		"success": "Creation Token successfully updated",
 		"successTitle": "Token updated"
 	}

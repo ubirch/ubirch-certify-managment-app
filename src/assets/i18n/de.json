@@ -48,10 +48,10 @@
 		"headline": "Punkte der Zertifizierung Admins"
 	},
 	"adminStatuses": {
+		"aborted": "Aborted",
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung",
-		"aborted": "Aborted"
+		"processing": "In Bearbeitung"
 	},
 	"dialog": {
 		"defaultMessage": "Sind Sie sicher, dass Sie fortfahren wollen?",
@@ -80,10 +80,10 @@
 		"headline": "Punkte der Zertifizierung Mitarbeiter"
 	},
 	"employeeStatuses": {
+		"aborted": "Aborted",
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung",
-		"aborted": "Aborted"
+		"processing": "In Bearbeitung"
 	},
 	"employeesImport": {
 		"headline": "Punkt der Zertifizierung Mitarbeiter Import",
@@ -99,7 +99,7 @@
 		"back": "Zurück",
 		"cancel": "Abbrechen",
 		"confirm": "Bestätigen",
-		"create": "Create",
+		"create": "Erstellen",
 		"errors": {
 			"400": "Es tut uns leid. Wir konnten die Anfrage nicht bearbeiten. Die Anfragedaten scheinen ungültig zu sein",
 			"401": "Es scheint, dass Ihre Sitzung abgelaufen ist. Bitte melden Sie sich erneut an, um fortzufahren",
@@ -142,16 +142,17 @@
 		"export": "Exportieren",
 		"identify": "Start Web Ident",
 		"import": "Importieren",
+		"retry": "Erneut versuchen",
 		"revoke2FA": "2FA-Token widerrufen"
 	},
 	"poc": {
 		"actionMessages": {
 			"retryError": "There was an error when retrying",
-			"retryErrorTitle": "Retry error",
-			"retrySuccess": "PoC retry has been sucessfully triggered",
-			"retrySuccessTitle": "Retry trigger success",
-			"retryWarning": "{{ count }} pocs failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"retryErrorTitle": "Erneuter Versuch fehlgeschlagen",
+			"retrySuccess": "PoC-Wiederholung wurde erfolgreich ausgelöst",
+			"retrySuccessTitle": "Wiederholungsversuch erfolgreich ausgelöst",
+			"retryWarning": "{{ count }} pocs konnte nicht wiederholt werden",
+			"retryWarningTitle": "Warnung: Wiederholung"
 		},
 		"created": "Erstellt",
 		"dataSchemaId": "Schema-Id",
@@ -197,24 +198,24 @@
 			"activateSuccessTitle": "Aktivierung erfolgreich",
 			"activateWarning": "{{ count }} Admin(s) konnte(n) nicht aktivieren",
 			"activateWarningTitle": "Aktivierungswarnung",
-			"deactivateError": "Deaktivierung durch Admins fehlgeschlagen",
+			"deactivateError": "Deaktivierung des Admins fehlgeschlagen",
 			"deactivateErrorTitle": "Deaktivierungsfehler",
 			"deactivateSuccess": "Admins wurden erfolgreich deaktiviert",
 			"deactivateSuccessTitle": "Deaktivierung erfolgreich",
 			"deactivateWarning": "{{ count }} Admin(s) konnte(n) nicht deaktiviert werden",
 			"deactivateWarningTitle": "Deaktivierungswarnung",
+			"retryError": "Beim erneuten Versuch ist ein Fehler aufgetreten",
+			"retryErrorTitle": "Fehler bei Wiederholung",
+			"retrySuccess": "Admin-Wiederholungsversuch wurde erfolgreich ausgelöst",
+			"retrySuccessTitle": "Wiederholungsversuch erfolgreich ausgelöst",
+			"retryWarning": "{{ count }} Admins konnten nicht wiederholt werden",
+			"retryWarningTitle": "Warnung: Wiederholung",
 			"revoke2FAError": "Widerruf des 2FA-Zugangstokens fehlgeschlagen",
 			"revoke2FAErrorTitle": "Revoke Fehler",
 			"revoke2FASuccess": "Admin 2FA-Zugangstoken wurde entzogen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung",
-			"retryError": "There was an error when retrying",
-			"retryErrorTitle": "Retry error",
-			"retrySuccess": "Admin retry has been sucessfully triggered",
-			"retrySuccessTitle": "Retry trigger success",
-			"retryWarning": "{{ count }} admins failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"revoke2FAWarningTitle": "Revoke Warnung"
 		},
 		"active": "Aktiv",
 		"completedId": "Web Ident ID",
@@ -292,18 +293,18 @@
 			"deactivateSuccessTitle": "Deaktivierung erfolgreich",
 			"deactivateWarning": " Deaktivierung von{{ count }} Mitarbeiter(n) fehlgeschlagen",
 			"deactivateWarningTitle": "Deaktivierungswarnung",
+			"retryError": "Beim erneuten Versuch ist ein Fehler aufgetreten",
+			"retryErrorTitle": "Fehler bei Wiederholung",
+			"retrySuccess": "Wiederholungsversuch für Mitarbeiter wurde erfolgreich ausgelöst",
+			"retrySuccessTitle": "Wiederholungsversuch erfolgreich ausgelöst",
+			"retryWarning": "{{ count }} Mitarbeiter konnten nicht wiederholt werden",
+			"retryWarningTitle": "Fehler bei Wiederholung",
 			"revoke2FAError": "Widerruf des 2FA-Zugangstokens fehlgeschlagen",
 			"revoke2FAErrorTitle": "Revoke Fehler",
 			"revoke2FASuccess": "Empoloyee 2FA-Zugangs-Token wurde widerrufen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung",
-			"retryError": "There was an error when retrying",
-			"retryErrorTitle": "Retry error",
-			"retrySuccess": "Employee retry has been sucessfully triggered",
-			"retrySuccessTitle": "Retry trigger success",
-			"retryWarning": "{{ count }} employees failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"revoke2FAWarningTitle": "Revoke Warnung"
 		},
 		"active": "Aktiv",
 		"createdAt": "Erstellt",
@@ -333,16 +334,16 @@
 		"headline": "Punkte der Zertifizierung"
 	},
 	"pocStatuses": {
+		"aborted": "Aborted",
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
-		"processing": "In Bearbeitung",
-		"aborted": "Aborted"
+		"processing": "In Bearbeitung"
 	},
 	"tokenUpdate": {
 		"creationToken": "Creation Token",
-		"navLabel": "Update Creation Token",
-		"invalidToken": "Please provide a valid Creation Token",
-		"success": "Creation Token successfully updated",
-		"successTitle": "Token updated"
+		"invalidToken": "Bitte geben Sie ein gültiges Creation Token an",
+		"navLabel": "Update des Creation Token",
+		"success": "Creation Token erfolgreich aktualisiert",
+		"successTitle": "Token aktualisiert"
 	}
 }
