@@ -1,0 +1,30 @@
+
+<div fxLayout="column" fxFlex>
+    <h2>{{ 'userProfile.headline' | translate }}</h2>
+
+    <mat-card fxLayout="column" fxFlex>
+      <mat-card-content fxFlex>
+        <div fxLayout fxFlex>
+      
+          <mat-nav-list>
+            <mat-list-item>
+              <a [routerLink]="[ 'personal-details' ]" routerLinkActive="active" >{{ 'userProfile.personalDetails.navLabel' | translate }}</a>
+            </mat-list-item>
+            <mat-list-item>
+              <a [routerLink]="[ 'roles' ]" routerLinkActive="active">{{ 'userProfile.roles.navLabel' | translate }}</a>
+            </mat-list-item>
+            <mat-list-item *ngIf="authService.isTenantAdmin()">
+              <a [routerLink]="[ 'creation-token' ]" routerLinkActive="active">{{ 'userProfile.tokenUpdate.creationToken' | translate }}</a>
+            </mat-list-item>
+          </mat-nav-list>
+        
+          <div fxFlex class="profile-content">
+            <router-outlet></router-outlet>
+          </div>
+    
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+
+</div>

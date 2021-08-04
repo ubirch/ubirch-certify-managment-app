@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { TokenUpdateComponent } from './token-update.component';
+import { PersonalDetailsComponent } from './personal-details.component';
 
-describe('TokenUpdateComponent', () => {
-  let component: TokenUpdateComponent;
-  let fixture: ComponentFixture<TokenUpdateComponent>;
+describe('PersonalDetailsComponent', () => {
+  let component: PersonalDetailsComponent;
+  let fixture: ComponentFixture<PersonalDetailsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TokenUpdateComponent ],
+      declarations: [ PersonalDetailsComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TokenUpdateComponent);
+    fixture = TestBed.createComponent(PersonalDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

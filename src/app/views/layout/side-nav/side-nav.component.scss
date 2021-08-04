@@ -1,4 +1,7 @@
 mat-list-item a { 
     min-width: 400px;
-    line-height: 48px;
+    line-height: 3rem;
 }
+
+mat-icon { margin-right: 1rem;}
+mat-divider { margin: 1rem 0; }

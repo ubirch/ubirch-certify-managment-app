@@ -6,13 +6,13 @@
       </button>
     </app-header>
     
-    <mat-sidenav-container id="main-wrap">
+    <mat-sidenav-container id="main-wrap" fxLayout="column">
       <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
                    [fixedInViewport]="true" mode="over" [opened]="false">
         <app-side-nav (click)="sidenav.close()"></app-side-nav>
       </mat-sidenav>
       
-      <mat-sidenav-content class="container">
+      <mat-sidenav-content class="container" fxLayout="column" fxFlex>
           <router-outlet></router-outlet>
       </mat-sidenav-content>
 

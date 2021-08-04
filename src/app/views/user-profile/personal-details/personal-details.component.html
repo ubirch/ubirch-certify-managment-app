@@ -1,0 +1,21 @@
+<ng-container *ngIf="profile | async as p">
+  <div class="row">
+    <h3>{{ 'userProfile.personalDetails.userName' | translate }}</h3>
+    <p>{{ p.username }}</p>
+  </div>
+  <div class="row">
+    <h3>{{ 'userProfile.personalDetails.firstName' | translate }}</h3>
+    <p>{{ p.firstName }}</p>
+  </div>
+  <div class="row">
+    <h3>{{ 'userProfile.personalDetails.lastName' | translate }}</h3>
+    <p>{{ p.lastName }}</p>
+  </div>
+  <div class="row">
+    <h3>{{ 'userProfile.personalDetails.email' | translate }}</h3>
+    <p>{{ p.email }}</p>
+  </div>
+  <div class="row">
+    <p><mat-checkbox [checked]="p.emailVerified" [disabled]="true">{{ 'userProfile.personalDetails.emailVerified' | translate }}</mat-checkbox></p>
+  </div>
+</ng-container>

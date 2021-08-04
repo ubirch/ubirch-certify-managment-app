@@ -147,7 +147,7 @@
 	},
 	"poc": {
 		"actionMessages": {
-			"retryError": "There was an error when retrying",
+			"retryError": "Beim erneuten Versuch ist ein Fehler aufgetreten",
 			"retryErrorTitle": "Erneuter Versuch fehlgeschlagen",
 			"retrySuccess": "PoC-Wiederholung wurde erfolgreich ausgelöst",
 			"retrySuccessTitle": "Wiederholungsversuch erfolgreich ausgelöst",
@@ -339,11 +339,26 @@
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
 	},
-	"tokenUpdate": {
-		"creationToken": "Creation Token",
-		"invalidToken": "Bitte geben Sie ein gültiges Creation Token an",
-		"navLabel": "Update des Creation Token",
-		"success": "Creation Token erfolgreich aktualisiert",
-		"successTitle": "Token aktualisiert"
+	"userProfile": {
+		"headline": "User Profile",
+		"roles": {
+			"navLabel": "User Roles",
+			"intro": "Below you can find keycloak roles assigned to you"
+		},
+		"personalDetails": {
+			"navLabel": "Personal Details",
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"email": "Email",
+			"userName": "User name",
+			"emailVerified": "Email verified?"
+		},
+		"tokenUpdate": {
+			"creationToken": "Creation Token",
+			"invalidToken": "Bitte geben Sie ein gültiges Creation Token an",
+			"note": "Please input valid Creation Token below. Invalid tokens may prevent you from uploading POCs.",
+			"success": "Creation Token erfolgreich aktualisiert",
+			"successTitle": "Token aktualisiert"
+		}
 	}
 }

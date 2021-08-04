@@ -339,11 +339,26 @@
 		"pending": "Pending",
 		"processing": "Processing"
 	},
-	"tokenUpdate": {
-		"creationToken": "Creation Token",
-		"invalidToken": "Please provide a valid Creation Token",
-		"navLabel": "Update Creation Token",
-		"success": "Creation Token successfully updated",
-		"successTitle": "Token updated"
+	"userProfile": {
+		"headline": "User Profile",
+		"roles": {
+			"navLabel": "User Roles",
+			"intro": "Below you can find keycloak roles assigned to you"
+		},
+		"personalDetails": {
+			"navLabel": "Personal Details",
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"email": "Email",
+			"userName": "User name",
+			"emailVerified": "Email verified?"
+		},
+		"tokenUpdate": {
+			"creationToken": "Creation Token",
+			"invalidToken": "Please provide a valid Creation Token",
+			"note": "Please input valid Creation Token below. Invalid tokens may prevent you from uploading POCs.",
+			"success": "Creation Token successfully updated",
+			"successTitle": "Token updated"
+		}
 	}
 }

@@ -1,12 +1,12 @@
 <form>
+    <p>{{ 'userProfile.tokenUpdate.note' | translate }}</p>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>{{ 'tokenUpdate.creationToken' | translate }}</mat-label>
-      <textarea matInput [attr.disabled]="loading" [formControl]="token"></textarea>
-      <mat-error>{{ 'tokenUpdate.invalidToken' | translate }}</mat-error>
+      <mat-label>{{ 'userProfile.tokenUpdate.creationToken' | translate }}</mat-label>
+      <textarea matInput [attr.disabled]="loading?'true':null" [formControl]="token"></textarea>
+      <mat-error>{{ 'userProfile.tokenUpdate.invalidToken' | translate }}</mat-error>
     </mat-form-field>
 
     <div mat-dialog-actions fxLayout fxLayoutAlign="center">
-      <button mat-button mat-dialog-close >{{ 'global.cancel' | translate }}</button>
       <button mat-raised-button color="primary" (click)="onUpdate()">{{ 'global.update' | translate }}</button>
     </div>
     

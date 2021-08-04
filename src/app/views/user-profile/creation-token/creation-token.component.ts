@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -8,10 +7,10 @@ import { TenantTokenService } from 'src/app/core/services/tenant-token.service';
 
 @Component({
   selector: 'app-token-update',
-  templateUrl: './token-update.component.html',
-  styleUrls: ['./token-update.component.scss'],
+  templateUrl: './creation-token.component.html',
+  styleUrls: ['./creation-token.component.scss'],
 })
-export class TokenUpdateComponent implements OnInit, OnDestroy {
+export class CreationTokenComponent implements OnInit, OnDestroy {
 
   loading = false;
 
@@ -19,7 +18,6 @@ export class TokenUpdateComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any>;
 
   constructor(
-    private dialogRef: MatDialogRef<TokenUpdateComponent>,
     private tokenService: TenantTokenService,
     private notification: NotificationService,
   ) { }
@@ -34,14 +32,16 @@ export class TokenUpdateComponent implements OnInit, OnDestroy {
       this.loading = true;
       this.tokenService.updateToken(this.token.value)
         .pipe(
-          finalize(() => { this.loading = false; }),
           takeUntil(this.unsubscribe$),
+          finalize(() => {
+            this.loading = false;
+            console.log(this.loading);
+          }),
         )
         .subscribe(_ => {
-          this.dialogRef.close();
           this.notification.success({
-            message: 'tokenUpdate.success',
-            title: 'tokenUpdate.successTitle'
+            message: 'userProfile.tokenUpdate.success',
+            title: 'userProfile.tokenUpdate.successTitle'
           });
         });
     }

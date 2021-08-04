@@ -103,6 +103,7 @@ const LIB_EXPORT_MODULES = [
   MatDividerModule,
   MatSidenavModule,
   ClipboardModule,
+  MatChipsModule,
 
   FlexLayoutModule,
   TranslateModule,
@@ -129,7 +130,6 @@ const LIB_EXPORT_MODULES = [
     // MatBadgeModule,
     // MatBottomSheetModule,
     // MatButtonToggleModule,
-    // MatChipsModule,
     // MatStepperModule,
     // MatExpansionModule,
     // MatGridListModule,

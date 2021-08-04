@@ -15,6 +15,13 @@ nav {
         top: 50%;
         transform: translate(-50%, -50%);
     }
-    .right { margin-left: auto; }
+    .right { 
+        margin-left: auto;
+
+        a { 
+            color: #fff;
+            text-decoration: none; 
+        }
+    }
     .right button { height: auto; width: auto; }
 }
