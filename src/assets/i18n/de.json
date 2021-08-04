@@ -334,29 +334,29 @@
 		"headline": "Punkte der Zertifizierung"
 	},
 	"pocStatuses": {
-		"aborted": "Aborted",
+		"aborted": "Abgebrochen",
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
 	},
 	"userProfile": {
-		"headline": "User Profile",
-		"roles": {
-			"navLabel": "User Roles",
-			"intro": "Below you can find keycloak roles assigned to you"
-		},
+		"headline": "Benutzerprofil",
 		"personalDetails": {
-			"navLabel": "Personal Details",
-			"firstName": "First Name",
-			"lastName": "Last Name",
-			"email": "Email",
-			"userName": "User name",
-			"emailVerified": "Email verified?"
+			"email": "E-Mail",
+			"emailVerified": "E-Mail verifiziert?",
+			"firstName": "Vorname",
+			"lastName": "Nachname",
+			"navLabel": "Persönliche Details",
+			"userName": "Name des Benutzers"
+		},
+		"roles": {
+			"intro": "Im Folgenden finden Sie die Ihnen zugewiesenen Keycloak-Rollen",
+			"navLabel": "Benutzer-Rollen"
 		},
 		"tokenUpdate": {
 			"creationToken": "Creation Token",
 			"invalidToken": "Bitte geben Sie ein gültiges Creation Token an",
-			"note": "Please input valid Creation Token below. Invalid tokens may prevent you from uploading POCs.",
+			"note": "Bitte geben Sie unten ein gültiges Creation-Token ein. Ungültige Token können Sie am Hochladen von POCs hindern.",
 			"success": "Creation Token erfolgreich aktualisiert",
 			"successTitle": "Token aktualisiert"
 		}

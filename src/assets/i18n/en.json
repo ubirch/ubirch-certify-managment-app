@@ -341,17 +341,17 @@
 	},
 	"userProfile": {
 		"headline": "User Profile",
-		"roles": {
-			"navLabel": "User Roles",
-			"intro": "Below you can find keycloak roles assigned to you"
-		},
 		"personalDetails": {
-			"navLabel": "Personal Details",
+			"email": "Email",
+			"emailVerified": "Email verified?",
 			"firstName": "First Name",
 			"lastName": "Last Name",
-			"email": "Email",
-			"userName": "User name",
-			"emailVerified": "Email verified?"
+			"navLabel": "Personal Details",
+			"userName": "User name"
+		},
+		"roles": {
+			"intro": "Below you can find keycloak roles assigned to you",
+			"navLabel": "User Roles"
 		},
 		"tokenUpdate": {
 			"creationToken": "Creation Token",
