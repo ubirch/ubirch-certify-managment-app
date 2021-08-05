@@ -1,11 +1,11 @@
 
-<div fxLayout="column" fxFlex>
+<div>
     <h2>{{ 'userProfile.headline' | translate }}</h2>
 
-    <mat-card fxLayout="column" fxFlex>
-      <mat-card-content fxFlex>
-        <div fxLayout fxFlex>
-      
+    <mat-card>
+      <mat-card-content>
+        <div fxLayout>
+
           <mat-nav-list>
             <mat-list-item>
               <a [routerLink]="[ 'personal-details' ]" routerLinkActive="active" >{{ 'userProfile.personalDetails.navLabel' | translate }}</a>
@@ -17,14 +17,14 @@
               <a [routerLink]="[ 'creation-token' ]" routerLinkActive="active">{{ 'userProfile.tokenUpdate.creationToken' | translate }}</a>
             </mat-list-item>
           </mat-nav-list>
-        
+
           <div fxFlex class="profile-content">
             <router-outlet></router-outlet>
           </div>
-    
+
         </div>
       </mat-card-content>
     </mat-card>
-    
+
 
 </div>
