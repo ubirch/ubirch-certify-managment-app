@@ -68,14 +68,6 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceGroupCreated}">{{ icon(state.deviceGroupCreated) }}</mat-icon>
         <span>{{ 'poc.state.deviceGroupCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.clientCertCreated !== undefined">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertCreated}">{{ icon(state.clientCertCreated) }}</mat-icon>
-        <span>{{ 'poc.state.clientCertCreated' | translate}}</span>
-      </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.clientCertProvided !== undefined">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertProvided}">{{ icon(state.clientCertProvided) }}</mat-icon>
-        <span>{{ 'poc.state.clientCertProvided' | translate}}</span>
-      </div>
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.deviceGroupRoleAssigned !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceGroupRoleAssigned}">{{ icon(state.deviceGroupRoleAssigned) }}</mat-icon>
         <span>{{ 'poc.state.deviceGroupRoleAssigned' | translate}}</span>

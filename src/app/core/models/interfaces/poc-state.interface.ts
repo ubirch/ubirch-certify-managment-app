@@ -15,8 +15,6 @@ export interface IPocState {
     assignedDeviceGroup: boolean;
     clientCertRequired: boolean;
     orgUnitCertCreated?: boolean;
-    clientCertCreated?: boolean;
-    clientCertProvided?: boolean;
     logoRequired: boolean;
     logoReceived?: boolean;
     logoStored?: boolean;

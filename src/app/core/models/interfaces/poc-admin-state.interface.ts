@@ -6,6 +6,8 @@ export interface IPocAdminState {
     pocAdminGroupAssigned: boolean;
     keycloakEmailSent: boolean;
     invitedToTeamDrive: boolean;
+    clientCertProvided?: boolean;
+    certifyApiProvided?: boolean;
     errorMessage: string;
 }
 

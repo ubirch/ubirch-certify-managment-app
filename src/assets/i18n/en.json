@@ -235,7 +235,9 @@
 			"pocAdminGroupAssigned": "Poc admin group assigned",
 			"webIdentInitiated": "Web ident initiated",
 			"webIdentRequired": "Web ident required",
-			"webIdentSuccess": "Web ident success"
+			"webIdentSuccess": "Web ident success",
+			"clientCertProvided": "Client certificate provided",
+			"certifyApiProvided": "Certify API provided"
 		},
 		"status": "Status",
 		"validationErrors": {

@@ -31,10 +31,14 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.keycloakEmailSent}">{{ icon(state.keycloakEmailSent) }}</mat-icon>
         <span>{{ 'pocAdmin.state.keycloakEmailSent' | translate}}</span>
       </div>
-      <!-- <div fxLayoutAlign="start center" fxLayoutGap="1rem">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.invitedToTeamDrive}">{{ icon(state.invitedToTeamDrive) }}</mat-icon>
-        <span>{{ 'pocAdmin.state.invitedToTeamDrive' | translate}}</span>
-      </div> -->
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.clientCertProvided !== undefined">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.clientCertProvided}">{{ icon(state.clientCertProvided) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.clientCertProvided' | translate}}</span>
+      </div>
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.certifyApiProvided !== undefined">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyApiProvided}">{{ icon(state.certifyApiProvided) }}</mat-icon>
+        <span>{{ 'pocAdmin.state.certifyApiProvided' | translate}}</span>
+      </div>
     </div>
     <div gdColumns="170px 1fr" class="state-dates" *ngIf="state.errorMessage">
       <label>{{ 'pocAdmin.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>

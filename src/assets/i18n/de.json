@@ -235,7 +235,9 @@
 			"pocAdminGroupAssigned": "Poc-Admin-Gruppe zugewiesen",
 			"webIdentInitiated": "Web-Ident initiiert",
 			"webIdentRequired": "Webkennung erforderlich",
-			"webIdentSuccess": "Web ident Erfolgreich"
+			"webIdentSuccess": "Web ident Erfolgreich",
+			"clientCertProvided": "Client certificate provided",
+			"certifyApiProvided": "Certify API provided"
 		},
 		"status": "Status",
 		"validationErrors": {
