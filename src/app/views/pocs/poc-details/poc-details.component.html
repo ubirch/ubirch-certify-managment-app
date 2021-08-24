@@ -96,7 +96,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.logoStored}">{{ icon(state.logoStored) }}</mat-icon>
         <span>{{ 'poc.state.logoStored' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.certifyApiProvided !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyApiProvided}">{{ icon(state.certifyApiProvided) }}</mat-icon>
         <span>{{ 'poc.state.certifyApiProvided' | translate}}</span>
       </div>
