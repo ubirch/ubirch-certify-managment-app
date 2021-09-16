@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NEVER, Observable, Subject } from 'rxjs';
 import { catchError, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { AdminStatus } from 'src/app/core/models/enums/admin-status.enum';
 import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -37,7 +38,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
       tap(
         (admin: IPocAdmin) => {
-          if (!admin.webIdentRequired || admin.webIdentInitiateId) {
+          if (!admin.webIdentRequired || admin.webIdentInitiateId || admin.state !== AdminStatus.pending) {
             throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
           }
         }
