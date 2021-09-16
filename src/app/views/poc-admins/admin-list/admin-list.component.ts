@@ -51,6 +51,7 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
   filters: FormGroup;
   adminStatusTranslation = AdminStatusTranslation;
   actionLoding = false;
+  adminStatues = AdminStatus;
 
   get search() { return this.filters.get('search'); }
   get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }

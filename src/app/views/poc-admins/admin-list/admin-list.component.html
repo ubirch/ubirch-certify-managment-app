@@ -86,7 +86,7 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let admin">
-            <button *ngIf="admin.webIdentRequired && !admin.webIdentInitiateId " color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editAdmin($event, admin)">
+            <button *ngIf="admin.webIdentRequired && !admin.webIdentInitiateId  && admin.state === adminStatues.pending" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editAdmin($event, admin)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-cell>
