@@ -241,7 +241,7 @@
 		},
 		"status": "Status",
 		"validationErrors": {
-			"completedId": "Web Ident is reuiqred"
+			"completedId": "Web Ident is required"
 		},
 		"webIdentInitiateId": "Web ident initiated ID",
 		"webidentSuccessId": "Web ident completed ID"
