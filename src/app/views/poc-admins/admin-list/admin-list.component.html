@@ -86,7 +86,7 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let admin">
-            <button *ngIf="admin.webIdentRequired && !admin.webIdentInitiateId  && admin.state === adminStatues.pending" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editAdmin($event, admin)">
+            <button *ngIf="admin.state != adminStatues.processing && admin.state != adminStatues.pending" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editAdmin($event, admin)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-cell>
@@ -121,9 +121,9 @@
 
 <div class="table-footer">
     <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}: {{ selectedCount }}</div>
-    <mat-paginator 
-        [length]="dataSource.totalItems$ | async" 
-        [pageSize]="defaultPageSize" 
+    <mat-paginator
+        [length]="dataSource.totalItems$ | async"
+        [pageSize]="defaultPageSize"
         [pageSizeOptions]="pageSizes">
     </mat-paginator>
 </div>

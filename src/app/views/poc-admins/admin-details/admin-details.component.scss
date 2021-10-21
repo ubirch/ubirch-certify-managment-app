@@ -8,10 +8,21 @@ label {
 
 .mat-divider { margin: 1rem 0; }
 
-button.ident-button { margin-top: 0.5rem; } 
+button.ident-button { margin-top: 0.5rem; }
 button.ident-button .mat-icon { color: #fff; }
 
 .state-dates {
     margin-top: 1rem;
+}
+
+.editButton{
+    width: fit-content;
+}
+
+.editIcon{
+    height: 100%;
+    align-self: center;
+    padding-right: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 

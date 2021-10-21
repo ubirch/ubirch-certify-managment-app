@@ -19,12 +19,15 @@
 		}
 	},
 	"adminEdit": {
+        "confirmText": "Sind sie sicher, dass sie den POC-Admin bearbeiten wollen? Der Web-Ident Prozess muss ggf. neu gestartet werden.",
 		"headline": "Administrator bearbeiten",
 		"notifications": {
 			"editNotAllowed": "Der Admin-Datensatz kann nicht aktualisiert werden",
 			"editNotAllowedTitle": "Admin-Editierfehler",
 			"success": "Admin wurde erfolgreich aktualisiert",
-			"successTitle": "Erfolg aktualisieren"
+			"successTitle": "Erfolg aktualisieren",
+            "invalidMobileNumberTitle": "Telefonnummer ungültig",
+            "invalidMobileNumber": "Bitte stellen Sie sicher, dass sie eine mobile Telefonnummer eingegeben haben"
 		},
 		"validationErrors": {
 			"dateOfBirth": "Bitte geben Sie ein gültiges Geburtsdatum an",
@@ -48,7 +51,7 @@
 		"headline": "Punkte der Zertifizierung Admins"
 	},
 	"adminStatuses": {
-		"aborted": "Aborted",
+		"aborted": "Abgebrochen ",
 		"completed": "Abgeschlossen",
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
@@ -221,6 +224,7 @@
 		"completedId": "Web Ident ID",
 		"createdAt": "Erstellt",
 		"dateOfBirth": "Geburtsdatum",
+        "edit": "Bearbeiten",
 		"email": "E-Mail",
 		"firstName": "Vorname",
 		"initialId": "Web Ident initial ID",

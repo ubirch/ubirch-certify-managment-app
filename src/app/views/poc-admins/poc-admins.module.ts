@@ -9,6 +9,7 @@ import { AdminIdentifyComponent } from './admin-identify/admin-identify.componen
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminCreateComponent } from './admin-create/admin-create.component';
+import {IonicModule} from '@ionic/angular';
 
 
 @NgModule({
@@ -21,9 +22,10 @@ import { AdminCreateComponent } from './admin-create/admin-create.component';
     AdminEditComponent,
     AdminCreateComponent,
   ],
-  imports: [
-    SharedModule,
-    PocAdminsRoutingModule
-  ]
+    imports: [
+        SharedModule,
+        PocAdminsRoutingModule,
+        IonicModule
+    ]
 })
 export class PocAdminsModule { }

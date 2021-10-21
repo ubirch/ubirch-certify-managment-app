@@ -6,7 +6,7 @@
             <!-- FIRST NAME -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.firstName' | translate }}" formControlName="firstName">
+                    <input [readonly]="isEdit" [ngClass]="{'readOnlyState': isEdit}" matInput placeholder="{{ 'pocAdmin.firstName' | translate }}" formControlName="firstName">
                     <mat-error *ngIf="form.get('firstName').errors">
                         {{ 'adminEdit.validationErrors.firstName' | translate }}
                       </mat-error>
@@ -16,7 +16,7 @@
             <!-- LAST NAME -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.lastName' | translate }}" formControlName="lastName">
+                    <input [readonly]="isEdit" [ngClass]="{'readOnlyState': isEdit}" matInput placeholder="{{ 'pocAdmin.lastName' | translate }}" formControlName="lastName">
                     <mat-error *ngIf="form.get('lastName').errors">
                         {{ 'adminEdit.validationErrors.lastName' | translate }}
                     </mat-error>
@@ -26,7 +26,7 @@
             <!-- DATE OF BIRTH -->
             <div fxLayout>
                 <app-mat-datepicker *ngIf="localeService.current$ | async as locale"
-                    formControlName="dateOfBirth" 
+                    formControlName="dateOfBirth"
                     [displayFormat]="locale.dateFormat"
                     [placeholder]="getBirthDayLabel(locale.datePlaceholder)"
                     [max]="'now'"
@@ -38,7 +38,7 @@
             <!-- EMAIl -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.email' | translate }}" formControlName="email">
+                    <input [readonly]="isEdit" [ngClass]="{'readOnlyState': isEdit}" matInput placeholder="{{ 'pocAdmin.email' | translate }}" formControlName="email">
                     <mat-error *ngIf="form.get('email').errors">
                         {{ 'adminEdit.validationErrors.email' | translate }}
                     </mat-error>
@@ -64,10 +64,10 @@
         </div>
 
         <div fxLayout="column" fxLayoutGap="1rem" class="actions">
-            <button mat-raised-button 
+            <button mat-raised-button
                 class="mat-btn-big"
-                color="primary" 
-                (click)="submitForm()" 
+                color="primary"
+                (click)="submitForm()"
                 [disabled]="form.invalid || form.pending">{{ btnLabel | translate }}</button>
             <button mat-raised-button (click)="backToList()">
                 <mat-icon aria-hidden="false" aria-label="Import pocs">chevron_left</mat-icon>

@@ -20,12 +20,15 @@
 	},
 	"adminEdit": {
 		"headline": "Admin Edit",
-		"notifications": {
+        "confirmText": "Are you sure you want to edit this POC-admin? The Web-Ident process will have to be restartetd.",
+        "notifications": {
 			"editNotAllowed": "The admin record can't be updated",
 			"editNotAllowedTitle": "Admin edit error",
 			"success": "Admin has been successfully updated",
-			"successTitle": "Update success"
-		},
+			"successTitle": "Update success",
+            "invalidMobileNumberTitle": "Invalid Mobile Number",
+            "invalidMobileNumber": "Please make sure to enter a mobile number."
+        },
 		"validationErrors": {
 			"dateOfBirth": "Please provide a valid birthdate",
 			"email": "Valid email address is required",
@@ -221,6 +224,7 @@
 		"completedId": "Web Ident ID",
 		"createdAt": "Created",
 		"dateOfBirth": "Date of Birth",
+        "edit": "Edit",
 		"email": "Email",
 		"firstName": "First Name",
 		"initialId": "Web Ident initial ID",
