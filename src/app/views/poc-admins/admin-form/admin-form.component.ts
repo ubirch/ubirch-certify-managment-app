@@ -10,6 +10,7 @@ import {AdminStatus} from '../../../core/models/enums/admin-status.enum';
 import {parsePhoneNumber} from 'libphonenumber-js/max';
 import {ErrorBase} from '../../../core/models/interfaces/error.interface';
 import {NotificationService} from '../../../core/services/notification.service';
+import {isValidPhoneNumber} from 'libphonenumber-js';
 
 @Component({
   selector: 'app-admin-form',
@@ -66,8 +67,13 @@ export class AdminFormComponent implements OnChanges {
 
   submitForm() {
       const phoneControl = this.form.get('phone');
-      const phoneNumber = parsePhoneNumber(phoneControl.value);
 
+      if (!isValidPhoneNumber(phoneControl.value)){
+          const err = new ErrorBase('adminEdit.notifications.invalidMobileNumber', 'adminEdit.notifications.invalidMobileNumberTitle');
+          this.notificationService.error({ message: err.message, title: err.title });
+          return;
+      }
+      const phoneNumber = parsePhoneNumber(phoneControl.value);
       if (phoneNumber.getType() !== 'MOBILE' && phoneNumber.getType() !== 'FIXED_LINE_OR_MOBILE'){
           const err = new ErrorBase('adminEdit.notifications.invalidMobileNumber', 'adminEdit.notifications.invalidMobileNumberTitle');
           this.notificationService.error({ message: err.message, title: err.title });
