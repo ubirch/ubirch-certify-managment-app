@@ -5,7 +5,7 @@
 
 <mat-divider></mat-divider>
 
-<div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state" class="state-details">
+<div *ngIf="adminState | async as state; else spinner" [@fadeInDown]="state" class="state-details"  >
     <div gdColumns="1fr 1fr" gdGap="0 1rem">
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.webIdentRequired !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.webIdentRequired}">{{ icon(state.webIdentRequired) }}</mat-icon>
@@ -51,9 +51,9 @@
         <label>{{ 'pocAdmin.webidentSuccessId' | translate }}:</label> <span>{{ admin.webIdentSuccessId }}</span>
       </ng-container>
     </div>
-    <button 
-        *ngIf="state.webIdentRequired && !state.webIdentSuccess" 
-        mat-raised-button color="primary" 
+    <button
+        *ngIf="state.webIdentRequired && !state.webIdentSuccess"
+        mat-raised-button color="primary"
         (click)="identify()"
         class="ident-button">
         <mat-icon aria-hidden="false" aria-label="Identify admin">fingerprint</mat-icon>

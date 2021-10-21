@@ -38,14 +38,15 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
       tap(
         (admin: IPocAdmin) => {
-          if (!admin.webIdentRequired || admin.webIdentInitiateId || admin.state !== AdminStatus.pending) {
-            throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
+          if (!admin.webIdentRequired || admin.webIdentInitiateId) {
+            //  throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
           }
         }
       ),
       takeUntil(this.unsubscribe$),
       catchError((err) => {
         if (err instanceof ErrorBase) {
+            console.log(err);
           this.notificationService.error({ message: err.message, title: err.title });
         } else {
           this.errorService.handlerResponseError(err);
