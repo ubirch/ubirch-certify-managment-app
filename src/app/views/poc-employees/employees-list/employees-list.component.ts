@@ -49,7 +49,7 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
   filters: FormGroup;
   employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
-  actionLoding = false;
+  actionLoading = false;
   exportLoading = false;
 
   get search() { return this.filters.get('search'); }
@@ -143,23 +143,23 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
     switch (this.action.value) {
 
       case ListAction.activate:
-        this.actionLoding = true;
+        this.actionLoading = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.activate)
-          .pipe(finalize(() => this.actionLoding = false))
+          .pipe(finalize(() => this.actionLoading = false))
           .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
         break;
 
       case ListAction.deactivate:
-        this.actionLoding = true;
+        this.actionLoading = true;
         this.employeeService.changeActiveStateForEmployees(selected, AcitvateAction.deactivate)
-          .pipe(finalize(() => this.actionLoding = false))
+          .pipe(finalize(() => this.actionLoading = false))
           .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
         break;
 
       case ListAction.retry:
-        this.actionLoding = true;
+        this.actionLoading = true;
         this.employeeService.retryEmployees(selected)
-          .pipe(finalize(() => this.actionLoding = false))
+          .pipe(finalize(() => this.actionLoading = false))
           .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee'));
         break;
 
@@ -171,11 +171,11 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
           take(1),
           switchMap(dialogResult => {
             if (dialogResult) {
-              this.actionLoding = true;
+              this.actionLoading = true;
               return this.employeeService.revoke2FAForEmployees(selected)
                 .pipe(
                   tap(resp => this.handleActionResponse(resp, this.action.value, 'pocEmployee')),
-                  finalize(() => this.actionLoding = false)
+                  finalize(() => this.actionLoading = false)
                 );
             }
             return NEVER;

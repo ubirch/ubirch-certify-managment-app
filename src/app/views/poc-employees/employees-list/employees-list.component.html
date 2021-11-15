@@ -13,7 +13,7 @@
             </mat-option>
         </mat-select>
         </mat-form-field>
-        <button [disabled]="actionLoding || !action" mat-raised-button color="primary" [ngClass]="{spinner: actionLoding, 'spinner-centerd': true}" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
+        <button [disabled]="actionLoading || !action" mat-raised-button color="primary" [ngClass]="{spinner: actionLoading, 'spinner-centerd': true}" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
@@ -99,9 +99,9 @@
 
 <div class="table-footer">
     <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}: {{ selectedCount }}</div>
-    <mat-paginator 
-        [length]="dataSource.totalItems$ | async" 
-        [pageSize]="defaultPageSize" 
+    <mat-paginator
+        [length]="dataSource.totalItems$ | async"
+        [pageSize]="defaultPageSize"
         [pageSizeOptions]="pageSizes">
     </mat-paginator>
 </div>

@@ -56,6 +56,20 @@
         <mat-cell *matCellDef="let poc">{{poc.pocName}}</mat-cell>
     </ng-container>
 
+    <!-- active -->
+    <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.active' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let poc">
+            <mat-checkbox class="example-margin"
+                          (click)="$event.stopPropagation()"
+                          disabled="{{getPocActivationChangeDisabled(poc.active)}}"
+                          checked="{{getPocIsActive(poc.active)}}"
+                          (change)="changePocActiveState(poc)"
+            ></mat-checkbox>
+            <!-- TODO: check if error_message is set -->
+        </mat-cell>
+    </ng-container>
+
     <!-- createdAt -->
     <ng-container matColumnDef="created">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.created' | translate }}</mat-header-cell>
@@ -107,9 +121,9 @@
 
 <div class="table-footer">
     <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}: {{ selectedCount }}</div>
-    <mat-paginator 
-        [length]="dataSource.totalItems$ | async" 
-        [pageSize]="defaultPageSize" 
+    <mat-paginator
+        [length]="dataSource.totalItems$ | async"
+        [pageSize]="defaultPageSize"
         [pageSizeOptions]="pageSizes">
     </mat-paginator>
 </div>

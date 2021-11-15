@@ -157,6 +157,7 @@
 			"retryWarning": "{{ count }} pocs failed to retry",
 			"retryWarningTitle": "Retry warning"
 		},
+        "active": "Active",
 		"created": "Created",
 		"dataSchemaId": "Schema Id",
 		"deviceId": "Device Id",

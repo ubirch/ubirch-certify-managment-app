@@ -157,6 +157,7 @@
 			"retryWarning": "{{ count }} pocs konnte nicht wiederholt werden",
 			"retryWarningTitle": "Warnung: Wiederholung"
 		},
+        "active": "Aktiv",
 		"created": "Erstellt",
 		"dataSchemaId": "Schema-Id",
 		"deviceId": "Geräte-ID",
