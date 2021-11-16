@@ -1,3 +1,4 @@
+import { PocActivationState } from '../enums/poc-activation-state.enum';
 import { PocStatus } from '../enums/poc-status.enum';
 import { IAddress } from './address.interface';
 import { IPerson } from './person.interface';
@@ -5,6 +6,7 @@ import { IPocAddons } from './poc-addons.interface';
 
 export interface IPoc {
     id: string;
+    active: PocActivationState;
     tenantId: string;
     externalId: string;
     pocName: string;

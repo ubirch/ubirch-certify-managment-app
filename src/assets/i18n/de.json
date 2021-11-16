@@ -157,6 +157,7 @@
 			"retryWarning": "{{ count }} pocs konnte nicht wiederholt werden",
 			"retryWarningTitle": "Warnung: Wiederholung"
 		},
+        "active": "Aktiv",
 		"created": "Erstellt",
 		"dataSchemaId": "Schema-Id",
 		"deviceId": "Geräte-ID",
@@ -345,6 +346,12 @@
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
 	},
+    "pocActivationState": {
+        "activated": "Aktiviert",
+        "deactivated": "Deaktiviert",
+        "activating": "Wird aktiviert...",
+        "deactivating": "Wird deaktiviert..."
+    },
 	"userProfile": {
 		"headline": "Benutzerprofil",
 		"personalDetails": {

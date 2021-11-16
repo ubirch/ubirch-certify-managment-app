@@ -46,7 +46,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$),
       catchError((err) => {
         if (err instanceof ErrorBase) {
-            console.log(err);
+          console.log(err);
           this.notificationService.error({ message: err.message, title: err.title });
         } else {
           this.errorService.handlerResponseError(err);

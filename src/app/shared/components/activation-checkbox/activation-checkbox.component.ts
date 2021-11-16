@@ -1,0 +1,36 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { PocActivationState } from '../../../core/models/enums/poc-activation-state.enum';
+
+@Component({
+  selector: 'app-activation-checkbox',
+  templateUrl: './activation-checkbox.component.html',
+  styleUrls: ['./activation-checkbox.component.scss'],
+})
+export class ActivationCheckboxComponent implements OnInit {
+    private disabled = true;
+    private checked = true;
+
+    @Input() set activeState(activeState: PocActivationState) {
+        this.disabled = this.getPocActivationChangeDisabled(activeState);
+        this.checked = this.getPocIsActive(activeState);
+    }
+
+    @Output() activeChanged = new EventEmitter<boolean>();
+
+  constructor() { }
+
+  ngOnInit() {}
+
+    public changeState($event: MatCheckboxChange) {
+        this.activeChanged.emit($event.checked);
+    }
+
+    private getPocIsActive(activeState: PocActivationState) {
+        return !!activeState && activeState === PocActivationState.activated;
+    }
+
+    private getPocActivationChangeDisabled(activeState: PocActivationState) {
+        return !activeState || (activeState !== PocActivationState.activated && activeState !== PocActivationState.deactivated);
+    }
+}
