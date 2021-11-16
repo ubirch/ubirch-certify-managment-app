@@ -8,8 +8,8 @@ import { PocActivationState } from '../../../core/models/enums/poc-activation-st
   styleUrls: ['./activation-checkbox.component.scss'],
 })
 export class ActivationCheckboxComponent implements OnInit {
-    private disabled = true;
-    private checked = true;
+    public disabled = true;
+    public checked = true;
 
     @Input() set activeState(activeState: PocActivationState) {
         this.disabled = this.getPocActivationChangeDisabled(activeState);
