@@ -59,7 +59,7 @@ export class PocsService {
     }
 
     changeActiveState(pocId: string, activate: AcitvateAction) {
-        const url = `${this.baseUrl}pocs/${pocId}/active/${activate}`;
+        const url = `${this.baseUrl}poc/${pocId}/active/${activate}`;
         return this.http.put(url, null);
     }
 

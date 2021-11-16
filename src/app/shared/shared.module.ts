@@ -52,6 +52,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ActivationCheckboxComponent } from './components/activation-checkbox/activation-checkbox.component';
 import { LanguageSelectComponent } from './components/language-select/language-select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -110,10 +111,11 @@ const LIB_EXPORT_MODULES = [
 ];
 
 @NgModule({
-  declarations: [
-    COMPONENTS,
-    UserInRoleDirective,
-  ],
+    declarations: [
+        COMPONENTS,
+        UserInRoleDirective,
+        ActivationCheckboxComponent,
+    ],
   imports: [
     ANGULAR_EXPORT_MODULES,
     LIB_EXPORT_MODULES,
@@ -149,10 +151,11 @@ const LIB_EXPORT_MODULES = [
     MatNativeDateModule,
     NgxMaskModule,
   ],
-  exports: [
-    ANGULAR_EXPORT_MODULES,
-    LIB_EXPORT_MODULES,
-    COMPONENTS,
-  ]
+    exports: [
+        ANGULAR_EXPORT_MODULES,
+        LIB_EXPORT_MODULES,
+        COMPONENTS,
+        ActivationCheckboxComponent,
+    ],
 })
 export class SharedModule { }

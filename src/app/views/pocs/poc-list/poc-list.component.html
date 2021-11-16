@@ -60,12 +60,10 @@
     <ng-container matColumnDef="active">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.active' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let poc">
-            <mat-checkbox class="example-margin"
-                          (click)="$event.stopPropagation()"
-                          disabled="{{getPocActivationChangeDisabled(poc.active)}}"
-                          checked="{{getPocIsActive(poc.active)}}"
-                          (change)="changePocActiveState(poc)"
-            ></mat-checkbox>
+            <app-activation-checkbox [activeState]="poc.active"
+                          (activeChanged)="changePocActiveState(poc)"
+            ></app-activation-checkbox>
+            {{ 'pocActivationState.' + PocActivationStateTranslation[poc.active] | translate }}
             <!-- TODO: check if error_message is set -->
         </mat-cell>
     </ng-container>

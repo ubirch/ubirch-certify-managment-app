@@ -346,6 +346,12 @@
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
 	},
+    "pocActivationState": {
+        "activated": "Aktiviert",
+        "deactivated": "Deaktiviert",
+        "activating": "Wird aktiviert...",
+        "deactivating": "Wird deaktiviert..."
+    },
 	"userProfile": {
 		"headline": "Benutzerprofil",
 		"personalDetails": {

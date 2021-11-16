@@ -20,7 +20,7 @@ import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
-import { PocActivationState } from 'src/app/core/models/enums/poc-activation-state.enum';
+import { PocActivationState, PocActivationStateTranslation } from 'src/app/core/models/enums/poc-activation-state.enum';
 
 @Component({
     selector: 'app-poc-list',
@@ -50,6 +50,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     expandedElement: IPoc | null;
     filters: FormGroup;
     PocStatusTranslation = PocStatusTranslation;
+    PocActivationStateTranslation = PocActivationStateTranslation;
     exportLoading = false;
     actionLoading = false;
 
@@ -63,14 +64,6 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     get statusFilter() {
         return this.columnFilters?.controls?.status;
-    }
-
-    public getPocIsActive(activeState: PocActivationState) {
-        return activeState && activeState === PocActivationState.activated;
-    }
-
-    public getPocActivationChangeDisabled(activeState: PocActivationState) {
-        return !activeState || (activeState !== PocActivationState.activated && activeState !== PocActivationState.deactivated);
     }
 
     public changePocActiveState(poc: IPoc) {
