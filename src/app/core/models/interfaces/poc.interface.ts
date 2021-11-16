@@ -26,5 +26,5 @@ export interface IPoc {
 
     created: Date;
     lastUpdated?: Date;
-    errorMessage?: string;
+    error_message?: string;
 }

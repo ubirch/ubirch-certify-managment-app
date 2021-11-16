@@ -1,39 +1,42 @@
 <h2>{{ 'pocList.headline' | translate }}</h2>
 
 <!-- FILTERS -->
-<app-poc-list-filters [filters]="filters" (exportClicked)="export()" [exportDisabled]="exportLoading"></app-poc-list-filters>
+<app-poc-list-filters [filters]="filters" (exportClicked)="export()"
+                      [exportDisabled]="exportLoading"></app-poc-list-filters>
 
 <!-- ACTIONS -->
-<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem" [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
+<div class="actions" *ngIf="showActions" fxLayout fxLayoutAlign="start end" fxLayoutGap="2rem"
+     [@fadeInDown]="showActions" [@fadeOutUp]="showActions">
     <label>{{ 'listActions.action' | translate }}</label>
     <mat-form-field>
         <mat-select [formControl]="action">
-            <mat-option *ngFor="let action of getActions()" [value]="action.value" >
-            {{ action.label | translate }}
+            <mat-option *ngFor="let action of getActions()" [value]="action.value">
+                {{ action.label | translate }}
             </mat-option>
         </mat-select>
-        </mat-form-field>
-        <button [disabled]="!action" mat-raised-button color="primary" (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
+    </mat-form-field>
+    <button [disabled]="!action" mat-raised-button color="primary"
+            (click)="applyAction()">{{ 'listActions.apply' | translate }} </button>
 </div>
 
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows
-    matSort [matSortActive]="defaultSortColumn" matSortDirection="asc" matSortDisableClear>
+           matSort [matSortActive]="defaultSortColumn" matSortDirection="asc" matSortDisableClear>
 
     <!-- Checkbox -->
     <ng-container matColumnDef="select">
         <mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()"
-                            [aria-label]="checkboxLabel()">
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
             </mat-checkbox>
         </mat-header-cell>
 
         <mat-cell *matCellDef="let row">
             <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
             </mat-checkbox>
         </mat-cell>
     </ng-container>
@@ -61,9 +64,9 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'poc.active' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let poc">
             <app-activation-checkbox [activeState]="poc.active"
-                          (activeChanged)="changePocActiveState(poc)"
+                                     (activeChanged)="changePocActiveState(poc)"
+                                     label="{{ 'pocActivationState.' + PocActivationStateTranslation[poc.active] | translate }}"
             ></app-activation-checkbox>
-            {{ 'pocActivationState.' + PocActivationStateTranslation[poc.active] | translate }}
             <!-- TODO: check if error_message is set -->
         </mat-cell>
     </ng-container>
@@ -95,7 +98,7 @@
     <ng-container matColumnDef="expandedDetail">
         <mat-cell *matCellDef="let poc">
             <div class="element-detail"
-                [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'" fxLayout  fxFlex>
+                 [@detailExpand]="poc == expandedElement ? 'expanded' : 'collapsed'" fxLayout fxFlex>
                 <div class="detail-cols" fxFlex>
                     <app-poc-details [poc]="poc" [current]="expandedElement === poc"></app-poc-details>
                 </div>
@@ -106,9 +109,9 @@
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
 
     <mat-row *matRowDef="let poc; columns: displayColumns;"
-        class="element-row"
-        [class.expanded-row]="expandedElement === poc"
-        (click)="expandedElement = expandedElement === poc ? null : poc">
+             class="element-row"
+             [class.expanded-row]="expandedElement === poc"
+             (click)="expandedElement = expandedElement === poc ? null : poc">
     </mat-row>
     <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></mat-row>
 </mat-table>
@@ -118,7 +121,8 @@
 </div>
 
 <div class="table-footer">
-    <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}: {{ selectedCount }}</div>
+    <div *ngIf="selectedCount" class="select-count mat-paginator">{{ 'global.selected' | translate }}
+        : {{ selectedCount }}</div>
     <mat-paginator
         [length]="dataSource.totalItems$ | async"
         [pageSize]="defaultPageSize"
