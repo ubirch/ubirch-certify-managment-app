@@ -15,6 +15,7 @@ export class ActivationCheckboxComponent implements OnInit {
         this.disabled = this.getPocActivationChangeDisabled(activeState);
         this.checked = this.getPocIsActive(activeState);
     }
+    @Input() label: string;
 
     @Output() activeChanged = new EventEmitter<boolean>();
 

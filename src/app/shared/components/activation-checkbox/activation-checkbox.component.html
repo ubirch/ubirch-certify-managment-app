@@ -3,4 +3,4 @@
               [disabled]="disabled"
               [checked]="checked"
               (change)="changeState($event)"
-></mat-checkbox>
+><ng-container *ngIf="label">{{label}}</ng-container></mat-checkbox>

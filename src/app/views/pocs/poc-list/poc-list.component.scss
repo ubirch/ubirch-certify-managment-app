@@ -2,13 +2,13 @@
     position: relative;
     display: block;
 
-    .spinner-container { 
-        position: absolute; 
+    .spinner-container {
+        position: absolute;
         left: 50%;
         top: 50%;
         transform: translateX(-50%);
     }
-    
+
     .actions {
         label, button {
             margin-bottom: 1.34375em;
@@ -29,6 +29,11 @@
 .mat-column-status {
     flex-basis: 120px;
     flex-grow: 0;
+}
+
+.mat-column-active {
+    flex-grow: 0;
+    flex-basis: 140px;
 }
 
 .mat-column-actions {
