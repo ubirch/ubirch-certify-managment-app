@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
+import { PocActivationState, PocActivationStateTranslation } from 'src/app/core/models/enums/poc-activation-state.enum';
 import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 import { Filters } from 'src/app/core/models/filters';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
@@ -19,8 +21,6 @@ import { detailExpand, fadeDownIn, fadeUpOut } from 'src/app/core/utils/animatio
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
-import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
-import { PocActivationState, PocActivationStateTranslation } from 'src/app/core/models/enums/poc-activation-state.enum';
 
 @Component({
     selector: 'app-poc-list',
@@ -42,6 +42,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         'lastUpdated',
         'active',
         'status',
+        'with-error',
         'actions',
     ];
     defaultSortColumn = 'externalId';
@@ -56,6 +57,14 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     get search() {
         return this.filters.get('search');
+    }
+
+    public getRowClass(poc: IPoc): string {
+        let rowClass = '';
+        if (poc.error_message) {
+            rowClass = 'with-error';
+        }
+        return rowClass;
     }
 
     get columnFilters() {

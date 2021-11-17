@@ -42,6 +42,12 @@
     flex-grow: 0;
 }
 
+.mat-column-with-error {
+    flex-basis: auto;
+    padding: 1rem;
+    flex-grow: 0;
+}
+
 .element-row {
     cursor: pointer;
 }
@@ -58,4 +64,8 @@
 .detail-cols {
     padding: 1rem 0 1rem 76px;
     display: flex;
+}
+
+.mat-row.with-error {
+    background-color: rgba(244,67,54,0.2);
 }

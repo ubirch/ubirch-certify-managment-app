@@ -152,10 +152,16 @@
 		"actionMessages": {
 			"retryError": "There was an error when retrying",
 			"retryErrorTitle": "Retry error",
-			"retrySuccess": "PoC retry has been sucessfully triggered",
+			"retrySuccess": "PoC retry has been successfully triggered",
 			"retrySuccessTitle": "Retry trigger success",
 			"retryWarning": "{{ count }} pocs failed to retry",
-			"retryWarningTitle": "Retry warning"
+			"retryWarningTitle": "Retry warning",
+            "nullSuccessTitle": "Success",
+            "nullSuccess": "The action has been performed successfully",
+            "nullWarningTitle": "Warning",
+            "nullWarning": "The action triggered a warning",
+            "nullErrorTitle": "Error",
+            "nullError": "The action failed"
 		},
         "active": "Active",
 		"created": "Created",
@@ -219,7 +225,13 @@
 			"revoke2FASuccess": "Admin 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning"
+			"revoke2FAWarningTitle": "Revoke warning",
+            "nullSuccessTitle": "Success",
+            "nullSuccess": "The action has been performed successfully",
+            "nullWarningTitle": "Warning",
+            "nullWarning": "The action triggered a warning",
+            "nullErrorTitle": "Error",
+            "nullError": "The action failed"
 		},
 		"active": "Active",
 		"completedId": "Web Ident ID",
@@ -311,7 +323,13 @@
 			"revoke2FASuccess": "Empoloyee 2FA access token has been revoked",
 			"revoke2FASuccessTitle": "Revoke success",
 			"revoke2FAWarning": "{{ count }} access 2FA tokens failed to be revoked",
-			"revoke2FAWarningTitle": "Revoke warning"
+			"revoke2FAWarningTitle": "Revoke warning",
+            "nullSuccessTitle": "Success",
+            "nullSuccess": "The action has been performed successfully",
+            "nullWarningTitle": "Warning",
+            "nullWarning": "The action triggered a warning",
+            "nullErrorTitle": "Error",
+            "nullError": "The action failed"
 		},
 		"active": "Active",
 		"createdAt": "Created",
