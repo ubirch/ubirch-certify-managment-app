@@ -61,7 +61,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     public getRowClass(poc: IPoc): string {
         let rowClass = '';
-        if (poc.error_message) {
+        if (poc.errorMessage) {
             rowClass = 'with-error';
         }
         return rowClass;

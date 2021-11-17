@@ -97,9 +97,9 @@
     <ng-container matColumnDef="with-error">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let poc">
-            <button *ngIf="poc.error_message" color="warn" mat-mini-fab aria-label="poc with errors">
-                <mat-icon>report_problem</mat-icon>
-            </button>
+            <span aria-label="poc with errors">
+                <mat-icon color="warn" *ngIf="poc.errorMessage">report_problem</mat-icon>
+            </span>
         </mat-cell>
     </ng-container>
 
