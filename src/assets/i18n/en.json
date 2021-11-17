@@ -360,8 +360,12 @@
 	"pocList": {
 		"actions": {
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?",
-			"deleteConfirmTitle": "Delete items"
-		},
+			"deleteConfirmTitle": "Delete items",
+            "activateConfirmMessage": "Are you sure you want to activate the PoC?",
+            "activateConfirmTitle": "Activate PoC",
+            "deactivateConfirmMessage": "Are you sure you want to deactivate the PoC?",
+            "deactivateConfirmTitle": "Deactivate PoC"
+        },
 		"filters": {
 			"filters": "Filters",
 			"search": "Search",

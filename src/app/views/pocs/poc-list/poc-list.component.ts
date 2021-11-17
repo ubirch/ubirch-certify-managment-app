@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { merge } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, finalize, map, takeUntil, tap } from 'rxjs/operators';
+import { merge, NEVER } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, finalize, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
 import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
 import { PocActivationState, PocActivationStateTranslation } from 'src/app/core/models/enums/poc-activation-state.enum';
@@ -91,14 +91,14 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         );
 
         this.actions = [
-            {
-                value: ListAction.activate, label: `listActions.activate`, predicate: (poc: IPoc) =>
-                    poc.active === PocActivationState.deactivated,
-            },
-            {
-                value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (poc: IPoc) =>
-                    poc.active === PocActivationState.activated,
-            },
+            // {
+            //     value: ListAction.activate, label: `listActions.activate`, predicate: (poc: IPoc) =>
+            //         poc.active === PocActivationState.deactivated,
+            // },
+            // {
+            //     value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (poc: IPoc) =>
+            //         poc.active === PocActivationState.activated,
+            // },
             { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true },
             { value: ListAction.retry, label: `listActions.retry`, predicate: (poc: IPoc) => poc.status === PocStatus.aborted },
         ];
@@ -121,14 +121,26 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     public changePocActiveState(poc: IPoc) {
         if (poc.active === PocActivationState.activated || poc.active === PocActivationState.deactivated) {
-            this.pocService.changeActiveStateForPoCs(
-                [ poc ],
-                poc.active === PocActivationState.activated ? AcitvateAction.deactivate : AcitvateAction.activate)
-                .pipe(finalize(() => this.actionLoading = false))
-                .subscribe(resp => this.handleActionResponse(
-                    resp,
-                    poc.active === PocActivationState.activated ? ListAction.deactivate : ListAction.activate,
-                    'poc'));
+            const activateTo: ListAction = poc.active === PocActivationState.activated ? ListAction.deactivate : ListAction.activate;
+            this.confirmService.open({
+                message: this.translateService.instant(`pocList.actions.${activateTo}ConfirmMessage`),
+                title: this.translateService.instant(`pocList.actions.${activateTo}ConfirmTitle`),
+            }).pipe(
+                take(1),
+                switchMap(dialogResult => {
+                    if (dialogResult) {
+                        this.actionLoading = true;
+                        this.pocService.changeActiveStateForPoCs(
+                            [ poc ],
+                            poc.active === PocActivationState.activated ? AcitvateAction.deactivate : AcitvateAction.activate)
+                            .pipe(finalize(() => this.actionLoading = false))
+                            .subscribe(resp => this.handleActionResponse(
+                                resp,
+                                activateTo,
+                                'poc'));                    }
+                    return NEVER;
+                })
+            ).subscribe();
         } else {
             console.error('changePocActiveState called in a wrong poc activation state: ' + poc.active);
         }

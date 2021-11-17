@@ -359,8 +359,12 @@
 	},
 	"pocList": {
 		"actions": {
-			"deleteConfirmMessage": "Sind Sie sicher, dass Sie {{count}} Element(e) löschen möchten?",
-			"deleteConfirmTitle": "Elemente löschen"
+            "deleteConfirmMessage": "Sind Sie sicher, dass Sie {{count}} Element(e) löschen möchten?",
+            "deleteConfirmTitle": "Elemente löschen",
+            "activateConfirmMessage": "Sind Sie sicher, dass Sie den PoC wieder aktivieren möchten?",
+            "activateConfirmTitle": "PoC aktivieren",
+            "deactivateConfirmMessage": "Sind Sie sicher, dass Sie den PoC deaktivieren möchten?",
+            "deactivateConfirmTitle": "PoC deaktivieren"
 		},
 		"filters": {
 			"filters": "Filter",
