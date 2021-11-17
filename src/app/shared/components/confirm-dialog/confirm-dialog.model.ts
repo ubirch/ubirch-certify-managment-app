@@ -4,6 +4,8 @@ export class ConfirmDialogModel {
         public message: string = 'dialog.defaultMessage',
         public yes: string = 'dialog.yesLabel',
         public no: string = 'dialog.noLabel',
+        public ok: string = 'dialog.okLabel',
+        public okOnly: boolean = false
     ) { }
 
     static create(data: Partial<ConfirmDialogModel>) {

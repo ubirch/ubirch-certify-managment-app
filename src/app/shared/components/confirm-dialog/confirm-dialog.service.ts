@@ -13,7 +13,7 @@ export class ConfirmDialogService {
     private dialog: MatDialog,
   ) { }
 
-  open(dialogData: Partial<ConfirmDialogModel>): Observable<boolean> {
+  open(dialogData: Partial<ConfirmDialogModel>, okOnly = false): Observable<boolean> {
     const data = ConfirmDialogModel.create(dialogData);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '800px',

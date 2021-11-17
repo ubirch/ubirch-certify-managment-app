@@ -61,6 +61,7 @@
 		"defaultTitle": "Confirmation required",
 		"noLabel": "No",
 		"yesLabel": "Yes",
+        "okLabel": "Ok",
 		"yesSureLabel": "Yes, I am sure"
 	},
 	"employeeEdit": {
@@ -156,6 +157,18 @@
 			"retrySuccessTitle": "Retry trigger success",
 			"retryWarning": "{{ count }} pocs failed to retry",
 			"retryWarningTitle": "Retry warning",
+            "activateSuccessTitle": "PoC activation triggered successfully",
+            "activateSuccess": "The activation of PoC(s) has been triggered successfully",
+            "activateWarningTitle": "PoC activation with warning",
+            "activateWarning": "The activation of PoC(s) triggered a warning",
+            "activateErrorTitle": "PoC activation failed",
+            "activateError": "The activation of PoC(s) failed",
+            "deactivateSuccessTitle": "PoC deactivation triggered successfully",
+            "deactivateSuccess": "The deactivation of PoC(s) has been triggered successfully",
+            "deactivateWarningTitle": "PoC deactivation with warning",
+            "deactivateWarning": "The deactivation of PoC(s) triggered a warning",
+            "deactivateErrorTitle": "PoC deactivation failed",
+            "deactivateError": "The deactivation of PoC(s) failed",
             "nullSuccessTitle": "Success",
             "nullSuccess": "The action has been performed successfully",
             "nullWarningTitle": "Warning",
@@ -348,8 +361,16 @@
 	"pocList": {
 		"actions": {
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?",
-			"deleteConfirmTitle": "Delete items"
-		},
+			"deleteConfirmTitle": "Delete items",
+            "activateConfirmMessage": "In your selection are {{count}} PoCs that can be activated. Are you sure you want to activate these PoC(s)?",
+            "activateConfirmTitle": "Activate PoC(s)",
+            "deactivateConfirmMessage": "In your selection are {{count}} PoCs that can be deactivated. Are you sure you want to deactivate these PoC(s)?",
+            "deactivateConfirmTitle": "Deactivate PoC(s)",
+            "noPocsFoundForactivateMessage": "You selected action 'deactivate' but only active PoCs can be deactivated and you haven't selected any deactivated PoCs.",
+            "noPocsFoundForactivateTitle": "No PoCs for deactivation selected",
+            "noPocsFoundFordeactivateMessage": "You selected action 'activate' but only deactivated PoCs can be activated and you haven't selected any active PoCs.",
+            "noPocsFoundFordeactivateTitle": "No PoCs for activation selected"
+        },
 		"filters": {
 			"filters": "Filters",
 			"search": "Search",
