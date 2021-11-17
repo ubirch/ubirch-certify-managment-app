@@ -55,16 +55,12 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     exportLoading = false;
     actionLoading = false;
 
-    get search() {
-        return this.filters.get('search');
+    protected loadItemsPage() {
+        this.dataSource.loadPocs(this.filters.value);
     }
 
-    public getRowClass(poc: IPoc): string {
-        let rowClass = '';
-        if (poc.errorMessage) {
-            rowClass = 'with-error';
-        }
-        return rowClass;
+    get search() {
+        return this.filters.get('search');
     }
 
     get columnFilters() {
@@ -73,21 +69,6 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     get statusFilter() {
         return this.columnFilters?.controls?.status;
-    }
-
-    public changePocActiveState(poc: IPoc) {
-        if (poc.active === PocActivationState.activated || poc.active === PocActivationState.deactivated) {
-            const changeActivationTo = poc.active === PocActivationState.activated ? AcitvateAction.deactivate : AcitvateAction.activate;
-            this.pocService.changeActiveStateForPoCs([poc], changeActivationTo)
-                .pipe(finalize(() => this.actionLoading = false))
-                .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'poc'));
-        } else {
-            console.error('changePocActiveState called in a wrong poc activation state: ' + poc.active);
-        }
-    }
-
-    protected loadItemsPage() {
-        this.dataSource.loadPocs(this.filters.value);
     }
 
     constructor(
@@ -128,6 +109,29 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         this.dataSource = new PocDataSource(this.pocService, this.errorService);
         this.generateFilters();
         this.loadItemsPage();
+    }
+
+    public getRowClass(poc: IPoc): string {
+        let rowClass = '';
+        if (poc.errorMessage) {
+            rowClass = 'with-error';
+        }
+        return rowClass;
+    }
+
+    public changePocActiveState(poc: IPoc) {
+        if (poc.active === PocActivationState.activated || poc.active === PocActivationState.deactivated) {
+            this.pocService.changeActiveStateForPoCs(
+                [ poc ],
+                poc.active === PocActivationState.activated ? AcitvateAction.deactivate : AcitvateAction.activate)
+                .pipe(finalize(() => this.actionLoading = false))
+                .subscribe(resp => this.handleActionResponse(
+                    resp,
+                    poc.active === PocActivationState.activated ? ListAction.deactivate : ListAction.activate,
+                    'poc'));
+        } else {
+            console.error('changePocActiveState called in a wrong poc activation state: ' + poc.active);
+        }
     }
 
     ngAfterViewInit(): void {
