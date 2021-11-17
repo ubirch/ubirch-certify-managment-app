@@ -155,8 +155,14 @@
 			"retrySuccess": "PoC-Wiederholung wurde erfolgreich ausgelöst",
 			"retrySuccessTitle": "Wiederholungsversuch erfolgreich ausgelöst",
 			"retryWarning": "{{ count }} pocs konnte nicht wiederholt werden",
-			"retryWarningTitle": "Warnung: Wiederholung"
-		},
+			"retryWarningTitle": "Warnung: Wiederholung",
+            "nullSuccessTitle": "Erfolgreich",
+            "nullSuccess": "Die Aktion wurde erfolgreich ausgeführt",
+            "nullWarningTitle": "Warnung",
+            "nullWarning": "Die Aktion hat eine Warnung ausgelöst",
+            "nullErrorTitle": "Fehler",
+            "nullError": "Die Aktion konnte nicht erfolgreich ausgeführt werden"
+        },
         "active": "Aktiv",
 		"created": "Erstellt",
 		"dataSchemaId": "Schema-Id",
@@ -219,7 +225,13 @@
 			"revoke2FASuccess": "Admin 2FA-Zugangstoken wurde entzogen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung"
+			"revoke2FAWarningTitle": "Revoke Warnung",
+            "nullSuccessTitle": "Erfolgreich",
+            "nullSuccess": "Die Aktion wurde erfolgreich ausgeführt",
+            "nullWarningTitle": "Warnung",
+            "nullWarning": "Die Aktion hat eine Warnung ausgelöst",
+            "nullErrorTitle": "Fehler",
+            "nullError": "Die Aktion konnte nicht erfolgreich ausgeführt werden"
 		},
 		"active": "Aktiv",
 		"completedId": "Web Ident ID",
@@ -311,7 +323,13 @@
 			"revoke2FASuccess": "Empoloyee 2FA-Zugangs-Token wurde widerrufen",
 			"revoke2FASuccessTitle": "Revoke Erfolgreich",
 			"revoke2FAWarning": "{{ count }} Zugriff 2FA-Token konnte nicht entzogen werden",
-			"revoke2FAWarningTitle": "Revoke Warnung"
+			"revoke2FAWarningTitle": "Revoke Warnung",
+            "nullSuccessTitle": "Erfolgreich",
+            "nullSuccess": "Die Aktion wurde erfolgreich ausgeführt",
+            "nullWarningTitle": "Warnung",
+            "nullWarning": "Die Aktion hat eine Warnung ausgelöst",
+            "nullErrorTitle": "Fehler",
+            "nullError": "Die Aktion konnte nicht erfolgreich ausgeführt werden"
 		},
 		"active": "Aktiv",
 		"createdAt": "Erstellt",
