@@ -61,6 +61,7 @@
 		"defaultTitle": "Confirmation required",
 		"noLabel": "No",
 		"yesLabel": "Yes",
+        "okLabel": "Ok",
 		"yesSureLabel": "Yes, I am sure"
 	},
 	"employeeEdit": {
@@ -361,10 +362,14 @@
 		"actions": {
 			"deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?",
 			"deleteConfirmTitle": "Delete items",
-            "activateConfirmMessage": "Are you sure you want to activate the PoC?",
-            "activateConfirmTitle": "Activate PoC",
-            "deactivateConfirmMessage": "Are you sure you want to deactivate the PoC?",
-            "deactivateConfirmTitle": "Deactivate PoC"
+            "activateConfirmMessage": "In your selection are {{count}} PoCs that can be activated. Are you sure you want to activate these PoC(s)?",
+            "activateConfirmTitle": "Activate PoC(s)",
+            "deactivateConfirmMessage": "In your selection are {{count}} PoCs that can be deactivated. Are you sure you want to deactivate these PoC(s)?",
+            "deactivateConfirmTitle": "Deactivate PoC(s)",
+            "noPocsFoundForactivateMessage": "You selected action 'deactivate' but only active PoCs can be deactivated and you haven't selected any deactivated PoCs.",
+            "noPocsFoundForactivateTitle": "No PoCs for deactivation selected",
+            "noPocsFoundFordeactivateMessage": "You selected action 'activate' but only deactivated PoCs can be activated and you haven't selected any active PoCs.",
+            "noPocsFoundFordeactivateTitle": "No PoCs for activation selected"
         },
 		"filters": {
 			"filters": "Filters",

@@ -61,6 +61,7 @@
 		"defaultTitle": "Bestätigung erforderlich",
 		"noLabel": "Nein",
 		"yesLabel": "Ja",
+        "okLabel": "Verstanden",
 		"yesSureLabel": "Ja, ich bin sicher"
 	},
 	"employeeEdit": {
@@ -361,10 +362,14 @@
 		"actions": {
             "deleteConfirmMessage": "Sind Sie sicher, dass Sie {{count}} Element(e) löschen möchten?",
             "deleteConfirmTitle": "Elemente löschen",
-            "activateConfirmMessage": "Sind Sie sicher, dass Sie den PoC wieder aktivieren möchten?",
+            "activateConfirmMessage": "In Ihrer Auswahl sind {{count}} PoC(s) die aktiviert werden können. Sind Sie sicher, dass Sie diese(n) PoC(s) aktivieren möchten?",
             "activateConfirmTitle": "PoC aktivieren",
-            "deactivateConfirmMessage": "Sind Sie sicher, dass Sie den PoC deaktivieren möchten?",
-            "deactivateConfirmTitle": "PoC deaktivieren"
+            "deactivateConfirmMessage": "In Ihrer Auswahl sind {{count}} PoC(s) die deaktiviert werden können. Sind Sie sicher, dass Sie diese(n) PoC(s) deaktivieren möchten?",
+            "deactivateConfirmTitle": "PoC deaktivieren",
+            "noPocsFoundForactivateMessage": "Sie haben die Aktion 'Deaktivieren' gewählt, aber es können nur aktivierte PoCs deaktiviert werden, und in Ihrer Auswahl befinden sich keine deaktivierten PoCs",
+            "noPocsFoundForactivateTitle": "Keine PoCs zum Deaktivieren in der Auswahl",
+            "noPocsFoundFordeactivateMessage": "Sie haben die Aktion 'Aktivieren' gewählt, aber es können nur deaktivierte PoCs aktiviert werden, und in Ihrer Auswahl befinden sich keine aktivierten PoCs",
+            "noPocsFoundFordeactivateTitle": "Keine PoCs zum Aktivieren in der Auswahl"
 		},
 		"filters": {
 			"filters": "Filter",

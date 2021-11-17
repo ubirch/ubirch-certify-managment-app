@@ -91,14 +91,14 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         );
 
         this.actions = [
-            // {
-            //     value: ListAction.activate, label: `listActions.activate`, predicate: (poc: IPoc) =>
-            //         poc.active === PocActivationState.deactivated,
-            // },
-            // {
-            //     value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (poc: IPoc) =>
-            //         poc.active === PocActivationState.activated,
-            // },
+            {
+                value: ListAction.activate, label: `listActions.activate`, predicate: (poc: IPoc) =>
+                    poc.active === PocActivationState.deactivated,
+            },
+            {
+                value: ListAction.deactivate, label: `listActions.deactivate`, predicate: (poc: IPoc) =>
+                    poc.active === PocActivationState.activated,
+            },
             { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true },
             { value: ListAction.retry, label: `listActions.retry`, predicate: (poc: IPoc) => poc.status === PocStatus.aborted },
         ];
@@ -122,8 +122,21 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     public changePocActiveState(poc: IPoc) {
         if (poc.active === PocActivationState.activated || poc.active === PocActivationState.deactivated) {
             const activateTo: ListAction = poc.active === PocActivationState.activated ? ListAction.deactivate : ListAction.activate;
+            this.flipActivationStateOfPocs(activateTo, [poc]);
+        } else {
+            console.error('changePocActiveState called in a wrong poc activation state: ' + poc.active);
+        }
+    }
+
+    private flipActivationStateOfPocs(activateTo: ListAction.activate | ListAction.deactivate, pocs: IPoc[]) {
+        // filter pocs to have the right activation state
+        const pocsInRightActivationState: IPoc[] = pocs.filter(poc =>
+            (activateTo === ListAction.activate && poc.active === PocActivationState.deactivated) ||
+            (activateTo === ListAction.deactivate && poc.active === PocActivationState.activated));
+        if (pocsInRightActivationState?.length) {
             this.confirmService.open({
-                message: this.translateService.instant(`pocList.actions.${activateTo}ConfirmMessage`),
+                message: this.translateService.instant(`pocList.actions.${activateTo}ConfirmMessage`,
+                    { count: pocsInRightActivationState.length }),
                 title: this.translateService.instant(`pocList.actions.${activateTo}ConfirmTitle`),
             }).pipe(
                 take(1),
@@ -131,18 +144,28 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
                     if (dialogResult) {
                         this.actionLoading = true;
                         this.pocService.changeActiveStateForPoCs(
-                            [ poc ],
-                            poc.active === PocActivationState.activated ? AcitvateAction.deactivate : AcitvateAction.activate)
+                            pocsInRightActivationState,
+                            activateTo === ListAction.activate ? AcitvateAction.activate : AcitvateAction.deactivate)
                             .pipe(finalize(() => this.actionLoading = false))
                             .subscribe(resp => this.handleActionResponse(
                                 resp,
                                 activateTo,
-                                'poc'));                    }
+                                'poc'));
+                    } else {
+                        // discard confirmation
+                        this.loadItemsPage();
+                        this.clearSelection();
+                    }
                     return NEVER;
-                })
+                }),
             ).subscribe();
         } else {
-            console.error('changePocActiveState called in a wrong poc activation state: ' + poc.active);
+            this.confirmService.open({
+                // inform user that only active PoCs can be deactivated and vice versa and selection didn't fit anything
+                message: this.translateService.instant(`pocList.actions.noPocsFoundFor${activateTo}Message`),
+                title: this.translateService.instant(`pocList.actions.noPocsFoundFor${activateTo}Title`),
+                okOnly: true
+            }).subscribe();
         }
     }
 
@@ -193,17 +216,8 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         const selected = this.selection.selected;
         switch (this.action.value) {
             case ListAction.activate:
-                this.actionLoading = true;
-                this.pocService.changeActiveStateForPoCs(selected, AcitvateAction.activate)
-                    .pipe(finalize(() => this.actionLoading = false))
-                    .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'poc'));
-                break;
-
             case ListAction.deactivate:
-                this.actionLoading = true;
-                this.pocService.changeActiveStateForPoCs(selected, AcitvateAction.deactivate)
-                    .pipe(finalize(() => this.actionLoading = false))
-                    .subscribe(resp => this.handleActionResponse(resp, this.action.value, 'poc'));
+                this.flipActivationStateOfPocs(this.action.value, selected);
                 break;
 
             case ListAction.delete:

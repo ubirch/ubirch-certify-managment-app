@@ -7,6 +7,11 @@
 </div>
 
 <div mat-dialog-actions fxLayout fxLayoutAlign="center">
-  <button mat-button (click)="onDismiss()">{{ data.no | translate}}</button>
-  <button mat-raised-button color="primary" (click)="onConfirm()">{{ data.yes | translate }}</button>
+    <ng-container *ngIf="!data.okOnly; else OK">
+        <button mat-button (click)="onDismiss()">{{ data.no | translate}}</button>
+        <button mat-raised-button color="primary" (click)="onConfirm()">{{ data.yes | translate }}</button>
+    </ng-container>
+    <ng-template #OK>
+        <button mat-raised-button color="primary" (click)="onConfirm()">{{ data.ok | translate }}</button>
+    </ng-template>
 </div>
