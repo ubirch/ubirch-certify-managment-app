@@ -21,7 +21,7 @@ export abstract class ListComponent<T> implements OnDestroy {
   actions: IAction<T>[];
   showActions = false;
 
-  protected unsubscribe$ = new Subject();
+  protected unsubscribe$ = new Subject<void>();
 
   get selectedCount() { return this.selection?.selected?.length; }
 

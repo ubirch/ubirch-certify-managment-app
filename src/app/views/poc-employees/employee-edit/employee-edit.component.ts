@@ -19,7 +19,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
-  private unsubscribe$ = new Subject();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private employeeService: PocEmployeeService,

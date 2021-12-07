@@ -15,7 +15,7 @@ export class CreationTokenComponent implements OnInit, OnDestroy {
   loading = false;
 
   token: FormControl;
-  unsubscribe$: Subject<any>;
+  unsubscribe$: Subject<void>;
 
   constructor(
     private tokenService: TenantTokenService,
@@ -24,7 +24,7 @@ export class CreationTokenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.token = new FormControl('', [Validators.required]);
-    this.unsubscribe$ = new Subject();
+    this.unsubscribe$ = new Subject<void>();
   }
 
   onUpdate() {
