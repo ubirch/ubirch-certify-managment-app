@@ -18,7 +18,7 @@ import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 })
 export class AdminEditComponent implements OnInit, OnDestroy {
 
-  private unsubscribe$ = new Subject();
+  private unsubscribe$ = new Subject<void>();
   public admin$: Observable<IPocAdmin>;
 
   constructor(

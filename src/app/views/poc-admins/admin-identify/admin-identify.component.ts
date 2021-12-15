@@ -22,7 +22,7 @@ export class AdminIdentifyComponent implements OnInit, OnDestroy {
   form: FormGroup;
   data$: Observable<AdminIdentity>;
 
-  private unsubscribe$ = new Subject();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     public adminService: PocAdminService,
