@@ -69,7 +69,6 @@
     "ansi-regex": "5.0.1",
     "glob-parent": "5.1.2",
     "node-forge": "1.0.0",
-    "postcss": "8.2.13",
     "source-map": "0.6.1"
   },
   "description": "App for management of Points of Certification (PoC)"
