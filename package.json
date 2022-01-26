@@ -28,7 +28,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "keycloak-angular": "^9.1.0",
-    "keycloak-js": "^16.1.0",
+    "keycloak-js": "^15.1.1",
     "libphonenumber-js": "^1.9.44",
     "moment": "^2.29.1",
     "ngx-animate": "^1.0.1",
