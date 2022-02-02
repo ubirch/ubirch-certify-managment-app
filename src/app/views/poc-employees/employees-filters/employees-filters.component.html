@@ -2,7 +2,7 @@
   <label>{{ 'pocList.filters.filters' | translate }}</label>
   <mat-form-field>
       <mat-label>{{ 'pocList.filters.search' | translate }}</mat-label>
-      <input matInput placeholder="{{ 'pocList.filters.searchPlaceholder' | translate}}" #input formControlName="search">
+      <input (keydown.enter)="$event.preventDefault()" matInput placeholder="{{ 'pocList.filters.searchPlaceholder' | translate}}" #input formControlName="search">
       <mat-hint>({{ 'pocEmployee.email' | translate }}, {{ 'pocEmployee.firstName'| translate  }}, {{ 'pocEmployee.lastName' | translate }})</mat-hint>
   </mat-form-field>
   <mat-form-field formGroupName="filterColumns">
