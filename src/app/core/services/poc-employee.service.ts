@@ -79,7 +79,7 @@ export class PocEmployeeService {
     }
 
     changeActiveState(employeeId: string, activate: AcitvateAction) {
-        const url = `${this.baseUrl}poc-employee/${employeeId}/active/${activate}`;
+        const url = `${this.baseUrl}employees/${employeeId}/active/${activate}`;
         return this.http.put(url, null);
     }
 
