@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
+import { Filters } from '../../../core/models/filters';
+import { PocAdminDataSource } from '../../../core/services/data-sources/poc-admin-data-source';
+import { PocAdminService } from '../../../core/services/poc-admin.service';
 
 @Component({
   selector: 'app-poc-edit',
@@ -17,6 +20,7 @@ export class PocEditComponent implements OnInit {
 
   form: FormGroup;
   poc: IPoc;
+  pocId: string;
 
   constructor(
     private pocService: PocsService,
@@ -32,6 +36,7 @@ export class PocEditComponent implements OnInit {
     this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('id')),
       filter(pocId => !!pocId),
+      tap(pocId => this.pocId = pocId),
       switchMap(pocId => this.pocService.getPoc(pocId))
     ).subscribe(
       (res: any) => {

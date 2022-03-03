@@ -290,6 +290,7 @@
 			"lastName": "Nachname",
 			"main": "Main",
 			"manager": "Manager",
+            "pocAdminsList": "PoC Administratoren",
 			"phone": "Telefon",
 			"street": "Straße",
 			"zipcode": "Postleitzahl"

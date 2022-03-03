@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { PocAdminsListComponent } from './poc-edit/poc-admins-list/poc-admins-list.component';
 
 import { PocsRoutingModule } from './pocs-routing.module';
 import { PocImportComponent } from './poc-import/poc-import.component';
@@ -10,13 +11,14 @@ import { PocEditComponent } from './poc-edit/poc-edit.component';
 
 
 @NgModule({
-  declarations: [
-    PocImportComponent,
-    PocListComponent,
-    PocEditComponent,
-    PocListFiltersComponent,
-    PocDetailsComponent,
-  ],
+    declarations: [
+        PocImportComponent,
+        PocListComponent,
+        PocEditComponent,
+        PocListFiltersComponent,
+        PocDetailsComponent,
+        PocAdminsListComponent,
+    ],
   imports: [
     SharedModule,
     PocsRoutingModule
