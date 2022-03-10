@@ -16,5 +16,6 @@ export interface IPocAdmin {
     webIdentRequired: boolean;
     webIdentInitiateId?: string;
     webIdentSuccessId?: string;
+    isMainAdmin: boolean;
 }
 

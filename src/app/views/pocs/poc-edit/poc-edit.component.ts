@@ -7,9 +7,6 @@ import { IPoc } from 'src/app/core/models/interfaces/poc.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocsService } from 'src/app/core/services/pocs.service';
-import { Filters } from '../../../core/models/filters';
-import { PocAdminDataSource } from '../../../core/services/data-sources/poc-admin-data-source';
-import { PocAdminService } from '../../../core/services/poc-admin.service';
 
 @Component({
   selector: 'app-poc-edit',

@@ -97,11 +97,8 @@
               </div>
             </ng-container>
 
-          <ng-container formGroupName="poc-admins">
-              <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
-
-              <app-poc-admins-list [pocId]="pocId"></app-poc-admins-list>
-          </ng-container>
+          <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
+          <app-poc-admins-list [pocId]="pocId"></app-poc-admins-list>
 
           <div fxLayout="column" fxLayoutGap="1rem" class="actions">
               <button mat-raised-button color="primary" class="mat-btn-big" (click)="submitForm()" [disabled]="form.invalid || form.pending">{{ 'global.update' | translate }}</button>
