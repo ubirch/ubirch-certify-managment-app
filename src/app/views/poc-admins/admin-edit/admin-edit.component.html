@@ -1,3 +1,2 @@
 <h2>{{ 'adminEdit.headline' | translate }}</h2>
-
-<app-admin-form [admin]="admin$ | async" (submitted)="updateAdmin($event)"></app-admin-form>
+<app-admin-form [admin]="admin$ | async" (submitted)="updateAdmin($event)" (change2Main)="change2MainITAdmin()"></app-admin-form>

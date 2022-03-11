@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NEVER } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { LocaleService } from 'src/app/core/services/locale.service';
 import { birthDateFromString, getFormatedBirthDate } from 'src/app/core/utils/date';
@@ -23,6 +25,7 @@ export class AdminFormComponent implements OnChanges {
   @Input() admin: IPocAdmin;
   @Input() pocId: string;
   @Output() submitted = new EventEmitter<IPocAdmin>();
+  @Output() change2Main = new EventEmitter<boolean>();
 
   // true - edit, false - create
   get isEdit() { return !!this.admin; }
@@ -110,4 +113,6 @@ export class AdminFormComponent implements OnChanges {
       return !isValidPhoneNumber(phoneNum);
   }
 
-}
+    public change2MainITAdmin() {
+      this.change2Main.emit(true);
+    }}

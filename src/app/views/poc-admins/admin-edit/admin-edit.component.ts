@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NEVER, Observable, Subject } from 'rxjs';
-import { catchError, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AdminStatus } from 'src/app/core/models/enums/admin-status.enum';
 import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
@@ -10,6 +10,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 import { LocaleService } from 'src/app/core/services/locale.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
+import { ConfirmDialogService } from '../../../shared/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-admin-edit',
@@ -20,6 +21,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   public admin$: Observable<IPocAdmin>;
+  private adminId: string;
 
   constructor(
     private pocAdminService: PocAdminService,
@@ -29,12 +31,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private translateService: TranslateService,
     public localeService: LocaleService,
+    private confirmService: ConfirmDialogService,
   ) { }
 
   ngOnInit() {
     this.admin$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('id')),
       filter(adminId => !!adminId),
+      tap(adminId => this.adminId = adminId ),
       switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
       tap(
         (admin: IPocAdmin) => {
@@ -73,6 +77,28 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     );
   }
 
+    public change2MainITAdmin() {
+        this.confirmService.open({
+            message: this.translateService.instant(`pocAdmin.changeMainPocAdmin.ConfirmMessage`),
+            title: this.translateService.instant(`pocAdmin.changeMainPocAdmin.ConfirmTitle`),
+        }).pipe(
+            take(1),
+            switchMap(dialogResult => {
+                if (dialogResult) {
+                    this.pocAdminService.changeMainPoCAdmin(this.adminId)
+                        .subscribe(_ => this.loadAdmin());
+                } else {
+                    // discard confirmation
+                    this.loadAdmin();
+                }
+                return NEVER;
+            }),
+        ).subscribe();
+    }
+
+    private loadAdmin() {
+      console.log('Reload Admin...');
+    }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
