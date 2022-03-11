@@ -68,7 +68,7 @@ export class AdminFormComponent implements OnChanges {
   submitForm() {
       const phoneControl = this.form.get('phone');
 
-      if (!isValidPhoneNumber(phoneControl.value)){
+      if (this.phoneNumberNotValid(phoneControl.value)){
           const err = new ErrorBase('adminEdit.notifications.invalidMobileNumber', 'adminEdit.notifications.invalidMobileNumberTitle');
           this.notificationService.error({ message: err.message, title: err.title });
           return;
@@ -105,5 +105,9 @@ export class AdminFormComponent implements OnChanges {
     return `${dobLabel}  (${format})`;
   }
 
+  private phoneNumberNotValid(numP: string): boolean {
+      const phoneNum = numP.startsWith('00') ? '+' + numP.slice(2) : numP;
+      return !isValidPhoneNumber(phoneNum);
+  }
 
 }
