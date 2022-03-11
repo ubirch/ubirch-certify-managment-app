@@ -3,7 +3,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NEVER, Observable, Subject } from 'rxjs';
 import { catchError, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { AdminStatus } from 'src/app/core/models/enums/admin-status.enum';
 import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
@@ -48,16 +47,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         }
       ),
       takeUntil(this.unsubscribe$),
-      catchError((err) => {
-        if (err instanceof ErrorBase) {
-          console.log(err);
-          this.notificationService.error({ message: err.message, title: err.title });
-        } else {
-          this.errorService.handlerResponseError(err);
-        }
-        this.router.navigate(['../../'], { relativeTo: this.route });
-        return NEVER;
-      })
+      catchError((err) => this.handleErrorOnLoadingAdmin(err))
     );
   }
 
@@ -100,7 +90,18 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       console.log('Reload Admin...');
     }
 
-  ngOnDestroy(): void {
+    private handleErrorOnLoadingAdmin(err: any) {
+        if (err instanceof ErrorBase) {
+            console.log(err);
+            this.notificationService.error({ message: err.message, title: err.title });
+        } else {
+            this.errorService.handlerResponseError(err);
+        }
+        this.router.navigate(['../../'], { relativeTo: this.route });
+        return NEVER;
+    }
+
+    ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
