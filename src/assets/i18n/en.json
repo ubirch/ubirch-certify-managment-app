@@ -257,6 +257,7 @@
 		"lastName": "Last Name",
 		"phone": "Phone",
 		"pocName": "PoC Name",
+        "isMainPocAdmin": "Main Admin",
 		"state": {
 			"certifyUserCreated": "Certify user created",
 			"errorMessage": "Error Message",
@@ -270,6 +271,10 @@
 			"certifyApiProvided": "Certify API provided"
 		},
 		"status": "Status",
+        "changeMainPocAdmin": {
+            "ConfirmTitle": "Change main PoC admin",
+            "ConfirmMessage": "Are you sure you want to make this person the MAIN PoC admin?",
+        },
 		"validationErrors": {
 			"completedId": "Web Ident is required"
 		},

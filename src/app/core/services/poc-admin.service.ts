@@ -13,150 +13,151 @@ import { IWebIdentInitiateId } from '../models/interfaces/web-ident-initiate-id.
 import { ErrorHandlerService } from './error-handler.service';
 
 interface IAdminActionState {
-  admin: IPocAdmin;
-  success: boolean;
+    admin: IPocAdmin;
+    success: boolean;
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class PocAdminService {
 
-  private selectedAdmin = new BehaviorSubject<IPocAdmin>(null);
-  selectedAdmin$ = this.selectedAdmin.asObservable();
+    tenantAdminPath = 'tenant-admin/';
+    baseUrl = environment.pocManagerApi + this.tenantAdminPath;
+    adminStatusUrl = `${this.baseUrl}poc-admin/status`;
+    adminUrl = `${this.baseUrl}poc-admin`;
+    adminsUrl = `${this.baseUrl}poc-admins`;
+    adminsIdentUrl = `${this.baseUrl}webident`;
+    changeMainAdminUrl = `${this.baseUrl}poc-admin/main`;
+    private selectedAdmin = new BehaviorSubject<IPocAdmin>(null);
+    selectedAdmin$ = this.selectedAdmin.asObservable();
 
-  tenantAdminPath = 'tenant-admin/';
-  baseUrl = environment.pocManagerApi + this.tenantAdminPath;
-  adminStatusUrl = `${this.baseUrl}poc-admin/status`;
-  adminUrl = `${this.baseUrl}poc-admin`;
-  adminsUrl = `${this.baseUrl}poc-admins`;
-  adminsIdentUrl = `${this.baseUrl}webident`;
+    constructor(
+        private http: HttpClient,
+        private errorService: ErrorHandlerService,
+    ) {
+    }
 
-  constructor(
-    private http: HttpClient,
-    private errorService: ErrorHandlerService,
-  ) { }
+    setSelected(admin: IPocAdmin) {
+        this.selectedAdmin.next(admin);
+    }
 
-  setSelected(admin: IPocAdmin) {
-    this.selectedAdmin.next(admin);
-  }
+    getAdmin(adminId: string): any {
+        const url = `${this.adminUrl}/${adminId}`;
+        return this.http.get<IPocAdmin>(url);
+    }
 
-  getAdmin(adminId: string): any {
-    const url = `${this.adminUrl}/${adminId}`;
-    return this.http.get<IPocAdmin>(url);
-  }
+    getAdmins(filters: Filters) {
+        // return of(ADMINS_MOCK).pipe(delay(1000));
 
-  getAdmins(filters: Filters) {
-    // return of(ADMINS_MOCK).pipe(delay(1000));
+        return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl, { params: flattenFilters(filters) as any });
+    }
 
-    return this.http.get<IListResult<IPocAdmin>>(this.adminsUrl, { params: flattenFilters(filters) as any });
-  }
+    getAdminState(adminId: string) {
+        // if (adminId === '1') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true }).pipe(delay(500)); }
+        // if (adminId === '3') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true, webIdentSuccess: true }).pipe(delay(500)); }
+        // return of(ADMIN_STATE_MOCK).pipe(delay(500));
 
+        const url = `${this.adminStatusUrl}/${adminId}`;
+        return this.http.get<IPocAdminState>(url);
+    }
 
-  getAdminState(adminId: string) {
-    // if (adminId === '1') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true }).pipe(delay(500)); }
-    // if (adminId === '3') { return of({ ...ADMIN_STATE_MOCK, webIdentInitiated: true, webIdentSuccess: true }).pipe(delay(500)); }
-    // return of(ADMIN_STATE_MOCK).pipe(delay(500));
+    getInitialIdentId(adminId: string) {
+        // return of('74575b09-6699-4f09-b1b2-dc8e456e0c97').pipe(delay(500));
 
-    const url = `${this.adminStatusUrl}/${adminId}`;
-    return this.http.get<IPocAdminState>(url);
-  }
+        const url = `${this.adminsIdentUrl}/initiate-id`;
+        return this.http.post<IWebIdentInitiateId>(url, { pocAdminId: adminId }).pipe(
+            map((val: IWebIdentInitiateId) => val.webInitiateId),
+        );
+    }
 
-  getInitialIdentId(adminId: string) {
-    // return of('74575b09-6699-4f09-b1b2-dc8e456e0c97').pipe(delay(500));
+    postPocAdmin(admin: IPocAdmin) {
+        const url = `${this.adminUrl}/create`;
+        return this.http.post(url, admin);
+    }
 
-    const url = `${this.adminsIdentUrl}/initiate-id`;
-    return this.http.post<IWebIdentInitiateId>(url, { pocAdminId: adminId }).pipe(
-      map((val: IWebIdentInitiateId) => val.webInitiateId)
-    );
-  }
+    putPocAdmin(admin: IPocAdmin) {
+        const url = `${this.adminUrl}/${admin.id}`;
+        return this.http.put(url, admin);
+    }
 
-  postPocAdmin(admin: IPocAdmin) {
-    const url = `${this.adminUrl}/create`;
-    return this.http.post(url, admin);
-  }
+    postWebIdentId(confirm: IWebIdentConfirmation) {
+        const url = `${this.adminsIdentUrl}/id`;
 
-  putPocAdmin(admin: IPocAdmin) {
-    const url = `${this.adminUrl}/${admin.id}`;
-    return this.http.put(url, admin);
-  }
+        return this.http.post(url, confirm).pipe(
+            catchError(err => this.errorService.handlerResponseError(err)),
+        );
+    }
 
-  postWebIdentId(confirm: IWebIdentConfirmation) {
-    const url = `${this.adminsIdentUrl}/id`;
+    revoke2FA(adminId: string) {
+        const url = `${this.adminUrl}/${adminId}/2fa-token`;
+        return this.http.delete(url);
+    }
 
-    return this.http.post(url, confirm).pipe(
-      catchError(err => this.errorService.handlerResponseError(err))
-    );
-  }
+    revoke2FAForAdmins(admins: IPocAdmin[]) {
+        return from(admins).pipe(
+            mergeMap(
+                admin => this.revoke2FA(admin.id).pipe(
+                    map(() => ({ admin, success: true })),
+                    catchError(() => of({ admin, success: false })),
+                ),
+            ),
+            reduce(
+                (acc, current: IAdminActionState) => {
+                    if (current.success) { acc.ok = [ ...acc.ok, current.admin ]; } else { acc.nok = [ ...acc.nok, current.admin ]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] },
+            ),
+        );
+    }
 
-  revoke2FA(adminId: string) {
-    const url = `${this.adminUrl}/${adminId}/2fa-token`;
-    return this.http.delete(url);
-  }
+    changeActiveState(adminId: string, activate: AcitvateAction) {
+        const url = `${this.adminUrl}/${adminId}/active/${activate}`;
+        return this.http.put(url, null);
+    }
 
-  revoke2FAForAdmins(admins: IPocAdmin[]) {
-    return from(admins).pipe(
-      mergeMap(
-        admin => this.revoke2FA(admin.id).pipe(
-          map(() => ({ admin, success: true })),
-          catchError(() => of({ admin, success: false })),
-        )
-      ),
-      reduce(
-        (acc, current: IAdminActionState) => {
-          if (current.success) { acc.ok = [...acc.ok, current.admin]; }
-          else { acc.nok = [...acc.nok, current.admin]; }
-          return acc;
-        }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
-      )
-    );
-  }
+    changeActiveStateForAdmins(admins: IPocAdmin[], activate: AcitvateAction) {
 
-  changeActiveState(adminId: string, activate: AcitvateAction) {
-    const url = `${this.adminUrl}/${adminId}/active/${activate}`;
-    return this.http.put(url, null);
-  }
+        return from(admins).pipe(
+            mergeMap(
+                admin => this.changeActiveState(admin.id, activate).pipe(
+                    map(() => ({ admin, success: true })),
+                    catchError(() => of({ admin, success: false })),
+                ),
+            ),
+            reduce(
+                (acc, current: IAdminActionState) => {
+                    if (current.success) { acc.ok = [ ...acc.ok, current.admin ]; } else { acc.nok = [ ...acc.nok, current.admin ]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] },
+            ),
+        );
+    }
 
-  changeActiveStateForAdmins(admins: IPocAdmin[], activate: AcitvateAction) {
+    retryAdmins(admins: IPocAdmin[]) {
+        return from(admins).pipe(
+            mergeMap(
+                admin => this.retryAdmin(admin.id).pipe(
+                    map(() => ({ admin, success: true })),
+                    catchError(() => of({ admin, success: false })),
+                ),
+            ),
+            reduce(
+                (acc, current: IAdminActionState) => {
+                    if (current.success) { acc.ok = [ ...acc.ok, current.admin ]; } else { acc.nok = [ ...acc.nok, current.admin ]; }
+                    return acc;
+                }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] },
+            ),
+        );
+    }
 
-    return from(admins).pipe(
-      mergeMap(
-        admin => this.changeActiveState(admin.id, activate).pipe(
-          map(() => ({ admin, success: true })),
-          catchError(() => of({ admin, success: false })),
-        )
-      ),
-      reduce(
-        (acc, current: IAdminActionState) => {
-          if (current.success) { acc.ok = [...acc.ok, current.admin]; }
-          else { acc.nok = [...acc.nok, current.admin]; }
-          return acc;
-        }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
-      )
-    );
-  }
+    retryAdmin(adminId: string) {
+        const url = `${this.baseUrl}poc-admin/retry/${adminId}`;
+        return this.http.put(url, null);
+    }
 
-  retryAdmins(admins: IPocAdmin[]) {
-    return from(admins).pipe(
-      mergeMap(
-        admin => this.retryAdmin(admin.id).pipe(
-          map(() => ({ admin, success: true })),
-          catchError(() => of({ admin, success: false })),
-        )
-      ),
-      reduce(
-        (acc, current: IAdminActionState) => {
-          if (current.success) { acc.ok = [...acc.ok, current.admin]; }
-          else { acc.nok = [...acc.nok, current.admin]; }
-          return acc;
-        }, { ok: [], nok: [] } as { ok: IPocAdmin[], nok: IPocAdmin[] }
-      )
-    );
-  }
-
-  retryAdmin(adminId: string) {
-    const url = `${this.baseUrl}poc-admin/retry/${adminId}`;
-    return this.http.put(url, null);
-  }
-
+    changeMainPoCAdmin(adminId: string) {
+        const url = `${this.changeMainAdminUrl}/${adminId}`;
+        return this.http.put(url, null);
+    }
 }

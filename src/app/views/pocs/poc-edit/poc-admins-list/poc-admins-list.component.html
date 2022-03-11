@@ -26,6 +26,19 @@
         </mat-cell>
     </ng-container>
 
+    <!-- active -->
+    <ng-container matColumnDef="isMainPocAdmin">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.isMainPocAdmin' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <mat-checkbox class="example-margin"
+                          [disabled]="!admin.active || admin.isMainAdmin"
+                          [ngModel]="admin.isMainAdmin"
+                          (click)="$event.stopPropagation()"
+                          (change)="changeMainITAdmin(admin)"
+            ></mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
     <!-- createdAt -->
     <ng-container matColumnDef="createdAt">
         <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.createdAt' | translate }}</mat-header-cell>
@@ -36,7 +49,7 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let admin">
-            <button *ngIf="!admin.webIdentInitiateId" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editEmployee($event, admin)">
+            <button *ngIf="admin.state != adminStatues.processing && admin.state != adminStatues.pending" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editEmployee($event, admin)">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-cell>
