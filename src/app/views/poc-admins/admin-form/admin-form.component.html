@@ -2,19 +2,19 @@
     <mat-card-content>
         <form [formGroup]="form" *ngIf="form" fxLayout="column" fxLayoutGap="1rem">
 
-            <ng-container *ngIf="admin.isMainAdmin; else CHANGE_MAIN_POC_ADMIN">
+            <ng-container *ngIf="admin?.isMainAdmin">
                 <div fxLayout="column" fxLayoutGap="1rem" class="information">
                     <h3>{{ 'pocAdmin.mainPocAdmin' | translate }}</h3>
                 </div>
             </ng-container>
-            <ng-template #CHANGE_MAIN_POC_ADMIN>
+            <ng-container *ngIf="admin && !admin.isMainAdmin">
                 <div fxLayout="column" fxLayoutGap="1rem" class="actions_inrow">
                     <button mat-raised-button
                             color="primary"
                             (click)="change2MainITAdmin()"
                             [disabled]="form.invalid || form.pending">{{ 'pocAdmin.changeMainPocAdmin.buttonLabel' | translate }}</button>
                 </div>
-            </ng-template>
+            </ng-container>
 
             <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
                 <!-- FIRST NAME -->
@@ -75,7 +75,7 @@
                 <div></div>
 
                 <!-- WEB IDENT REQUIRED -->
-                <div fxLayout *ngIf="!isEdit">
+                <div fxLayout *ngIf="admin && !isEdit">
                     <mat-checkbox
                         formControlName="webIdentRequired">{{ 'pocAdmin.state.webIdentRequired' | translate }}</mat-checkbox>
                 </div>

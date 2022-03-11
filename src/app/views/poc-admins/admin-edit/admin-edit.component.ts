@@ -34,21 +34,18 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.admin$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('id')),
       filter(adminId => !!adminId),
-      tap(adminId => this.adminId = adminId ),
-      switchMap(adminId => this.pocAdminService.getAdmin(adminId)),
-      tap(
-        (admin: IPocAdmin) => {
-          if (!admin.webIdentRequired || admin.webIdentInitiateId) {
-            //  throw new ErrorBase('adminEdit.notifications.editNotAllowed', 'adminEdit.notifications.editNotAllowedTitle');
-          }
-        }
-      ),
+      take(1),
+      tap(adminId => {
+          this.adminId = adminId;
+          console.log('adminId = ' + adminId);
+      } ),
+      tap(_ => this.loadAdmin()),
       takeUntil(this.unsubscribe$),
       catchError((err) => this.handleErrorOnLoadingAdmin(err))
-    );
+    ).subscribe();
   }
 
   updateAdmin(admin: IPocAdmin) {
@@ -87,7 +84,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     }
 
     private loadAdmin() {
-      console.log('Reload Admin...');
+        console.log('load');
+        this.admin$ = this.pocAdminService.getAdmin(this.adminId).pipe(
+            tap(
+                (admin: IPocAdmin) => admin
+            ),
+            takeUntil(this.unsubscribe$),
+            catchError((err) => this.handleErrorOnLoadingAdmin(err))
+        );
     }
 
     private handleErrorOnLoadingAdmin(err: any) {
