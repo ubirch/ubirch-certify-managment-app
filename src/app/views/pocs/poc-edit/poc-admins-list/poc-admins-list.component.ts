@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { error } from 'protractor';
 import { NEVER } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { AdminStatus } from '../../../../core/models/enums/admin-status.enum';
@@ -10,7 +9,6 @@ import { IPocAdmin } from '../../../../core/models/interfaces/poc-admin.interfac
 import { IPocEmployee } from '../../../../core/models/interfaces/poc-employee.interface';
 import { PocAdminDataSource } from '../../../../core/services/data-sources/poc-admin-data-source';
 import { ErrorHandlerService } from '../../../../core/services/error-handler.service';
-import { NotificationService } from '../../../../core/services/notification.service';
 import { PocAdminService } from '../../../../core/services/poc-admin.service';
 import { ConfirmDialogService } from '../../../../shared/components/confirm-dialog/confirm-dialog.service';
 
@@ -48,7 +46,6 @@ export class PocAdminsListComponent implements OnInit {
         protected route: ActivatedRoute,
         protected confirmService: ConfirmDialogService,
         protected translateService: TranslateService,
-        private notification: NotificationService,
     ) {
     }
 

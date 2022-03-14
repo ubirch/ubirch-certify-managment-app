@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { NEVER, Observable, Subject } from 'rxjs';
+import { NEVER, Observable, Subject, tap } from 'rxjs';
 import { catchError, filter, map, takeUntil } from 'rxjs/operators';
 import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
@@ -19,6 +19,7 @@ export class AdminCreateComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
   public pocId$: Observable<string>;
+  public pocId: string;
 
   constructor(
     private pocAdminService: PocAdminService,
@@ -34,6 +35,7 @@ export class AdminCreateComponent implements OnInit, OnDestroy {
     this.pocId$ = this.route.paramMap.pipe(
       map((params: ParamMap) => params.get('pocId')),
       filter(pocId => !!pocId),
+      tap(pocId => this.pocId = pocId),
       takeUntil(this.unsubscribe$),
       catchError((err) => {
         if (err instanceof ErrorBase) {
@@ -56,7 +58,7 @@ export class AdminCreateComponent implements OnInit, OnDestroy {
           message: this.translateService.instant(successMsg),
           title: this.translateService.instant(successTitleMsg),
         });
-        this.router.navigate(['views/', 'poc-admins']);
+        this.router.navigate([ '/views', 'pocs', 'edit', this.pocId ]);
       },
       err => this.errorService.handlerResponseError(err)
     );
