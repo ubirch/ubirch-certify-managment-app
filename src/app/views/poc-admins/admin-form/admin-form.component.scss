@@ -6,6 +6,11 @@ form {
     margin: 2rem auto 0;
 }
 
+.align-items-end {
+    align-self: end;
+    margin: 0px 0px auto auto;
+}
+
 .actions_inrow {
     flex-direction: row;
     box-sizing: border-box;

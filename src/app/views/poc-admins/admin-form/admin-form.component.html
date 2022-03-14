@@ -8,11 +8,23 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="admin && !admin.isMainAdmin">
-                <div fxLayout="column" fxLayoutGap="1rem" class="actions_inrow">
+
+                <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
+                    <!-- POC -->
+                    <div fxLayout>
+                        <mat-form-field fxFlex>
+                            <input [readonly]="isEdit" [ngClass]="{'readOnlyState': isEdit}" matInput
+                                   placeholder="Point of Certification (PoC)" [value]="admin.pocName">
+                        </mat-form-field>
+<!--                            <a id="poc_link" [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">{{ admin.pocName }}</a> -->
+                    </div>
+
+                    <div fxLayout class="align-items-end">
                     <button mat-raised-button
                             color="primary"
                             (click)="change2MainITAdmin()"
                             [disabled]="form.invalid || form.pending">{{ 'pocAdmin.changeMainPocAdmin.buttonLabel' | translate }}</button>
+                    </div>
                 </div>
             </ng-container>
 
