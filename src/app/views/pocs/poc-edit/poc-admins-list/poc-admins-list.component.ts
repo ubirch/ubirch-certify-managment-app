@@ -86,7 +86,7 @@ export class PocAdminsListComponent implements OnInit {
     private loadAdminsForPoC() {
         if (this.selfPocId) {
             this.dataSource = new PocAdminDataSource(this.adminService, this.errorService);
-            this.dataSource.loadAdmins({ ...new Filters(), search: this.selfPocId, sortColumn: this.defaultSortColumn });
+            this.dataSource.loadAdmins({ ...new Filters(), search: this.selfPocId, sortColumn: this.defaultSortColumn }, true);
         }
     }
 }
