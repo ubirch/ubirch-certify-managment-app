@@ -19,7 +19,7 @@
 		}
 	},
 	"adminEdit": {
-        "confirmText": "Sind sie sicher, dass sie den POC-Admin bearbeiten wollen? Der Web-Ident Prozess muss ggf. neu gestartet werden.",
+        "confirmText": "Sind Sie sicher, dass Sie den POC-Admin bearbeiten wollen? Der Web-Ident Prozess muss ggf. neu gestartet werden.",
 		"headline": "Administrator bearbeiten",
 		"notifications": {
 			"editNotAllowed": "Der Admin-Datensatz kann nicht aktualisiert werden",
@@ -27,7 +27,7 @@
 			"success": "Admin wurde erfolgreich aktualisiert",
 			"successTitle": "Erfolg aktualisieren",
             "invalidMobileNumberTitle": "Telefonnummer ungültig",
-            "invalidMobileNumber": "Bitte stellen Sie sicher, dass sie eine mobile Telefonnummer eingegeben haben"
+            "invalidMobileNumber": "Bitte stellen Sie sicher, dass Sie eine mobile Telefonnummer eingegeben haben"
 		},
 		"validationErrors": {
 			"dateOfBirth": "Bitte geben Sie ein gültiges Geburtsdatum an",
@@ -113,7 +113,7 @@
 			"403Title": "Fehlende Berechtigung",
 			"notImplemented": "Leider können wir die Anfrage nicht bearbeiten. Methode noch nicht implementiert",
 			"requestDefault": "Es ist ein Fehler bei der Bearbeitung Ihrer Anfrage aufgetreten. Bitte versuchen Sie es erneut",
-			"requestDefaultTitle": "Fehler beim anfordern"
+			"requestDefaultTitle": "Fehler beim Anfordern"
 		},
 		"login": "Anmeldung",
 		"logout": "Abmelden",
@@ -256,6 +256,7 @@
 		"initialId": "Web Ident initial ID",
 		"lastName": "Nachname",
 		"phone": "Telefon",
+        "isMainPocAdmin": "Main Admin",
 		"pocName": "PoC Name",
 		"state": {
 			"certifyUserCreated": "Certify Benutzer erstellt",
@@ -270,6 +271,12 @@
 			"certifyApiProvided": "Certify API provided"
 		},
 		"status": "Status",
+        "mainPocAdminOf": "Haupt-PoC-Admin von",
+        "changeMainPocAdmin": {
+            "buttonLabel": "Zum Haupt-PoC-Admin machen",
+            "ConfirmTitle": "Haupt-PoC-Admin ändern",
+            "ConfirmMessage": "Sind Sie sicher, dass Sie diese Person zum Haupt-POC-Admin machen wollen?"
+        },
 		"validationErrors": {
 			"completedId": "Web Ident ist erforderlich"
 		},
@@ -290,6 +297,7 @@
 			"lastName": "Nachname",
 			"main": "Main",
 			"manager": "Manager",
+            "pocAdminsList": "PoC Administratoren",
 			"phone": "Telefon",
 			"street": "Straße",
 			"zipcode": "Postleitzahl"

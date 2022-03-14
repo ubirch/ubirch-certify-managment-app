@@ -28,9 +28,10 @@
     justify-content: center;
 }
 .mat-column-status,
-.mat-column-active { flex-grow: 0;}
-.mat-column-active { flex-basis: 80px; }
-.mat-column-pocName { flex: 1.25; }
+.mat-column-active, .mat-column-isMainPocAdmin {
+    flex-grow: 0;
+    flex-basis: 80px;
+}
 .mat-column-email { flex: 2; }
 .mat-column-status {
     flex-basis: 100px;
@@ -57,4 +58,15 @@
 .detail-cols {
     padding: 1rem 0 1rem 76px;
     display: flex;
+}
+
+.mat-row.is-main-admin {
+    background-color: rgba(126, 213, 111, 0.81);
+    font-weight: 500;
+    min-height: 86px;
+    border-bottom: 2px solid #ccc;
+
+    mat-cell {
+        font-size: larger;
+    }
 }

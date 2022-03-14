@@ -36,14 +36,16 @@ export class PocAdminDataSource implements IListDataSource<IPocAdmin> {
         this.loadingSubject.complete();
     }
 
-    loadAdmins(filters: Filters) {
+    loadAdmins(filters: Filters, mainAdminFirst = false) {
         this.loadingSubject.next(true);
 
         this.service.getAdmins(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
         ).subscribe(
             adminsResult => {
-                this.adminSubject.next(adminsResult.records ?? []);
+                const preparedAdminsList = adminsResult.records ?
+                    mainAdminFirst ? this.filterMainAdmin(adminsResult.records) : adminsResult.records : [];
+                this.adminSubject.next(preparedAdminsList);
                 this.totalItemsSubject.next(adminsResult.total ?? 0);
             },
             (err: HttpErrorResponse) => {
@@ -51,5 +53,16 @@ export class PocAdminDataSource implements IListDataSource<IPocAdmin> {
                 return of({} as IListResult<IPocAdmin>);
             }
         );
+    }
+
+    filterMainAdmin(admins: IPocAdmin[]): IPocAdmin[] {
+        const mainAdminIndex = admins ? admins.findIndex(admin => admin.isMainAdmin) : -1;
+        if (mainAdminIndex < 0) {
+            return admins;
+        } else {
+            const newAdminsList = admins.filter(admin => !admin.isMainAdmin);
+            newAdminsList.unshift(admins[mainAdminIndex]);
+            return newAdminsList;
+        }
     }
 }

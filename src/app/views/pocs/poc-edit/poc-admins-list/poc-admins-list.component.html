@@ -1,0 +1,71 @@
+<div class="actions">
+    <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'create', selfPocId]">
+        <mat-icon aria-hidden="false" aria-label="Add admin">add</mat-icon>
+        {{ 'listActions.addAdmin' | translate }}
+    </button>
+</div>
+
+<mat-table *ngIf="dataSource" class="pocs-table mat-elevation-z8" [dataSource]="dataSource" multiTemplateDataRows>
+
+    <!-- firstName -->
+    <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.firstName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.firstName}}</mat-cell>
+    </ng-container>
+
+    <!-- lastName -->
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.lastName' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.lastName}}</mat-cell>
+    </ng-container>
+
+    <!-- email -->
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.email' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.email}}</mat-cell>
+    </ng-container>
+
+    <!-- active -->
+    <ng-container matColumnDef="active">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.active' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <mat-checkbox class="example-margin" [disabled]="true" [(ngModel)]="admin.active"></mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <!-- active -->
+    <ng-container matColumnDef="isMainPocAdmin">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.isMainPocAdmin' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <mat-checkbox class="example-margin"
+                          [disabled]="!admin.active || admin.isMainAdmin"
+                          [ngModel]="admin.isMainAdmin"
+                          (click)="$event.stopPropagation()"
+                          (change)="changeMainITAdmin(admin)"
+            ></mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <!-- createdAt -->
+    <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.createdAt' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{admin.createdAt | date:'yyyy-MM-dd hh:mm' }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let admin">
+            <button *ngIf="admin.state != adminStatues.processing && admin.state != adminStatues.pending" color="default" mat-mini-fab aria-label="Edit poc admin" (click)="editEmployee($event, admin)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let admin; columns: displayColumns;"
+             class="element-row"
+             [ngClass]="getRowClass(admin)">
+    </mat-row>
+</mat-table>

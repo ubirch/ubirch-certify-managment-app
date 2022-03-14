@@ -6,6 +6,25 @@ form {
     margin: 2rem auto 0;
 }
 
+.align-items-end {
+    align-self: end;
+    margin: 0px 0px auto auto;
+}
+
+.actions_inrow {
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-end flex-start;
+    align-items: flex-end;
+}
+
 .readOnlyState{
     color: rgba(150, 150, 150, 1);
+}
+
+.information {
+    h3 {
+        font-weight: bolder;
+    }
 }

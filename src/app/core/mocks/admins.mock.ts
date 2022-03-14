@@ -15,7 +15,10 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
-            webIdentInitiateId: '11375b09-6699-4f09-b1b2-dc8e455e0c33'
+            webIdentInitiateId: '11375b09-6699-4f09-b1b2-dc8e455e0c33',
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '2',
@@ -26,6 +29,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '3',
@@ -36,6 +42,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.completed,
+            isMainAdmin: true,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '4',
@@ -46,6 +55,10 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
+
         },
         {
             id: '5',
@@ -56,6 +69,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '6',
@@ -66,6 +82,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.completed,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '7',
@@ -76,6 +95,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '8',
@@ -86,6 +108,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.processing,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '9',
@@ -96,6 +121,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         },
         {
             id: '10',
@@ -106,6 +134,9 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             phone: '123432402',
             dateOfBirth: { year: 1984, month: 1, day: 1 },
             state: AdminStatus.pending,
+            isMainAdmin: false,
+            active: false,
+            createdAt: '2021-12-15T07:32:03.640Z'
         }
     ],
 };
