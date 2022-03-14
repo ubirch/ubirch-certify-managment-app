@@ -59,7 +59,11 @@
     <!-- pocName -->
     <ng-container matColumnDef="pocName">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'pocAdmin.pocName' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let admin">{{admin.pocName}}</mat-cell>
+        <mat-cell *matCellDef="let admin">
+            <a [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">
+                {{admin.pocName}}
+            </a>
+        </mat-cell>
     </ng-container>
 
      <!-- active -->

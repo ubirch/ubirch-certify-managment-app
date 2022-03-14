@@ -2,13 +2,13 @@
     position: relative;
     display: block;
 
-    .spinner-container { 
-        position: absolute; 
+    .spinner-container {
+        position: absolute;
         left: 50%;
         top: 50%;
         transform: translateX(-50%);
     }
-    
+
     .actions {
         label, button {
             margin-bottom: 1.34375em;
@@ -30,8 +30,9 @@
 .mat-column-status,
 .mat-column-active { flex-grow: 0;}
 .mat-column-active { flex-basis: 80px; }
+.mat-column-pocName { flex: 1.25; }
 .mat-column-email { flex: 2; }
-.mat-column-status { 
+.mat-column-status {
     flex-basis: 100px;
 }
 .mat-column-actions {
