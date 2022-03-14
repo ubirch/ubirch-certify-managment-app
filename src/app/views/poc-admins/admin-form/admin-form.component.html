@@ -4,7 +4,9 @@
 
             <ng-container *ngIf="admin?.isMainAdmin">
                 <div fxLayout="column" fxLayoutGap="1rem" class="information">
-                    <h3>{{ 'pocAdmin.mainPocAdminOf' | translate }}: <a [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">{{ admin.pocName }}</a></h3>
+                    <h3>{{ 'pocAdmin.mainPocAdminOf' | translate }}: <a
+                        [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]"
+                        routerLinkActive="active">{{ admin.pocName }}</a></h3>
                 </div>
             </ng-container>
             <ng-container *ngIf="admin && !admin.isMainAdmin">
@@ -12,18 +14,22 @@
                 <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
                     <!-- POC -->
                     <div fxLayout>
-                        <mat-form-field fxFlex>
+                        <mat-form-field class="mdc-text-field--with-trailing-icon" fxFlex>
                             <input [readonly]="isEdit" [ngClass]="{'readOnlyState': isEdit}" matInput
                                    placeholder="Point of Certification (PoC)" [value]="admin.pocName">
+                            <span class="open-link-from-formfield">
+                                <a [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">
+                                                    <mat-icon aria-hidden="false" aria-label="Import pocs">open_in_browser</mat-icon>
+                                </a>
+                                </span>
                         </mat-form-field>
-<!--                            <a id="poc_link" [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">{{ admin.pocName }}</a> -->
                     </div>
 
                     <div fxLayout class="align-items-end">
-                    <button mat-raised-button
-                            color="primary"
-                            (click)="change2MainITAdmin()"
-                            [disabled]="form.invalid || form.pending">{{ 'pocAdmin.changeMainPocAdmin.buttonLabel' | translate }}</button>
+                        <button mat-raised-button
+                                color="primary"
+                                (click)="change2MainITAdmin()"
+                                [disabled]="form.pending">{{ 'pocAdmin.changeMainPocAdmin.buttonLabel' | translate }}</button>
                     </div>
                 </div>
             </ng-container>

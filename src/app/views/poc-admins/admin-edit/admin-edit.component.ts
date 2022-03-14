@@ -12,56 +12,62 @@ import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 import { ConfirmDialogService } from '../../../shared/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
-  selector: 'app-admin-edit',
-  templateUrl: './admin-edit.component.html',
-  styleUrls: ['./admin-edit.component.scss'],
+    selector: 'app-admin-edit',
+    templateUrl: './admin-edit.component.html',
+    styleUrls: [ './admin-edit.component.scss' ],
 })
 export class AdminEditComponent implements OnInit, OnDestroy {
 
-  private unsubscribe$ = new Subject<void>();
-  public admin$: Observable<IPocAdmin>;
-  private adminId: string;
+    public admin$: Observable<IPocAdmin>;
+    private unsubscribe$ = new Subject<void>();
+    private adminId: string;
 
-  constructor(
-    private pocAdminService: PocAdminService,
-    private errorService: ErrorHandlerService,
-    private route: ActivatedRoute,
-    private notificationService: NotificationService,
-    private router: Router,
-    private translateService: TranslateService,
-    public localeService: LocaleService,
-    private confirmService: ConfirmDialogService,
-  ) { }
+    constructor(
+        private pocAdminService: PocAdminService,
+        private errorService: ErrorHandlerService,
+        private route: ActivatedRoute,
+        private notificationService: NotificationService,
+        private router: Router,
+        private translateService: TranslateService,
+        public localeService: LocaleService,
+        private confirmService: ConfirmDialogService,
+    ) {
+    }
 
-  ngOnInit() {
-    this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('id')),
-      filter(adminId => !!adminId),
-      take(1),
-      tap(adminId => {
-          this.adminId = adminId;
-      } ),
-      tap(_ => this.loadAdmin()),
-      takeUntil(this.unsubscribe$),
-      catchError((err) => this.handleErrorOnLoadingAdmin(err))
-    ).subscribe();
-  }
+    ngOnInit() {
+        this.route.paramMap.pipe(
+            map((params: ParamMap) => params.get('id')),
+            filter(adminId => !!adminId),
+            take(1),
+            tap(adminId => {
+                this.adminId = adminId;
+            }),
+            tap(_ => this.loadAdmin()),
+            takeUntil(this.unsubscribe$),
+            catchError((err) => this.handleErrorOnLoadingAdmin(err)),
+        ).subscribe();
+    }
 
-  updateAdmin(admin: IPocAdmin) {
-    const successMsg = 'adminEdit.notifications.success';
-    const successTitleMsg = 'adminEdit.notifications.successTitle';
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
 
-    this.pocAdminService.putPocAdmin(admin).subscribe(
-      _ => {
-        this.notificationService.success({
-          message: this.translateService.instant(successMsg),
-          title: this.translateService.instant(successTitleMsg),
-        });
-        this.router.navigate(['views/', 'poc-admins']);
-      },
-      err => this.errorService.handlerResponseError(err)
-    );
-  }
+    updateAdmin(admin: IPocAdmin) {
+        const successMsg = 'adminEdit.notifications.success';
+        const successTitleMsg = 'adminEdit.notifications.successTitle';
+
+        this.pocAdminService.putPocAdmin(admin).subscribe(
+            _ => {
+                this.notificationService.success({
+                    message: this.translateService.instant(successMsg),
+                    title: this.translateService.instant(successTitleMsg),
+                });
+//                this.router.navigate([ 'views/', 'poc-admins' ]);
+            },
+            err => this.errorService.handlerResponseError(err),
+        );
+    }
 
     public change2MainITAdmin() {
         this.confirmService.open({
@@ -85,10 +91,10 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     private loadAdmin() {
         this.admin$ = this.pocAdminService.getAdmin(this.adminId).pipe(
             tap(
-                (admin: IPocAdmin) => admin
+                (admin: IPocAdmin) => admin,
             ),
             takeUntil(this.unsubscribe$),
-            catchError((err) => this.handleErrorOnLoadingAdmin(err))
+            catchError((err) => this.handleErrorOnLoadingAdmin(err)),
         );
     }
 
@@ -99,13 +105,8 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         } else {
             this.errorService.handlerResponseError(err);
         }
-        this.router.navigate(['../../'], { relativeTo: this.route });
+        this.router.navigate([ '../../' ], { relativeTo: this.route });
         return NEVER;
     }
-
-    ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 
 }
