@@ -1,4 +1,4 @@
-<h2>{{ 'pocEdit.headline' | translate }}: <span>{{ poc?.externalId }}</span></h2>
+<h2>{{ 'pocEdit.headline' | translate }}: <span>{{ poc?.pocName }}</span><span *ngIf="poc?.externalId"> ( {{ poc?.externalId }} )</span></h2>
 
 <mat-card>
     <mat-card-content>
