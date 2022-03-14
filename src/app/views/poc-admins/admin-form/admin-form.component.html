@@ -4,7 +4,7 @@
 
             <ng-container *ngIf="admin?.isMainAdmin">
                 <div fxLayout="column" fxLayoutGap="1rem" class="information">
-                    <h3>{{ 'pocAdmin.mainPocAdmin' | translate }}</h3>
+                    <h3>{{ 'pocAdmin.mainPocAdminOf' | translate }}: <a [routerLink]="[ '/views', 'pocs', 'edit', admin.pocId ]" routerLinkActive="active">{{ admin.pocName }}</a></h3>
                 </div>
             </ng-container>
             <ng-container *ngIf="admin && !admin.isMainAdmin">

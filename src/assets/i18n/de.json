@@ -271,7 +271,7 @@
 			"certifyApiProvided": "Certify API provided"
 		},
 		"status": "Status",
-        "mainPocAdmin": "Haupt-PoC-Admin",
+        "mainPocAdminOf": "Haupt-PoC-Admin von",
         "changeMainPocAdmin": {
             "buttonLabel": "Zum Haupt-PoC-Admin machen",
             "ConfirmTitle": "Haupt-PoC-Admin ändern",

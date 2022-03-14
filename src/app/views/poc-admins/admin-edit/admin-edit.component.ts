@@ -40,7 +40,6 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       take(1),
       tap(adminId => {
           this.adminId = adminId;
-          console.log('adminId = ' + adminId);
       } ),
       tap(_ => this.loadAdmin()),
       takeUntil(this.unsubscribe$),
