@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NEVER, Observable, Subject } from 'rxjs';
-import { catchError, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, filter, map, takeUntil } from 'rxjs/operators';
 import { ErrorBase } from 'src/app/core/models/interfaces/error.interface';
 import { IPocAdmin } from 'src/app/core/models/interfaces/poc-admin.interface';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';

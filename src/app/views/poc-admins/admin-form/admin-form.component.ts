@@ -62,6 +62,7 @@ export class AdminFormComponent implements OnChanges {
 
     if (this.isEdit) {
       this.form.addControl('id', new FormControl(admin?.id));
+      this.form.addControl('webIdentRequired', new FormControl({value: false, disabled: true}));
     } else {
       this.form.addControl('webIdentRequired', new FormControl(false, [Validators.required]));
       this.form.addControl('pocId', new FormControl(pocId, [Validators.required]));

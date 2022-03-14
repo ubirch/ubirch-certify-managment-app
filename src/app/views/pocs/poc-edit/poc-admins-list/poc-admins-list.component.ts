@@ -34,7 +34,7 @@ export class PocAdminsListComponent implements OnInit {
     defaultSortColumn = 'email';
     adminStatues = AdminStatus;
 
-    private selfPocId: string;
+    selfPocId: string;
     @Input()
     public set pocId(val: string) {
         this.selfPocId = val;

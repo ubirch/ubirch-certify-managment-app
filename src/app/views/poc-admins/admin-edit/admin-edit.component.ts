@@ -84,7 +84,6 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     }
 
     private loadAdmin() {
-        console.log('load');
         this.admin$ = this.pocAdminService.getAdmin(this.adminId).pipe(
             tap(
                 (admin: IPocAdmin) => admin
