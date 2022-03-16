@@ -38,7 +38,7 @@
         <mat-header-cell *matHeaderCellDef>{{ 'pocAdmin.isMainPocAdmin' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let admin">
             <mat-checkbox class="example-margin"
-                          [disabled]="!admin.active || admin.isMainAdmin"
+                          [disabled]="!admin.active || admin.state !== adminStatues.completed || admin.isMainAdmin"
                           [ngModel]="admin.isMainAdmin"
                           (click)="$event.stopPropagation()"
                           (change)="changeMainITAdmin(admin)"
