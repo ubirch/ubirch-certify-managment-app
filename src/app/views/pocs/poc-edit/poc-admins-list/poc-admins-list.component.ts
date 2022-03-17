@@ -74,7 +74,10 @@ export class PocAdminsListComponent implements OnInit {
             switchMap(dialogResult => {
                 if (dialogResult) {
                     this.adminService.changeMainPoCAdmin(newMainAdmin.id)
-                        .subscribe(_ => this.loadAdminsForPoC());
+                        .subscribe({
+                            next: (_) => this.loadAdminsForPoC(),
+                            error: (error) => console.log()
+                        });
                 } else {
                     // discard confirmation
                     this.loadAdminsForPoC();

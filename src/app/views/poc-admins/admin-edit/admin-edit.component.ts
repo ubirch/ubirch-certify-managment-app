@@ -57,16 +57,16 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         const successMsg = 'adminEdit.notifications.success';
         const successTitleMsg = 'adminEdit.notifications.successTitle';
 
-        this.pocAdminService.putPocAdmin(admin).subscribe(
-            _ => {
+        this.pocAdminService.putPocAdmin(admin).subscribe({
+            next: (_) => {
                 this.notificationService.success({
                     message: this.translateService.instant(successMsg),
                     title: this.translateService.instant(successTitleMsg),
                 });
 //                this.router.navigate([ 'views/', 'poc-admins' ]);
             },
-            err => this.errorService.handlerResponseError(err),
-        );
+            error: (err) => this.errorService.handlerResponseError(err)
+        });
     }
 
     public change2MainITAdmin() {

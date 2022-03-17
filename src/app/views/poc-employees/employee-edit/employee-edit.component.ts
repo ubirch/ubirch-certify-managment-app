@@ -37,13 +37,13 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       filter(employeeId => !!employeeId),
       switchMap(employeeId => this.employeeService.getEmployee(employeeId)),
       takeUntil(this.unsubscribe$)
-    ).subscribe(
-      (employee: IPocEmployee) => this.generateForm(employee),
-      (err) => {
-        this.errorService.handlerResponseError(err);
-        this.router.navigate(['../../'], { relativeTo: this.route });
-      }
-    );
+    ).subscribe({
+        next: (employee: IPocEmployee) => this.generateForm(employee),
+        error: (err) => {
+            this.errorService.handlerResponseError(err);
+            this.router.navigate(['../../'], { relativeTo: this.route });
+        }
+    });
   }
 
   generateForm(employee: IPocEmployee) {
@@ -58,16 +58,16 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   submitForm() {
     const employee: IPocEmployee = this.form.value;
 
-    this.employeeService.putPocEmployee(employee).subscribe(
-      _ => {
-        this.notificationService.success({
-          message: this.translateService.instant('employeeEdit.notifications.success'),
-          title: this.translateService.instant('employeeEdit.notifications.successTitle'),
-        });
-        this.router.navigate(['views/', 'poc-employees']);
-      },
-      err => this.errorService.handlerResponseError(err)
-    );
+    this.employeeService.putPocEmployee(employee).subscribe({
+        next: (_) => {
+            this.notificationService.success({
+                message: this.translateService.instant('employeeEdit.notifications.success'),
+                title: this.translateService.instant('employeeEdit.notifications.successTitle'),
+            });
+            this.router.navigate(['views/', 'poc-employees']);
+        },
+        error: (err) => this.errorService.handlerResponseError(err)
+    });
   }
 
   backToList() {

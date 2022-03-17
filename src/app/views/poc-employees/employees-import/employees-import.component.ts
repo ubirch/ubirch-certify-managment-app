@@ -37,26 +37,26 @@ export class EmployeesImportComponent {
 
   uploadFile() {
     this.employeeService.importFile(this.file)
-      .subscribe(
-        event => {
-          this.progress = event;
-          if (event.state === UploadState.done) {
-            if (event.result && event.result instanceof Blob && event.result.size > 0) {
-              this.errorFile = event.result;
-              this.notification = this.notificationService.warning({
-                title: 'employeesImport.notifications.partialTitle',
-                message: 'employeesImport.notifications.partial'
-              });
-            } else {
-              this.notification = this.notificationService.success({ message: 'employeesImport.notifications.success' });
-            }
+      .subscribe({
+          next: (event) => {
+              this.progress = event;
+              if (event.state === UploadState.done) {
+                  if (event.result && event.result instanceof Blob && event.result.size > 0) {
+                      this.errorFile = event.result;
+                      this.notification = this.notificationService.warning({
+                          title: 'employeesImport.notifications.partialTitle',
+                          message: 'employeesImport.notifications.partial'
+                      });
+                  } else {
+                      this.notification = this.notificationService.success({ message: 'employeesImport.notifications.success' });
+                  }
+              }
+          },
+          error: (err) => {
+              this.progress = null;
+              this.notification = this.error.handlerResponseError(err);
           }
-        },
-        err => {
-          this.progress = null;
-          this.notification = this.error.handlerResponseError(err);
-        }
-      );
+      });
   }
 
   downloadResult() {

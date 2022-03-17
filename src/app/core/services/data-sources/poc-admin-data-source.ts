@@ -41,18 +41,18 @@ export class PocAdminDataSource implements IListDataSource<IPocAdmin> {
 
         this.service.getAdmins(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
-        ).subscribe(
-            adminsResult => {
+        ).subscribe({
+            next: (adminsResult) => {
                 const preparedAdminsList = adminsResult.records ?
                     mainAdminFirst ? this.filterMainAdmin(adminsResult.records) : adminsResult.records : [];
                 this.adminSubject.next(preparedAdminsList);
                 this.totalItemsSubject.next(adminsResult.total ?? 0);
             },
-            (err: HttpErrorResponse) => {
+            error: (err: HttpErrorResponse) => {
                 this.error.handlerResponseError(err);
                 return of({} as IListResult<IPocAdmin>);
             }
-        );
+        });
     }
 
     filterMainAdmin(admins: IPocAdmin[]): IPocAdmin[] {
