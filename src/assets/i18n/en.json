@@ -276,6 +276,8 @@
             "buttonLabel": "Change to main PoC admin",
             "ConfirmTitle": "Change main PoC admin",
             "ConfirmMessage": "Are you sure you want to make this person the MAIN PoC admin?",
+            "FailedError": "Making this person to main PoC admin failed",
+            "FailedErrorTitle": "Changing main PoC admin failed"
         },
 		"validationErrors": {
 			"completedId": "Web Ident is required"

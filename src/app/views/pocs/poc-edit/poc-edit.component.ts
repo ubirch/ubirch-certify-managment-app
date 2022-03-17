@@ -35,16 +35,16 @@ export class PocEditComponent implements OnInit {
       filter(pocId => !!pocId),
       tap(pocId => this.pocId = pocId),
       switchMap(pocId => this.pocService.getPoc(pocId))
-    ).subscribe(
-      (res: any) => {
-        this.poc = res;
-        this.generateForm();
-      },
-      (err) => {
-        this.errorService.handlerResponseError(err);
-        this.router.navigate(['../../'], { relativeTo: this.route });
-      }
-    );
+    ).subscribe({
+        next: (res: any) => {
+            this.poc = res;
+            this.generateForm();
+        },
+        error: (err) => {
+            this.errorService.handlerResponseError(err);
+            this.router.navigate(['../../'], { relativeTo: this.route });
+        }
+    });
   }
 
   generateForm() {
@@ -71,15 +71,15 @@ export class PocEditComponent implements OnInit {
 
   submitForm() {
     const poc: IPoc = { ...this.form.value, id: this.poc.id };
-    this.pocService.putPoc(poc).subscribe(
-      _ => {
-        this.notificationService.success({
-          message: this.translateService.instant('pocEdit.notifications.success'),
-          title: this.translateService.instant('pocEdit.notifications.successTitle'),
-        });
-        this.router.navigate(['views/', 'pocs']);
-      },
-      err => this.errorService.handlerResponseError(err)
-    );
+    this.pocService.putPoc(poc).subscribe({
+        next: (_) => {
+            this.notificationService.success({
+                message: this.translateService.instant('pocEdit.notifications.success'),
+                title: this.translateService.instant('pocEdit.notifications.successTitle'),
+            });
+            this.router.navigate(['views/', 'pocs']);
+        },
+            error: (err) => this.errorService.handlerResponseError(err)
+    });
   }
 }

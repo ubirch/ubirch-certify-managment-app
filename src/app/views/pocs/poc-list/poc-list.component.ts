@@ -245,10 +245,10 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
         this.pocService.exportPocs().pipe(
             takeUntil(this.unsubscribe$),
             finalize(() => this.exportLoading = false),
-        ).subscribe(
-            blob => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
-            err => this.errorService.handlerResponseError(err),
-        );
+        ).subscribe({
+            next: (blob) => this.exportService.triggerDownload(blob, 'POCS_' + (new Date()).toISOString() + '.csv'),
+                error: (err) => this.errorService.handlerResponseError(err),
+        });
     }
 
     // private deleteItems(pocs: IPoc[]) {

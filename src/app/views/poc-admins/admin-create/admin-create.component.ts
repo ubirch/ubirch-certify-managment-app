@@ -11,62 +11,63 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
 
 @Component({
-  selector: 'app-admin-create',
-  templateUrl: './admin-create.component.html',
-  styleUrls: ['./admin-create.component.scss'],
+    selector: 'app-admin-create',
+    templateUrl: './admin-create.component.html',
+    styleUrls: [ './admin-create.component.scss' ],
 })
 export class AdminCreateComponent implements OnInit, OnDestroy {
 
-  private unsubscribe$ = new Subject<void>();
-  public pocId$: Observable<string>;
-  public pocId: string;
+    public pocId$: Observable<string>;
+    public pocId: string;
+    private unsubscribe$ = new Subject<void>();
 
-  constructor(
-    private pocAdminService: PocAdminService,
-    private errorService: ErrorHandlerService,
-    private route: ActivatedRoute,
-    private notificationService: NotificationService,
-    private router: Router,
-    private translateService: TranslateService,
-    public localeService: LocaleService,
-  ) { }
+    constructor(
+        private pocAdminService: PocAdminService,
+        private errorService: ErrorHandlerService,
+        private route: ActivatedRoute,
+        private notificationService: NotificationService,
+        private router: Router,
+        private translateService: TranslateService,
+        public localeService: LocaleService,
+    ) {
+    }
 
-  ngOnInit() {
-    this.pocId$ = this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('pocId')),
-      filter(pocId => !!pocId),
-      tap(pocId => this.pocId = pocId),
-      takeUntil(this.unsubscribe$),
-      catchError((err) => {
-        if (err instanceof ErrorBase) {
-          this.notificationService.error({ message: err.message, title: err.title });
-        } else {
-          this.errorService.handlerResponseError(err);
-        }
-        this.router.navigate(['../../'], { relativeTo: this.route });
-        return NEVER;
-      }));
-  }
+    ngOnInit() {
+        this.pocId$ = this.route.paramMap.pipe(
+            map((params: ParamMap) => params.get('pocId')),
+            filter(pocId => !!pocId),
+            tap(pocId => this.pocId = pocId),
+            takeUntil(this.unsubscribe$),
+            catchError((err) => {
+                if (err instanceof ErrorBase) {
+                    this.notificationService.error({ message: err.message, title: err.title });
+                } else {
+                    this.errorService.handlerResponseError(err);
+                }
+                this.router.navigate([ '../../' ], { relativeTo: this.route });
+                return NEVER;
+            }));
+    }
 
-  createAdmin(admin: IPocAdmin) {
-    const successMsg = 'adminCreate.notifications.success';
-    const successTitleMsg = 'adminCreate.notifications.successTitle';
+    ngOnDestroy(): void {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
 
-    this.pocAdminService.postPocAdmin(admin).subscribe(
-      _ => {
-        this.notificationService.success({
-          message: this.translateService.instant(successMsg),
-          title: this.translateService.instant(successTitleMsg),
+    createAdmin(admin: IPocAdmin) {
+        const successMsg = 'adminCreate.notifications.success';
+        const successTitleMsg = 'adminCreate.notifications.successTitle';
+
+        this.pocAdminService.postPocAdmin(admin).subscribe({
+            next: (_) => {
+                this.notificationService.success({
+                    message: this.translateService.instant(successMsg),
+                    title: this.translateService.instant(successTitleMsg),
+                });
+                this.router.navigate([ '/views', 'pocs', 'edit', this.pocId ]);
+            },
+            error: (err) => this.errorService.handlerResponseError(err),
         });
-        this.router.navigate([ '/views', 'pocs', 'edit', this.pocId ]);
-      },
-      err => this.errorService.handlerResponseError(err)
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
+    }
 
 }

@@ -38,16 +38,16 @@ export class PocDataSource implements DataSource<IPoc> {
 
         this.service.getPocs(filters).pipe(
             finalize(() => this.loadingSubject.next(false))
-        ).subscribe(
-            pocResult => {
+        ).subscribe({
+            next: (pocResult) => {
                 this.pocSubject.next(pocResult.records ?? []);
                 this.totalItemsSubject.next(pocResult.total ?? 0);
             },
-            (err: HttpErrorResponse) => {
+            error: (err: HttpErrorResponse) => {
                 this.error.handlerResponseError(err);
                 return of({} as IListResult<IPoc>);
             }
-        );
+        });
     }
 
     deletePocs(pocs: IPoc[], filters: Filters) {

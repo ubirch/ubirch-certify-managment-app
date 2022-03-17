@@ -275,7 +275,9 @@
         "changeMainPocAdmin": {
             "buttonLabel": "Zum Haupt-PoC-Admin machen",
             "ConfirmTitle": "Haupt-PoC-Admin ändern",
-            "ConfirmMessage": "Sind Sie sicher, dass Sie diese Person zum Haupt-POC-Admin machen wollen?"
+            "ConfirmMessage": "Sind Sie sicher, dass Sie diese Person zum Haupt-POC-Admin machen wollen?",
+            "FailedError": "Beim Versuch, diese Person zum Haupt-POC-Admin zu machen, ist leider ein Fehler aufgetreten.",
+            "FailedErrorTitle": "Haupt-PoC-Admin ändern fehlgeschlagen"
         },
 		"validationErrors": {
 			"completedId": "Web Ident ist erforderlich"
