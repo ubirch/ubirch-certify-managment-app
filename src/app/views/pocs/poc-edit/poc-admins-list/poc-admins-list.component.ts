@@ -5,10 +5,12 @@ import { NEVER } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { AdminStatus } from '../../../../core/models/enums/admin-status.enum';
 import { Filters } from '../../../../core/models/filters';
+import { INotification } from '../../../../core/models/interfaces/notification.interface';
 import { IPocAdmin } from '../../../../core/models/interfaces/poc-admin.interface';
 import { IPocEmployee } from '../../../../core/models/interfaces/poc-employee.interface';
 import { PocAdminDataSource } from '../../../../core/services/data-sources/poc-admin-data-source';
 import { ErrorHandlerService } from '../../../../core/services/error-handler.service';
+import { NotificationService } from '../../../../core/services/notification.service';
 import { PocAdminService } from '../../../../core/services/poc-admin.service';
 import { ConfirmDialogService } from '../../../../shared/components/confirm-dialog/confirm-dialog.service';
 
@@ -46,6 +48,7 @@ export class PocAdminsListComponent implements OnInit {
         protected route: ActivatedRoute,
         protected confirmService: ConfirmDialogService,
         protected translateService: TranslateService,
+        private notificationService: NotificationService,
     ) {
     }
 
@@ -76,7 +79,13 @@ export class PocAdminsListComponent implements OnInit {
                     this.adminService.changeMainPoCAdmin(newMainAdmin.id)
                         .subscribe({
                             next: (_) => this.loadAdminsForPoC(),
-                            error: (error) => console.log()
+                            error: (error) => {
+                                this.handleErrorOnChangingAdmin({
+                                    message: `pocAdmin.changeMainPocAdmin.FailedError`,
+                                    title: `pocAdmin.changeMainPocAdmin.FailedErrorTitle`,
+                                    duration: 7000
+                                });
+                            }
                         });
                 } else {
                     // discard confirmation
@@ -91,5 +100,10 @@ export class PocAdminsListComponent implements OnInit {
             this.dataSource = new PocAdminDataSource(this.adminService, this.errorService);
             this.dataSource.loadAdmins({ ...new Filters(), search: this.selfPocId, sortColumn: this.defaultSortColumn }, true);
         }
+    }
+
+    private handleErrorOnChangingAdmin(message: INotification) {
+        this.notificationService.error(message);
+        this.loadAdminsForPoC();
     }
 }

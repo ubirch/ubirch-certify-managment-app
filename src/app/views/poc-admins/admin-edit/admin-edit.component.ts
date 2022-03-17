@@ -9,6 +9,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error-handler.service
 import { LocaleService } from 'src/app/core/services/locale.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { PocAdminService } from 'src/app/core/services/poc-admin.service';
+import { INotification } from '../../../core/models/interfaces/notification.interface';
 import { ConfirmDialogService } from '../../../shared/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
@@ -78,7 +79,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
             switchMap(dialogResult => {
                 if (dialogResult) {
                     this.pocAdminService.changeMainPoCAdmin(this.adminId)
-                        .subscribe(_ => this.loadAdmin());
+                        .subscribe({
+                            next: (_) => this.loadAdmin(),
+                            error: err => this.handleErrorOnChangingAdmin({
+                                message: `pocAdmin.changeMainPocAdmin.FailedError`,
+                                title: `pocAdmin.changeMainPocAdmin.FailedErrorTitle`,
+                                duration: 7000
+                            })
+                        });
                 } else {
                     // discard confirmation
                     this.loadAdmin();
@@ -96,6 +104,11 @@ export class AdminEditComponent implements OnInit, OnDestroy {
             takeUntil(this.unsubscribe$),
             catchError((err) => this.handleErrorOnLoadingAdmin(err)),
         );
+    }
+
+    private handleErrorOnChangingAdmin(message: INotification) {
+        this.notificationService.error(message);
+        this.loadAdmin();
     }
 
     private handleErrorOnLoadingAdmin(err: any) {
