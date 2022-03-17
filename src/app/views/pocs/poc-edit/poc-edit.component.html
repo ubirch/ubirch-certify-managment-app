@@ -4,6 +4,9 @@
     <mat-card-content>
       <form [formGroup]="form" *ngIf="form" fxLayout="column" fxLayoutGap="1rem" #f>
 
+          <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
+          <app-poc-admins-list [pocId]="pocId"></app-poc-admins-list>
+
           <h3 fxLayout fxLayoutAlign="start center"><mat-icon color="primary">info</mat-icon>{{ 'pocEdit.fields.main' | translate }}</h3>
           <mat-form-field class="full-width">
             <input matInput placeholder="{{ 'pocEdit.fields.phone' | translate }}" formControlName="phone">
@@ -96,9 +99,6 @@
                 </mat-form-field>
               </div>
             </ng-container>
-
-          <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
-          <app-poc-admins-list [pocId]="pocId"></app-poc-admins-list>
 
           <div fxLayout="column" fxLayoutGap="1rem" class="actions">
               <button mat-raised-button color="primary" class="mat-btn-big" (click)="submitForm()" [disabled]="form.invalid || form.pending">{{ 'global.update' | translate }}</button>
