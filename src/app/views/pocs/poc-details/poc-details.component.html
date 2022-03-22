@@ -1,6 +1,6 @@
 
-<div class="actions">
-  <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'create', poc.id]">
+<div *ngIf="pocState | async as state" class="actions">
+  <button *ngIf="state.adminGroupCreated === true" mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'create', poc.id]">
     <mat-icon aria-hidden="false" aria-label="Add admin">add</mat-icon>
     {{ 'listActions.addAdmin' | translate }} 
   </button>
