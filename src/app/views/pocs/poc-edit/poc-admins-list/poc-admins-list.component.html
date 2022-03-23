@@ -1,4 +1,4 @@
-<div class="actions">
+<div *ngIf="pocType.includes('app')"  class="actions" >
     <button mat-raised-button color="primary" [routerLink]="[ '/views', 'poc-admins', 'create', selfPocId]">
         <mat-icon aria-hidden="false" aria-label="Add admin">add</mat-icon>
         {{ 'listActions.addAdmin' | translate }}
