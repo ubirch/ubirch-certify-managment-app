@@ -23,6 +23,7 @@ export interface IPoc {
     certifyApp?: boolean;
     clientCertRequired: boolean;
     pocAddons: IPocAddons;
+    pocType: string;
 
     created: Date;
     lastUpdated?: Date;
