@@ -40,6 +40,7 @@ export class PocAdminsListComponent implements OnInit {
         this.selfPocId = val;
         this.loadAdminsForPoC();
     }
+    @Input() pocType: string;
 
     constructor(
         private errorService: ErrorHandlerService,
@@ -52,8 +53,7 @@ export class PocAdminsListComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     editEmployee(event: MouseEvent, employee: IPocEmployee) {
         this.router.navigate([ '/views/poc-admins/edit', employee.id ]);

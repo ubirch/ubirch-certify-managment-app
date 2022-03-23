@@ -5,7 +5,7 @@
       <form [formGroup]="form" *ngIf="form" fxLayout="column" fxLayoutGap="1rem" #f>
 
           <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
-          <app-poc-admins-list [pocId]="pocId"></app-poc-admins-list>
+          <app-poc-admins-list [pocType]="poc.pocType" [pocId]="pocId"></app-poc-admins-list>
 
           <h3 fxLayout fxLayoutAlign="start center"><mat-icon color="primary">info</mat-icon>{{ 'pocEdit.fields.main' | translate }}</h3>
           <mat-form-field class="full-width">
