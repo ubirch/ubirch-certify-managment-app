@@ -56,6 +56,11 @@
 		"pending": "Wartet auf Bearbeitung",
 		"processing": "In Bearbeitung"
 	},
+	"browser-check": {
+		"warning": "Warnung",
+		"unsupported": "Diese Version wird nicht unterstützt und die App funktioniert möglicherweise nicht wie erwartet.",
+		"update": "Bitte aktualisieren"
+	  },
 	"dialog": {
 		"defaultMessage": "Sind Sie sicher, dass Sie fortfahren wollen?",
 		"defaultTitle": "Bestätigung erforderlich",
