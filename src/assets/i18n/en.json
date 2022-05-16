@@ -56,6 +56,11 @@
 		"pending": "Pending",
 		"processing": "Processing"
 	},
+	"browser-check": {
+		"warning": "Warning",
+		"unsupported": "This version is not supported and the app may not work as expected.",
+		"update": "Please update"
+	  },
 	"dialog": {
 		"defaultMessage": "Are you sure you want to proceed?",
 		"defaultTitle": "Confirmation required",

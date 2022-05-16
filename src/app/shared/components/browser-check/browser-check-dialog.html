@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ "browser-check.warning" | translate }}</h1>
+<div mat-dialog-content>
+    <h4>
+        Browser: {{ data.browserName | titlecase }} - Version : {{ data.version
+        }}
+    </h4>
+    <p>{{ "browser-check.unsupported" | translate }}</p>
+    <p>{{ "browser-check.update" | translate }} {{ data.browserName | titlecase }}.</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="(onOkClick())">OK</button>
+</div>

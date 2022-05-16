@@ -64,6 +64,7 @@ import { NotificationInlineComponent } from './components/notification-inline/no
 import { MatDatepickerComponent } from './components/mat-datepicker/mat-datepicker.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { UserInRoleDirective } from './directives/user-in-role.directive';
+import { BrowserCheckComponent, BrowserCheckDialog } from './components/browser-check/browser-check.component';
 
 
 const COMPONENTS = [
@@ -75,7 +76,9 @@ const COMPONENTS = [
   NotificationComponent,
   NotificationInlineComponent,
   FileSizePipe,
-  MatDatepickerComponent
+  MatDatepickerComponent,
+  BrowserCheckComponent,
+  BrowserCheckDialog
 ];
 
 const ANGULAR_EXPORT_MODULES = [
