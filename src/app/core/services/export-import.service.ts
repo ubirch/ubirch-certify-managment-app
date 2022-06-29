@@ -38,6 +38,32 @@ export class ExportImportService {
     );
   }
 
+  importRevocation(file: String, url: string): Observable<IUploadStatus> {
+    const config = new HttpRequest('POST', url, file, {
+      reportProgress: true,
+      responseType: 'blob'
+    });
+
+    return this.http.request(config).pipe(
+      scan((acc, resp) => {
+        if (isHttpProgressEvent(resp)) {
+          return {
+            progress: resp.total ? Math.round((100 * resp.loaded) / resp.total) : acc.progress,
+            state: UploadState.inPorgress,
+          } as IUploadStatus;
+        } else if (isHttpResponse(resp)) {
+          return {
+            progress: 100,
+            state: UploadState.done,
+            result: resp.body
+          } as IUploadStatus;
+        }
+        return acc;
+      },
+        { state: UploadState.pending, progress: 0, result: null })
+    );
+  }
+
   triggerDownload(blob: Blob, fileName: string) {
     const a = document.createElement('a');
     const objectUrl = URL.createObjectURL(blob);

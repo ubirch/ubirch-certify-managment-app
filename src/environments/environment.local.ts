@@ -8,4 +8,5 @@ export const environment = {
     production: true,
     keycloak: keycloakConfig,
     pocManagerApi: 'https://api.poc.dev.ubirch.com/',
+    revocationApi: 'https://api.crl.dev.ubirch.com/',
 };

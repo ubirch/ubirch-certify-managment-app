@@ -1,0 +1,154 @@
+<h2 style="margin-top: 0.5rem">
+    {{ "revocationBatchList.headline" | translate }}
+</h2>
+
+<mat-table
+    class="revocations-table mat-elevation-z8"
+    [dataSource]="dataSource"
+    multiTemplateDataRows
+    matSort
+    [matSortActive]="defaultSortColumn"
+    matSortDirection="asc"
+    matSortDisableClear
+>
+    <!-- Batch Id -->
+    <ng-container matColumnDef="batchId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.batchId" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocationBatch">{{
+            revocationBatch.id
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Id -->
+    <ng-container matColumnDef="kid">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.kid" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocationBatch">{{
+            revocationBatch.kid
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Expiry date -->
+    <ng-container matColumnDef="technicalExpiryDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.expiration" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.technicalExpiryDate | date: "yyyy-MM-dd hh:mm"
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- uploaded at -->
+    <ng-container matColumnDef="uploadedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.uploadedAt" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.createdAt | date: "yyyy-MM-dd hh:mm"
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Deleted -->
+    <ng-container matColumnDef="deleted">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "deleted" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">
+            <mat-icon
+                aria-hidden="false"
+                [ngClass]="revocation.deleted === true ? 'green' : 'red'"
+                >{{ icon(revocation.deleted) }}</mat-icon
+            >
+        </mat-cell>
+    </ng-container>
+
+    <!-- deletedAt -->
+    <ng-container matColumnDef="deletedAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.deletedAt" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.deletedAt | date: "yyyy-MM-dd hh:mm"
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- number of entries -->
+    <ng-container matColumnDef="num_of_entries">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationBatchList.numOfEntries" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.numberOfRevocations
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let revocation">
+            <button
+                *ngIf="revocation.deleted === false"
+                color="default"
+                mat-mini-fab
+                aria-label="Edit revocation"
+                (click)="deleteBatch(revocation)"
+            >
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let revocation">
+            <div
+                class="element-detail"
+                [@detailExpand]="
+                    revocation == expandedElement ? 'expanded' : 'collapsed'
+                "
+                fxLayout
+                fxFlex
+            >
+                <div class="detail-cols" fxFlex>
+                    <app-revocation-entries-list
+                        [batchId]="revocation.id"
+                    ></app-revocation-entries-list>
+                </div>
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+    <mat-row
+        *matRowDef="let revocation; columns: displayColumns"
+        class="element-row"
+        [ngClass]="getRowClass(revocation)"
+        [class.expanded-row]="expandedElement === revocation"
+        (click)="expandedElement = expandedElement === revocation ? null : revocation"
+    >
+    </mat-row>
+    <mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="detail-row"
+    ></mat-row>
+</mat-table>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="table-footer">
+    <div *ngIf="selectedCount" class="select-count mat-paginator">
+        {{ "global.selected" | translate }} : {{ selectedCount }}
+    </div>
+    <mat-paginator
+        [length]="dataSource.totalItems$ | async"
+        [pageSize]="defaultPageSize"
+        [pageSizeOptions]="pageSizes"
+    >
+    </mat-paginator>
+</div>

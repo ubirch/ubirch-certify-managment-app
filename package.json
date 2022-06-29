@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve --port 9202",
-    "build": "ng build",
+    "build": "npm run supportedBrowsers && ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
