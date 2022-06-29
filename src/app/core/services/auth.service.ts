@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { POC_ADMIN_ROLE, ROLE, TENANT_ADMIN_ROLE } from '../models/roles';
+import { POC_ADMIN_ROLE, REVOCATION_AUTHORIZER_ROLE, REVOCATION_REQUESTER_ROLE, ROLE, TENANT_ADMIN_ROLE } from '../models/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,15 @@ export class AuthService {
   isPocAdmin() {
     const roles = this.keycloak.getUserRoles();
     return roles?.includes(POC_ADMIN_ROLE);
+  }
+
+  isRevocationRequester() {
+    const roles = this.keycloak.getUserRoles();
+    return roles?.includes(REVOCATION_REQUESTER_ROLE);
+  }
+  
+  isRevocationAuthorizer() {
+    const roles = this.keycloak.getUserRoles();
+    return roles?.includes(REVOCATION_AUTHORIZER_ROLE);
   }
 }
