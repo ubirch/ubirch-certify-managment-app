@@ -1,0 +1,45 @@
+<div fxFlex="50" fxFlexOffset="25">
+    <h2>{{ "revocationImport.headline" | translate }}</h2>
+    <form class="example-form">
+        <p>
+            {{ "revocationImport.prompt" | translate }}
+        </p>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <textarea
+                id="base64Revocation"
+                [(ngModel)]="base64Revocation"
+                matInput
+                [ngModelOptions]="{ standalone: true }"
+                style="height: 9rem"
+            ></textarea>
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+            <button
+                type="submit"
+                [disabled]="base64Revocation === ''"
+                mat-raised-button
+                color="primary"
+                (click)="uploadFile()"
+                class="import-btn"
+            >
+                <mat-icon aria-hidden="false" aria-label="Import pocs"
+                    >file_upload</mat-icon
+                >
+                {{ "import.upload" | translate }}
+            </button>
+            <button
+                type="button"
+                mat-raised-button
+                [routerLink]="['/views', 'revocation-requester']"
+                class="back-btn"
+            >
+                <mat-icon aria-hidden="false" aria-label="Import pocs"
+                    >chevron_left</mat-icon
+                >
+                {{ "global.back" | translate }}
+            </button>
+        </div>
+    </form>
+</div>
