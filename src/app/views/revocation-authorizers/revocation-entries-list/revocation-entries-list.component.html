@@ -1,0 +1,89 @@
+<mat-table
+    class="revocations-table mat-elevation-z8"
+    [dataSource]="dataSource"
+    multiTemplateDataRows
+    matSort
+    [matSortActive]="defaultSortColumn"
+    matSortDirection="asc"
+    matSortDisableClear
+>
+    <!-- Id -->
+    <ng-container matColumnDef="dsc_kid">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.revocationId" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.kid
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Signature -->
+    <ng-container matColumnDef="r_value_signature">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.rValueSignature" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            (revocation.rValueSignature | slice:0:10) + '...'
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Transaction ID -->
+    <ng-container matColumnDef="transaction_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.transactionId" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            (revocation.transactionNumber | slice:0:10) + '...'
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- issuing country -->
+    <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.issuingCountry" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.issuingCountry
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid from -->
+    <ng-container matColumnDef="date_of_issue">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.dateOfIssue" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.dateOfIssue | date: "yyyy-MM-dd hh:mm"
+        }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid until -->
+    <ng-container matColumnDef="expiration">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "revocationList.expiration" | translate
+        }}</mat-header-cell>
+        <mat-cell *matCellDef="let revocation">{{
+            revocation.technicalExpiryDate | date: "yyyy-MM-dd hh:mm"
+        }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+    <mat-row
+    *matRowDef="let revocation; columns: displayColumns"
+    class="element-row"
+    [ngClass]="getRowClass(revocation)"
+>
+</mat-row>
+</mat-table>
+
+<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="table-footer">
+    <mat-paginator
+        [length]="dataSource.totalItems$ | async"
+        [pageSize]="defaultPageSize"
+        [pageSizeOptions]="pageSizes"
+    >
+    </mat-paginator>
+</div>
