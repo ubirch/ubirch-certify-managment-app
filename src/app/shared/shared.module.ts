@@ -108,7 +108,7 @@ const LIB_EXPORT_MODULES = [
   MatSidenavModule,
   ClipboardModule,
   MatChipsModule,
-
+  MatTabsModule,
   FlexLayoutModule,
   TranslateModule,
 ];
