@@ -9,5 +9,5 @@ export const environment = {
   production: true,
   keycloak: keycloakConfig,
   pocManagerApi: '@@POC_MANAGER_API@@',
-  revocationApi: ''
+  revocationApi: '@@REVOCATION_API@@'
 };
