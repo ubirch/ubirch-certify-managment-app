@@ -11,4 +11,5 @@ find /www -type f -name '*.js' -exec \
         -e "s%@@KEYCLOAK_URL@@%${KEYCLOAK_URL}%" \
         -e "s%@@KEYCLOAK_CLIENT_ID@@%${KEYCLOAK_CLIENT_ID}%" \
         -e "s%@@POC_MANAGER_API@@%${POC_MANAGER_API}%" \
+        -e "s%@@REVOCATION_API@@%${REVOCATION_API}%" \
         {} \;
