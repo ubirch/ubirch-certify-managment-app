@@ -28,7 +28,7 @@ export class RequesterImportComponent implements OnInit {
     ngOnInit() {}
 
     uploadFile() {
-        this.revocationService.importFile(this.base64Revocation).subscribe({
+        this.revocationService.importFile(this.base64Revocation.trim()).subscribe({
             next: (event) => {
                 this.progress = event;
                 if (event.state === UploadState.done) {
