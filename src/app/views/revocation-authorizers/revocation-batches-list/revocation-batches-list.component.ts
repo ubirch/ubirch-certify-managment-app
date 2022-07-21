@@ -91,10 +91,10 @@ export class RevocationBatchesListComponent
 
     icon(value: boolean) {
         if (value === true) {
-            return 'check_circle';
+            return 'cancel';
         }
         if (value === false) {
-            return 'cancel';
+            return 'check_circle';
         }
         return '';
     }

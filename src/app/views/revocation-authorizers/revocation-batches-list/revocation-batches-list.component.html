@@ -54,12 +54,12 @@
     <!-- Deleted -->
     <ng-container matColumnDef="deleted">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
-            "deleted" | translate
+            "revocationBatchList.valid" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let revocation">
             <mat-icon
                 aria-hidden="false"
-                [ngClass]="revocation.deleted === true ? 'green' : 'red'"
+                [ngClass]="revocation.deleted === true ? 'red' : 'green'"
                 >{{ icon(revocation.deleted) }}</mat-icon
             >
         </mat-cell>

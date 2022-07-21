@@ -412,6 +412,7 @@
         "kid": "Key ID (SKID)",
         "expiration": "Expiry Date",
         "uploadedAt": "Upload Date",
+        "valid": "Valid",
         "deletedAt": "Deletion Date",
         "numOfEntries": "Number of entries",
         "delete": {
