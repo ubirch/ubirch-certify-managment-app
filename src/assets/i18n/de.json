@@ -412,6 +412,7 @@
         "kid": "Schlüssel ID (SKID)",
         "expiration": "Ablaufdatum",
         "uploadedAt": "Hochladedatum",
+        "valid": "Gültig",
         "deletedAt": "Löschdatum",
         "numOfEntries": "Anzahl der Einträge",
         "delete": {
