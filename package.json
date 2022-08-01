@@ -33,10 +33,11 @@
     "keycloak-angular": "^9.1.0",
     "keycloak-js": "^15.1.1",
     "libphonenumber-js": "^1.9.44",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "ngx-animate": "^1.0.1",
     "ngx-cookie-service": "^13.1.2",
     "ngx-mask": "^13.1.1",
+    "pdf-qr": "^1.0.0",
     "rxjs": "~7.5.2",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4"

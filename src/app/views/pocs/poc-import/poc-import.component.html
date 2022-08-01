@@ -12,7 +12,7 @@
     </button>
   </app-notification-inline>
 
-  <app-file-upload (fileSelected)="fileSelected($event)" [progress]="progress"></app-file-upload>
+  <app-file-upload (fileSelected)="fileSelected($event)" [progress]="progress" accept=".csv"></app-file-upload>
 
   <div fxLayout="column" fxLayoutGap="3rem" class="actions">
     <button [disabled]="!file || !!progress" mat-raised-button color="primary" (click)="uploadFile()" class="import-btn">
