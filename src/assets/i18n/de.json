@@ -422,7 +422,7 @@
     },
     "revocationImport": {
         "headline": "Revocation Importieren",
-        "prompt": "Schreiben oder fügen Sie unten eine base64-Zeichenfolge ein und klicken Sie auf die Schaltfläche \"Hochladen\".",
+        "prompt": "Wählen Sie eine .pdf-Datei aus oder legen Sie sie unten ab und klicken Sie auf die Schaltfläche \"Hochladen\".",
         "notifications": {
             "error": "Ooops, wir können die Ausstehende nicht verarbeiten. Bitte versuchen Sie es später noch einmal.",
             "errorTitle": "Dateiupload fehlgeschlagen",

@@ -3,7 +3,7 @@
     <strong>{{ fileName  | translate}}</strong>
     <span *ngIf="fileSize">{{ fileSize | fileSize}}</span>
   </label>
-  <input type="file" id="file" #input (change)="selected($event)" [accept]="accept">
+  <input type="file" id="file" #input (change)="selected($event)" [accept]="_accept">
   <mat-progress-bar
     *ngIf="progress && this.file"
     mode="determinate"
