@@ -422,7 +422,7 @@
     },
     "revocationImport": {
         "headline": "Revocation Import",
-        "prompt": "Write or paste a base64 string below and click \"Upload\" button.",
+        "prompt": "Select or drop a .pdf file below and click \"Upload\" button.",
         "notifications": {
             "error": "Ooops, we are unable to process the revocation. Please try again later.",
             "errorTitle": "Revocation upload failed",
