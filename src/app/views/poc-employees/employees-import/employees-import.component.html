@@ -97,9 +97,8 @@
                 </form>
             </div>
             <div fxLayout="column" fxLayoutGap="3rem" class="actions">
-                <!-- [disabled]="!file || !!progress"   -->
                 <button
-                    [disabled]="form.validator"
+                    [disabled]="this.form.controls['employees'].invalid"
                     mat-raised-button
                     color="primary"
                     (click)="uploadForm()"

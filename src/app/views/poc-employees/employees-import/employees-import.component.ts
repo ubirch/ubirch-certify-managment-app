@@ -57,17 +57,8 @@ export class EmployeesImportComponent implements OnInit {
     createEmployee() {
         return this.formBuilder.group({
             firstName: [null, [Validators.required, Validators.minLength(2)]],
-            lastName: [null, [Validators.required], Validators.minLength(2)],
-            email: [
-                null,
-                [
-                    Validators.required,
-                    Validators.email,
-                    Validators.pattern(
-                        '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'
-                    ),
-                ],
-            ],
+            lastName: [null, [Validators.required, Validators.minLength(2)]],
+            email: [null, [Validators.required, Validators.email]],
         });
     }
 
@@ -103,7 +94,9 @@ export class EmployeesImportComponent implements OnInit {
                 });
                 this.router.navigate(['views/', 'poc-employees']);
             },
-            error: (err) => this.error.handlerResponseError(err),
+            error: (err) => {
+                this.error.handlerResponseError(err);
+            },
         });
     }
 
