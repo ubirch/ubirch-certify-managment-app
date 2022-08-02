@@ -49,7 +49,7 @@ export class RequesterImportComponent implements OnInit {
 
     callback = (result: { success: any; codes: string[]; message: any }) => {
         if (result.success) {
-            this.base64Revocation = result.codes[0];
+            this.base64Revocation = result.codes[0].trim().replace(/(\r\n|\n|\r)/gm, "");
             this.invalidFile = false;
         } else {
             alert(result.message);
