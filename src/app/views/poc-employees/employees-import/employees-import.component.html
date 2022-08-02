@@ -1,28 +1,182 @@
-<h2>{{ 'employeesImport.headline' | translate }}</h2>
+<h2>{{ "employeesImport.headline" | translate }}</h2>
 
-<mat-card fxLayout="column" fxLayoutGap="2rem" fxLayoutAlign="start stretch">
-  <p>
-    {{ 'import.uploadPrompt' | translate }} 
-  </p>
+<mat-tab-group mat-align-tabs="center" [selectedIndex]="0">
+    <!-- First Tab: Import through form -->
+    <mat-tab label="{{ 'employeesImport.formImportLabel' | translate }}">
+        <mat-card
+            fxLayout="column"
+            fxLayoutGap="2rem"
+            fxLayoutAlign="start stretch"
+        >
+            <p fxFlexAlign="center">
+                {{ "employeesImport.formImportPrompt" | translate }}
+            </p>
+            <div fxFlexAlign="center" fxFlex="1 1 auto">
+                <form [formGroup]="form">
+                    <ng-container
+                        formArrayName="employees"
+                        *ngFor="let employee of employees.controls; index as i"
+                    >
+                        <div [formGroupName]="i">
+                            <div fxLayout="row" fxLayoutGap="2rem">
+                                <!-- First Name -->
+                                <mat-form-field fxFlexAlign="center">
+                                    <mat-label>{{
+                                        "pocEmployee.firstName" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="firstName"
+                                    />
+                                    <mat-error>
+                                        {{
+                                            "employeesImport.validationErrors.firstName"
+                                                | translate
+                                        }}
+                                    </mat-error>
+                                </mat-form-field>
 
-   <app-notification-inline [notification]="notification">
-    <button mat-raised-button color="accent" (click)="downloadResult()" *ngIf="errorFile">
-      <mat-icon aria-hidden="false" aria-label="Import pocs">file_download</mat-icon>
-      {{ 'import.downloadFile' | translate }} 
-    </button>
-  </app-notification-inline>
+                                <!-- Last Name -->
+                                <mat-form-field fxFlexAlign="center">
+                                    <mat-label>{{
+                                        "pocEmployee.lastName" | translate
+                                    }}</mat-label>
+                                    <input
+                                        matInput
+                                        formControlName="lastName"
+                                    />
+                                    <mat-error>
+                                        {{
+                                            "employeesImport.validationErrors.lastName"
+                                                | translate
+                                        }}
+                                    </mat-error>
+                                </mat-form-field>
 
-  <app-file-upload (fileSelected)="fileSelected($event)" [progress]="progress"></app-file-upload>
+                                <!-- E-mail -->
+                                <mat-form-field fxFlexAlign="center">
+                                    <mat-label>{{
+                                        "pocEmployee.email" | translate
+                                    }}</mat-label>
+                                    <input
+                                        type="email"
+                                        matInput
+                                        formControlName="email"
+                                    />
+                                    <mat-error>
+                                        {{
+                                            "employeesImport.validationErrors.email"
+                                                | translate
+                                        }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <button
+                                    matTooltip="Delete employee"
+                                    class="deleteBtn"
+                                    mat-mini-fab
+                                    color="primary"
+                                    aria-label="Remove button with a delete icon"
+                                    (click)="removeEmployee(i)"
+                                    *ngIf="i > 0"
+                                >
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <button
+                        type="button"
+                        mat-mini-fab
+                        color="addBtn"
+                        matTooltip="Add more employees"
+                        aria-label="Remove button with a delete icon"
+                        (click)="addEmployee()"
+                    >
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </form>
+            </div>
+            <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+                <!-- [disabled]="!file || !!progress"   -->
+                <button
+                    [disabled]="form.validator"
+                    mat-raised-button
+                    color="primary"
+                    (click)="uploadForm()"
+                    class="import-btn"
+                >
+                    <mat-icon aria-hidden="false" aria-label="Import pocs"
+                        >file_upload</mat-icon
+                    >
+                    {{ "import.upload" | translate }}
+                </button>
+                <button
+                    mat-raised-button
+                    [routerLink]="['/views', 'poc-employees']"
+                    class="back-btn"
+                >
+                    <mat-icon aria-hidden="false" aria-label="Import pocs"
+                        >chevron_left</mat-icon
+                    >
+                    {{ "global.back" | translate }}
+                </button>
+            </div>
+        </mat-card>
+    </mat-tab>
 
-  <div fxLayout="column" fxLayoutGap="3rem" class="actions">
-    <button [disabled]="!file || !!progress" mat-raised-button color="primary" (click)="uploadFile()" class="import-btn">
-      <mat-icon aria-hidden="false" aria-label="Import pocs">file_upload</mat-icon>
-      {{ 'import.upload' | translate }}
-    </button>
-    <button mat-raised-button [routerLink]="[ '/views', 'poc-employees' ]" class="back-btn">
-      <mat-icon aria-hidden="false" aria-label="Import pocs">chevron_left</mat-icon>
-      {{ 'global.back' | translate }} 
-    </button>
-  </div>
- 
-</mat-card>
+    <!-- Second Tab: Import through .csv file -->
+    <mat-tab label="{{ 'employeesImport.csvImportLabel' | translate }}">
+        <mat-card
+            fxLayout="column"
+            fxLayoutGap="2rem"
+            fxLayoutAlign="start stretch"
+        >
+            <p>
+                {{ "import.uploadPrompt" | translate }}
+            </p>
+
+            <app-notification-inline [notification]="notification">
+                <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="downloadResult()"
+                    *ngIf="errorFile"
+                >
+                    <mat-icon aria-hidden="false" aria-label="Import pocs"
+                        >file_download</mat-icon
+                    >
+                    {{ "import.downloadFile" | translate }}
+                </button>
+            </app-notification-inline>
+            <app-file-upload
+                (fileSelected)="fileSelected($event)"
+                [progress]="progress"
+                accept=".csv"
+            ></app-file-upload>
+            <div fxLayout="column" fxLayoutGap="3rem" class="actions">
+                <button
+                    [disabled]="!file || !!progress"
+                    mat-raised-button
+                    color="primary"
+                    (click)="uploadFile()"
+                    class="import-btn"
+                >
+                    <mat-icon aria-hidden="false" aria-label="Import pocs"
+                        >file_upload</mat-icon
+                    >
+                    {{ "import.upload" | translate }}
+                </button>
+                <button
+                    mat-raised-button
+                    [routerLink]="['/views', 'poc-employees']"
+                    class="back-btn"
+                >
+                    <mat-icon aria-hidden="false" aria-label="Import pocs"
+                        >chevron_left</mat-icon
+                    >
+                    {{ "global.back" | translate }}
+                </button>
+            </div>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

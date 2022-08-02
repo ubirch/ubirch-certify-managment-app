@@ -26,7 +26,7 @@ export class PocsService {
     pocStatusUrl = `${this.baseUrl}pocStatus`;
     editUrl = `${this.baseUrl}poc`;
     pocsUrl = `${this.baseUrl}pocs`;
-    uploadUrl = `${this.baseUrl}pocs/create`;
+    uploadUrl = `${this.baseUrl}pocs/csv/create`;
     downloadUrl = `${this.baseUrl}devices`;
 
     constructor(
