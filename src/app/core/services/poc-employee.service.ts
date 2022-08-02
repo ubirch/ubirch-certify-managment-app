@@ -23,7 +23,8 @@ export class PocEmployeeService {
     baseUrl = environment.pocManagerApi + this.pocAdminPath;
     employeesStatusUrl = `${this.baseUrl}employee/status`;
     employeesUrl = `${this.baseUrl}employees`;
-    importEmployeesUrl = `${this.baseUrl}employees/create`;
+    importEmployeesUrl = `${this.baseUrl}employees/csv/create`;
+    importEmployeesFormUrl = `${this.baseUrl}employees/batch/create`;
 
     constructor(
         private http: HttpClient,
@@ -53,6 +54,11 @@ export class PocEmployeeService {
 
     importFile(file: File) {
         return this.importService.uploadFile(file, this.importEmployeesUrl);
+    }
+
+    importForm(employees: IPocEmployee[]): Observable<any> {
+        // return this.importService.uploadFile(file, this.importEmployeesUrl);
+        return this.http.post(this.importEmployeesFormUrl, employees);
     }
 
     revoke2FA(employeeId: string) {

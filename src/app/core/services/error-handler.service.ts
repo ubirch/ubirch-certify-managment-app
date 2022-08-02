@@ -24,6 +24,14 @@ export class ErrorHandlerService {
           title: 'global.errors.403Title',
         });
         break;
+      case 409:
+        if(error.error.data.detail.length > 0) {
+          notification = this.notification.error({
+            message: 'global.errors.409',
+            title: 'global.errors.409Title',
+          });
+        }
+        break;
       default:
         notification = this.notification.error({
           message: 'global.errors.requestDefault',

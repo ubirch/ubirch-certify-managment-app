@@ -96,12 +96,20 @@
     },
     "employeesImport": {
         "headline": "Punkt der Zertifizierung Mitarbeiter Import",
+        "csvImportLabel": ".csv-Datei importieren",
+        "formImportLabel": "Form importieren",
+        "formImportPrompt": "Erstellen Sie unten einen oder mehrere Mitarbeiter und klicken Sie auf die Schaltfläche \"Hochladen\".",
         "notifications": {
             "error": "Ooops, wir können die Datei nicht verarbeiten. Bitte versuchen Sie es später noch einmal.",
             "errorTitle": "Dateiupload fehlgeschlagen",
             "partial": "Bei der Verarbeitung Ihrer .csv-Datei sind einige Fehler aufgetreten. Laden Sie die Ausgabedatei für Details herunter.",
             "partialTitle": "Mitarbeiter importieren unvollständig",
             "success": "Der Import von Mitarbeitern wurde erfolgreich verarbeitet"
+        },
+        "validationErrors": {
+            "email": "Gültige E-Mail Adresse ist erforderlich",
+            "firstName": "Vorname ist erforderlich (min. 2 Zeichen)",
+            "lastName": "Nachname ist erforderlich (mindestens 2 Zeichen)"
         }
     },
     "global": {
@@ -113,9 +121,11 @@
             "400": "Es tut uns leid. Wir konnten die Anfrage nicht bearbeiten. Die Anfragedaten scheinen ungültig zu sein",
             "401": "Es scheint, dass Ihre Sitzung abgelaufen ist. Bitte melden Sie sich erneut an, um fortzufahren",
             "403": "Entschuldigung. Wir waren nicht in der Lage, diese Anfrage zu autorisieren",
+            "409": "Entschuldigung. Wir konnten diese Anfrage nicht bearbeiten, da eine oder mehrere E-Mail-Adressen bereits verwendet werden",
             "400Title": "Fehlerhafte Anfrage",
             "401Title": "Sitzung abgelaufen",
             "403Title": "Fehlende Berechtigung",
+            "409Title": "Doppelte E-Mail Adresse(n)",
             "notImplemented": "Leider können wir die Anfrage nicht bearbeiten. Methode noch nicht implementiert",
             "requestDefault": "Es ist ein Fehler bei der Bearbeitung Ihrer Anfrage aufgetreten. Bitte versuchen Sie es erneut",
             "requestDefaultTitle": "Fehler beim Anfordern"
