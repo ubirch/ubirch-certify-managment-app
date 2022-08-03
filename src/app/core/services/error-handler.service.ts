@@ -25,10 +25,15 @@ export class ErrorHandlerService {
         });
         break;
       case 409:
-        if(error.error.data.detail.length > 0) {
+        if(error.url.includes('api.poc.dev.ubirch.com')) {
           notification = this.notification.error({
-            message: 'global.errors.409',
-            title: 'global.errors.409Title',
+            message: 'global.errors.poc409',
+            title: 'global.errors.poc409Title',
+          });
+        } else if (error.url.includes('api.crl.dev.ubirch.com')) {
+          notification = this.notification.error({
+            message: 'global.errors.revocation409',
+            title: 'global.errors.revocation409Title',
           });
         }
         break;
