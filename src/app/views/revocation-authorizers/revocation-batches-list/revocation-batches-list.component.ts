@@ -102,7 +102,9 @@ export class RevocationBatchesListComponent
     ngOnInit() {
         this.dataSource = new RevocationBatchDataSource(
             this.revocationService,
-            this.errorService
+            this.errorService,
+            this.translateService,
+            this.notificationService
         );
         this.generateFilters();
         this.loadItemsPage();
@@ -169,18 +171,7 @@ export class RevocationBatchesListComponent
                     }
                 })
             )
-            .subscribe({
-                next: () => {
-                    this.notificationService.success({
-                        message: this.translateService.instant(
-                            'revocationAuthorizer.notifications.delete-success'
-                        ),
-                    });
-                },
-                error: (err) => {
-                    this.errorService.handlerResponseError(err);
-                },
-            });
+            .subscribe();
     }
 
     private generateFilters() {
