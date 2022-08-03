@@ -1,5 +1,6 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 import {
     BehaviorSubject,
     catchError,
@@ -13,6 +14,7 @@ import { Filters } from '../../models/filters';
 import { IListResult } from '../../models/interfaces/list-result.interface';
 import { RevocationBatch } from '../../models/interfaces/revocation-batch.interface';
 import { ErrorHandlerService } from '../error-handler.service';
+import { NotificationService } from '../notification.service';
 import { RevocationService } from '../revocation.service';
 
 export class RevocationBatchDataSource implements DataSource<RevocationBatch> {
@@ -29,7 +31,9 @@ export class RevocationBatchDataSource implements DataSource<RevocationBatch> {
 
     constructor(
         private service: RevocationService,
-        private error: ErrorHandlerService
+        private error: ErrorHandlerService,
+        protected translateService: TranslateService,
+        protected notificationService: NotificationService,
     ) {}
 
     connect(
@@ -69,6 +73,17 @@ export class RevocationBatchDataSource implements DataSource<RevocationBatch> {
                 catchError((err) => of(this.error.handlerResponseError(err))),
                 finalize(() => this.loadingSubject.next(false))
             )
-            .subscribe();
+            .subscribe({
+                next: () => {
+                    this.notificationService.success({
+                        message: this.translateService.instant(
+                            'revocationAuthorizer.notifications.delete-success'
+                        ),
+                    });
+                },
+                error: (err) => {
+                    this.error.handlerResponseError(err);
+                },
+            });
     }
 }
