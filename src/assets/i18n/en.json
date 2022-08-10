@@ -424,8 +424,6 @@
         "kid": "Key ID (SKID)",
         "expiration": "Expiry Date",
         "uploadedAt": "Upload Date",
-        "valid": "Valid",
-        "deletedAt": "Deletion Date",
         "numOfEntries": "Number of entries",
         "delete": {
             "deleteConfirmMessage": "Are you sure you want to delete this batch?",
