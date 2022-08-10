@@ -424,8 +424,6 @@
         "kid": "Schlüssel ID (SKID)",
         "expiration": "Ablaufdatum",
         "uploadedAt": "Hochladedatum",
-        "valid": "Gültig",
-        "deletedAt": "Löschdatum",
         "numOfEntries": "Anzahl der Einträge",
         "delete": {
             "deleteConfirmMessage": "Sind Sie sicher, dass Sie diesen Batch löschen möchten?",

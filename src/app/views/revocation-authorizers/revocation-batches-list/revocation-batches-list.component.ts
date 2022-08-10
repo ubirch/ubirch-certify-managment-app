@@ -43,8 +43,6 @@ export class RevocationBatchesListComponent
         'kid',
         'technicalExpiryDate',
         'uploadedAt',
-        'deleted',
-        'deletedAt',
         'num_of_entries',
         'actions',
     ];

@@ -3,7 +3,5 @@ export interface RevocationBatch {
     kid: string;
     technicalExpiryDate: string;
     createdAt: string;
-    deleted: boolean;
-    deletedAt: string;
     numberOfRevocations: number;
 }
