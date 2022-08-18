@@ -140,6 +140,7 @@
     "import": {
         "downloadFile": "Datei herunterladen",
         "filePlaceholder": "Keine Dateien ausgewählt",
+        "multipleFilesPlaceholder": "Dateien ausgewählt",
         "headline": "Punkte der Zertifizierung Import",
         "notifications": {
             "error": "Ooops, wir können die Datei nicht verarbeiten. Bitte versuchen Sie es später noch einmal.",
@@ -432,13 +433,14 @@
     },
     "revocationImport": {
         "headline": "Revocation Importieren",
-        "prompt": "Wählen Sie eine .pdf-Datei aus oder legen Sie sie unten ab und klicken Sie auf die Schaltfläche \"Hochladen\".",
+        "prompt": "Wählen Sie .pdf-Dateien unten aus oder legen Sie sie ab und klicken Sie auf die Schaltfläche \"Hochladen\".",
         "notifications": {
             "error": "Ooops, wir können die Ausstehende nicht verarbeiten. Bitte versuchen Sie es später noch einmal.",
             "errorTitle": "Dateiupload fehlgeschlagen",
             "partial": "There were some errors while processing your revocation.",
             "partialTitle": "Revocation import incomplete",
-            "success": "Revocation wurde erfolgreich bearbeitet"
+            "success": "Revocation wurde erfolgreich bearbeitet",
+            "complete": "Der Importvorgang ist abgeschlossen. Die folgenden revocation(s) wurden nicht importiert, da sie bereits existieren."
         }
     },
     "revocationList": {

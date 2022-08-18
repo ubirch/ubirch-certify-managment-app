@@ -33,7 +33,7 @@ export class RevocationBatchDataSource implements DataSource<RevocationBatch> {
         private service: RevocationService,
         private error: ErrorHandlerService,
         protected translateService: TranslateService,
-        protected notificationService: NotificationService,
+        protected notificationService: NotificationService
     ) {}
 
     connect(
@@ -54,8 +54,10 @@ export class RevocationBatchDataSource implements DataSource<RevocationBatch> {
             .pipe(finalize(() => this.loadingSubject.next(false)))
             .subscribe({
                 next: (batchesResult) => {
-                    this.batchesSubject.next(batchesResult.records ?? []);
-                    this.totalItemsSubject.next(batchesResult.total ?? 0);
+                    // if (batchesResult) {
+                        this.batchesSubject.next(batchesResult ? batchesResult.records : []);
+                        this.totalItemsSubject.next(batchesResult ? batchesResult.total : 0);
+                    // }
                 },
                 error: (err: HttpErrorResponse) => {
                     this.error.handlerResponseError(err);

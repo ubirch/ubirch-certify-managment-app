@@ -29,7 +29,7 @@
       <div *ngIf="state.certifyGroupRoleAssigned" fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupRoleAssigned}">{{ icon(state.certifyGroupRoleAssigned) }}</mat-icon>
         <span>{{ 'poc.state.certifyGroupRoleAssigned' | translate}}</span>
-      </div>
+      </div> 
 
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.adminGroupCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminGroupCreated}">{{ icon(state.adminGroupCreated) }}</mat-icon>
@@ -59,7 +59,7 @@
       <div *ngIf="state.assignedDeviceGroup" fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDeviceGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDeviceGroup' | translate}}</span>
-      </div>
+      </div> 
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.deviceRoleCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceRoleCreated}">{{ icon(state.deviceRoleCreated) }}</mat-icon>
         <span>{{ 'poc.state.deviceRoleCreated' | translate}}</span>
