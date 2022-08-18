@@ -18,7 +18,7 @@
         <div fxLayout="column" fxLayoutGap="3rem" class="actions">
             <button
                 type="submit"
-                [disabled]="!file || !!progress || this.invalidFile"
+                [disabled]=" !!progress || this.invalidFile"
                 mat-raised-button
                 color="primary"
                 (click)="uploadFile()"

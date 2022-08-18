@@ -1,4 +1,11 @@
 <div [ngClass]="cssClass">
-  <h3 *ngIf="data.title">{{ data.title | translate }}</h3>
-  <p>{{ data.message | translate }}</p>
-</div>  
+    <h3 *ngIf="data.title">{{ data.title | translate }}</h3>
+    <p>{{ data.message | translate }}</p>
+    <div *ngIf="data.revocationMessage">
+        <p *ngFor="let item of data.revocationMessage; index as i">
+            <strong>
+                {{ item | translate }}
+            </strong>
+        </p>
+    </div>
+</div>

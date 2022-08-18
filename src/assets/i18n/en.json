@@ -140,6 +140,7 @@
     "import": {
         "downloadFile": "Download File",
         "filePlaceholder": "No files selected",
+        "multipleFilesPlaceholder": "files selected",
         "headline": "Points of Certification Import",
         "notifications": {
             "error": "Ooops, we are unable to process the file. Please try again later.",
@@ -432,13 +433,14 @@
     },
     "revocationImport": {
         "headline": "Revocation Import",
-        "prompt": "Select or drop a .pdf file below and click \"Upload\" button.",
+        "prompt": "Select or drop .pdf files below and click \"Upload\" button.",
         "notifications": {
             "error": "Ooops, we are unable to process the revocation. Please try again later.",
             "errorTitle": "Revocation upload failed",
             "partial": "There were some errors while processing your revocation.",
             "partialTitle": "Revocation import incomplete",
-            "success": "Revocation have been successfully processed"
+            "success": "Revocation have been successfully processed",
+            "complete": "Import proccess completed. The following revocation(s) were not imported because they already exist."
         }
     },
     "revocationList": {

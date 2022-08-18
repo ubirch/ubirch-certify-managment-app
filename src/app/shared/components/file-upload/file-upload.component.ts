@@ -7,6 +7,7 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
@@ -18,11 +19,12 @@ import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status.inte
     styleUrls: ['./file-upload.component.scss'],
 })
 export class FileUploadComponent implements AfterViewInit {
-    file: any;
-    // accept = accept;
+    file: File;
     _accept: string;
     draggedOver = false;
     uploadStates = UploadState;
+    multipleFilenames = 0;
+    multipleFilesSizes = 0;
 
     @ViewChild('input') input: ElementRef;
     @ViewChild('drop') drop: ElementRef;
@@ -43,6 +45,7 @@ export class FileUploadComponent implements AfterViewInit {
     }
 
     @Output() fileSelected = new EventEmitter<File>();
+    @Output() qrSelected = new EventEmitter<any>();
 
     fileDropped$: Observable<any>;
 
@@ -52,19 +55,19 @@ export class FileUploadComponent implements AfterViewInit {
         );
     }
     get fileSize(): number {
-        if (this.file?.size === 20) {
-            return this.file?.files[0].size;
+        if (this.multipleFilenames > 1) {
+            return this.multipleFilesSizes;
         }
         return this.file?.size;
     }
     get fileName(): string {
-        if (this.file?.name === '') {
-            return this.file?.files[0].name;
+        if (this.multipleFilenames > 1) {
+            return `${this.multipleFilenames} ${this.translate.instant('import.multipleFilesPlaceholder')}`;
         }
         return this.file?.name ?? 'import.filePlaceholder';
     }
 
-    constructor() {}
+    constructor(private translate: TranslateService) {}
 
     ngAfterViewInit(): void {
         merge(
@@ -83,14 +86,13 @@ export class FileUploadComponent implements AfterViewInit {
                 filter((v) => !this.disabled),
                 tap((event: DragEvent) => {
                     const filesList = event.dataTransfer?.files;
+                    this.multipleFilenames += filesList.length;
                     for (let i = 0; i < filesList?.length ?? 0; i++) {
+                        this.multipleFilesSizes += filesList.item(i).size;
                         const file = filesList.item(i);
-                        if (file.type === 'text/csv' || 'application/pdf') {
-                            this.file = file;
-                            this.fileChanaged();
-                            this.draggedOver = false;
-                            return;
-                        }
+                        this.file = file;
+                        this.fileChanaged();
+                        this.draggedOver = false;
                     }
                 })
             )
@@ -105,9 +107,7 @@ export class FileUploadComponent implements AfterViewInit {
     }
 
     selected(event) {
-        this._accept === '.csv'
-            ? (this.file = event?.target?.files?.[0])
-            : (this.file = event?.srcElement);
+        this.file = event?.target?.files?.[0];
         this.fileChanaged();
     }
 

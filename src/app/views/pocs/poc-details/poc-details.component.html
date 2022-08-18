@@ -26,10 +26,10 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupCreated}">{{ icon(state.certifyGroupCreated) }}</mat-icon>
         <span>{{ 'poc.state.certifyGroupCreated' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <!-- <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certifyGroupRoleAssigned}">{{ icon(state.certifyGroupRoleAssigned) }}</mat-icon>
         <span>{{ 'poc.state.certifyGroupRoleAssigned' | translate}}</span>
-      </div>
+      </div> -->
 
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.adminGroupCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.adminGroupCreated}">{{ icon(state.adminGroupCreated) }}</mat-icon>
@@ -56,10 +56,10 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDataSchemaGroup}">{{ icon(state.assignedDataSchemaGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDataSchemaGroup' | translate}}</span>
       </div>
-      <div fxLayoutAlign="start center" fxLayoutGap="1rem">
+      <!-- <div fxLayoutAlign="start center" fxLayoutGap="1rem">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.assignedDeviceGroup}">{{ icon(state.assignedDeviceGroup) }}</mat-icon>
         <span>{{ 'poc.state.assignedDeviceGroup' | translate}}</span>
-      </div>
+      </div> -->
       <div fxLayoutAlign="start center" fxLayoutGap="1rem" *ngIf="state.deviceRoleCreated !== undefined">
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.deviceRoleCreated}">{{ icon(state.deviceRoleCreated) }}</mat-icon>
         <span>{{ 'poc.state.deviceRoleCreated' | translate}}</span>
