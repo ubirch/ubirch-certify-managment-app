@@ -73,7 +73,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
                     );
                     this.invalidFile = false;
                 } else {
-                    this.file.pop();
+                    this.file.splice(this.qrCodes.length, 1);
                     alert(result.message);
                     this.invalidFile = true;
                 }
