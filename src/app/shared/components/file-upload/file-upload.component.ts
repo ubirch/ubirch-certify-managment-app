@@ -62,7 +62,9 @@ export class FileUploadComponent implements AfterViewInit {
     }
     get fileName(): string {
         if (this.multipleFilenames > 1) {
-            return `${this.multipleFilenames} ${this.translate.instant('import.multipleFilesPlaceholder')}`;
+            return `${this.multipleFilenames} ${this.translate.instant(
+                'import.multipleFilesPlaceholder'
+            )}`;
         }
         return this.file?.name ?? 'import.filePlaceholder';
     }
@@ -107,8 +109,17 @@ export class FileUploadComponent implements AfterViewInit {
     }
 
     selected(event) {
-        this.file = event?.target?.files?.[0];
-        this.fileChanaged();
+        const filesList = event.target?.files;
+        this.multipleFilenames += filesList.length;
+        for (let i = 0; i < filesList?.length ?? 0; i++) {
+            this.multipleFilesSizes += filesList.item(i).size;
+            const file = filesList.item(i);
+            this.file = file;
+            this.fileChanaged();
+            this.draggedOver = false;
+        }
+        // this.file = event?.target?.files?.[0];
+        // this.fileChanaged();
     }
 
     fileDropped(event) {
