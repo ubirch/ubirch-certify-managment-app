@@ -210,6 +210,7 @@
             "certifyApiProvided": "Bereitgestellte Api zertifizieren",
             "certifyGroupCreated": "Zertifizierungsgruppe erstellt",
             "certifyGroupRoleAssigned": "Zugewiesene Gruppenrolle zertifizieren",
+            "certifyManagerProvided": "Zertifikat an Manager übergeben",
             "certifyRoleCreated": "Zertifizierungsrolle erstellt",
             "clientCertCreated": "Client-Zertifikat erstellt",
             "clientCertProvided": "Client-Zertifikat bereitgestellt",
