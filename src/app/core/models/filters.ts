@@ -6,6 +6,8 @@ const FILTER_PARAM_PREFIX = 'filterColumn';
 export class Filters {
     search = '';
     sortColumn = '';
+    from = '';
+    to = '';
     sortOrder: SortDirection = 'asc';
     pageIndex = 0;
     pageSize: number = DEFAULT_PAGE_SIZE;
@@ -18,7 +20,9 @@ export interface FilterColumn {
 
 export const flattenFilters = (filters: Filters) => {
     const { filterColumns, ...other } = filters;
-    if (!filterColumns) { return filters; }
+    if (!filterColumns) {
+        return filters;
+    }
 
     const flatFilters = Object.keys(filterColumns).reduce((acc, key) => {
         const newKey = `${FILTER_PARAM_PREFIX}[${key}]`;

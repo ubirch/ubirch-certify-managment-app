@@ -5,12 +5,13 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { map, merge, takeUntil, tap } from 'rxjs';
+import { Filters } from 'src/app/core/models/filters';
 
 import { RevocationEntry } from 'src/app/core/models/interfaces/revocation-entry.interface';
 import { Revocation } from 'src/app/core/models/interfaces/revocation.interface';
@@ -38,14 +39,14 @@ export class RevocationEntriesListComponent
     @Input() batchId: string;
 
     displayColumns: string[] = [
-        'dsc_kid',
-        'r_value_signature',
-        'country',
-        'date_of_issue',
-        'expiration',
-        'transaction_id',
+        'kid',
+        'rValueSignature',
+        'issuingCountry',
+        'dateOfIssue',
+        'technicalExpiryDate',
+        'transactionNumber',
     ];
-    defaultSortColumn = 'dateOfIssue';
+    defaultSortColumn = 'rValueSignature';
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
 
@@ -54,7 +55,7 @@ export class RevocationEntriesListComponent
     showActions: boolean;
 
     protected loadItemsPage() {
-        this.dataSource.loadBatchEntries(this.batchId);
+        this.dataSource.loadBatchEntries(this.batchId, this.filters.value);
     }
 
     constructor(
@@ -81,6 +82,7 @@ export class RevocationEntriesListComponent
             this.revocationService,
             this.errorService
         );
+        this.generateFilters();
         this.loadItemsPage();
     }
 
@@ -127,5 +129,20 @@ export class RevocationEntriesListComponent
                 takeUntil(this.unsubscribe$)
             )
             .subscribe();
+    }
+
+    private generateFilters() {
+        this.filters = this.fb.group({
+            ...new Filters(),
+            sortColumn: this.defaultSortColumn,
+        });
+        this.filters.get('search').setValidators([Validators.minLength(3)]);
+
+        this.filters.addControl(
+            'filterColumns',
+            this.fb.group({
+                status: [''],
+            })
+        );
     }
 }

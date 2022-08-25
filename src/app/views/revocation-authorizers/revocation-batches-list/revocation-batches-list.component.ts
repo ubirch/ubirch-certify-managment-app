@@ -47,7 +47,7 @@ export class RevocationBatchesListComponent
         'actions',
     ];
 
-    defaultSortColumn = 'uploadedAt';
+    defaultSortColumn = 'batchId';
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
     expandedElement: RevocationEntry | null;

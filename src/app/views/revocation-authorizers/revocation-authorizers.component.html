@@ -1,4 +1,8 @@
-<mat-tab-group style="align-items: stretch">
+<mat-tab-group
+    mat-align-tabs="center"
+    [selectedIndex]="0"
+    style="align-items: stretch"
+>
     <mat-tab
         label="{{
             'revocationAuthorizer.tabs.revocationsHeadline' | translate
@@ -10,6 +14,8 @@
     <mat-tab
         label="{{ 'revocationAuthorizer.tabs.batchesHeadline' | translate }}"
     >
-        <app-revocation-batches-list></app-revocation-batches-list>
+        <ng-template matTabContent>
+            <app-revocation-batches-list></app-revocation-batches-list>
+        </ng-template>
     </mat-tab>
 </mat-tab-group>

@@ -35,6 +35,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
     };
     private endSubs$ = new Subject();
     invalidFile = true;
+    
 
     constructor(
         private router: Router,
@@ -102,7 +103,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
                 filename: '',
             };
         });
-        console.log(this.base64Revocation);
+        // console.log(this.base64Revocation);
 
         if (this.base64Revocation.length > 0) {
             const obj$ = this.base64Revocation.map((item) => {
@@ -134,9 +135,9 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
                     })
                 )
                 .subscribe((finalArray) => {
-                    console.log(finalArray);
+                    // console.log(finalArray);
                     const finale = finalArray.map((i) => i.filename);
-                    console.log(finale);
+                    // console.log(finale);
                     if (finale.length > 0) {
                         this.notification = this.notificationService.warning({
                             message: 'revocationImport.notifications.complete',

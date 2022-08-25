@@ -210,6 +210,7 @@
             "certifyApiProvided": "Certify api provided",
             "certifyGroupCreated": "Certify group created",
             "certifyGroupRoleAssigned": "Certify group role assigned",
+            "certifyManagerProvided": "Cert provided to manager",
             "certifyRoleCreated": "Certify role created",
             "clientCertCreated": "Client cert created",
             "clientCertProvided": "Client cert provided",
@@ -452,10 +453,22 @@
         "dateOfIssue": "Issued At",
         "expiration": "Expiry Date",
         "warning": "Warning",
-        "no-revocations": "There are no pending revocations."
+        "no-revocations": "There are no pending revocations.",
+        "updatedAt": "Uploaded"
     },
     "revocationRequester": {
-        "register-headline": "Revocation Import"
+        "exportWarningTitle": "Nothing to export",
+        "exportWarning": "There are no revocations in the selected range.",
+        "exportErrortitle": "Too many records",
+        "exportError": "The number of records to be exported must be less than 50000. Please shorten the selected range.",
+        "allRevocations-headline": "All Revocations",
+        "allRevocations-empty": "There are no revocations in the selected range.",
+        "register-headline": "Revocation Import",
+        "date-header": "Enter a date range",
+        "tabs": {
+            "revocationsHeadline": "Pending Revocations",
+            "allRevocationsHeadline": "All Revocations"
+        }
     },
     "revocationAuthorizer": {
         "tabs": {

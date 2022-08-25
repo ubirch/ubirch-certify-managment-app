@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Filters, flattenFilters } from '../models/filters';
+import { AllRevocations } from '../models/interfaces/all-revocations.interface';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { RevocationBatch } from '../models/interfaces/revocation-batch.interface';
 import { RevocationEntry } from '../models/interfaces/revocation-entry.interface';
@@ -16,6 +17,7 @@ import { ExportImportService } from './export-import.service';
 export class RevocationService {
     baseUrl = `${environment.revocationApi}api/dcc/revocation`;
     pendingRevocationsPath = `${this.baseUrl}/pending`;
+    allRevocationsPath = `${this.baseUrl}/uploaded`;
     uploadUrl = `${this.baseUrl}/upload`;
     revocationBatchesUrl = `${this.baseUrl}/batch`;
 
@@ -27,6 +29,16 @@ export class RevocationService {
     getRevocations(filters: Filters): Observable<IListResult<Revocation>> {
         return this.http.get<IListResult<Revocation>>(
             this.pendingRevocationsPath,
+            {
+                params: flattenFilters(filters) as any,
+            }
+        );
+    }
+    getAllRevocations(
+        filters: Filters
+    ): Observable<IListResult<AllRevocations>> {
+        return this.http.get<IListResult<AllRevocations>>(
+            this.allRevocationsPath,
             {
                 params: flattenFilters(filters) as any,
             }
@@ -46,6 +58,15 @@ export class RevocationService {
         );
     }
 
+    exportRevocations(filters: Filters) {
+        const headers = new HttpHeaders().set('Accept', 'text/csv');
+        return this.http.get(this.allRevocationsPath, {
+            headers,
+            responseType: 'blob',
+            params: flattenFilters(filters) as any,
+        });
+    }
+
     uploadRevocations() {
         return this.http.put(this.uploadUrl, null, { responseType: 'text' });
     }
@@ -60,8 +81,13 @@ export class RevocationService {
             { params: flattenFilters(filters) as any }
         );
     }
-    getBatchEntries(batchId: string): Observable<IListResult<RevocationEntry>> {
+    getBatchEntries(
+        batchId: string,
+        filters: Filters
+    ): Observable<IListResult<RevocationEntry>> {
         const url = `${this.revocationBatchesUrl}/${batchId}`;
-        return this.http.get<IListResult<RevocationEntry>>(url);
+        return this.http.get<IListResult<RevocationEntry>>(url, {
+            params: flattenFilters(filters) as any,
+        });
     }
 }
