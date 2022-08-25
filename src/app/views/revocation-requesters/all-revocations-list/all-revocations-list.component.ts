@@ -175,6 +175,9 @@ export class AllRevocationsListComponent
     }
     export() {
         this.exportLoading = true;
+        delete this.filters.value.pageIndex;
+        delete this.filters.value.pageSize;
+        delete this.filters.value.filterColumns;
         this.revocationService
             .exportRevocations(this.filters.value)
             .pipe(
