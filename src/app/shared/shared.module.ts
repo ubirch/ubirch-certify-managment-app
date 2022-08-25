@@ -111,6 +111,8 @@ const LIB_EXPORT_MODULES = [
   MatTabsModule,
   FlexLayoutModule,
   TranslateModule,
+  MatDatepickerModule,
+  MatTooltipModule
 ];
 
 @NgModule({

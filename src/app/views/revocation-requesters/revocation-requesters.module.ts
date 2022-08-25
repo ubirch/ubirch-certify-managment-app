@@ -6,9 +6,10 @@ import { RevocationRequesterRoutingModule } from './revocation-requester-routing
 import { RevocationAuthorizersModule } from '../revocation-authorizers/revocation-authorizers.module';
 import { RequesterFiltersComponent } from './requester-filters/requester-filters.component';
 import { RevocationRequestersComponent } from './revocation-requesters.component';
+import { AllRevocationsListComponent } from './all-revocations-list/all-revocations-list.component';
 
 @NgModule({
-    declarations: [RequesterImportComponent, RequesterFiltersComponent, RevocationRequestersComponent],
+    declarations: [RequesterImportComponent, RequesterFiltersComponent, RevocationRequestersComponent, AllRevocationsListComponent],
     imports: [CommonModule, SharedModule, RevocationRequesterRoutingModule, RevocationAuthorizersModule],
 })
 export class RevocationRequestersModule {}

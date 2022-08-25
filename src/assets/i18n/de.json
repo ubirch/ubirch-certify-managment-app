@@ -453,10 +453,22 @@
         "dateOfIssue": "Ausstellungsdatum",
         "expiration": "Ablaufdatum",
         "warning": "Warnung",
-        "no-revocations": "Es gibt keine ausstehende Revocations."
+        "no-revocations": "Es gibt keine ausstehende Revocations.",
+        "updatedAt": "Hochgeladen"
     },
     "revocationRequester": {
-        "register-headline": "Revocation importieren"
+        "exportWarningTitle": "Nichts zu exportieren",
+        "exportWarning": "Im ausgewählten Bereich gibt es keine Revocations.",
+        "exportErrortitle": "Zu viele Datensätze",
+        "exportError": "Die Anzahl der zu exportierenden Datensätze muss kleiner als 50000 sein. Bitte kürzen Sie den ausgewählten Bereich.",
+        "allRevocations-headline": "Alle Revocations",
+        "allRevocations-empty": "Im ausgewählten Bereich gibt es keine Revocations.",
+        "register-headline": "Revocation importieren",
+        "date-header": "Einen Datumsbereich eingeben",
+        "tabs": {
+            "revocationsHeadline": "Ausstehende Revocations",
+            "allRevocationsHeadline": "Alle Revocations"
+        }
     },
     "revocationAuthorizer": {
         "tabs": {

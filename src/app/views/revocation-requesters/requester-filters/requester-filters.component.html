@@ -1,6 +1,55 @@
-<div fxLayout fxLayoutGap="2rem" fxLayoutAlign="end end" class="filters">
-  <button mat-raised-button color="primary" [routerLink]="[ '/views','revocation-requester', 'import' ]">
-      <mat-icon aria-hidden="false">add</mat-icon>
-      {{ 'listActions.import' | translate }} 
-  </button>
+<form
+    [formGroup]="filters"
+    *ngIf="filters"
+    fxLayout
+    fxLayoutGap="2rem"
+    fxLayoutAlign="end end"
+    class="filters"
+>
+    <mat-form-field appearance="fill">
+        <mat-label>{{
+            "revocationRequester.date-header" | translate
+        }}</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date" #dateRangeStart />
+            <input
+                matEndDate
+                placeholder="End date"
+                #dateRangeEnd
+                (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)"
+            />
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="downloadCSV()"
+        [ngClass]="{ 'export-btn': true, spinner: exportDisabled }"
+        [disabled]="exportDisabled"
+    >
+        <mat-icon aria-hidden="false" aria-label="Export pocs to csv"
+            >download</mat-icon
+        >
+        {{ "listActions.export" | translate }}
+    </button>
+</form>
+<!-- Import button for Pending revocation -->
+<div
+    fxLayout
+    fxLayoutGap="2rem"
+    fxLayoutAlign="end end"
+    style="margin-top: 1.34375rem; margin-bottom: 1.34375rem"
+    *ngIf="!filters"
+>
+    <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/views', 'revocation-requester', 'import']"
+    >
+        <mat-icon aria-hidden="false">add</mat-icon>
+        {{ "listActions.import" | translate }}
+    </button>
 </div>

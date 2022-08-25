@@ -1,59 +1,64 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
+import { MatDateRangePicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { map, merge, takeUntil, tap } from 'rxjs';
+import {
+    debounceTime,
+    finalize,
+    map,
+    merge,
+    of,
+    takeUntil,
+    tap,
+    zip,
+} from 'rxjs';
 import { Filters } from 'src/app/core/models/filters';
-import { Revocation } from 'src/app/core/models/interfaces/revocation.interface';
-import { RevocationDataSource } from 'src/app/core/services/data-sources/revocation-data-source';
+import { AllRevocations } from 'src/app/core/models/interfaces/all-revocations.interface';
+import { INotification } from 'src/app/core/models/interfaces/notification.interface';
+import { AllRevocationsDatasource } from 'src/app/core/services/data-sources/all-revocations-data-source';
 import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
+import { ExportImportService } from 'src/app/core/services/export-import.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { RevocationService } from 'src/app/core/services/revocation.service';
-import {
-    detailExpand,
-    fadeDownIn,
-    fadeUpOut,
-} from 'src/app/core/utils/animations';
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
 
 @Component({
-    selector: 'app-revocation-list',
-    templateUrl: './revocation-list.component.html',
-    styleUrls: ['./revocation-list.component.scss'],
-    animations: [detailExpand, fadeDownIn, fadeUpOut],
+    selector: 'app-all-revocations-list',
+    templateUrl: './all-revocations-list.component.html',
+    styleUrls: ['./all-revocations-list.component.scss'],
 })
-export class RevocationListComponent
-    extends ListComponent<Revocation>
+export class AllRevocationsListComponent
+    extends ListComponent<AllRevocations>
     implements OnInit, AfterViewInit
 {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+    dataSource: AllRevocationsDatasource;
 
-    dataSource: RevocationDataSource;
-
-    displayColumns: string[] = [
-        'kid',
-        'rValueSignature',
-        'issuingCountry',
-        'dateOfIssue',
-        'technicalExpiryDate',
-        'transactionNumber',
-    ];
-    defaultSortColumn = 'rValueSignature';
+    displayColumns: string[] = ['transaction_id', 'updatedAt'];
+    defaultSortColumn = 'updatedAt';
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
-    expandedElement: Revocation | null;
+    expandedElement: AllRevocations | null;
     filters: FormGroup;
+    notification: INotification;
     actionLoading = false;
     showActions: boolean;
+    exportLoading = false;
 
     protected loadItemsPage() {
-        this.dataSource.loadRevocations(this.filters.value);
+        this.dataSource.loadAllRevocations(this.filters.value);
     }
 
     get search() {
@@ -65,6 +70,7 @@ export class RevocationListComponent
     }
 
     constructor(
+        protected exportService: ExportImportService,
         protected revocationService: RevocationService,
         protected fb: FormBuilder,
         protected translateService: TranslateService,
@@ -85,7 +91,7 @@ export class RevocationListComponent
     }
 
     ngOnInit() {
-        this.dataSource = new RevocationDataSource(
+        this.dataSource = new AllRevocationsDatasource(
             this.revocationService,
             this.errorService
         );
@@ -93,7 +99,7 @@ export class RevocationListComponent
         this.loadItemsPage();
     }
 
-    public getRowClass(revocation: Revocation): string {
+    public getRowClass(revocation: AllRevocations): string {
         let rowClass = '';
         return rowClass;
     }
@@ -113,7 +119,6 @@ export class RevocationListComponent
                     pageSize: page.pageSize,
                 }))
             );
-
             merge(sort$, paginate$)
                 .pipe(
                     tap((filters) => {
@@ -134,6 +139,26 @@ export class RevocationListComponent
         }
     }
 
+    dateRangeChange(date: { start: { value: any }; end: { value: any } }) {
+        zip(
+            of([date.start, date.end]).pipe(
+                map(() => ({
+                    from: date.start.value,
+                    to: date.end.value,
+                }))
+            )
+        )
+            .pipe(
+                tap((filters) => {
+                    this.filters.patchValue(...filters);
+                    this.selection.clear();
+                    this.loadItemsPage();
+                }),
+                takeUntil(this.unsubscribe$)
+            )
+            .subscribe();
+    }
+
     private generateFilters() {
         this.filters = this.fb.group({
             ...new Filters(),
@@ -147,5 +172,38 @@ export class RevocationListComponent
                 status: [''],
             })
         );
+    }
+    export() {
+        this.exportLoading = true;
+        this.revocationService
+            .exportRevocations(this.filters.value)
+            .pipe(
+                takeUntil(this.unsubscribe$),
+                finalize(() => (this.exportLoading = false))
+            )
+            .subscribe({
+                next: (blob) => {
+                    if (blob) {
+                        const timezone = new Intl.DateTimeFormat(
+                            'en-US'
+                        ).resolvedOptions().timeZone;
+                        this.exportService.triggerDownload(
+                            blob,
+                            'Revocations_' +
+                                new Date().toLocaleString('en-DE', {
+                                    timeZone: timezone,
+                                }) +
+                                '.csv'
+                        );
+                    } else {
+                        this.notification = this.notificationService.warning({
+                            title: 'revocationRequester.exportWarningTitle',
+                            message: 'revocationRequester.exportWarning',
+                        });
+                    }
+                },
+
+                error: (err) => this.errorService.handlerResponseError(err),
+            });
     }
 }

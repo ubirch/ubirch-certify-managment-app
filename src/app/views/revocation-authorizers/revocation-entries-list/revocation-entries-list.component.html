@@ -8,7 +8,7 @@
     matSortDisableClear
 >
     <!-- Id -->
-    <ng-container matColumnDef="dsc_kid">
+    <ng-container matColumnDef="kid">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.revocationId" | translate
         }}</mat-header-cell>
@@ -18,7 +18,7 @@
     </ng-container>
 
     <!-- Signature -->
-    <ng-container matColumnDef="r_value_signature">
+    <ng-container matColumnDef="rValueSignature">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.rValueSignature" | translate
         }}</mat-header-cell>
@@ -28,7 +28,7 @@
     </ng-container>
 
     <!-- Transaction ID -->
-    <ng-container matColumnDef="transaction_id">
+    <ng-container matColumnDef="transactionNumber">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.transactionId" | translate
         }}</mat-header-cell>
@@ -38,7 +38,7 @@
     </ng-container>
 
     <!-- issuing country -->
-    <ng-container matColumnDef="country">
+    <ng-container matColumnDef="issuingCountry">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.issuingCountry" | translate
         }}</mat-header-cell>
@@ -48,7 +48,7 @@
     </ng-container>
 
     <!-- Valid from -->
-    <ng-container matColumnDef="date_of_issue">
+    <ng-container matColumnDef="dateOfIssue">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.dateOfIssue" | translate
         }}</mat-header-cell>
@@ -58,7 +58,7 @@
     </ng-container>
 
     <!-- Valid until -->
-    <ng-container matColumnDef="expiration">
+    <ng-container matColumnDef="technicalExpiryDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{
             "revocationList.expiration" | translate
         }}</mat-header-cell>
