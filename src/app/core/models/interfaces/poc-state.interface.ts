@@ -20,6 +20,7 @@ export interface IPocState {
     logoStored?: boolean;
     goClientProvided: boolean;
     certifyApiProvided: boolean;
+    certManagerProvided: boolean;
 
     errorMessage: string;
 

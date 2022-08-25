@@ -104,6 +104,10 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.goClientProvided}">{{ icon(state.goClientProvided) }}</mat-icon>
         <span>{{ 'poc.state.goClientProvided' | translate}}</span>
       </div>
+      <div *ngIf="state.certManagerProvided" fxLayoutAlign="start center" fxLayoutGap="1rem">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{success: state.certManagerProvided}">{{ icon(state.certManagerProvided) }}</mat-icon>
+        <span>{{ 'poc.state.certifyManagerProvided' | translate}}</span>
+      </div>
       
     </div>
     <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
