@@ -46,7 +46,7 @@ export class AllRevocationsListComponent
     @ViewChild(MatSort) sort: MatSort;
     dataSource: AllRevocationsDatasource;
 
-    displayColumns: string[] = ['transaction_id', 'updatedAt'];
+    displayColumns: string[] = ['transactionNumber', 'updatedAt'];
     defaultSortColumn = 'updatedAt';
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
