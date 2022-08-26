@@ -42,8 +42,8 @@ export class RevocationBatchesListComponent
         'batchId',
         'kid',
         'technicalExpiryDate',
-        'uploadedAt',
-        'num_of_entries',
+        'createdAt',
+        'numberOfRevocations',
         'actions',
     ];
 
