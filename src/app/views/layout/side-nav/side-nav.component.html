@@ -9,11 +9,11 @@
     </mat-list-item>
     <mat-list-item *ngIf="authService.hasBothRoles()">
       <mat-icon>assignment</mat-icon>
-      <a [routerLink]="[ '/views', 'revocation-requester' ]" routerLinkActive="active">{{ 'Requester' | translate }}</a>
+      <a [routerLink]="[ '/views', 'revocation-requester' ]" routerLinkActive="active">{{ 'revocationRequester.headline' | translate }}</a>
     </mat-list-item>
     <mat-list-item *ngIf="authService.hasBothRoles()">
       <mat-icon>check_circle_outline</mat-icon>
-      <a [routerLink]="[ '/views', 'revocation-authorizer' ]" routerLinkActive="active">{{ 'Authorizer' | translate }}</a>
+      <a [routerLink]="[ '/views', 'revocation-authorizer' ]" routerLinkActive="active">{{ 'revocationAuthorizer.headline' | translate }}</a>
     </mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()">
