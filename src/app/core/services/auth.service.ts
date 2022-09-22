@@ -33,8 +33,6 @@ export class AuthService {
 
     isRevocationRequester() {
         const roles = this.keycloak.getUserRoles();
-        console.log(roles);
-        
         return (
             roles?.includes(REVOCATION_REQUESTER_ROLE) &&
             !roles?.includes(REVOCATION_AUTHORIZER_ROLE)
