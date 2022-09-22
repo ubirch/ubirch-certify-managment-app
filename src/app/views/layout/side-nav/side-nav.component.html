@@ -1,14 +1,22 @@
 <mat-nav-list>
-    <mat-list-item>
+    <mat-list-item *ngIf="!authService.isRevocationApp()">
       <mat-icon>place</mat-icon>
       <a [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" >PoCs</a>
     </mat-list-item>
-    <mat-list-item>
+    <mat-list-item *ngIf="!authService.isRevocationApp()">
       <mat-icon>group</mat-icon>
       <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active">PoC Admins</a>
     </mat-list-item>
+    <mat-list-item *ngIf="authService.hasBothRoles()">
+      <mat-icon>assignment</mat-icon>
+      <a [routerLink]="[ '/views', 'revocation-requester' ]" routerLinkActive="active">{{ 'Requester' | translate }}</a>
+    </mat-list-item>
+    <mat-list-item *ngIf="authService.hasBothRoles()">
+      <mat-icon>check_circle_outline</mat-icon>
+      <a [routerLink]="[ '/views', 'revocation-authorizer' ]" routerLinkActive="active">{{ 'Authorizer' | translate }}</a>
+    </mat-list-item>
     <mat-divider></mat-divider>
-    <mat-list-item *ngIf="authService.isTenantAdmin()">
+    <mat-list-item *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()">
       <mat-icon>account_circle</mat-icon>
       <a [routerLink]="[ '/views', 'profile' ]" routerLinkActive="active">{{ 'userProfile.headline' | translate }}</a>
     </mat-list-item>

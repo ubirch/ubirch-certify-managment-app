@@ -29,6 +29,9 @@ export class RoleRedirectResolver implements Resolve<void> {
         if (this.authService.isRevocationRequester()) {
             redirect = 'revocation-requester';
         }
+        if (this.authService.hasBothRoles()) {
+            redirect = 'revocation-requester';
+        }
 
         this.router.navigate(['/views', redirect]);
     }

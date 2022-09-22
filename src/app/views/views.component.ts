@@ -2,18 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
-  selector: 'app-views',
-  templateUrl: './views.component.html',
-  styleUrls: ['./views.component.scss'],
+    selector: 'app-views',
+    templateUrl: './views.component.html',
+    styleUrls: ['./views.component.scss'],
 })
 export class ViewsComponent implements OnInit {
+    showNav = true;
 
-  showNav = true;
+    constructor(private authService: AuthService) {}
 
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-    if (this.authService.isPocAdmin()) { this.showNav = false; }
-  }
-
+    ngOnInit() {
+        if (this.authService.isPocAdmin()) {
+            this.showNav = false;
+        }
+        if (
+            this.authService.isRevocationApp() &&
+            !this.authService.hasBothRoles()
+        ) {
+            this.showNav = false;
+        }
+    }
 }
