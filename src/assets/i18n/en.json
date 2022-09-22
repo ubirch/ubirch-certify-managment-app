@@ -457,6 +457,7 @@
         "updatedAt": "Uploaded"
     },
     "revocationRequester": {
+        "headline": "Requester",
         "exportWarningTitle": "Nothing to export",
         "exportWarning": "There are no revocations in the selected range.",
         "exportErrortitle": "Too many records",
@@ -471,6 +472,7 @@
         }
     },
     "revocationAuthorizer": {
+        "headline": "Authorizer",
         "tabs": {
             "revocationsHeadline": "Pending Revocations",
             "batchesHeadline": "Uploaded Batches"

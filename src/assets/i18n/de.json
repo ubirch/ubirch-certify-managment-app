@@ -457,6 +457,7 @@
         "updatedAt": "Hochgeladen"
     },
     "revocationRequester": {
+        "headline": "Antragsteller/in",
         "exportWarningTitle": "Nichts zu exportieren",
         "exportWarning": "Im ausgewählten Bereich gibt es keine Revocations.",
         "exportErrortitle": "Zu viele Datensätze",
@@ -471,6 +472,7 @@
         }
     },
     "revocationAuthorizer": {
+        "headline": "Bevollmächtigte/r",
         "tabs": {
             "revocationsHeadline": "Ausstehende Revocations",
             "batchesHeadline": "Hochgeladene Batches"
