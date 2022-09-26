@@ -1,4 +1,4 @@
-<h2>{{ 'pocEdit.headline' | translate }}: <span>{{ poc?.pocName }}</span><span *ngIf="poc?.externalId"> ( {{ poc?.externalId }} )</span></h2>
+<h2>{{ 'pocEdit.headline' | translate }}: <span>{{ poc?.pocName }}</span><span *ngIf="poc?.externalId"></span></h2>
 
 <mat-card>
     <mat-card-content>
@@ -7,13 +7,28 @@
           <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">people_alt</mat-icon>{{ 'pocEdit.fields.pocAdminsList' | translate }}</h3>
           <app-poc-admins-list [pocType]="poc.pocType" [pocId]="pocId"></app-poc-admins-list>
 
-          <h3 fxLayout fxLayoutAlign="start center"><mat-icon color="primary">info</mat-icon>{{ 'pocEdit.fields.main' | translate }}</h3>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="{{ 'pocEdit.fields.phone' | translate }}" formControlName="phone">
-            <mat-error *ngIf="form.get('phone').errors">
-              {{ 'pocEdit.validationErrors.phone' | translate }}
-            </mat-error>
-          </mat-form-field>
+          <ng-container>
+              <h3 fxLayout fxLayoutAlign="start center"><mat-icon color="primary">info</mat-icon>{{ 'pocEdit.fields.main' | translate }}</h3>
+              <div fxLayout fxLayoutGap="2rem">
+                  <mat-form-field class="full-width">
+                      <input matInput placeholder="{{ 'pocEdit.fields.phone' | translate }}" formControlName="phone">
+                      <mat-error *ngIf="form.get('phone').errors">
+                          {{ 'pocEdit.validationErrors.phone' | translate }}
+                      </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="full-width locationIDField">
+                      <input value="{{poc.externalId}}" readonly="true" matInput placeholder="{{'pocEdit.fields.locationID' | translate}}">
+                      <button mat-raised-button color="primary" class="mat-btn-sm locationIdButton" (click)="openChangeLocation()">{{ 'global.change' | translate }}</button>
+                  </mat-form-field>
+              </div>
+          </ng-container>
+
+          <div *ngIf="locationIdChanges?.[0]">
+              <h4>{{"locationEdit.currentChanges" | translate}}</h4>
+              <app-location-id-change-table [pocLocationChanges]="locationIdChanges"></app-location-id-change-table>
+          </div>
+
+
 
           <ng-container formGroupName="address">
               <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem"><mat-icon color="primary">place</mat-icon>{{ 'pocEdit.fields.address' | translate }}</h3>

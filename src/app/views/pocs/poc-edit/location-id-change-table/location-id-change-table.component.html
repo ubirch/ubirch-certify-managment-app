@@ -1,0 +1,28 @@
+<mat-table class="pocs-table mat-elevation-z8" [dataSource]="pocLocationChanges" multiTemplateDataRows>
+    <ng-container matColumnDef="LocationID">
+        <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.new' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let locationChange">{{locationChange.newExternalId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+        <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.status' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let locationChange"><mat-icon>{{"locationEdit." + locationChange.status + "-matIcon" | translate}}</mat-icon> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Timestamp">
+        <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.timestamp' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let locationChange">{{locationChange.changedAt| date:locale.dateFormat:'':locale.language}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="DeleteTimestamp">
+        <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.deleteTimestamp' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let locationChange">{{locationChange.deleteAt | date:locale.dateFormat:'':locale.language}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let locationChange; columns: displayColumns;"
+             class="element-row"
+             [ngClass]="getRowClass(locationChange)">
+    </mat-row>
+</mat-table>
