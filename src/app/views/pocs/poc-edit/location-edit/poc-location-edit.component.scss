@@ -1,0 +1,16 @@
+.submitButton {
+    max-width: 25rem;
+    align-self: center;
+}
+
+.changeAlert {
+    padding: 1rem;
+    background-color: #fff3cd;
+    color: #856404;
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}

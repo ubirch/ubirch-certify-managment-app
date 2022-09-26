@@ -135,7 +135,8 @@
         "login": "Login",
         "logout": "Logout",
         "selected": "Selected",
-        "update": "Update"
+        "update": "Update",
+        "change": "Change"
     },
     "import": {
         "downloadFile": "Download File",
@@ -166,6 +167,25 @@
         "import": "Import",
         "retry": "Retry",
         "revoke2FA": "Revoke 2FA token"
+    },
+    "locationEdit": {
+        "ABORTED-matIcon": "error_outline",
+        "COMPLETED-matIcon": "done",
+        "PENDING-matIcon": "hourglass_empty",
+        "currentChanges": "Current location ID changes",
+        "new": "New location ID",
+        "current": "Current location ID",
+        "status": "Status",
+        "timestamp": "Time of change",
+        "deleteTimestamp": "Deletion of old location ID",
+        "infoText": "The old locationID will be provided for 2 weeks unless the tenant certificate has been updated less than 2 weeks ago. In that case only the new locationID can be used.",
+        "update": "Update Location ID",
+        "headline": "Location ID Update",
+        "successMessage": "Location ID has been successfully updated",
+        "successTitle": "Update success",
+        "validationErrors": {
+            "new": "Maximum 10 Characters, only capital letters and numbers"
+        }
     },
     "poc": {
         "actionMessages": {
@@ -316,6 +336,7 @@
             "firstName": "First Name",
             "houseNumber": "House number",
             "lastName": "Last Name",
+            "locationID": "Location ID",
             "main": "Main",
             "manager": "Manager",
             "pocAdminsList": "PoC Administrators",

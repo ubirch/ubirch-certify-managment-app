@@ -135,7 +135,8 @@
         "login": "Anmeldung",
         "logout": "Abmelden",
         "selected": "Ausgewählte",
-        "update": "Aktualisieren"
+        "update": "Aktualisieren",
+        "change": "Ändern"
     },
     "import": {
         "downloadFile": "Datei herunterladen",
@@ -166,6 +167,25 @@
         "import": "Importieren",
         "retry": "Erneut versuchen",
         "revoke2FA": "2FA-Token widerrufen"
+    },
+    "locationEdit": {
+        "ABORTED-matIcon": "error_outline",
+        "COMPLETED-matIcon": "done",
+        "PENDING-matIcon": "hourglass_empty",
+        "currentChanges": "Aktuelle Standort-ID Änderungen",
+        "new": "Neue Standort-ID",
+        "current": "Aktuelle Standort-ID",
+        "status": "Status",
+        "timestamp": "Änderungszeitpunkt",
+        "deleteTimestamp": "Löschungszeitpunkt der alten Standort-ID",
+        "infoText": "Die alte Standort-ID wird für 2 Wochen bereitgestellt, es sei denn, das Tenant Zertifikat wurde vor weniger als 2 Wochen aktualisiert. In diesem Fall kann nur die neue Standort-ID verwendet werden.",
+        "update": "Standort-ID aktualisieren",
+        "headline": "Standort-ID aktualisieren",
+        "successMessage": "Standort-ID erfolgreich aktualisiert",
+        "successTitle": "Standort-ID aktualisiert",
+        "validationErrors": {
+            "new": "Maximale Länge von 10 Zeichen, nur Großbuchstaben und Zahlen erlaubt"
+        }
     },
     "poc": {
         "actionMessages": {
@@ -316,6 +336,7 @@
             "firstName": "Vorname",
             "houseNumber": "Hausnummer",
             "lastName": "Nachname",
+            "locationID": "Location ID",
             "main": "Main",
             "manager": "Manager",
             "pocAdminsList": "PoC Administratoren",

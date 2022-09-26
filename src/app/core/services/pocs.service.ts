@@ -111,4 +111,10 @@ export class PocsService {
         return this.http.put(url, null);
     }
 
+    editLocationId(pocId: string, newLocationId: string) {
+        const url = `${this.baseUrl}poc/${pocId}/externalId`;
+        const body = { "newExternalId": newLocationId };
+        return this.http.put(url, body);
+    }
+
 }
