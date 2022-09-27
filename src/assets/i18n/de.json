@@ -171,7 +171,7 @@
     "locationEdit": {
         "ABORTED-matIcon": "error_outline",
         "COMPLETED-matIcon": "done",
-        "PENDING-matIcon": "hourglass_empty",
+        "PROCESSING-matIcon": "hourglass_empty",
         "currentChanges": "Aktuelle Standort-ID Änderungen",
         "new": "Neue Standort-ID",
         "current": "Aktuelle Standort-ID",
@@ -184,7 +184,11 @@
         "successMessage": "Standort-ID erfolgreich aktualisiert",
         "successTitle": "Standort-ID aktualisiert",
         "validationErrors": {
-            "new": "Maximale Länge von 10 Zeichen, nur Großbuchstaben und Zahlen erlaubt"
+            "new": "Maximale Länge von 9 Zeichen, nur Großbuchstaben und Zahlen erlaubt"
+        },
+        "errors": {
+            "duplicateMessage": "Die neue Standort-ID wurde bereits verwendet und kann nicht erneut verwendet werden",
+            "duplicateTitle": "Doppelte Standort-ID"
         }
     },
     "poc": {
