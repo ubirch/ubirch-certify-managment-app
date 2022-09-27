@@ -171,7 +171,7 @@
     "locationEdit": {
         "ABORTED-matIcon": "error_outline",
         "COMPLETED-matIcon": "done",
-        "PENDING-matIcon": "hourglass_empty",
+        "PROCESSING-matIcon": "hourglass_empty",
         "currentChanges": "Current location ID changes",
         "new": "New location ID",
         "current": "Current location ID",
@@ -184,7 +184,11 @@
         "successMessage": "Location ID has been successfully updated",
         "successTitle": "Update success",
         "validationErrors": {
-            "new": "Maximum 10 Characters, only capital letters and numbers"
+            "new": "Maximum 9 Characters, only capital letters and numbers"
+        },
+        "errors": {
+            "duplicateMessage": "The new location ID has already been used and can't be used again.",
+            "duplicateTitle": "Duplicate location ID"
         }
     },
     "poc": {

@@ -43,6 +43,7 @@ export class PocEditComponent implements OnInit {
             next: (res: any) => {
                 this.poc = res;
                 this.locationIdChanges = this.poc.externalIdChanges;
+                console.log(this.poc)
                 this.generateForm();
             },
             error: (err) => {

@@ -58,7 +58,7 @@ export class PocLocationEditComponent implements OnInit {
     generateForm() {
         this.form = this.fb.group({
             current: [this.poc.externalId, [Validators.required]],
-            new: ['', [Validators.required, Validators.minLength(5),  /*this.locationIdValidator()*/ ]],  //TODO add back in after testing
+            new: ['', [Validators.required, Validators.minLength(5), this.locationIdValidator()]],
         });
     }
 
@@ -69,14 +69,13 @@ export class PocLocationEditComponent implements OnInit {
                 this.notificationService.success({
                     message: this.translationService.instant('locationEdit.successMessage'),
                     title: this.translationService.instant('locationEdit.successTitle'),
-                    duration: 1500,
+                    duration: 3500,
                     type: NotificationType.success
                 })
                 this.disableForm = true;
                 setTimeout(() => {
                     this.router.navigate(['../../', this.pocId], {relativeTo: this.route});
                 }, 1500);
-
             },
             error: (err) => {
                 this.errorService.handlerResponseError(err);
@@ -89,14 +88,24 @@ export class PocLocationEditComponent implements OnInit {
     }
 
     locationIdValidator(): ValidatorFn {
-            return (control:AbstractControl) : ValidationErrors | null => {
+        return (control: AbstractControl): ValidationErrors | null => {
 
+            const pocType = this.poc?.pocType.toLowerCase();
+            if (pocType.includes('bmg')) {
                 const value = control.value;
 
                 const alphanumeric = /^[A-Z0-9]+$/;
 
-                return alphanumeric.test(value) ? null : {locationId: true};
-            };
+                if (value.length > 9) {
+                    return {locationIdValidator: true};
+                }
+
+                return alphanumeric.test(value) ? null : {locationIdValidator: true};
+            }
+
+            return null;
+
+        };
     }
 
 }

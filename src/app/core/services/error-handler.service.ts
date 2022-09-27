@@ -10,12 +10,19 @@ export class ErrorHandlerService {
 
     handlerResponseError(error: HttpErrorResponse) {
         let notification;
+        console.log(error);
         switch (error.status) {
             case 400:
                 if (error.message.includes('too many records')) {
                     notification = this.notification.error({
                         message: 'revocationRequester.exportError',
                         title: 'revocationRequester.exportErrortitle',
+                    });
+                    break;
+                } else if (error.error.errorMessage.includes('externalId') && error.error.errorMessage.includes('is already used')) {
+                    notification = this.notification.error({
+                        message: 'locationEdit.errors.duplicateMessage',
+                        title: 'locationEdit.errors.duplicateTitle',
                     });
                     break;
                 } else {
