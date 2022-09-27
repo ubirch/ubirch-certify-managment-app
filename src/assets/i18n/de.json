@@ -157,7 +157,7 @@
     "listActions": {
         "action": "Aktion",
         "activate": "Aktivieren",
-        "addAdmin": "Add Admin",
+        "addAdmin": "Admin hinzufügen",
         "apply": "Anwenden",
         "completeIdentify": "Vervollständige Web Ident",
         "deactivate": "Deaktivieren",
