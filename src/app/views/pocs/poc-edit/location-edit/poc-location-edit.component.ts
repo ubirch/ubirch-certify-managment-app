@@ -58,7 +58,7 @@ export class PocLocationEditComponent implements OnInit {
     generateForm() {
         this.form = this.fb.group({
             current: [this.poc.externalId, [Validators.required]],
-            new: ['', [Validators.required, Validators.minLength(5),  this.locationIdValidator()]],
+            new: ['', [Validators.required, Validators.minLength(5),  /*this.locationIdValidator()*/ ]],  //TODO add back in after testing
         });
     }
 
