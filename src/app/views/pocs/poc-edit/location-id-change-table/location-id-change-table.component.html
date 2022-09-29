@@ -1,4 +1,9 @@
 <mat-table class="pocs-table mat-elevation-z8" [dataSource]="pocLocationChanges" multiTemplateDataRows>
+    <ng-container matColumnDef="LocationIDOld">
+        <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.old' | translate }}</mat-header-cell>
+        <mat-cell *matCellDef="let locationChange">{{locationChange.oldExternalId}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="LocationID">
         <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.new' | translate }}</mat-header-cell>
         <mat-cell *matCellDef="let locationChange">{{locationChange.newExternalId}}</mat-cell>

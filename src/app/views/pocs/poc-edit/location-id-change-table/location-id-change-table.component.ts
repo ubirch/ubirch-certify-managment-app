@@ -15,6 +15,7 @@ export class LocationIdChangeTableComponent implements OnInit {
     locale: ILocale;
 
     displayColumns: string[] = [
+        'LocationIDOld',
         'LocationID',
         'Status',
         'Timestamp',
