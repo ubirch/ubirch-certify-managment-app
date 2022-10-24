@@ -23,6 +23,9 @@ export class RoleRedirectResolver implements Resolve<void> {
         if (this.authService.isTenantAdmin()) {
             redirect = 'pocs';
         }
+        if (this.authService.isSuperAdmin()) {
+            redirect = 'super-admin';
+        }
         if (this.authService.isRevocationAuthorizer()) {
             redirect = 'revocation-authorizer';
         }
