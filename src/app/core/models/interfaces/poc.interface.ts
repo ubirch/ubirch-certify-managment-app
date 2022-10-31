@@ -4,6 +4,7 @@ import { IAddress } from './address.interface';
 import { IPerson } from './person.interface';
 import { IPocAddons } from './poc-addons.interface';
 import {ILocationIdChange} from "./locationIdChange.interface";
+import { PocType } from '../enums/poc-type.enum';
 
 export interface IPoc {
     id: string;
@@ -25,7 +26,7 @@ export interface IPoc {
     certifyApp?: boolean;
     clientCertRequired: boolean;
     pocAddons: IPocAddons;
-    pocType: string;
+    pocType: PocType;
 
     created: Date;
     lastUpdated?: Date;
