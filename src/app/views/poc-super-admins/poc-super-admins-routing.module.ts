@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SuperAdminDetailsComponent } from './super-admin-details/super-admin-details.component';
 import { SuperAdminListComponent } from './super-admin-list/super-admin-list.component';
 
 const routes: Routes = [
@@ -12,6 +13,11 @@ const routes: Routes = [
         path: 'pocs',
         pathMatch: 'full',
         component: SuperAdminListComponent,
+    },
+    {
+        path: 'poc-details/:id',
+        pathMatch: 'full',
+        component: SuperAdminDetailsComponent,
     },
 ];
 
