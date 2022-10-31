@@ -509,6 +509,23 @@
             "delete-success": "Batch has been successfully deleted"
         }
     },
+    "superAdmin": {
+        "pocsList": {
+            "headline": "Points of Certification Super Admins"
+        },
+        "pocDetails": {
+            "headline": "Point of Certification Details",
+            "tenant": "Tenant",
+            "tenantName": "Tenant Name",
+            "mainAdmin": "Main PoC Admin",
+            "details": "PoC Details",
+            "pocName": "PoC Name",
+            "locationId": "Location ID",
+            "status": "Status",
+            "createdAt": "Created At",
+            "Active": "Active"
+        }
+    },
     "userProfile": {
         "headline": "User Profile",
         "personalDetails": {
