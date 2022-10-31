@@ -523,7 +523,9 @@
             "locationId": "Location ID",
             "status": "Status",
             "createdAt": "Erstellt",
-            "Active": "Activ"
+            "Active": "Activ",
+            "validCert": "Valid Until",
+            "renewCert": "Erstellen & Ersetzen"
         }
     },
     "userProfile": {
