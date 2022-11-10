@@ -11,17 +11,21 @@
 
     <ng-container matColumnDef="Status">
         <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.status' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let locationChange"><mat-icon>{{"locationEdit." + locationChange.status + "-matIcon" | translate}}</mat-icon> </mat-cell>
+        <mat-cell *matCellDef="let locationChange">
+            <mat-icon>{{"locationEdit." + locationChange.status + "-matIcon" | translate}}</mat-icon>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Timestamp">
         <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.timestamp' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let locationChange">{{locationChange.changedAt| date:locale.dateFormat:'':locale.language}}</mat-cell>
+        <mat-cell
+            *matCellDef="let locationChange">{{locationChange.changedAt| date:locale.dateFormat:'':locale.language}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="DeleteTimestamp">
         <mat-header-cell *matHeaderCellDef>{{ 'locationEdit.deleteTimestamp' | translate }}</mat-header-cell>
-        <mat-cell *matCellDef="let locationChange">{{locationChange.deleteAt | date:locale.dateFormat:'':locale.language}}</mat-cell>
+        <mat-cell
+            *matCellDef="let locationChange">{{locationChange.deleteAt | date:locale.dateFormat:'':locale.language}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>

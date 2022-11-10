@@ -7,6 +7,7 @@ import {
     TENANT_ADMIN_ROLE,
     REVOCATION_REQUESTER_ROLE,
     REVOCATION_AUTHORIZER_ROLE,
+    SUPER_ADMIN_ROLE,
 } from '../core/models/roles';
 import { LandingComponent } from './landing/landing.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
@@ -56,6 +57,17 @@ const routes: Routes = [
                 canActivate: [RoleGuard],
                 data: {
                     role: POC_ADMIN_ROLE,
+                },
+            },
+            {
+                path: 'super-admin',
+                loadChildren: () =>
+                    import('./poc-super-admins/poc-super-admins.module').then(
+                        (m) => m.PocSuperAdminsModule
+                    ),
+                canActivate: [RoleGuard],
+                data: {
+                    role: SUPER_ADMIN_ROLE,
                 },
             },
             {

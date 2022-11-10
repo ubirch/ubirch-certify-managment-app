@@ -5,6 +5,7 @@ import {
     REVOCATION_AUTHORIZER_ROLE,
     REVOCATION_REQUESTER_ROLE,
     ROLE,
+    SUPER_ADMIN_ROLE,
     TENANT_ADMIN_ROLE,
 } from '../models/roles';
 
@@ -29,6 +30,11 @@ export class AuthService {
     isPocAdmin() {
         const roles = this.keycloak.getUserRoles();
         return roles?.includes(POC_ADMIN_ROLE);
+    }
+
+    isSuperAdmin() {
+        const roles = this.keycloak.getUserRoles();
+        return roles?.includes(SUPER_ADMIN_ROLE);
     }
 
     isRevocationRequester() {
@@ -56,7 +62,7 @@ export class AuthService {
     }
 
     isRevocationApp() {
-      const roles = this.keycloak.getUserRoles();
+        const roles = this.keycloak.getUserRoles();
         return (
             roles?.includes(REVOCATION_AUTHORIZER_ROLE) ||
             roles?.includes(REVOCATION_REQUESTER_ROLE)

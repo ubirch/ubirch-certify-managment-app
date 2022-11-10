@@ -509,6 +509,39 @@
             "delete-success": "Batch has been successfully deleted"
         }
     },
+    "superAdmin": {
+        "pocsList": {
+            "headline": "Points of Certification Super Admins"
+        },
+        "pocDetails": {
+            "headline": "Point of Certification Details",
+            "tenant": "Tenant",
+            "tenantName": "Tenant Name",
+            "mainAdmin": "Main PoC Admin",
+            "details": "PoC Details",
+            "pocName": "PoC Name",
+            "locationId": "Location ID",
+            "status": "Status",
+            "createdAt": "Created At",
+            "active": "Active",
+            "validCert": "Valid Until",
+            "renewCert": "Create & Replace",
+            "clientCert": "Client Certificate",
+            "expirationWarnings": {
+                "urgent": "The Client Certificate will expire in less than 4 weeks. Please renew it in the near future.",
+                "veryUrgent": "The Client Certificate will expire in less than 1 week. Please renew it as soon as possible.",
+                "expired": "The Client Certificate has expired. You have to renew it to restore functionality."
+            }
+        },
+        "cert": {
+            "renew-title": "Create and Replace Client Certificate",
+            "renew-message": "Are you sure you want to create and replace the client certificate?",
+            "renew-yes": "Yes I am sure",
+            "renew-no": "No, cancel",
+            "renew-success": "Client certificate has been successfully created and replaced",
+            "renew-success-title": "Success"
+        }
+    },
     "userProfile": {
         "headline": "User Profile",
         "personalDetails": {
