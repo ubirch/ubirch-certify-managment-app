@@ -49,10 +49,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
     configs = {
         scale: {
             once: true,
-            value: 2,
-            start: 0.2,
-            step: 0.2,
-            stop: 2,
+            value: 3,
         },
         resultOpts: {
             singleCodeInPage: true,
