@@ -1,34 +1,65 @@
-h2 span { font-weight: normal;}
+h2 span {
+    font-weight: normal;
+}
 
 form {
-  padding: 2rem;
+    padding: 2rem;
 }
 
 .full-width {
-  width: 100%;
+    width: 100%;
 }
 
 h3 {
-  font-weight: bold;
-  margin-top: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
 
-  mat-icon {
-    margin-right: 0.5rem;
-  }
+    mat-icon {
+        margin-right: 0.5rem;
+    }
 }
 
 .actions {
-  margin: 2rem auto 0;
+    margin: 2rem auto 0;
 }
 
-::ng-deep .locationIDField .mat-form-field-infix{
+::ng-deep .locationIDField .mat-form-field-infix {
     display: flex;
     flex-direction: row;
 }
 
-::ng-deep .locationIdButton{
+::ng-deep .locationIdButton {
     height: 2rem;
-    padding: 0;
     margin-top: -1rem;
     line-height: 14px;
+}
+
+::ng-deep .mat-raised-button {
+    min-width: unset;
+}
+
+.expirationAlert {
+    padding: 1rem;
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0 !important;
+}
+
+.urgent {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.veryUrgent{
+    background-color: #ffe6cd;
+    color: #855104;
+}
+
+.expired {
+    background-color: #f8d7da;
+    color: #721c24;
 }

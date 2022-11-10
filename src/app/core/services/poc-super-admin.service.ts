@@ -29,8 +29,11 @@ export class PocSuperAdminService {
     }
 
     renewClientCert(pocId: string) {
-        const url = `${this.baseUrl}certificates/pocs`;
-        const body = { pocId };
-        return this.http.post(url, body);
+        if (pocId) {
+            const url = `${this.baseUrl}certificates/pocs/renew`;
+            const array = [pocId];
+            return this.http.patch(url, {ids: array});
+        }
+        return of(Error());
     }
 }

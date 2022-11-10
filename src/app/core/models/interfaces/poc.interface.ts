@@ -5,6 +5,7 @@ import { IPerson } from './person.interface';
 import { IPocAddons } from './poc-addons.interface';
 import {ILocationIdChange} from "./locationIdChange.interface";
 import { PocType } from '../enums/poc-type.enum';
+import {IMainAdmin} from "./mainAdmin.interface";
 
 export interface IPoc {
     id: string;
@@ -22,6 +23,7 @@ export interface IPoc {
     extraConfig?: any;
     manager?: IPerson;
     roleName: string;
+    mainAdmin?: IMainAdmin;
 
     certifyApp?: boolean;
     clientCertRequired: boolean;
@@ -31,4 +33,6 @@ export interface IPoc {
     created: Date;
     lastUpdated?: Date;
     errorMessage?: string;
+
+    tenantName?: string;
 }

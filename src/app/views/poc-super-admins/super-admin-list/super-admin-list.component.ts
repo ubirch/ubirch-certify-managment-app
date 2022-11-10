@@ -48,6 +48,8 @@ import {
 import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
 import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
+import {ILocale} from "../../../core/models/interfaces/locale.interface";
+import {LocaleService} from "../../../core/services/locale.service";
 
 @Component({
     selector: 'app-super-admin-list',
@@ -63,6 +65,7 @@ export class SuperAdminListComponent
     @ViewChild(MatSort) sort: MatSort;
 
     dataSource: PocSuperAdminDataSource;
+    locale: ILocale;
 
     displayColumns: string[] = [
         'externalId',
@@ -107,7 +110,8 @@ export class SuperAdminListComponent
         protected errorService: ErrorHandlerService,
         protected exportService: ExportImportService,
         protected notificationService: NotificationService,
-        protected router: Router
+        protected router: Router,
+        private localeService: LocaleService
     ) {
         super(
             fb,
@@ -120,6 +124,7 @@ export class SuperAdminListComponent
     }
 
     ngOnInit() {
+        this.localeService.current$.subscribe(locale => this.locale = locale);
         this.dataSource = new PocSuperAdminDataSource(
             this.pocSuperAdminService,
             this.errorService

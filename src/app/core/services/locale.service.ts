@@ -17,13 +17,15 @@ registerLocaleData(localeEn, 'en');
 const LOCALES: { [key: string]: ILocale } = {
   en: {
     language: 'en',
-    dateFormat: DateTimeLocaleFormat.enDisplayShort,
-    datePlaceholder: DateTimeLocaleFormat.enDisplayShortPlaceholder,
+      dateFormat: DateTimeLocaleFormat.enDisplayShort,
+      dateFormatLong: DateTimeLocaleFormat.enDisplayLong,
+      datePlaceholder: DateTimeLocaleFormat.enDisplayShortPlaceholder,
   } as ILocale,
   de: {
     language: 'de',
-    dateFormat: DateTimeLocaleFormat.deDisplayShort,
-    datePlaceholder: DateTimeLocaleFormat.deDisplayShortPlaceholder
+      dateFormat: DateTimeLocaleFormat.deDisplayShort,
+      dateFormatLong: DateTimeLocaleFormat.deDisplayLong,
+      datePlaceholder: DateTimeLocaleFormat.deDisplayShortPlaceholder
   } as ILocale,
 };
 

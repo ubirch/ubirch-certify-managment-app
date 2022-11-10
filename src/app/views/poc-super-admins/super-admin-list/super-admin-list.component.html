@@ -54,7 +54,7 @@
                         PocActivationStateTranslation[poc.active] | translate
                 }}"
             ></app-activation-checkbox>
-        </mat-cell> 
+        </mat-cell>
     </ng-container>  -->
 
     <!-- createdAt -->
@@ -63,7 +63,7 @@
             "poc.created" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let poc">{{
-            poc.created | date: "yyyy-MM-dd hh:mm"
+            poc.created | date:locale.dateFormatLong:"": locale.language
         }}</mat-cell>
     </ng-container>
 
@@ -73,7 +73,7 @@
             "poc.lastUpdated" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let poc">{{
-            poc.lastUpdated | date: "yyyy-MM-dd hh:mm"
+            poc.lastUpdated | date:locale.dateFormatLong:"": locale.language
         }}</mat-cell>
     </ng-container>
 
@@ -130,7 +130,7 @@
     <mat-row
         *matRowDef="let poc; columns: displayColumns"
         class="element-row"
-        [ngClass]="getRowClass(poc)"   
+        [ngClass]="getRowClass(poc)"
     >
     </mat-row>
     <!-- <mat-row
