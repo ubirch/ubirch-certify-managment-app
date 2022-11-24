@@ -53,7 +53,7 @@
             "revocationList.dateOfIssue" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let revocation">{{
-            revocation.dateOfIssue | date: "yyyy-MM-dd hh:mm"
+            revocation.dateOfIssue | date: "yyyy-MM-dd HH:mm"
         }}</mat-cell>
     </ng-container>
 
@@ -63,7 +63,7 @@
             "revocationList.expiration" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let revocation">{{
-            revocation.technicalExpiryDate | date: "yyyy-MM-dd hh:mm"
+            revocation.technicalExpiryDate | date: "yyyy-MM-dd HH:mm"
         }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
