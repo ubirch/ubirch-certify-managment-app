@@ -115,7 +115,17 @@
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width locationIDField">
                         <input
+                            *ngIf="!expectedCertExpirationDate"
                             value="{{ poc?.mainAdmin?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'superAdmin.pocDetails.validCert' | translate
+                            }}"
+                        />
+                        <input
+                            *ngIf="expectedCertExpirationDate"
+                            value="{{ expectedCertExpirationDate | date:locale.dateFormatLong:'':locale.language}} {{ 'superAdmin.pocDetails.recentChange' | translate }}"
                             readonly="true"
                             matInput
                             placeholder="{{
@@ -132,9 +142,9 @@
                         </button>
                     </mat-form-field>
                 </div>
-                <p  *ngIf="getCertUrgency() == 0" class="expirationAlert urgent"><mat-icon>notification_important</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.urgent' | translate}}</p>
-                <p  *ngIf="getCertUrgency() == 1" class="expirationAlert veryUrgent"><mat-icon>warning</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.veryUrgent' | translate}}</p>
-                <p  *ngIf="getCertUrgency() == 2" class="expirationAlert expired"><mat-icon>error</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.expired' | translate}}</p>
+                <p  *ngIf="getCertUrgency() == 0 && !expectedCertExpirationDate" class="expirationAlert urgent"><mat-icon>notification_important</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.urgent' | translate}}</p>
+                <p  *ngIf="getCertUrgency() == 1 && !expectedCertExpirationDate" class="expirationAlert veryUrgent"><mat-icon>warning</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.veryUrgent' | translate}}</p>
+                <p  *ngIf="getCertUrgency() == 2 && !expectedCertExpirationDate" class="expirationAlert expired"><mat-icon>error</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.expired' | translate}}</p>
             </ng-container>
 
             <div fxLayout="column" fxLayoutGap="1rem" class="actions">

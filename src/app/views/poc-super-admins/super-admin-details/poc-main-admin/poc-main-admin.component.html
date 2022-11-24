@@ -23,6 +23,14 @@
         <mat-cell *matCellDef="let admin">{{ admin.email }}</mat-cell>
     </ng-container>
 
+    <!-- phone -->
+    <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef>{{
+            "pocAdmin.phone" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let admin">{{ admin.phoneNumber }}</mat-cell>
+    </ng-container>
+
     <!-- active -->
     <ng-container matColumnDef="active">
         <mat-header-cell *matHeaderCellDef>{{
