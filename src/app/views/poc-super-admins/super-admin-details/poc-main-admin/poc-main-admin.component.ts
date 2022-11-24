@@ -20,6 +20,7 @@ export class PocMainAdminComponent implements OnInit {
         'firstName',
         'lastName',
         'email',
+        'phoneNumber',
         'active',
         'createdAt',
     ];

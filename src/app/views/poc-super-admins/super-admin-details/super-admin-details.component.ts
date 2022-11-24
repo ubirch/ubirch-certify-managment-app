@@ -14,6 +14,7 @@ import {IPoc} from "../../../core/models/interfaces/poc.interface";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -25,6 +26,9 @@ export class SuperAdminDetailsComponent implements OnInit {
     poc: IPoc;
     pocId: string;
     locale: ILocale;
+    expectedCertExpirationDate: Date;
+
+    pocSubscription: Subscription;
 
     constructor(
         private pocSuperAdminService: PocSuperAdminService,
@@ -42,26 +46,7 @@ export class SuperAdminDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.localService.current$.subscribe(locale => this.locale = locale);
-        this.route.paramMap
-            .pipe(
-                map((params: ParamMap) => params.get('id')),
-                filter((pocId) => !!pocId),
-                tap((pocId) => (this.pocId = pocId)),
-                switchMap((pocId) => this.pocSuperAdminService.getPoc(pocId))
-            )
-            .subscribe({
-                next: (res: any) => {
-                    this.poc = res;
-                    console.log(this.poc);
-                    this.generateForm();
-                },
-                error: (err) => {
-                    this.errorService.handlerResponseError(err);
-                    this.router.navigate(['../../'], {
-                        relativeTo: this.route,
-                    });
-                },
-            });
+        this.pocSubscription = this.subscribeToPoc();
     }
 
     generateForm() {
@@ -108,6 +93,7 @@ export class SuperAdminDetailsComponent implements OnInit {
                             message: this.translate.instant('superAdmin.cert.renew-success'),
                             title: this.translate.instant('superAdmin.cert.renew-success-title'),
                         });
+                        this.expectedCertExpirationDate = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000);
                     },
                     error: (err) => {
                         this.errorService.handlerResponseError(err);
@@ -142,5 +128,28 @@ export class SuperAdminDetailsComponent implements OnInit {
         }
 
         return CERTURGENCY.NONE;
+    }
+
+    subscribeToPoc() {
+        return this.route.paramMap
+            .pipe(
+                map((params: ParamMap) => params.get('id')),
+                filter((pocId) => !!pocId),
+                tap((pocId) => (this.pocId = pocId)),
+                switchMap((pocId) => this.pocSuperAdminService.getPoc(pocId))
+            )
+            .subscribe({
+                next: (res: any) => {
+                    this.poc = res;
+                    console.log(this.poc);
+                    this.generateForm();
+                },
+                error: (err) => {
+                    this.errorService.handlerResponseError(err);
+                    this.router.navigate(['../../'], {
+                        relativeTo: this.route,
+                    });
+                },
+            });
     }
 }
