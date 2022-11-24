@@ -111,8 +111,8 @@
       
     </div>
     <div gdColumns="auto 1fr" class="state-dates" fxLayoutGap="0.5rem">
-      <label>{{ 'poc.state.lastUpdated' | translate }}:</label><span>{{ state.lastUpdated | date:'yyyy-MM-dd hh:mm' }}</span>
-      <label>{{ 'poc.state.created' | translate }}:</label><span>{{ state.created | date:'yyyy-MM-dd hh:mm' }}</span>
+      <label>{{ 'poc.state.lastUpdated' | translate }}:</label><span>{{ state.lastUpdated | date:'yyyy-MM-dd HH:mm' }}</span>
+      <label>{{ 'poc.state.created' | translate }}:</label><span>{{ state.created | date:'yyyy-MM-dd HH:mm' }}</span>
       <ng-container *ngIf="state.errorMessage">
         <label >{{ 'poc.state.errorMessage' | translate }}:</label><span>{{ state.errorMessage }}</span>
       </ng-container>

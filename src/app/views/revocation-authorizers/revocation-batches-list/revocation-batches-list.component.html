@@ -37,7 +37,7 @@
             "revocationBatchList.expiration" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let revocation">{{
-            revocation.technicalExpiryDate | date: "yyyy-MM-dd hh:mm"
+            revocation.technicalExpiryDate | date: "yyyy-MM-dd HH:mm"
         }}</mat-cell>
     </ng-container>
 
@@ -47,7 +47,7 @@
             "revocationBatchList.uploadedAt" | translate
         }}</mat-header-cell>
         <mat-cell *matCellDef="let revocation">{{
-            revocation.createdAt | date: "yyyy-MM-dd hh:mm"
+            revocation.createdAt | date: "yyyy-MM-dd HH:mm"
         }}</mat-cell>
     </ng-container>
 
