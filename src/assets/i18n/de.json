@@ -527,7 +527,7 @@
             "validCert": "Gültig bis",
             "renewCert": "Erstellen & Ersetzen",
             "clientCert": "Client Zertifikat",
-            "recentChange": "(erwartete Änderung)",
+            "recentChange": "lädt...",
             "expirationWarnings": {
                 "urgent": "Das Client Zertifikat läuft in weniger als 4 Wochen ab. Bitte ersetzen Sie es in naher Zukunft.",
                 "veryUrgent": "Das Client Zertifikat läuft in weniger als 1 Woche ab. Bitte ersetzen Sie es so schnell wie möglich.",

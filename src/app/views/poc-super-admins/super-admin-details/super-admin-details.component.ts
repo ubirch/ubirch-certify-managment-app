@@ -14,7 +14,7 @@ import {IPoc} from "../../../core/models/interfaces/poc.interface";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
-import {Observable, Subscription} from "rxjs";
+import {interval, Observable, startWith, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -23,12 +23,12 @@ import {Observable, Subscription} from "rxjs";
 })
 export class SuperAdminDetailsComponent implements OnInit {
     form: FormGroup;
-    poc: IPoc;
+    poc: any;
     pocId: string;
     locale: ILocale;
-    expectedCertExpirationDate: Date;
 
-    pocSubscription: Subscription;
+    polling: Subscription;
+    isPolling = false;
 
     constructor(
         private pocSuperAdminService: PocSuperAdminService,
@@ -46,7 +46,26 @@ export class SuperAdminDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.localService.current$.subscribe(locale => this.locale = locale);
-        this.pocSubscription = this.subscribeToPoc();
+        this.route.paramMap
+            .pipe(
+                map((params: ParamMap) => params.get('id')),
+                filter((pocId) => !!pocId),
+                tap((pocId) => (this.pocId = pocId)),
+                switchMap((pocId) => this.pocSuperAdminService.getPoc(pocId))
+            )
+            .subscribe({
+                next: (res: any) => {
+                    this.poc = res;
+                    console.log(this.poc);
+                    this.generateForm();
+                },
+                error: (err) => {
+                    this.errorService.handlerResponseError(err);
+                    this.router.navigate(['../../'], {
+                        relativeTo: this.route,
+                    });
+                },
+            });
     }
 
     generateForm() {
@@ -87,13 +106,13 @@ export class SuperAdminDetailsComponent implements OnInit {
             okOnly: false
         }).subscribe((result) => {
             if (result) {
+                this.restartPolling(this.pocId);
                 this.pocSuperAdminService.renewClientCert(this.poc.id).subscribe({
                     next: (res: any) => {
                         this.notificationService.success({
                             message: this.translate.instant('superAdmin.cert.renew-success'),
                             title: this.translate.instant('superAdmin.cert.renew-success-title'),
                         });
-                        this.expectedCertExpirationDate = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000);
                     },
                     error: (err) => {
                         this.errorService.handlerResponseError(err);
@@ -130,19 +149,24 @@ export class SuperAdminDetailsComponent implements OnInit {
         return CERTURGENCY.NONE;
     }
 
-    subscribeToPoc() {
-        return this.route.paramMap
+    public restartPolling(pocId: string) {
+        this.stopPolling();
+
+        this.polling = interval(10000)
             .pipe(
-                map((params: ParamMap) => params.get('id')),
-                filter((pocId) => !!pocId),
-                tap((pocId) => (this.pocId = pocId)),
-                switchMap((pocId) => this.pocSuperAdminService.getPoc(pocId))
-            )
-            .subscribe({
+                startWith(0),
+                switchMap(() => this.pocSuperAdminService.getPoc(pocId))
+            ).subscribe({
                 next: (res: any) => {
+                    this.isPolling = true;
+                    console.log("polling");
+                    let oldCert = this.poc.mainAdmin.certExpirationDate;
                     this.poc = res;
-                    console.log(this.poc);
                     this.generateForm();
+                    if (oldCert !== this.poc.mainAdmin.certExpirationDate) {
+                        this.stopPolling();
+                        this.isPolling = false;
+                    }
                 },
                 error: (err) => {
                     this.errorService.handlerResponseError(err);
@@ -151,5 +175,15 @@ export class SuperAdminDetailsComponent implements OnInit {
                     });
                 },
             });
+    }
+
+    public stopPolling() {
+        if (this.polling) {
+            this.polling.unsubscribe();
+        }
+    }
+
+    ngOnDestroy() {
+        this.stopPolling();
     }
 }
