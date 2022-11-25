@@ -527,6 +527,7 @@
             "validCert": "Valid Until",
             "renewCert": "Create & Replace",
             "clientCert": "Client Certificate",
+            "recentChange": "loading...",
             "expirationWarnings": {
                 "urgent": "The Client Certificate will expire in less than 4 weeks. Please renew it in the near future.",
                 "veryUrgent": "The Client Certificate will expire in less than 1 week. Please renew it as soon as possible.",
@@ -538,7 +539,7 @@
             "renew-message": "Are you sure you want to create and replace the client certificate?",
             "renew-yes": "Yes I am sure",
             "renew-no": "No, cancel",
-            "renew-success": "Client certificate has been successfully created and replaced",
+            "renew-success": "Client certificate has been successfully created and replaced. The changes will be applied in the next 30 seconds.",
             "renew-success-title": "Success"
         }
     },

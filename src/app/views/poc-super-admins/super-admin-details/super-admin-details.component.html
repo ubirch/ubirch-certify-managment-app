@@ -115,7 +115,17 @@
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width locationIDField">
                         <input
+                            *ngIf="!isPolling"
                             value="{{ poc?.mainAdmin?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'superAdmin.pocDetails.validCert' | translate
+                            }}"
+                        />
+                        <input
+                            *ngIf="isPolling"
+                            value="{{ 'superAdmin.pocDetails.recentChange' | translate }}"
                             readonly="true"
                             matInput
                             placeholder="{{

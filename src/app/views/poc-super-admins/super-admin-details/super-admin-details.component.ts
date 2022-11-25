@@ -14,6 +14,7 @@ import {IPoc} from "../../../core/models/interfaces/poc.interface";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
+import {interval, Observable, startWith, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -22,9 +23,12 @@ import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 })
 export class SuperAdminDetailsComponent implements OnInit {
     form: FormGroup;
-    poc: IPoc;
+    poc: any;
     pocId: string;
     locale: ILocale;
+
+    polling: Subscription;
+    isPolling = false;
 
     constructor(
         private pocSuperAdminService: PocSuperAdminService,
@@ -102,6 +106,7 @@ export class SuperAdminDetailsComponent implements OnInit {
             okOnly: false
         }).subscribe((result) => {
             if (result) {
+                this.restartPolling(this.pocId);
                 this.pocSuperAdminService.renewClientCert(this.poc.id).subscribe({
                     next: (res: any) => {
                         this.notificationService.success({
@@ -142,5 +147,43 @@ export class SuperAdminDetailsComponent implements OnInit {
         }
 
         return CERTURGENCY.NONE;
+    }
+
+    public restartPolling(pocId: string) {
+        this.stopPolling();
+
+        this.polling = interval(10000)
+            .pipe(
+                startWith(0),
+                switchMap(() => this.pocSuperAdminService.getPoc(pocId))
+            ).subscribe({
+                next: (res: any) => {
+                    this.isPolling = true;
+                    console.log("polling");
+                    let oldCert = this.poc.mainAdmin.certExpirationDate;
+                    this.poc = res;
+                    this.generateForm();
+                    if (oldCert !== this.poc.mainAdmin.certExpirationDate) {
+                        this.stopPolling();
+                        this.isPolling = false;
+                    }
+                },
+                error: (err) => {
+                    this.errorService.handlerResponseError(err);
+                    this.router.navigate(['../../'], {
+                        relativeTo: this.route,
+                    });
+                },
+            });
+    }
+
+    public stopPolling() {
+        if (this.polling) {
+            this.polling.unsubscribe();
+        }
+    }
+
+    ngOnDestroy() {
+        this.stopPolling();
     }
 }

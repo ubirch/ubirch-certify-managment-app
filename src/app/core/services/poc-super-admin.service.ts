@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import {BehaviorSubject, from, interval, Observable, of, startWith, Subscription} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IListResult } from '../models/interfaces/list-result.interface';
 import { flattenFilters, Filters } from '../models/filters';
 import { IPocSuperAdmin } from '../models/interfaces/poc-super-admin.interface';
+import {switchMap} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
+import {IPoc} from "../models/interfaces/poc.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +18,10 @@ export class PocSuperAdminService {
     pocsUrl = `${this.baseUrl}pocs`;
     pocDetailsUrl = `${this.baseUrl}poc`;
 
-    constructor(private http: HttpClient) {}
+    currentPoc = new BehaviorSubject(null);
+    $currentPoc = this.currentPoc.asObservable();
+
+    constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
     getPoc(id: string) {
         const url = `${this.pocDetailsUrl}/${id}`;
