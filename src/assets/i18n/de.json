@@ -432,7 +432,8 @@
             "searchPlaceholder": "Min 3 Zeichen",
             "status": "Status"
         },
-        "headline": "Punkte der Zertifizierung"
+        "headline": "Punkte der Zertifizierung",
+        "menuItem": "PoCs"
     },
     "pocStatuses": {
         "aborted": "Abgebrochen",
@@ -541,6 +542,9 @@
             "renew-no": "Nein, abbrechen",
             "renew-success": "Neues Zertifikat wurde erfolgreich erstellt und ersetzt",
             "renew-success-title": "Erfolgreich"
+        },
+        "tenantsList": {
+            "headline": "Tenants"
         }
     },
     "userProfile": {

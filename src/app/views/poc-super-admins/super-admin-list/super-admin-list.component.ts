@@ -1,53 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { NavigationExtras, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { merge, NEVER } from 'rxjs';
-import {
-    debounceTime,
-    distinctUntilChanged,
-    filter,
-    finalize,
-    map,
-    switchMap,
-    take,
-    takeUntil,
-    tap,
-} from 'rxjs/operators';
-import { AcitvateAction } from 'src/app/core/models/enums/acitvate-action.enum';
-import { ListAction } from 'src/app/core/models/enums/list-actions.enum';
-import {
-    PocActivationState,
-    PocActivationStateTranslation,
-} from 'src/app/core/models/enums/poc-activation-state.enum';
-import {
-    PocStatus,
-    PocStatusTranslation,
-} from 'src/app/core/models/enums/poc-status.enum';
-import { Filters } from 'src/app/core/models/filters';
-import { IPocSuperAdmin } from 'src/app/core/models/interfaces/poc-super-admin.interface';
-import { PocDataSource } from 'src/app/core/services/data-sources/poc-data-source';
-import { PocSuperAdminDataSource } from 'src/app/core/services/data-sources/poc-super-admin-data-source';
-import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { ExportImportService } from 'src/app/core/services/export-import.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { PocSuperAdminService } from 'src/app/core/services/poc-super-admin.service';
-import { PocsService } from 'src/app/core/services/pocs.service';
-import {
-    detailExpand,
-    fadeDownIn,
-    fadeUpOut,
-} from 'src/app/core/utils/animations';
-import { DEFAULT_PAGE_SIZE, PAGE_SIZES } from 'src/app/core/utils/constants';
-import { ConfirmDialogService } from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
-import { ListComponent } from 'src/app/shared/components/list/list.component';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {merge} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, map, takeUntil, tap,} from 'rxjs/operators';
+import {PocActivationStateTranslation,} from 'src/app/core/models/enums/poc-activation-state.enum';
+import {PocStatusTranslation,} from 'src/app/core/models/enums/poc-status.enum';
+import {Filters} from 'src/app/core/models/filters';
+import {IPocSuperAdmin} from 'src/app/core/models/interfaces/poc-super-admin.interface';
+import {PocSuperAdminDataSource} from 'src/app/core/services/data-sources/poc-super-admin-data-source';
+import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
+import {ExportImportService} from 'src/app/core/services/export-import.service';
+import {NotificationService} from 'src/app/core/services/notification.service';
+import {PocSuperAdminService} from 'src/app/core/services/poc-super-admin.service';
+import {detailExpand, fadeDownIn, fadeUpOut,} from 'src/app/core/utils/animations';
+import {DEFAULT_PAGE_SIZE, PAGE_SIZES} from 'src/app/core/utils/constants';
+import {ConfirmDialogService} from 'src/app/shared/components/confirm-dialog/confirm-dialog.service';
+import {ListComponent} from 'src/app/shared/components/list/list.component';
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 

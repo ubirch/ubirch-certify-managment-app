@@ -432,7 +432,8 @@
             "searchPlaceholder": "min 3 characters",
             "status": "Status"
         },
-        "headline": "Points of Certification"
+        "headline": "Points of Certification",
+        "menuItem": "PoCs"
     },
     "pocStatuses": {
         "aborted": "Aborted",
@@ -541,6 +542,9 @@
             "renew-no": "No, cancel",
             "renew-success": "Client certificate has been successfully created and replaced. The changes will be applied in the next 30 seconds.",
             "renew-success-title": "Success"
+        },
+        "tenantsList": {
+            "headline": "Tenants"
         }
     },
     "userProfile": {
