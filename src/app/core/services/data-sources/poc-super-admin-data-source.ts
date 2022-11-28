@@ -7,7 +7,7 @@ import { IListResult } from '../../models/interfaces/list-result.interface';
 import { IPocSuperAdmin } from '../../models/interfaces/poc-super-admin.interface';
 import { ErrorHandlerService } from '../error-handler.service';
 import { PocSuperAdminService } from '../poc-super-admin.service';
- 
+
 export class PocSuperAdminDataSource implements DataSource<IPocSuperAdmin> {
     private pocSubject = new BehaviorSubject<IPocSuperAdmin[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);

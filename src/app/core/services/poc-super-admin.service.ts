@@ -8,6 +8,7 @@ import { IPocSuperAdmin } from '../models/interfaces/poc-super-admin.interface';
 import {switchMap} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 import {IPoc} from "../models/interfaces/poc.interface";
+import {ITenant} from "../models/interfaces/tenant.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -17,6 +18,7 @@ export class PocSuperAdminService {
     baseUrl = environment.pocManagerApi + this.superAdminPath;
     pocsUrl = `${this.baseUrl}pocs`;
     pocDetailsUrl = `${this.baseUrl}poc`;
+    tenantsUrl = `${this.baseUrl}tenants`;
 
     currentPoc = new BehaviorSubject(null);
     $currentPoc = this.currentPoc.asObservable();
@@ -41,5 +43,11 @@ export class PocSuperAdminService {
             return this.http.patch(url, {ids: array});
         }
         return of(Error());
+    }
+
+    getAllTenants(filters: Filters): Observable<IListResult<ITenant>> {
+        return this.http.get<IListResult<ITenant>>(this.tenantsUrl, {
+            params: flattenFilters(filters) as any,
+        });
     }
 }
