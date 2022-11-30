@@ -9,7 +9,7 @@ ADD . ./
 RUN ng build --configuration=production
 
 
-FROM bitnami/nginx:1.21.6
+FROM bitnami/nginx:1.23.2
 ENV \
     KEYCLOAK_REALM=ubirch-certificator \
     KEYCLOAK_URL=https://id.certify.dev.ubirch.com/auth/ \
