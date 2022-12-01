@@ -36,6 +36,11 @@
     flex-basis: 140px;
 }
 
+.mat-column-name { flex: 1.25; }
+.mat-column-email { flex: 2; }
+.mat-column-usageType { flex: 0.75; }
+.mat-column-tenantType { flex: 0.75; }
+
 .mat-column-actions {
     flex-basis: auto;
     padding: 1rem;
