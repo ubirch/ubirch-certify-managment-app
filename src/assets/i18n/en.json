@@ -547,6 +547,16 @@
             "headline": "Tenants"
         }
     },
+    "tenant": {
+        "created": "Created",
+        "id": "Id",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "tenantType": "Tenant type",
+        "usageType": "Usage type",
+        "certExpirationDate": "Client certificate expiration date"
+    },
     "userProfile": {
         "headline": "User Profile",
         "personalDetails": {

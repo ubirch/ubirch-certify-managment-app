@@ -10,5 +10,4 @@ export interface ITenant {
     email?: string;
     phone?: string;
     certExpirationDate?: Date;
-
 }

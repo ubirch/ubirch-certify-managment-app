@@ -3,7 +3,6 @@ import {ITenant} from "../../models/interfaces/tenant.interface";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {PocSuperAdminService} from "../poc-super-admin.service";
 import {ErrorHandlerService} from "../error-handler.service";
-import {IPocSuperAdmin} from "../../models/interfaces/poc-super-admin.interface";
 import {Filters} from "../../models/filters";
 import {finalize} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";

@@ -1,7 +1,99 @@
 <h2>{{ "superAdmin.tenantsList.headline" | translate }}</h2>
 
 <!-- FILTERS -->
-<app-super-admin-list-filters
-    [filters]="filters"
-></app-super-admin-list-filters>
 
+<mat-table
+    class="pocs-table mat-elevation-z8"
+    [dataSource]="dataSource"
+    multiTemplateDataRows
+    matSort
+    [matSortActive]="defaultSortColumn"
+    matSortDirection="asc"
+    matSortDisableClear
+>
+
+    <!-- tenant id -->
+    <ng-container matColumnDef="id">
+        <mat-header-cell [hidden]="true" *matHeaderCellDef mat-sort-header>{{
+            "tenant.id" | translate
+            }}</mat-header-cell>
+        <mat-cell [hidden]="true" *matCellDef="let tenant">{{ tenant.id }}</mat-cell>
+    </ng-container>
+
+    <!-- name -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.name" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{ tenant.name }}</mat-cell>
+    </ng-container>
+
+    <!-- tenantType -->
+    <ng-container matColumnDef="tenantType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.tenantType" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{
+            TenantTypeTranslation[tenant.tenantType]
+            }}</mat-cell>
+    </ng-container>
+
+    <!-- usageType -->
+    <ng-container matColumnDef="usageType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.usageType" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{
+            TenantPoCUsageTypeTranslation[tenant.usageType]
+            }}</mat-cell>
+    </ng-container>
+
+    <!-- contact email -->
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.email" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{ tenant.email }}</mat-cell>
+    </ng-container>
+
+    <!-- contact phone -->
+    <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.phone" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{ tenant.phone }}</mat-cell>
+    </ng-container>
+
+    <!-- certExpirationDate -->
+    <ng-container matColumnDef="certExpirationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.certExpirationDate" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">
+            <ng-container *ngIf="tenant.certExpirationDate">{{
+            tenant.certExpirationDate | date:locale.dateFormatLong:"": locale.language
+            }}
+            </ng-container>
+        </mat-cell>
+    </ng-container>
+
+    <!-- createdAt -->
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+            "tenant.created" | translate
+            }}</mat-header-cell>
+        <mat-cell *matCellDef="let tenant">{{
+            tenant.created | date:locale.dateFormatLong:"": locale.language
+            }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+    <mat-row
+        *matRowDef="let tenant; columns: displayColumns"
+        class="element-row"
+        [ngClass]="getRowClass(tenant)"
+    >
+    </mat-row>
+
+</mat-table>
