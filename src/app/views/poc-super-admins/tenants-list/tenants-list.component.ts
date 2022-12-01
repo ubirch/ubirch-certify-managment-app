@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {detailExpand, fadeDownIn, fadeUpOut} from "../../../core/utils/animations";
 import {TenantDataSource} from "../../../core/services/data-sources/tenant-data-source";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -10,6 +10,16 @@ import {Filters} from "../../../core/models/filters";
 import {IPocSuperAdmin} from "../../../core/models/interfaces/poc-super-admin.interface";
 import {TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
 import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
+import {ListComponent} from "../../../shared/components/list/list.component";
+import {ITenant} from "../../../core/models/interfaces/tenant.interface";
+import {NotificationService} from "../../../core/services/notification.service";
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
+import {DEFAULT_PAGE_SIZE, PAGE_SIZES} from "../../../core/utils/constants";
+import {MatPaginator} from "@angular/material/paginator";
+import {map, takeUntil, tap} from "rxjs/operators";
+import {merge} from "rxjs";
 
 @Component({
     selector: 'app-tenants-list',
@@ -17,7 +27,11 @@ import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-p
     styleUrls: ['./tenants-list.component.scss'],
     animations: [detailExpand, fadeDownIn, fadeUpOut],
 })
-export class TenantsListComponent implements OnInit {
+export class TenantsListComponent
+    extends ListComponent<ITenant>
+    implements OnInit, AfterViewInit {
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     locale: ILocale;
     dataSource: TenantDataSource;
@@ -34,9 +48,8 @@ export class TenantsListComponent implements OnInit {
     ];
     TenantTypeTranslation = TenantTypeTranslation;
     TenantPoCUsageTypeTranslation = TenantPoCUsageTypeTranslation;
-
-    // email?: string;
-    // phone?: string;
+    defaultPageSize = DEFAULT_PAGE_SIZE;
+    pageSizes = PAGE_SIZES;
 
     defaultSortColumn = 'name';
 
@@ -45,7 +58,19 @@ export class TenantsListComponent implements OnInit {
         protected errorService: ErrorHandlerService,
         private localeService: LocaleService,
         protected fb: FormBuilder,
+        protected notificationService: NotificationService,
+        protected router: Router,
+        protected translateService: TranslateService,
+        protected confirmService: ConfirmDialogService,
     ) {
+        super(
+            fb,
+            errorService,
+            notificationService,
+            router,
+            confirmService,
+            translateService
+        );
     }
 
     protected loadItemsPage() {
@@ -97,5 +122,25 @@ export class TenantsListComponent implements OnInit {
                 status: [''],
             })
         );
+    }
+
+    ngAfterViewInit(): void {
+        const paginate$ = this.paginator.page.pipe(
+            map((page) => ({
+                pageIndex: page.pageIndex,
+                pageSize: page.pageSize,
+            }))
+        );
+
+        merge(paginate$)
+            .pipe(
+                tap((filters) => {
+                    this.filters.patchValue(filters);
+                    this.selection.clear();
+                    this.loadItemsPage();
+                }),
+                takeUntil(this.unsubscribe$)
+            )
+            .subscribe();
     }
 }
