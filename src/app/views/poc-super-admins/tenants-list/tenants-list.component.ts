@@ -20,6 +20,7 @@ import {DEFAULT_PAGE_SIZE, PAGE_SIZES} from "../../../core/utils/constants";
 import {MatPaginator} from "@angular/material/paginator";
 import {map, takeUntil, tap} from "rxjs/operators";
 import {merge} from "rxjs";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
     selector: 'app-tenants-list',
@@ -32,6 +33,7 @@ export class TenantsListComponent
     implements OnInit, AfterViewInit {
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
     locale: ILocale;
     dataSource: TenantDataSource;
@@ -132,7 +134,15 @@ export class TenantsListComponent
             }))
         );
 
-        merge(paginate$)
+        const sort$ = this.sort.sortChange.pipe(
+            map((sort) => ({
+                pageIndex: 0,
+                sortColumn: sort.active,
+                sortOrder: sort.direction,
+            }))
+        );
+
+        merge(paginate$, sort$)
             .pipe(
                 tap((filters) => {
                     this.filters.patchValue(filters);
