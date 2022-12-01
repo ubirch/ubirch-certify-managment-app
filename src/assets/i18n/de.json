@@ -413,6 +413,14 @@
         },
         "status": "Status"
     },
+    "list": {
+        "filters": {
+            "filters": "Filter",
+            "search": "Suche",
+            "searchPlaceholder": "Min 3 Zeichen",
+            "status": "Status"
+        }
+    },
     "pocList": {
         "actions": {
             "deleteConfirmMessage": "Sind Sie sicher, dass Sie {{count}} Element(e) löschen möchten?",
@@ -425,12 +433,6 @@
             "noPocsFoundForactivateTitle": "Keine PoCs zum Deaktivieren in der Auswahl",
             "noPocsFoundFordeactivateMessage": "Sie haben die Aktion 'Aktivieren' gewählt, aber es können nur deaktivierte PoCs aktiviert werden, und in Ihrer Auswahl befinden sich keine aktivierten PoCs",
             "noPocsFoundFordeactivateTitle": "Keine PoCs zum Aktivieren in der Auswahl"
-        },
-        "filters": {
-            "filters": "Filter",
-            "search": "Suche",
-            "searchPlaceholder": "Min 3 Zeichen",
-            "status": "Status"
         },
         "headline": "Punkte der Zertifizierung",
         "menuItem": "PoCs"

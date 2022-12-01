@@ -9,6 +9,7 @@ import { SuperAdminListFiltersComponent } from './super-admin-list-filters/super
 import { SuperAdminDetailsComponent } from './super-admin-details/super-admin-details.component';
 import { PocMainAdminComponent } from './super-admin-details/poc-main-admin/poc-main-admin.component';
 import {TenantsListComponent} from "./tenants-list/tenants-list.component";
+import {TenantsListFiltersComponent} from "./tenants-list-filters/tenants-list-filters.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {TenantsListComponent} from "./tenants-list/tenants-list.component";
     SuperAdminListFiltersComponent,
     SuperAdminDetailsComponent,
     PocMainAdminComponent,
-    TenantsListComponent
+    TenantsListComponent,
+    TenantsListFiltersComponent
   ],
   imports: [
     CommonModule,

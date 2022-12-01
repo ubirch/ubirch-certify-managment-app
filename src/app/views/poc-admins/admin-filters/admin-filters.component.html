@@ -1,12 +1,12 @@
 <form action="" [formGroup]="filters" *ngIf="filters" fxLayout fxLayoutGap="2rem" fxLayoutAlign="start end" class="filters">
-  <label>{{ 'pocList.filters.filters' | translate }}</label>
+  <label>{{ 'list.filters.filters' | translate }}</label>
   <mat-form-field>
-      <mat-label>{{ 'pocList.filters.search' | translate }}</mat-label>
-      <input (keydown.enter)="$event.preventDefault()" matInput placeholder="{{ 'pocList.filters.searchPlaceholder' | translate}}" #input formControlName="search">
+      <mat-label>{{ 'list.filters.search' | translate }}</mat-label>
+      <input (keydown.enter)="$event.preventDefault()" matInput placeholder="{{ 'list.filters.searchPlaceholder' | translate}}" #input formControlName="search">
       <mat-hint>({{ 'pocAdmin.email' | translate }}, {{ 'pocAdmin.firstName'| translate  }}, {{ 'pocAdmin.lastName' | translate }})</mat-hint>
   </mat-form-field>
   <mat-form-field formGroupName="filterColumns">
-      <mat-label>{{ 'pocList.filters.status' | translate }} </mat-label>
+      <mat-label>{{ 'list.filters.status' | translate }} </mat-label>
       <mat-select formControlName="status" multiple>
           <mat-option *ngFor="let status of statuses" [value]="status">{{ 'pocStatuses.' + AdminStatusTranslation[status] | translate }}</mat-option>
       </mat-select>

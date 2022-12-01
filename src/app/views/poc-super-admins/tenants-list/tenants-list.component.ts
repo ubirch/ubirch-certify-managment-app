@@ -18,7 +18,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
 import {DEFAULT_PAGE_SIZE, PAGE_SIZES} from "../../../core/utils/constants";
 import {MatPaginator} from "@angular/material/paginator";
-import {map, takeUntil, tap} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, filter, map, takeUntil, tap} from "rxjs/operators";
 import {merge} from "rxjs";
 import {MatSort} from "@angular/material/sort";
 
@@ -127,6 +127,13 @@ export class TenantsListComponent
     }
 
     ngAfterViewInit(): void {
+        const search$ = this.search.valueChanges.pipe(
+            filter(() => this.search.valid),
+            distinctUntilChanged(),
+            debounceTime(1000),
+            map((search) => ({ search }))
+        );
+
         const paginate$ = this.paginator.page.pipe(
             map((page) => ({
                 pageIndex: page.pageIndex,
@@ -142,7 +149,7 @@ export class TenantsListComponent
             }))
         );
 
-        merge(paginate$, sort$)
+        merge(paginate$, sort$, search$)
             .pipe(
                 tap((filters) => {
                     this.filters.patchValue(filters);

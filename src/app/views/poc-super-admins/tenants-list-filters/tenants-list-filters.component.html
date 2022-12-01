@@ -1,0 +1,8 @@
+<form action="" [formGroup]="filters" *ngIf="filters" fxLayout fxLayoutGap="2rem" fxLayoutAlign="start end" class="filters">
+    <label>{{ 'list.filters.filters' | translate }}</label>
+    <mat-form-field>
+        <mat-label>{{ 'list.filters.search' | translate }}</mat-label>
+        <input (keydown.enter)="$event.preventDefault()" matInput placeholder="{{ 'list.filters.searchPlaceholder' | translate}}" #input formControlName="search">
+        <mat-hint>({{ 'tenant.name' | translate }})</mat-hint>
+    </mat-form-field>
+</form>

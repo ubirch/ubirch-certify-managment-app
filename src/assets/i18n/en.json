@@ -413,6 +413,14 @@
         },
         "status": "Status"
     },
+    "list": {
+        "filters": {
+            "filters": "Filters",
+            "search": "Search",
+            "searchPlaceholder": "min 3 characters",
+            "status": "Status"
+        }
+    },
     "pocList": {
         "actions": {
             "deleteConfirmMessage": "Are you sure you want to delete {{count}} item(s)?",
@@ -425,12 +433,6 @@
             "noPocsFoundForactivateTitle": "No PoCs for deactivation selected",
             "noPocsFoundFordeactivateMessage": "You selected action 'activate' but only deactivated PoCs can be activated and you haven't selected any active PoCs.",
             "noPocsFoundFordeactivateTitle": "No PoCs for activation selected"
-        },
-        "filters": {
-            "filters": "Filters",
-            "search": "Search",
-            "searchPlaceholder": "min 3 characters",
-            "status": "Status"
         },
         "headline": "Points of Certification",
         "menuItem": "PoCs"
