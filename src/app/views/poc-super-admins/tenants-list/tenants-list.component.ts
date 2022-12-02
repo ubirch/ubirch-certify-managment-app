@@ -46,7 +46,7 @@ export class TenantsListComponent
         'phone',
         'certExpirationDate',
         'created',
-        'id',
+        'actions',
     ];
     TenantTypeTranslation = TenantTypeTranslation;
     TenantPoCUsageTypeTranslation = TenantPoCUsageTypeTranslation;
@@ -167,5 +167,10 @@ export class TenantsListComponent
                 takeUntil(this.unsubscribe$)
             )
             .subscribe();
+    }
+
+    goToTenantDetails($event: MouseEvent, tenant: ITenant) {
+        this.router.navigate(['/views', 'super-admin', 'tenant-details', tenant.id]);
+        $event.stopPropagation();
     }
 }
