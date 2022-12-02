@@ -89,8 +89,8 @@ export class TenantsListComponent
         return this.filters?.get('filterColumns') as FormGroup;
     }
 
-    get statusFilter() {
-        return this.columnFilters?.controls?.status;
+    get tenantTypeFilter() {
+        return this.columnFilters?.controls?.tenantType;
     }
 
     ngOnInit() {
@@ -121,7 +121,7 @@ export class TenantsListComponent
         this.filters.addControl(
             'filterColumns',
             this.fb.group({
-                status: [''],
+                tenantType: [''],
             })
         );
     }
@@ -149,7 +149,9 @@ export class TenantsListComponent
             }))
         );
 
-        merge(paginate$, sort$, search$)
+        const tenantType$ = this.tenantTypeFilter.valueChanges.pipe(debounceTime(1000));
+
+        merge(paginate$, sort$, search$, tenantType$)
             .pipe(
                 tap((filters) => {
                     this.filters.patchValue(filters);
