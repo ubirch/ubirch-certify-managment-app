@@ -5,10 +5,18 @@
         <input (keydown.enter)="$event.preventDefault()" matInput placeholder="{{ 'list.filters.searchPlaceholder' | translate}}" #input formControlName="search">
         <mat-hint>({{ 'tenant.name' | translate }})</mat-hint>
     </mat-form-field>
-    <mat-form-field formGroupName="filterColumns">
-        <mat-label>{{ 'tenant.tenantType' | translate }} </mat-label>
-        <mat-select formControlName="tenantType" multiple>
-            <mat-option *ngFor="let tenantType of tenantTypes" [value]="tenantType">{{ TenantTypeTranslation[tenantType] }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <div formGroupName="filterColumns">
+        <mat-form-field>
+            <mat-label>{{ 'tenant.tenantType' | translate }} </mat-label>
+            <mat-select formControlName="tenantType" multiple>
+                <mat-option *ngFor="let tenantType of tenantTypes" [value]="tenantType">{{ TenantTypeTranslation[tenantType] }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'tenant.usageType' | translate }} </mat-label>
+            <mat-select formControlName="usageType" multiple>
+                <mat-option *ngFor="let usageType of tenantPoCUsageTypes" [value]="usageType">{{ TenantPoCUsageTypeTranslation[usageType] }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 </form>

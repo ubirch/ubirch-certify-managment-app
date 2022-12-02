@@ -93,6 +93,10 @@ export class TenantsListComponent
         return this.columnFilters?.controls?.tenantType;
     }
 
+    get tenantPoCUsageTypeFilter() {
+        return this.columnFilters?.controls?.usageType;
+    }
+
     ngOnInit() {
         this.localeService.current$.subscribe(locale => this.locale = locale);
         this.dataSource = new TenantDataSource(
@@ -122,6 +126,7 @@ export class TenantsListComponent
             'filterColumns',
             this.fb.group({
                 tenantType: [''],
+                usageType: ['']
             })
         );
     }
@@ -150,8 +155,9 @@ export class TenantsListComponent
         );
 
         const tenantType$ = this.tenantTypeFilter.valueChanges.pipe(debounceTime(1000));
+        const tenantPoCUsageType$ = this.tenantPoCUsageTypeFilter.valueChanges.pipe(debounceTime(1000));
 
-        merge(paginate$, sort$, search$, tenantType$)
+        merge(paginate$, sort$, search$, tenantType$, tenantPoCUsageType$)
             .pipe(
                 tap((filters) => {
                     this.filters.patchValue(filters);
