@@ -19,6 +19,7 @@ export class PocSuperAdminService {
     pocsUrl = `${this.baseUrl}pocs`;
     pocDetailsUrl = `${this.baseUrl}poc`;
     tenantsUrl = `${this.baseUrl}tenants`;
+    tenantDetailsUrl = `${this.baseUrl}tenant`;
 
     currentPoc = new BehaviorSubject(null);
     $currentPoc = this.currentPoc.asObservable();
@@ -49,5 +50,10 @@ export class PocSuperAdminService {
         return this.http.get<IListResult<ITenant>>(this.tenantsUrl, {
             params: flattenFilters(filters) as any,
         });
+    }
+
+    getTenant(id: string) {
+        const url = `${this.tenantDetailsUrl}/${id}`;
+        return this.http.get<ITenant>(url);
     }
 }

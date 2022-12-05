@@ -5,16 +5,12 @@ import {TranslateService} from '@ngx-translate/core';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
 import {NotificationService} from 'src/app/core/services/notification.service';
-import {ILocationIdChange} from '../../../core/models/interfaces/locationIdChange.interface';
-import {LocationIdChangesStates} from '../../../core/models/enums/location-id-changes-states.enum';
-import {IPocSuperAdmin} from 'src/app/core/models/interfaces/poc-super-admin.interface';
 import {PocSuperAdminService} from 'src/app/core/services/poc-super-admin.service';
 import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
-import {IPoc} from "../../../core/models/interfaces/poc.interface";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
-import {interval, Observable, startWith, Subscription} from "rxjs";
+import {interval, startWith, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -56,7 +52,7 @@ export class SuperAdminDetailsComponent implements OnInit {
             .subscribe({
                 next: (res: any) => {
                     this.poc = res;
-                    console.log(this.poc);
+//                    console.log(this.poc);
                     this.generateForm();
                 },
                 error: (err) => {

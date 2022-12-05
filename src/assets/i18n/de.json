@@ -547,6 +547,9 @@
         },
         "tenantsList": {
             "headline": "Tenants"
+        },
+        "tenantDetails": {
+            "headline": "Tenant Details"
         }
     },
     "tenant": {
