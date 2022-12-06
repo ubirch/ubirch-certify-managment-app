@@ -60,7 +60,8 @@ export class TenantDetailsComponent implements OnInit {
     generateForm() {
         this.form = this.fb.group({
             tenantDetails: this.fb.group({
-                name: [ this.tenant?.name, [ Validators.required, Validators.minLength(3) ] ],
+                name: [ {value: this.tenant?.name, disabled: true},
+                    [ Validators.required, Validators.minLength(3) ] ],
                 email: [ this.tenant?.email, [ Validators.required, Validators.email ] ],
                 phone: [ this.tenant?.phone, [
                     Validators.required,
