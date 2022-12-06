@@ -528,7 +528,7 @@
             "status": "Status",
             "createdAt": "Erstellt",
             "active": "Activ",
-            "validCert": "Gültig bis",
+            "certValidUntil": "Gültig bis",
             "renewCert": "Erstellen & Ersetzen",
             "clientCert": "Client Zertifikat",
             "recentChange": "lädt...",
@@ -562,8 +562,12 @@
         "phone": "Telefon",
         "tenantType": "Tenant Typ",
         "usageType": "Art der Nutzung",
+        "certValidUntil": "Gültig bis",
         "certExpirationDate": "Ablaufdatum des Client-Zertifikats",
+        "clientCertHeader": "Client Zertifikat",
+        "renewCert": "Erstellen & Ersetzen",
         "notifications": {
+            "recentChange": "lädt...",
             "updateTenant": {
                 "success": "Tenant Daten wurden aktualisiert",
                 "successTitle": "Aktualisierung erfolgreich",

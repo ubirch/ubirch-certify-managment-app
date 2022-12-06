@@ -528,7 +528,7 @@
             "status": "Status",
             "createdAt": "Created At",
             "active": "Active",
-            "validCert": "Valid Until",
+            "certValidUntil": "Valid Until",
             "renewCert": "Create & Replace",
             "clientCert": "Client Certificate",
             "recentChange": "loading...",
@@ -562,8 +562,12 @@
         "phone": "Phone",
         "tenantType": "Tenant type",
         "usageType": "Usage type",
+        "certValidUntil": "Valid Until",
         "certExpirationDate": "Client certificate expiration date",
+        "clientCertHeader": "Client Certificate",
+        "renewCert": "Create & Replace",
         "notifications": {
+            "recentChange": "loading...",
             "updateTenant": {
                 "success": "Tenant data have been changed successfully",
                 "successTitle": "Changes successful",

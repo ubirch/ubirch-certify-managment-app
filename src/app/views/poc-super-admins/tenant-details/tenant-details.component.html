@@ -58,28 +58,69 @@
                     </mat-form-field>
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
-                <mat-form-field class="full-width">
-                    <input
-                        readonly="true"
-                        matInput
-                        placeholder="{{
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
                                 'tenant.tenantType' | translate
                             }}"
-                        formControlName="tenantType"
-                    />
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <input
-                        readonly="true"
-                        matInput
-                        placeholder="{{
+                            formControlName="tenantType"
+                        />
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
                                 'tenant.usageType' | translate
                             }}"
-                        formControlName="usageType"
-                    />
-                </mat-form-field>
-            </div>
+                            formControlName="usageType"
+                        />
+                    </mat-form-field>
+                </div>
             </ng-container>
+            <ng-container>
+                <h3 fxLayout fxLayoutAlign="start center">
+                    <mat-icon color="primary">info
+                    </mat-icon>
+                    {{ "tenant.clientCertHeader" | translate }}
+                </h3>
+                <div fxLayout fxLayoutGap="2rem">
+                    <mat-form-field class="full-width locationIDField">
+                        <input
+                            *ngIf="!isPolling"
+                            value="{{ tenant?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.certValidUntil' | translate
+                            }}"
+                        />
+                        <input
+                            *ngIf="isPolling"
+                            value="{{ 'tenant.notifications.recentChange' | translate }}"
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.certValidUntil' | translate
+                            }}"
+                        />
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            class="mat-btn-sm locationIdButton"
+                            (click)="renewClientCertificate()"
+                        >
+                            {{'tenant.renewCert' | translate }}
+                        </button>
+                    </mat-form-field>
+                </div>
+                <p  *ngIf="getCertUrgency() == 0" class="expirationAlert urgent"><mat-icon>notification_important</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.urgent' | translate}}</p>
+                <p  *ngIf="getCertUrgency() == 1" class="expirationAlert veryUrgent"><mat-icon>warning</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.veryUrgent' | translate}}</p>
+                <p  *ngIf="getCertUrgency() == 2" class="expirationAlert expired"><mat-icon>error</mat-icon> {{'superAdmin.pocDetails.expirationWarnings.expired' | translate}}</p>
+            </ng-container>
+
             <div fxLayout="column" fxLayoutGap="1rem" class="actions">
                 <button mat-raised-button
                         class="mat-btn-big"
