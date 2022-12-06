@@ -549,7 +549,8 @@
             "headline": "Tenants"
         },
         "tenantDetails": {
-            "headline": "Tenant Details"
+            "headline": "Tenant Details",
+            "name": "Name"
         }
     },
     "tenant": {

@@ -11,6 +11,7 @@ import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 import {interval, startWith, Subscription} from "rxjs";
+import {getFormatedDateTime} from "../../../core/utils/date";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -78,7 +79,7 @@ export class SuperAdminDetailsComponent implements OnInit {
                 status: this.fb
                     .control(this.poc.status.toLowerCase()),
                 createdAt: this.fb
-                    .control(this.poc.created, [
+                    .control(getFormatedDateTime(this.poc.created, this.locale), [
                         Validators.required,
                         Validators.minLength(5),
                     ]),

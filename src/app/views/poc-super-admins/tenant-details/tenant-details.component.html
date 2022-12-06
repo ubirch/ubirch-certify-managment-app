@@ -2,3 +2,70 @@
     {{ "superAdmin.tenantDetails.headline" | translate }}:
     <span>{{ tenant?.name }}</span>
 </h2>
+
+<mat-card>
+    <mat-card-content>
+        <mat-spinner style="margin: auto" *ngIf="!tenant"></mat-spinner>
+        <form *ngIf="form" [formGroup]="form" fxLayout="column" fxLayoutGap="1rem" #f>
+            <ng-container formGroupName="tenantDetails">
+                <h3 fxLayout fxLayoutAlign="start center">
+                    <mat-icon color="primary">people_alt
+                    </mat-icon
+                    >
+                    {{ "superAdmin.pocDetails.tenant" | translate }}
+                </h3>
+                <div fxLayout fxLayoutGap="2rem">
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.name' | translate
+                            }}"
+                            formControlName="name"
+                        />
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.created' | translate
+                            }}"
+                            formControlName="createdAt"
+                        />
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="2rem">
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.email' | translate
+                            }}"
+                            formControlName="email"
+                        />
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.phone' | translate
+                            }}"
+                            formControlName="phone"
+                        />
+                    </mat-form-field>
+                </div>
+            </ng-container>
+        </form>
+    </mat-card-content>
+</mat-card>
+<!--
+    email?: string;
+    phone?: string;
+    tenantType: TenantType,
+    usageType: TenantPoCUsageType,
+-> spaeter:    certExpirationDate?: Date;
+-->
