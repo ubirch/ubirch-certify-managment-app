@@ -10,7 +10,7 @@
         <form *ngIf="form" [formGroup]="form" fxLayout="column" fxLayoutGap="1rem" #f>
             <ng-container>
                 <h3 fxLayout fxLayoutAlign="start center">
-                    <mat-icon color="primary">people_alt
+                    <mat-icon color="primary">factory
                     </mat-icon
                     >
                     {{ "superAdmin.pocDetails.tenant" | translate }}
@@ -153,7 +153,7 @@
                     [routerLink]="['/views', 'super-admin', 'pocs']"
                 >
                     <mat-icon aria-hidden="false">chevron_left</mat-icon>
-                    {{ "global.cancel" | translate }}
+                    {{ "global.back2list" | translate }}
                 </button>
             </div>
         </form>

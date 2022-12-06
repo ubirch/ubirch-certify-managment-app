@@ -114,6 +114,7 @@
     },
     "global": {
         "back": "Zurück",
+        "back2list": "Zurück zur Übersicht",
         "cancel": "Abbrechen",
         "confirm": "Bestätigen",
         "create": "Erstellen",

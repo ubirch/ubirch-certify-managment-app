@@ -8,6 +8,8 @@ import {ITenant} from "../../../core/models/interfaces/tenant.interface";
 import {ErrorHandlerService} from "../../../core/services/error-handler.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {getFormatedDateTime} from "../../../core/utils/date";
+import {TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
+import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
 
 @Component({
     selector: 'app-tenant-details',
@@ -64,7 +66,12 @@ export class TenantDetailsComponent implements OnInit {
                     Validators.required,
                     Validators.pattern(/^(\+|00)[0-9]{1,3}[ \-0-9]{4,14}$/),
                 ] ],
-                createdAt: [ getFormatedDateTime(this.tenant.created, this.locale), [ Validators.required ] ],
+                createdAt: [ {value: getFormatedDateTime(this.tenant.created, this.locale), disabled: true},
+                    [ Validators.required ] ],
+                tenantType: [ {value: this.tenant?.tenantType ? TenantTypeTranslation[this.tenant?.tenantType]
+                        : 'undefined', disabled: true}],
+                usageType: [ {value: this.tenant?.usageType ? TenantPoCUsageTypeTranslation[this.tenant?.usageType]
+                        : 'undefined', disabled: true}],
             })
         });
     }

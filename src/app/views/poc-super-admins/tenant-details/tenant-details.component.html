@@ -9,7 +9,7 @@
         <form *ngIf="form" [formGroup]="form" fxLayout="column" fxLayoutGap="1rem" #f>
             <ng-container formGroupName="tenantDetails">
                 <h3 fxLayout fxLayoutAlign="start center">
-                    <mat-icon color="primary">people_alt
+                    <mat-icon color="primary">factory
                     </mat-icon
                     >
                     {{ "superAdmin.pocDetails.tenant" | translate }}
@@ -58,13 +58,42 @@
                         />
                     </mat-form-field>
                 </div>
+                <div fxLayout fxLayoutGap="2rem">
+                <mat-form-field class="full-width">
+                    <input
+                        readonly="true"
+                        matInput
+                        placeholder="{{
+                                'tenant.tenantType' | translate
+                            }}"
+                        formControlName="tenantType"
+                    />
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input
+                        readonly="true"
+                        matInput
+                        placeholder="{{
+                                'tenant.usageType' | translate
+                            }}"
+                        formControlName="usageType"
+                    />
+                </mat-form-field>
+            </div>
             </ng-container>
+            <div fxLayout="column" fxLayoutGap="1rem" class="actions">
+                <button
+                    mat-raised-button
+                    [routerLink]="['/views', 'super-admin', 'tenants']"
+                >
+                    <mat-icon aria-hidden="false">chevron_left</mat-icon>
+                    {{ "global.back2list" | translate }}
+                </button>
+            </div>
         </form>
     </mat-card-content>
 </mat-card>
 <!--
-    email?: string;
-    phone?: string;
     tenantType: TenantType,
     usageType: TenantPoCUsageType,
 -> spaeter:    certExpirationDate?: Date;
