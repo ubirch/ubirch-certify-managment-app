@@ -1,14 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, from, interval, Observable, of, startWith, Subscription} from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { IListResult } from '../models/interfaces/list-result.interface';
-import { flattenFilters, Filters } from '../models/filters';
-import { IPocSuperAdmin } from '../models/interfaces/poc-super-admin.interface';
-import {switchMap} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {IListResult} from '../models/interfaces/list-result.interface';
+import {Filters, flattenFilters} from '../models/filters';
+import {IPocSuperAdmin} from '../models/interfaces/poc-super-admin.interface';
 import {ActivatedRoute} from "@angular/router";
-import {IPoc} from "../models/interfaces/poc.interface";
 import {ITenant} from "../models/interfaces/tenant.interface";
+import {ITenantChanges} from "../models/interfaces/tenant-changes.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -55,5 +54,10 @@ export class PocSuperAdminService {
     getTenant(id: string) {
         const url = `${this.tenantDetailsUrl}/${id}`;
         return this.http.get<ITenant>(url);
+    }
+
+    updateTenant(id: string, data: ITenantChanges) {
+        const url = `${this.tenantDetailsUrl}/${id}`;
+        return this.http.put<ITenantChanges>(url, data);
     }
 }

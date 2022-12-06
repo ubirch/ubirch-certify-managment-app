@@ -562,7 +562,19 @@
         "phone": "Telefon",
         "tenantType": "Tenant Typ",
         "usageType": "Art der Nutzung",
-        "certExpirationDate": "Ablaufdatum des Client-Zertifikats"
+        "certExpirationDate": "Ablaufdatum des Client-Zertifikats",
+        "notifications": {
+            "updateTenant": {
+                "success": "Tenant Daten wurden aktualisiert",
+                "successTitle": "Aktualisierung erfolgreich",
+                "failedDataMissing": "Es liegt ein Fehler vor - kein Zugriff auf Tenant Daten!",
+                "failedDataMissingTitle": "Fehler beim Versenden"
+            }
+        },
+        "validationErrors": {
+            "email": "Gültige E-Mail Adresse ist erforderlich",
+            "phone": "Eine gültige Telefonnummer mit vorangestellter Landesvorwahl (z. B. 0049 oder +49) ist erforderlich"
+        }
     },
     "userProfile": {
         "headline": "Benutzerprofil",

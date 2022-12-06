@@ -3,6 +3,7 @@ import { IListResult } from '../models/interfaces/list-result.interface';
 import { IPocAdminState } from '../models/interfaces/poc-admin-state.interface';
 import { IPocAdmin } from '../models/interfaces/poc-admin.interface';
 
+const creationDate = new Date('2021-12-15T07:32:03.640Z');
 export const ADMINS_MOCK: IListResult<IPocAdmin> = {
     total: 10,
     records: [
@@ -18,7 +19,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             webIdentInitiateId: '11375b09-6699-4f09-b1b2-dc8e455e0c33',
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '2',
@@ -31,7 +33,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '3',
@@ -44,7 +47,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.completed,
             isMainAdmin: true,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '4',
@@ -57,7 +61,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
 
         },
         {
@@ -71,7 +76,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '6',
@@ -84,7 +90,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.completed,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '7',
@@ -97,7 +104,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '8',
@@ -110,7 +118,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.processing,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '9',
@@ -123,7 +132,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         },
         {
             id: '10',
@@ -136,7 +146,8 @@ export const ADMINS_MOCK: IListResult<IPocAdmin> = {
             state: AdminStatus.pending,
             isMainAdmin: false,
             active: false,
-            createdAt: '2021-12-15T07:32:03.640Z'
+            createdAt: creationDate,
+            webIdentRequired: false
         }
     ],
 };

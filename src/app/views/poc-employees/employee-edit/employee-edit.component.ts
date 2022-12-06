@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
-import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
-import { IPocEmployee } from 'src/app/core/models/interfaces/poc-employee.interface';
-import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { LocaleService } from 'src/app/core/services/locale.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { PocEmployeeService } from 'src/app/core/services/poc-employee.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {Subject} from 'rxjs';
+import {filter, map, switchMap, takeUntil} from 'rxjs/operators';
+import {IPocEmployee} from 'src/app/core/models/interfaces/poc-employee.interface';
+import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
+import {NotificationService} from 'src/app/core/services/notification.service';
+import {PocEmployeeService} from 'src/app/core/services/poc-employee.service';
 
 @Component({
   selector: 'app-employee-edit',

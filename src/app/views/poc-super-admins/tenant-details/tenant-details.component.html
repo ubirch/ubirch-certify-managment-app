@@ -39,23 +39,22 @@
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
                         <input
-                            readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.email' | translate
-                            }}"
-                            formControlName="email"
-                        />
+                            placeholder="{{ 'tenant.email' | translate }}"
+                            formControlName="email"/>
+                        <mat-error *ngIf="form.get('tenantDetails').get('email').errors">
+                            {{ 'tenant.validationErrors.email' | translate }}
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field class="full-width">
                         <input
-                            readonly="true"
                             matInput
                             placeholder="{{
-                                'tenant.phone' | translate
-                            }}"
-                            formControlName="phone"
-                        />
+                                'tenant.phone' | translate }}"
+                            formControlName="phone"/>
+                        <mat-error *ngIf="form.get('tenantDetails').get('phone').errors">
+                            {{ 'tenant.validationErrors.phone' | translate }}
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
@@ -82,10 +81,14 @@
             </div>
             </ng-container>
             <div fxLayout="column" fxLayoutGap="1rem" class="actions">
+                <button mat-raised-button
+                        class="mat-btn-big"
+                        color="primary"
+                        (click)="submitForm()"
+                        [disabled]="!form.dirty || form.invalid || form.pending">{{ "global.change" | translate }}</button>
                 <button
                     mat-raised-button
-                    [routerLink]="['/views', 'super-admin', 'tenants']"
-                >
+                    [routerLink]="['/views', 'super-admin', 'tenants']">
                     <mat-icon aria-hidden="false">chevron_left</mat-icon>
                     {{ "global.back2list" | translate }}
                 </button>
@@ -94,7 +97,5 @@
     </mat-card-content>
 </mat-card>
 <!--
-    tenantType: TenantType,
-    usageType: TenantPoCUsageType,
 -> spaeter:    certExpirationDate?: Date;
 -->

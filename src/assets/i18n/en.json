@@ -562,7 +562,19 @@
         "phone": "Phone",
         "tenantType": "Tenant type",
         "usageType": "Usage type",
-        "certExpirationDate": "Client certificate expiration date"
+        "certExpirationDate": "Client certificate expiration date",
+        "notifications": {
+            "updateTenant": {
+                "success": "Tenant data have been changed successfully",
+                "successTitle": "Changes successful",
+                "failedDataMissing": "An error occurred - cannot access tenant data!",
+                "failedDataMissingTitle": "Error during sending of data"
+            }
+        },
+        "validationErrors": {
+            "email": "Valid email address is required",
+            "phone": "A valid phone number prefixed with country code (ie. 0049 or +49) is required"
+        }
     },
     "userProfile": {
         "headline": "User Profile",
