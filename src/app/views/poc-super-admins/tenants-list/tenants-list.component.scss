@@ -74,3 +74,18 @@
 .mat-row.with-error {
     background-color: rgba(244,67,54,0.2);
 }
+
+.urgent {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.veryUrgent{
+    background-color: #ffe6cd;
+    color: #855104;
+}
+
+.expired {
+    background-color: #f8d7da;
+    color: #721c24;
+}

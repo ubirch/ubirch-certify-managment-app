@@ -7,7 +7,6 @@ import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {PocSuperAdminService} from "../../../core/services/poc-super-admin.service";
 import {ErrorHandlerService} from "../../../core/services/error-handler.service";
 import {Filters} from "../../../core/models/filters";
-import {IPocSuperAdmin} from "../../../core/models/interfaces/poc-super-admin.interface";
 import {TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
 import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
 import {ListComponent} from "../../../shared/components/list/list.component";
@@ -21,6 +20,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {debounceTime, distinctUntilChanged, filter, map, takeUntil, tap} from "rxjs/operators";
 import {merge} from "rxjs";
 import {MatSort} from "@angular/material/sort";
+import {getCertUrgency} from "../../../core/utils/date";
+import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 
 @Component({
     selector: 'app-tenants-list',
@@ -107,10 +108,20 @@ export class TenantsListComponent
         this.loadItemsPage();
     }
 
-    public getRowClass(poc: IPocSuperAdmin): string {
+    public getRowClass(tenant: ITenant): string {
         let rowClass = '';
-        if (poc.errorMessage) {
-            rowClass = 'with-error';
+        if (tenant.certExpirationDate) {
+            let expirationState = getCertUrgency(new Date(tenant.certExpirationDate));
+            switch (expirationState) {
+                case CERTURGENCY.EXPIRED:
+                    rowClass = "expired";
+                    break;
+                case CERTURGENCY.VERYURGENT:
+                    rowClass = "veryUrgent";
+                    break;
+                case CERTURGENCY.URGENT:
+                    rowClass = "urgent"
+            }
         }
         return rowClass;
     }
