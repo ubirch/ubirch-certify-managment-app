@@ -5,16 +5,13 @@ import {TranslateService} from '@ngx-translate/core';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
 import {NotificationService} from 'src/app/core/services/notification.service';
-import {ILocationIdChange} from '../../../core/models/interfaces/locationIdChange.interface';
-import {LocationIdChangesStates} from '../../../core/models/enums/location-id-changes-states.enum';
-import {IPocSuperAdmin} from 'src/app/core/models/interfaces/poc-super-admin.interface';
 import {PocSuperAdminService} from 'src/app/core/services/poc-super-admin.service';
 import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
-import {IPoc} from "../../../core/models/interfaces/poc.interface";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
-import {interval, Observable, startWith, Subscription} from "rxjs";
+import {interval, startWith, Subscription} from "rxjs";
+import {getCertUrgency, getFormatedDateTime} from "../../../core/utils/date";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -29,6 +26,7 @@ export class SuperAdminDetailsComponent implements OnInit {
 
     polling: Subscription;
     isPolling = false;
+    CERTURGENCY = CERTURGENCY;
 
     constructor(
         private pocSuperAdminService: PocSuperAdminService,
@@ -56,7 +54,7 @@ export class SuperAdminDetailsComponent implements OnInit {
             .subscribe({
                 next: (res: any) => {
                     this.poc = res;
-                    console.log(this.poc);
+//                    console.log(this.poc);
                     this.generateForm();
                 },
                 error: (err) => {
@@ -82,7 +80,7 @@ export class SuperAdminDetailsComponent implements OnInit {
                 status: this.fb
                     .control(this.poc.status.toLowerCase()),
                 createdAt: this.fb
-                    .control(this.poc.created, [
+                    .control(getFormatedDateTime(this.poc.created, this.locale), [
                         Validators.required,
                         Validators.minLength(5),
                     ]),
@@ -107,7 +105,7 @@ export class SuperAdminDetailsComponent implements OnInit {
         }).subscribe((result) => {
             if (result) {
                 this.restartPolling(this.pocId);
-                this.pocSuperAdminService.renewClientCert(this.poc.id).subscribe({
+                this.pocSuperAdminService.renewAppPoCClientCert(this.poc.id).subscribe({
                     next: (res: any) => {
                         this.notificationService.success({
                             message: this.translate.instant('superAdmin.cert.renew-success'),
@@ -122,31 +120,8 @@ export class SuperAdminDetailsComponent implements OnInit {
         });
     }
 
-    getCertUrgency() {
-        let urgentThreshold = 28;
-        let veryUrgentThreshold = 7;
-        let expiredThreshold = 0;
-
-        let expirationDate = new Date(this.poc.mainAdmin.certExpirationDate);
-        let today = new Date();
-
-        let timeDiff = expirationDate.getTime() - today.getTime();
-
-        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-        if (diffDays <= expiredThreshold) {
-            return CERTURGENCY.EXPIRED;
-        }
-
-        if (diffDays <= veryUrgentThreshold) {
-            return CERTURGENCY.VERYURGENT;
-        }
-
-        if (diffDays <= urgentThreshold) {
-            return CERTURGENCY.URGENT;
-        }
-
-        return CERTURGENCY.NONE;
+    checkCertUrgency() {
+        return getCertUrgency(this.poc.mainAdmin.certExpirationDate);
     }
 
     public restartPolling(pocId: string) {

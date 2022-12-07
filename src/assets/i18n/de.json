@@ -114,6 +114,7 @@
     },
     "global": {
         "back": "Zurück",
+        "back2list": "Zurück zur Übersicht",
         "cancel": "Abbrechen",
         "confirm": "Bestätigen",
         "create": "Erstellen",
@@ -413,6 +414,14 @@
         },
         "status": "Status"
     },
+    "list": {
+        "filters": {
+            "filters": "Filter",
+            "search": "Suche",
+            "searchPlaceholder": "Min 3 Zeichen",
+            "status": "Status"
+        }
+    },
     "pocList": {
         "actions": {
             "deleteConfirmMessage": "Sind Sie sicher, dass Sie {{count}} Element(e) löschen möchten?",
@@ -426,13 +435,8 @@
             "noPocsFoundFordeactivateMessage": "Sie haben die Aktion 'Aktivieren' gewählt, aber es können nur deaktivierte PoCs aktiviert werden, und in Ihrer Auswahl befinden sich keine aktivierten PoCs",
             "noPocsFoundFordeactivateTitle": "Keine PoCs zum Aktivieren in der Auswahl"
         },
-        "filters": {
-            "filters": "Filter",
-            "search": "Suche",
-            "searchPlaceholder": "Min 3 Zeichen",
-            "status": "Status"
-        },
-        "headline": "Punkte der Zertifizierung"
+        "headline": "Punkte der Zertifizierung",
+        "menuItem": "PoCs"
     },
     "pocStatuses": {
         "aborted": "Abgebrochen",
@@ -524,15 +528,10 @@
             "status": "Status",
             "createdAt": "Erstellt",
             "active": "Activ",
-            "validCert": "Gültig bis",
+            "certValidUntil": "Gültig bis",
             "renewCert": "Erstellen & Ersetzen",
             "clientCert": "Client Zertifikat",
-            "recentChange": "lädt...",
-            "expirationWarnings": {
-                "urgent": "Das Client Zertifikat läuft in weniger als 4 Wochen ab. Bitte ersetzen Sie es in naher Zukunft.",
-                "veryUrgent": "Das Client Zertifikat läuft in weniger als 1 Woche ab. Bitte ersetzen Sie es so schnell wie möglich.",
-                "expired": "Das Client Zertifikat ist abgelaufen. Bitte ersetzen Sie es so schnell wie möglich."
-            }
+            "recentChange": "lädt..."
         },
         "cert": {
             "renew-title": "Neues Zertifikat erstellen und ersetzen",
@@ -540,7 +539,45 @@
             "renew-yes": "Ja, ich bin sicher",
             "renew-no": "Nein, abbrechen",
             "renew-success": "Neues Zertifikat wurde erfolgreich erstellt und ersetzt",
-            "renew-success-title": "Erfolgreich"
+            "renew-success-title": "Erfolgreich",
+            "expirationWarnings": {
+                "urgent": "Das Client Zertifikat läuft in weniger als 4 Wochen ab. Bitte ersetzen Sie es in naher Zukunft.",
+                "veryUrgent": "Das Client Zertifikat läuft in weniger als 1 Woche ab. Bitte ersetzen Sie es so schnell wie möglich.",
+                "expired": "Das Client Zertifikat ist abgelaufen. Bitte ersetzen Sie es so schnell wie möglich."
+            }
+        },
+        "tenantsList": {
+            "headline": "Tenants"
+        },
+        "tenantDetails": {
+            "headline": "Tenant Details",
+            "name": "Name"
+        }
+    },
+    "tenant": {
+        "created": "Erstellt",
+        "id": "Id",
+        "name": "Name",
+        "email": "E-Mail",
+        "phone": "Telefon",
+        "tenantType": "Tenant Typ",
+        "usageType": "Art der Nutzung",
+        "certValidUntil": "Gültig bis",
+        "certExpirationDate": "Ablaufdatum des Client-Zertifikats",
+        "clientCertHeader": "Client Zertifikat",
+        "renewCert": "Erstellen & Ersetzen",
+        "notifications": {
+            "recentChange": "lädt...",
+            "updateTenant": {
+                "success": "Tenant Daten wurden aktualisiert",
+                "successTitle": "Aktualisierung erfolgreich",
+                "failedDataMissing": "Es liegt ein Fehler vor - kein Zugriff auf Tenant Daten!",
+                "failedDataMissingTitle": "Fehler beim Versenden"
+            }
+        },
+        "validationErrors": {
+            "email": "Gültige E-Mail Adresse ist erforderlich",
+            "phone": "Eine gültige Telefonnummer mit vorangestellter Landesvorwahl (z. B. 0049 oder +49) ist erforderlich"
         }
     },
     "userProfile": {

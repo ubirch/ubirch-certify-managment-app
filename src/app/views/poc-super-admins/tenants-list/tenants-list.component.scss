@@ -1,0 +1,91 @@
+:host {
+    position: relative;
+    display: block;
+
+    .spinner-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+    }
+
+    .actions {
+        label, button {
+            margin-bottom: 1.34375em;
+        }
+    }
+    mat-paginator {
+        box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.mat-column-select {
+    overflow: initial;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 100px;
+}
+
+.mat-column-status {
+    flex-basis: 120px;
+    flex-grow: 0;
+}
+
+.mat-column-active {
+    flex-grow: 0;
+    flex-basis: 140px;
+}
+
+.mat-column-name { flex: 1.25; }
+.mat-column-email { flex: 2; }
+.mat-column-usageType { flex: 0.75; }
+.mat-column-tenantType { flex: 0.75; }
+
+.mat-column-actions {
+    flex-basis: auto;
+    padding: 1rem;
+    flex-grow: 0;
+}
+
+.mat-column-with-expiration-warning {
+    flex-basis: 30px;
+    padding: 0.2rem;
+    flex-grow: 0;
+}
+
+.element-row {
+    cursor: pointer;
+}
+
+.detail-row {
+    min-height: auto;
+    background: #efefef;
+}
+
+.element-detail {
+    overflow: hidden;
+}
+
+.detail-cols {
+    padding: 1rem 0 1rem 76px;
+    display: flex;
+}
+
+.mat-row.with-error {
+    background-color: rgba(244,67,54,0.2);
+}
+
+.urgent {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.veryUrgent{
+    background-color: #ffe6cd;
+    color: #855104;
+}
+
+.expired {
+    background-color: #f8d7da;
+    color: #721c24;
+}

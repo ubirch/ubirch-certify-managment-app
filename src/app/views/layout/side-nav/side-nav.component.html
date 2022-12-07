@@ -1,9 +1,10 @@
 <mat-nav-list>
     <mat-list-item *ngIf="!authService.isRevocationApp()">
       <mat-icon>place</mat-icon>
-      <a [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" >PoCs</a>
+      <a *ngIf="!authService.isSuperAdmin" [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" >{{ 'pocList.menuItem' | translate }}</a>
+      <a *ngIf="authService.isSuperAdmin" [routerLink]="[ '/views', 'super-admin', 'pocs' ]" routerLinkActive="active" >{{ 'pocList.menuItem' | translate }}</a>
     </mat-list-item>
-    <mat-list-item *ngIf="!authService.isRevocationApp()">
+    <mat-list-item *ngIf="!authService.isRevocationApp() && !authService.isSuperAdmin()">
       <mat-icon>group</mat-icon>
       <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active">PoC Admins</a>
     </mat-list-item>
@@ -19,5 +20,9 @@
     <mat-list-item *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()">
       <mat-icon>account_circle</mat-icon>
       <a [routerLink]="[ '/views', 'profile' ]" routerLinkActive="active">{{ 'userProfile.headline' | translate }}</a>
+    </mat-list-item>
+    <mat-list-item *ngIf="authService.isSuperAdmin()">
+        <mat-icon>factory</mat-icon>
+        <a [routerLink]="[ '/views', 'super-admin', 'tenants' ]" routerLinkActive="active">{{ 'superAdmin.tenantsList.headline' | translate }}</a>
     </mat-list-item>
 </mat-nav-list>

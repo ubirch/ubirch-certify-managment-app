@@ -19,12 +19,16 @@ const LOCALES: { [key: string]: ILocale } = {
     language: 'en',
       dateFormat: DateTimeLocaleFormat.enDisplayShort,
       dateFormatLong: DateTimeLocaleFormat.enDisplayLong,
+      dateFormat4Moment: DateTimeLocaleFormat.enMomentDisplayShort,
+      dateFormatLong4Moment: DateTimeLocaleFormat.enMomentDisplayLong,
       datePlaceholder: DateTimeLocaleFormat.enDisplayShortPlaceholder,
   } as ILocale,
   de: {
     language: 'de',
       dateFormat: DateTimeLocaleFormat.deDisplayShort,
       dateFormatLong: DateTimeLocaleFormat.deDisplayLong,
+      dateFormat4Moment: DateTimeLocaleFormat.deMomentDisplayShort,
+      dateFormatLong4Moment: DateTimeLocaleFormat.deMomentDisplayLong,
       datePlaceholder: DateTimeLocaleFormat.deDisplayShortPlaceholder
   } as ILocale,
 };

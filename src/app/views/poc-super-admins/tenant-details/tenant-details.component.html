@@ -1,14 +1,13 @@
 <h2>
-    {{ "superAdmin.pocDetails.headline" | translate }}:
-    <span>{{ poc?.pocName }}</span>
-    <!-- <span *ngIf="poc?.externalId"></span> -->
+    {{ "superAdmin.tenantDetails.headline" | translate }}:
+    <span>{{ tenant?.name }}</span>
 </h2>
 
 <mat-card>
     <mat-card-content>
-        <mat-spinner style="margin: auto" *ngIf="!poc"></mat-spinner>
+        <mat-spinner style="margin: auto" *ngIf="!tenant"></mat-spinner>
         <form *ngIf="form" [formGroup]="form" fxLayout="column" fxLayoutGap="1rem" #f>
-            <ng-container>
+            <ng-container formGroupName="tenantDetails">
                 <h3 fxLayout fxLayoutAlign="start center">
                     <mat-icon color="primary">factory
                     </mat-icon
@@ -21,42 +20,9 @@
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.tenantName' | translate
+                                'tenant.name' | translate
                             }}"
-                            formControlName="tenant"
-                        />
-                    </mat-form-field>
-                </div>
-            </ng-container>
-
-            <ng-container *ngIf="poc?.pocType.includes('app')">
-                <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem">
-                    <mat-icon color="primary">people_alt
-                    </mat-icon
-                    >
-                    {{ "superAdmin.pocDetails.mainAdmin" | translate }}
-                </h3>
-                <app-poc-main-admin *ngIf="poc.mainAdmin"
-                                    [mainAdmin]="[poc.mainAdmin]"
-                ></app-poc-main-admin>
-            </ng-container>
-
-            <ng-container formGroupName="pocDetails">
-                <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem">
-                    <mat-icon color="primary">info
-                    </mat-icon
-                    >
-                    {{ "superAdmin.pocDetails.details" | translate }}
-                </h3>
-                <div fxLayout fxLayoutGap="2rem">
-                    <mat-form-field class="full-width">
-                        <input
-                            readonly="true"
-                            matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.pocName' | translate
-                            }}"
-                            formControlName="pocName"
+                            formControlName="name"
                         />
                     </mat-form-field>
                     <mat-form-field class="full-width">
@@ -64,29 +30,7 @@
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.locationId' | translate
-                            }}"
-                            formControlName="externalId"
-                        />
-                    </mat-form-field>
-                </div>
-                <div fxLayout fxLayoutGap="2rem">
-                    <mat-form-field class="full-width">
-                        <input
-                            readonly="true"
-                            matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.status' | translate
-                            }}"
-                            formControlName="status"
-                        />
-                    </mat-form-field>
-                    <mat-form-field class="full-width">
-                        <input
-                            readonly="true"
-                            matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.createdAt' | translate
+                                'tenant.created' | translate
                             }}"
                             formControlName="createdAt"
                         />
@@ -95,41 +39,71 @@
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
                         <input
+                            matInput
+                            placeholder="{{ 'tenant.email' | translate }}"
+                            formControlName="email"/>
+                        <mat-error *ngIf="form.get('tenantDetails').get('email').errors">
+                            {{ 'tenant.validationErrors.email' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input
+                            matInput
+                            placeholder="{{
+                                'tenant.phone' | translate }}"
+                            formControlName="phone"/>
+                        <mat-error *ngIf="form.get('tenantDetails').get('phone').errors">
+                            {{ 'tenant.validationErrors.phone' | translate }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="2rem">
+                    <mat-form-field class="full-width">
+                        <input
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.active' | translate
+                                'tenant.tenantType' | translate
                             }}"
-                            formControlName="active"
+                            formControlName="tenantType"
+                        />
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input
+                            readonly="true"
+                            matInput
+                            placeholder="{{
+                                'tenant.usageType' | translate
+                            }}"
+                            formControlName="usageType"
                         />
                     </mat-form-field>
                 </div>
             </ng-container>
-
-            <ng-container *ngIf="poc?.pocType.includes('app') && poc?.pocType.includes('bmg')">
+            <ng-container>
                 <h3 fxLayout fxLayoutAlign="start center">
                     <mat-icon color="primary">info
                     </mat-icon>
-                    {{ "superAdmin.pocDetails.clientCert" | translate }}
+                    {{ "tenant.clientCertHeader" | translate }}
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width locationIDField">
                         <input
                             *ngIf="!isPolling"
-                            value="{{ poc?.mainAdmin?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
+                            value="{{ tenant?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.certValidUntil' | translate
+                                'tenant.certValidUntil' | translate
                             }}"
                         />
                         <input
                             *ngIf="isPolling"
-                            value="{{ 'superAdmin.pocDetails.recentChange' | translate }}"
+                            value="{{ 'tenant.notifications.recentChange' | translate }}"
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.certValidUntil' | translate
+                                'tenant.certValidUntil' | translate
                             }}"
                         />
                         <button
@@ -138,7 +112,7 @@
                             class="mat-btn-sm locationIdButton"
                             (click)="renewClientCertificate()"
                         >
-                            {{'superAdmin.pocDetails.renewCert' | translate }}
+                            {{'tenant.renewCert' | translate }}
                         </button>
                     </mat-form-field>
                 </div>
@@ -148,10 +122,14 @@
             </ng-container>
 
             <div fxLayout="column" fxLayoutGap="1rem" class="actions">
+                <button mat-raised-button
+                        class="mat-btn-big"
+                        color="primary"
+                        (click)="submitForm()"
+                        [disabled]="!form.dirty || form.invalid || form.pending">{{ "global.change" | translate }}</button>
                 <button
                     mat-raised-button
-                    [routerLink]="['/views', 'super-admin', 'pocs']"
-                >
+                    [routerLink]="['/views', 'super-admin', 'tenants']">
                     <mat-icon aria-hidden="false">chevron_left</mat-icon>
                     {{ "global.back2list" | translate }}
                 </button>
@@ -159,3 +137,6 @@
         </form>
     </mat-card-content>
 </mat-card>
+<!--
+-> spaeter:    certExpirationDate?: Date;
+-->

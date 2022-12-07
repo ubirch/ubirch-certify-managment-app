@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
+import {Component, Input} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {PocStatus, PocStatusTranslation} from 'src/app/core/models/enums/poc-status.enum';
 
 
 @Component({
