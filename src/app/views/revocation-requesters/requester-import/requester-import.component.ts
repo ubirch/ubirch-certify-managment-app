@@ -1,22 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UploadState } from 'src/app/core/models/enums/upload-state.enum';
-import { INotification } from 'src/app/core/models/interfaces/notification.interface';
-import { IUploadStatus } from 'src/app/core/models/interfaces/upload-status.interface';
-import { ErrorHandlerService } from 'src/app/core/services/error-handler.service';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { RevocationService } from 'src/app/core/services/revocation.service';
-import { PDF_QR_JS } from 'pdf-qr';
-import { RevocationImport } from 'src/app/core/models/interfaces/revocation-import.interface';
-import {
-    catchError,
-    finalize,
-    forkJoin,
-    map,
-    Observable,
-    of,
-    Subject,
-} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {INotification} from 'src/app/core/models/interfaces/notification.interface';
+import {IUploadStatus} from 'src/app/core/models/interfaces/upload-status.interface';
+import {ErrorHandlerService} from 'src/app/core/services/error-handler.service';
+import {NotificationService} from 'src/app/core/services/notification.service';
+import {RevocationService} from 'src/app/core/services/revocation.service';
+import {PDF_QR_JS} from 'pdf-qr';
+import {RevocationImport} from 'src/app/core/models/interfaces/revocation-import.interface';
+import {catchError, finalize, forkJoin, map, Observable, of, Subject,} from 'rxjs';
+
 @Component({
     selector: 'app-requester-import',
     templateUrl: './requester-import.component.html',
@@ -35,7 +27,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
     };
     private endSubs$ = new Subject();
     invalidFile = true;
-    
+
 
     constructor(
         private router: Router,
@@ -91,7 +83,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
     }
 
     uploadFile() {
-        this.file.forEach((i, v) => { 
+        this.file.forEach((i, v) => {
             this.obj.filename = i.name;
             this.obj.qrCodeExtract = this.qrCodes[v];
             this.base64Revocation.push(this.obj);
@@ -150,6 +142,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
             this.notification = this.notificationService.error({
                 title: 'global.errors.requestDefaultTitle',
                 message: 'global.errors.requestDefault',
+                duration: undefined // so that notification isn't closed automatically
             });
         }
     }
