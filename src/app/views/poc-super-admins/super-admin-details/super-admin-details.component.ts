@@ -11,8 +11,7 @@ import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {LocaleService} from "../../../core/services/locale.service";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 import {interval, startWith, Subscription} from "rxjs";
-import {getFormatedDateTime} from "../../../core/utils/date";
-import {EXPIRED_THRESHOLD, URGENT_THRESHOLD, VERY_URGENT_THRESHOLD} from "../../../core/utils/constants";
+import {getCertUrgency, getFormatedDateTime} from "../../../core/utils/date";
 
 @Component({
     selector: 'app-super-admin-details',
@@ -27,6 +26,7 @@ export class SuperAdminDetailsComponent implements OnInit {
 
     polling: Subscription;
     isPolling = false;
+    CERTURGENCY = CERTURGENCY;
 
     constructor(
         private pocSuperAdminService: PocSuperAdminService,
@@ -120,31 +120,13 @@ export class SuperAdminDetailsComponent implements OnInit {
         });
     }
 
-    getCertUrgency() {
-        let urgentThreshold = URGENT_THRESHOLD;
-        let veryUrgentThreshold = VERY_URGENT_THRESHOLD;
-        let expiredThreshold = EXPIRED_THRESHOLD;
-
-        let expirationDate = new Date(this.poc.mainAdmin.certExpirationDate);
-        let today = new Date();
-
-        let timeDiff = expirationDate.getTime() - today.getTime();
-
-        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-        if (diffDays <= expiredThreshold) {
-            return CERTURGENCY.EXPIRED;
+    checkCertUrgency() {
+        if (this.poc.mainAdmin.certExpirationDate) {
+            let expirationDate = new Date(this.poc.mainAdmin.certExpirationDate);
+            return getCertUrgency(expirationDate);
+        } else {
+            return CERTURGENCY.NONE;
         }
-
-        if (diffDays <= veryUrgentThreshold) {
-            return CERTURGENCY.VERYURGENT;
-        }
-
-        if (diffDays <= urgentThreshold) {
-            return CERTURGENCY.URGENT;
-        }
-
-        return CERTURGENCY.NONE;
     }
 
     public restartPolling(pocId: string) {

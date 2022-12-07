@@ -531,12 +531,7 @@
             "certValidUntil": "Gültig bis",
             "renewCert": "Erstellen & Ersetzen",
             "clientCert": "Client Zertifikat",
-            "recentChange": "lädt...",
-            "expirationWarnings": {
-                "urgent": "Das Client Zertifikat läuft in weniger als 4 Wochen ab. Bitte ersetzen Sie es in naher Zukunft.",
-                "veryUrgent": "Das Client Zertifikat läuft in weniger als 1 Woche ab. Bitte ersetzen Sie es so schnell wie möglich.",
-                "expired": "Das Client Zertifikat ist abgelaufen. Bitte ersetzen Sie es so schnell wie möglich."
-            }
+            "recentChange": "lädt..."
         },
         "cert": {
             "renew-title": "Neues Zertifikat erstellen und ersetzen",
@@ -544,7 +539,12 @@
             "renew-yes": "Ja, ich bin sicher",
             "renew-no": "Nein, abbrechen",
             "renew-success": "Neues Zertifikat wurde erfolgreich erstellt und ersetzt",
-            "renew-success-title": "Erfolgreich"
+            "renew-success-title": "Erfolgreich",
+            "expirationWarnings": {
+                "urgent": "Das Client Zertifikat läuft in weniger als 4 Wochen ab. Bitte ersetzen Sie es in naher Zukunft.",
+                "veryUrgent": "Das Client Zertifikat läuft in weniger als 1 Woche ab. Bitte ersetzen Sie es so schnell wie möglich.",
+                "expired": "Das Client Zertifikat ist abgelaufen. Bitte ersetzen Sie es so schnell wie möglich."
+            }
         },
         "tenantsList": {
             "headline": "Tenants"

@@ -7,7 +7,7 @@ import {PocSuperAdminService} from "../../../core/services/poc-super-admin.servi
 import {ITenant} from "../../../core/models/interfaces/tenant.interface";
 import {ErrorHandlerService} from "../../../core/services/error-handler.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {getFormatedDateTime} from "../../../core/utils/date";
+import {getCertUrgency, getFormatedDateTime} from "../../../core/utils/date";
 import {TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
 import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
 import {ITenantChanges} from "../../../core/models/interfaces/tenant-changes.interface";
@@ -16,7 +16,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {interval, startWith, Subscription} from "rxjs";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
-import {EXPIRED_THRESHOLD, URGENT_THRESHOLD, VERY_URGENT_THRESHOLD} from "../../../core/utils/constants";
 
 @Component({
     selector: 'app-tenant-details',
@@ -31,6 +30,7 @@ export class TenantDetailsComponent implements OnInit {
     tenant: ITenant;
     polling: Subscription;
     isPolling = false;
+    CERTURGENCY = CERTURGENCY;
 
     constructor(
         private localService: LocaleService,
@@ -157,31 +157,13 @@ export class TenantDetailsComponent implements OnInit {
         });
     }
 
-    getCertUrgency() {
-        let urgentThreshold = URGENT_THRESHOLD;
-        let veryUrgentThreshold = VERY_URGENT_THRESHOLD;
-        let expiredThreshold = EXPIRED_THRESHOLD;
-
-        let expirationDate = new Date(this.tenant.certExpirationDate);
-        let today = new Date();
-
-        let timeDiff = expirationDate.getTime() - today.getTime();
-
-        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-        if (diffDays <= expiredThreshold) {
-            return CERTURGENCY.EXPIRED;
+    checkCertUrgency() {
+        if (this.tenant.certExpirationDate) {
+            let expirationDate = new Date(this.tenant.certExpirationDate);
+            return getCertUrgency(expirationDate);
+        } else {
+            return CERTURGENCY.NONE;
         }
-
-        if (diffDays <= veryUrgentThreshold) {
-            return CERTURGENCY.VERYURGENT;
-        }
-
-        if (diffDays <= urgentThreshold) {
-            return CERTURGENCY.URGENT;
-        }
-
-        return CERTURGENCY.NONE;
     }
 
     public restartPolling(tenantId: string) {
