@@ -158,12 +158,7 @@ export class TenantDetailsComponent implements OnInit {
     }
 
     checkCertUrgency() {
-        if (this.tenant.certExpirationDate) {
-            let expirationDate = new Date(this.tenant.certExpirationDate);
-            return getCertUrgency(expirationDate);
-        } else {
-            return CERTURGENCY.NONE;
-        }
+        return getCertUrgency(this.tenant.certExpirationDate);
     }
 
     public restartPolling(tenantId: string) {

@@ -25,24 +25,43 @@ export const getFormatedDateTime = (date: Date, locale: ILocale) => {
     return moment(date).format(locale.dateFormatLong4Moment);
 };
 
-export const getCertUrgency = (expirationDate: Date) => {
-    let today = new Date();
+export const getCertUrgency = (expirationDateStr: Date | string) => {
 
-    let timeDiff = expirationDate.getTime() - today.getTime();
+    if (expirationDateStr) {
+        let expirationDate = new Date(expirationDateStr);
 
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        let today = new Date();
 
-    if (diffDays <= EXPIRED_THRESHOLD) {
-        return CERTURGENCY.EXPIRED;
+        let timeDiff = expirationDate.getTime() - today.getTime();
+
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if (diffDays <= EXPIRED_THRESHOLD) {
+            return CERTURGENCY.EXPIRED;
+        }
+
+        if (diffDays <= VERY_URGENT_THRESHOLD) {
+            return CERTURGENCY.VERYURGENT;
+        }
+
+        if (diffDays <= URGENT_THRESHOLD) {
+            return CERTURGENCY.URGENT;
+        }
     }
-
-    if (diffDays <= VERY_URGENT_THRESHOLD) {
-        return CERTURGENCY.VERYURGENT;
-    }
-
-    if (diffDays <= URGENT_THRESHOLD) {
-        return CERTURGENCY.URGENT;
-    }
-
     return CERTURGENCY.NONE;
+}
+
+export const mappedClassToCertUrgency = (urgency: number) => {
+    let rowClass = '';
+    switch (urgency) {
+        case CERTURGENCY.EXPIRED:
+            rowClass = "expired";
+            break;
+        case CERTURGENCY.VERYURGENT:
+            rowClass = "veryUrgent";
+            break;
+        case CERTURGENCY.URGENT:
+            rowClass = "urgent"
+    }
+    return rowClass;
 }

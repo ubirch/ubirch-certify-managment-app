@@ -121,12 +121,7 @@ export class SuperAdminDetailsComponent implements OnInit {
     }
 
     checkCertUrgency() {
-        if (this.poc.mainAdmin.certExpirationDate) {
-            let expirationDate = new Date(this.poc.mainAdmin.certExpirationDate);
-            return getCertUrgency(expirationDate);
-        } else {
-            return CERTURGENCY.NONE;
-        }
+        return getCertUrgency(this.poc.mainAdmin.certExpirationDate);
     }
 
     public restartPolling(pocId: string) {

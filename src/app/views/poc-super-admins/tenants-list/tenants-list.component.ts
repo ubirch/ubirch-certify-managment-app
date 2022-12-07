@@ -20,7 +20,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {debounceTime, distinctUntilChanged, filter, map, takeUntil, tap} from "rxjs/operators";
 import {merge} from "rxjs";
 import {MatSort} from "@angular/material/sort";
-import {getCertUrgency} from "../../../core/utils/date";
+import {getCertUrgency, mappedClassToCertUrgency} from "../../../core/utils/date";
 import {CERTURGENCY} from "../../../core/models/enums/certUrgency.enum";
 
 @Component({
@@ -47,12 +47,14 @@ export class TenantsListComponent
         'phone',
         'certExpirationDate',
         'created',
+        'with-expiration-warning',
         'actions',
     ];
     TenantTypeTranslation = TenantTypeTranslation;
     TenantPoCUsageTypeTranslation = TenantPoCUsageTypeTranslation;
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
+    CERTURGENCY = CERTURGENCY;
 
     defaultSortColumn = 'name';
 
@@ -109,21 +111,12 @@ export class TenantsListComponent
     }
 
     public getRowClass(tenant: ITenant): string {
-        let rowClass = '';
-        if (tenant.certExpirationDate) {
-            let expirationState = getCertUrgency(new Date(tenant.certExpirationDate));
-            switch (expirationState) {
-                case CERTURGENCY.EXPIRED:
-                    rowClass = "expired";
-                    break;
-                case CERTURGENCY.VERYURGENT:
-                    rowClass = "veryUrgent";
-                    break;
-                case CERTURGENCY.URGENT:
-                    rowClass = "urgent"
-            }
-        }
-        return rowClass;
+        let expirationState = getCertUrgency(tenant.certExpirationDate);
+        return mappedClassToCertUrgency(expirationState);
+    }
+
+    public checkCertUrgency(tenant: ITenant) {
+        return getCertUrgency(tenant.certExpirationDate);
     }
 
     private generateFilters() {
