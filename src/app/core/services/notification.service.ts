@@ -28,7 +28,7 @@ export class NotificationService {
 
   private openSnackBar(config: INotification) {
     this.notifications.openFromComponent(NotificationComponent, {
-      duration: config.duration || DEFAULT_NOTIFICATION_DURATION,
+      duration: config.duration ? config.duration > 0 ? config.duration : undefined : DEFAULT_NOTIFICATION_DURATION,
       data: config
     });
     return config;

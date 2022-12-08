@@ -20,5 +20,20 @@
         color: #63630d;
         background-color: #ffffa9;
     }
+
+    .closeDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+
+        .closeBut {
+            align-self:flex-end;
+            background-color: transparent;
+            box-shadow: none;
+        }
+    }
 }
 

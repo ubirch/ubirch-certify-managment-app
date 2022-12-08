@@ -118,6 +118,7 @@
         "cancel": "Cancel",
         "confirm": "Confirm",
         "create": "Create",
+        "close": "Close",
         "errors": {
             "400": "Sorry. We were unable to process the request. Request data seems to be invalid",
             "401": "Seems like your session has expired. Please log in again to continue",

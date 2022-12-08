@@ -1,4 +1,9 @@
 <div [ngClass]="cssClass">
+    <div class="closeDiv" *ngIf="!data.duration || data.duration <= 0">
+        <button class="closeBut" mat-raised-button aria-label="Close" (click)="dismiss()">
+            <mat-icon aria-hidden="false">close</mat-icon>
+        </button>
+    </div>
     <h3 *ngIf="data.title">{{ data.title | translate }}</h3>
     <p>{{ data.message | translate }}</p>
     <div *ngIf="data.revocationMessage">
