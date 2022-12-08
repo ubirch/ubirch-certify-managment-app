@@ -118,6 +118,7 @@
         "cancel": "Abbrechen",
         "confirm": "Bestätigen",
         "create": "Erstellen",
+        "close": "Schließen",
         "errors": {
             "400": "Es tut uns leid. Wir konnten die Anfrage nicht bearbeiten. Die Anfragedaten scheinen ungültig zu sein",
             "401": "Es scheint, dass Ihre Sitzung abgelaufen ist. Bitte melden Sie sich erneut an, um fortzufahren",

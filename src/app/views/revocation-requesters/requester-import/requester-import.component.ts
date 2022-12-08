@@ -131,6 +131,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
                         this.notification = this.notificationService.warning({
                             message: 'revocationImport.notifications.complete',
                             revocationMessage: finale,
+                            duration: -1 // so that notification isn't closed automatically
                         });
                     } else {
                         this.notification = this.notificationService.success({
@@ -142,7 +143,7 @@ export class RequesterImportComponent implements OnInit, OnDestroy {
             this.notification = this.notificationService.error({
                 title: 'global.errors.requestDefaultTitle',
                 message: 'global.errors.requestDefault',
-                duration: undefined // so that notification isn't closed automatically
+                duration: -1 // so that notification isn't closed automatically
             });
         }
     }

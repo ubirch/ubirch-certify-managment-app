@@ -25,4 +25,8 @@ export class NotificationComponent implements OnInit {
   ) { }
 
   ngOnInit() { }
+
+    dismiss() {
+        this.snackRef.dismiss();
+    }
 }
