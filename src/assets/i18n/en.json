@@ -537,6 +537,8 @@
         "cert": {
             "renew-title": "Create and Replace Client Certificate",
             "renew-message": "Are you sure you want to create and replace the client certificate?",
+            "force-renew-title": "Create and Replace Additional Client Certificate",
+            "force-renew-message": "Recently a new certificate has been created for this tenant. The renewal process takes 2 weeks and is not yet completed. Are you sure you want to create and replace an additional client certificate?",
             "renew-yes": "Yes I am sure",
             "renew-no": "No, cancel",
             "renew-success": "Client certificate has been successfully created and replaced. The changes will be applied in the next 30 seconds.",

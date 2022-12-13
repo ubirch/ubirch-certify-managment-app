@@ -139,8 +139,8 @@ export class TenantDetailsComponent implements OnInit {
             yes: this.translateService.instant('superAdmin.cert.renew-yes'),
             no: this.translateService.instant('superAdmin.cert.renew-no'),
             okOnly: false
-        }).subscribe((result) => {
-            if (result) {
+        }).subscribe((renewConfirmed) => {
+            if (renewConfirmed) {
                 this.restartPolling(this.tenantId);
                 this.pocSuperAdminService.renewTenantClientCert(this.tenantId).subscribe({
                     next: (res: any) => {
@@ -150,7 +150,34 @@ export class TenantDetailsComponent implements OnInit {
                         });
                     },
                     error: (err) => {
-                        this.errorService.handlerResponseError(err);
+                        this.stopPolling();
+                        if (err?.status === 409) {
+                            this.confirmDialog.open({
+                                title: this.translateService.instant('superAdmin.cert.force-renew-title'),
+                                message: this.translateService.instant('superAdmin.cert.force-renew-message'),
+                                yes: this.translateService.instant('superAdmin.cert.renew-yes'),
+                                no: this.translateService.instant('superAdmin.cert.renew-no'),
+                                okOnly: false
+                            }).subscribe((forceConfirmed) => {
+                                if (forceConfirmed) {
+                                    this.restartPolling(this.tenantId);
+                                    this.pocSuperAdminService.renewTenantClientCert(this.tenantId, true).subscribe({
+                                        next: (res: any) => {
+                                            this.notificationService.success({
+                                                message: this.translateService.instant('superAdmin.cert.renew-success'),
+                                                title: this.translateService.instant('superAdmin.cert.renew-success-title'),
+                                            });
+                                        },
+                                        error: (err) => {
+                                            this.errorService.handlerResponseError(err);
+                                        }
+                                    });
+                                }
+                            });
+
+                        } else {
+                            this.errorService.handlerResponseError(err);
+                        }
                     },
                 });
             }
@@ -176,7 +203,6 @@ export class TenantDetailsComponent implements OnInit {
                     this.generateForm();
                     if (oldCert !== this.tenant.certExpirationDate) {
                         this.stopPolling();
-                        this.isPolling = false;
                     }
                 },
                 error: (err) => {
@@ -191,6 +217,7 @@ export class TenantDetailsComponent implements OnInit {
     public stopPolling() {
         if (this.polling) {
             this.polling.unsubscribe();
+            this.isPolling = false;
         }
     }
 

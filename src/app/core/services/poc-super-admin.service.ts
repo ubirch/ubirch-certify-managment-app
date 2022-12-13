@@ -24,8 +24,8 @@ export class PocSuperAdminService {
 
     constructor(
         private http: HttpClient,
-        private route: ActivatedRoute)
-    {}
+        private route: ActivatedRoute) {
+    }
 
     getPoc(id: string) {
         const url = `${this.pocDetailsUrl}/${id}`;
@@ -47,11 +47,14 @@ export class PocSuperAdminService {
         return of(Error());
     }
 
-    renewTenantClientCert(tenantId: string) {
+    renewTenantClientCert(tenantId: string, force: boolean = false) {
         if (tenantId) {
             const url = this.tenantCertUpdateUrl;
-            const array = [tenantId];
-            return this.http.patch(url, {ids: array});
+            const body = {ids: [tenantId]};
+            if (force) {
+                body['force'] = true;
+            }
+            return this.http.patch(url, body);
         }
         return of(Error());
     }

@@ -537,6 +537,8 @@
         "cert": {
             "renew-title": "Neues Zertifikat erstellen und ersetzen",
             "renew-message": "Sind Sie sicher, dass Sie ein neues Zertifikat für diesen PoC erstellen möchten?",
+            "force-renew-title": "Weiteres neues Zertifikat erstellen und ersetzen",
+            "force-renew-message": "Es wurde kürzlich ein neues Zertifikat für diesen Tenant erstellt. Der Erneuerungsprozess dauert 2 Wochen und ist noch nicht abgeschlossen. Sind Sie sicher, dass Sie ein weiteres neues Zertifikat für diesen PoC erstellen möchten?",
             "renew-yes": "Ja, ich bin sicher",
             "renew-no": "Nein, abbrechen",
             "renew-success": "Neues Zertifikat wurde erfolgreich erstellt und ersetzt",
