@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators,} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
@@ -51,7 +51,7 @@ export class SuperAdminListComponent
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
     expandedElement: IPocSuperAdmin | null;
-    filters: FormGroup;
+    filters: UntypedFormGroup;
     PocStatusTranslation = PocStatusTranslation;
     PocActivationStateTranslation = PocActivationStateTranslation;
 
@@ -66,7 +66,7 @@ export class SuperAdminListComponent
     }
 
     get columnFilters() {
-        return this.filters?.get('filterColumns') as FormGroup;
+        return this.filters?.get('filterColumns') as UntypedFormGroup;
     }
 
     get statusFilter() {
@@ -75,7 +75,7 @@ export class SuperAdminListComponent
 
     constructor(
         protected pocSuperAdminService: PocSuperAdminService,
-        protected fb: FormBuilder,
+        protected fb: UntypedFormBuilder,
         protected translateService: TranslateService,
         protected confirmService: ConfirmDialogService,
         protected errorService: ErrorHandlerService,

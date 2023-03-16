@@ -27,7 +27,6 @@ export function maskConfigFunction(): Partial<IConfig> {
 
 @NgModule({
     declarations: [AppComponent],
-    entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
@@ -56,6 +55,6 @@ export function maskConfigFunction(): Partial<IConfig> {
         },
         sessionEndedInterceptorProvider
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

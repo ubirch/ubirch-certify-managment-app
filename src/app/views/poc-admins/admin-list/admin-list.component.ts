@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -48,18 +48,18 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
   pageSizes = PAGE_SIZES;
   expandedElement: IPocAdmin | null;
 
-  filters: FormGroup;
+  filters: UntypedFormGroup;
   adminStatusTranslation = AdminStatusTranslation;
   actionLoding = false;
   adminStatues = AdminStatus;
 
   get search() { return this.filters.get('search'); }
-  get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
+  get columnFilters() { return this.filters?.get('filterColumns') as UntypedFormGroup; }
   get statusFilter() { return this.columnFilters?.controls?.status; }
 
   constructor(
     protected adminService: PocAdminService,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected errorService: ErrorHandlerService,
     protected notificationService: NotificationService,
     protected router: Router,
@@ -82,7 +82,7 @@ export class AdminListComponent extends ListComponent<IPocAdmin> implements OnIn
       { value: ListAction.revoke2FA, label: `listActions.revoke2FA`, predicate: (admin: IPocAdmin) => true },
       { value: ListAction.retry, label: `listActions.retry`, predicate: (admin: IPocAdmin) => admin.state === AdminStatus.aborted },
     ];
-    this.action = new FormControl();
+    this.action = new UntypedFormControl();
   }
 
   ngOnInit() {

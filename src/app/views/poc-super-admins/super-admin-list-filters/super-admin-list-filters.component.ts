@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {PocStatus, PocStatusTranslation} from 'src/app/core/models/enums/poc-status.enum';
 
 
@@ -10,7 +10,7 @@ import {PocStatus, PocStatusTranslation} from 'src/app/core/models/enums/poc-sta
 })
 export class SuperAdminListFiltersComponent {
 
-  @Input() filters: FormGroup;
+  @Input() filters: UntypedFormGroup;
 
   statuses: string[] = [PocStatus.completed, PocStatus.pending, PocStatus.processing, PocStatus.aborted];
   PocStatusTranslation = PocStatusTranslation;

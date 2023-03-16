@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 import {TenantType, TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
 import {TenantPoCUsageType, TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
 
@@ -10,7 +10,7 @@ import {TenantPoCUsageType, TenantPoCUsageTypeTranslation} from "../../../core/m
 })
 export class TenantsListFiltersComponent implements OnInit {
 
-    @Input() filters: FormGroup;
+    @Input() filters: UntypedFormGroup;
 
     tenantTypes: string[] = [TenantType.bmg, TenantType.ubirch];
     tenantPoCUsageTypes: string[] = [TenantPoCUsageType.API, TenantPoCUsageType.APP, TenantPoCUsageType.BOTH];

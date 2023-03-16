@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
@@ -19,7 +19,7 @@ import {getCertUrgency, getFormatedDateTime} from "../../../core/utils/date";
     styleUrls: ['./super-admin-details.component.scss'],
 })
 export class SuperAdminDetailsComponent implements OnInit {
-    form: FormGroup;
+    form: UntypedFormGroup;
     poc: any;
     pocId: string;
     locale: ILocale;
@@ -32,7 +32,7 @@ export class SuperAdminDetailsComponent implements OnInit {
         private pocSuperAdminService: PocSuperAdminService,
         private errorService: ErrorHandlerService,
         private route: ActivatedRoute,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private router: Router,
         private confirmDialog: ConfirmDialogService,
         private translate: TranslateService,

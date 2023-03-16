@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
-    FormBuilder,
+    UntypedFormBuilder,
     FormControl,
-    FormGroup,
+    UntypedFormGroup,
     Validators,
 } from '@angular/forms';
 import { MatDateRangePicker } from '@angular/material/datepicker';
@@ -51,7 +51,7 @@ export class AllRevocationsListComponent
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
     expandedElement: AllRevocations | null;
-    filters: FormGroup;
+    filters: UntypedFormGroup;
     notification: INotification;
     actionLoading = false;
     showActions: boolean;
@@ -66,13 +66,13 @@ export class AllRevocationsListComponent
     }
 
     get columnFilters() {
-        return this.filters?.get('filterColumns') as FormGroup;
+        return this.filters?.get('filterColumns') as UntypedFormGroup;
     }
 
     constructor(
         protected exportService: ExportImportService,
         protected revocationService: RevocationService,
-        protected fb: FormBuilder,
+        protected fb: UntypedFormBuilder,
         protected translateService: TranslateService,
         protected confirmService: ConfirmDialogService,
         protected errorService: ErrorHandlerService,

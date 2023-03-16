@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {Subject} from 'rxjs';
@@ -16,7 +16,7 @@ import {PocEmployeeService} from 'src/app/core/services/poc-employee.service';
 })
 export class EmployeeEditComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -25,7 +25,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
     private errorService: ErrorHandlerService,
     private notificationService: NotificationService,
     private translateService: TranslateService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
   ) { }

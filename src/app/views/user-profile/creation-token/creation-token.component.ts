@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -14,7 +14,7 @@ export class CreationTokenComponent implements OnInit, OnDestroy {
 
   loading = false;
 
-  token: FormControl;
+  token: UntypedFormControl;
   unsubscribe$: Subject<void>;
 
   constructor(
@@ -23,7 +23,7 @@ export class CreationTokenComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.token = new FormControl('', [Validators.required]);
+    this.token = new UntypedFormControl('', [Validators.required]);
     this.unsubscribe$ = new Subject<void>();
   }
 

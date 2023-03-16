@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-revocation-requesters',
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./revocation-requesters.component.scss'],
 })
 export class RevocationRequestersComponent implements OnInit {
-  filters: FormGroup;
+  filters: UntypedFormGroup;
   constructor() { }
 
   ngOnInit() {}
