@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/confirm-dialog.service";
 import {DEFAULT_PAGE_SIZE, PAGE_SIZES} from "../../../core/utils/constants";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatLegacyPaginator as MatPaginator} from "@angular/material/legacy-paginator";
 import {debounceTime, distinctUntilChanged, filter, map, takeUntil, tap} from "rxjs/operators";
 import {merge} from "rxjs";
 import {MatSort} from "@angular/material/sort";

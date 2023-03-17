@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -55,7 +55,7 @@ $ubirch-app-theme: mat-light-theme((
   color: (
     primary: $ubirch-app-primary,
     accent: $ubirch-app-accent,
-    warn: $ubirch-app-warn,  
+    warn: $ubirch-app-warn,
 
   )
 ));
@@ -67,7 +67,7 @@ $ubirch-app-theme: mat-light-theme((
         color: (
             primary: $ubirch-app-primary,
             accent: $ubirch-app-accent,
-            warn: $ubirch-app-warn,  
+            warn: $ubirch-app-warn,
         )
     ));
 
@@ -75,7 +75,7 @@ $ubirch-app-theme: mat-light-theme((
     // $custom-background-color: map_get($mat-blue-grey, 50);
 
     // -or- Can set colour by hex value too
-    
+
     @include angular-material-theme($ubirch-app-dark-theme);
 
     &.mat-app-background { background-color: #000; }

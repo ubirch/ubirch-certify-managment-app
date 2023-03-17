@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { NotificationComponent } from 'src/app/shared/components/notification/notification.component';
 import { NotificationType } from '../models/enums/notification-type.enum';
 import { INotification } from '../models/interfaces/notification.interface';
