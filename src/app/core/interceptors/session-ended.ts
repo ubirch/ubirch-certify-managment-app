@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { NEVER, throwError } from 'rxjs';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NotAuthorizedDialogComponent } from 'src/app/views/not-authorized-dialog/not-authorized-dialog.component';
 import { environment } from 'src/environments/environment';
 
