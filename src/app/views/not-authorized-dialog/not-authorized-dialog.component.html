@@ -1,8 +1,11 @@
 <div fxLayout="column" fxLayoutGap="2rem">
-    <h1>{{ 'global.errors.401Title' | translate}}</h1>
-    <p>{{ 'global.errors.401' | translate }}</p>
-    
+    <h1 mat-dialog-title>{{ "global.errors.401Title" | translate }}</h1>
+    <div mat-dialog-content>
+        <p>{{ "global.errors.401" | translate }}</p>
+    </div>
     <div fxLayout fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" (click)="logout()">{{ 'global.login' | translate }}</button>
+        <button mat-raised-button color="primary" (click)="logout()">
+            {{ "global.login" | translate }}
+        </button>
     </div>
 </div>

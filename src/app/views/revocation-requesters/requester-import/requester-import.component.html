@@ -4,21 +4,16 @@
         <p>
             {{ "revocationImport.prompt" | translate }}
         </p>
-        <!-- <mat-form-field class="example-full-width" appearance="fill">
-            <textarea
-                id="base64Revocation"
-                [(ngModel)]="base64Revocation"
-                matInput
-                [ngModelOptions]="{ standalone: true }"
-                style="height: 9rem"
-            ></textarea>
-        </mat-form-field> -->
-        <app-file-upload id="revo" (fileSelected)="fileSelected($event)" [progress]="progress" accept="application/pdf" ></app-file-upload>
-
+        <app-file-upload
+            id="revo"
+            (fileSelected)="fileSelected($event)"
+            [progress]="progress"
+            accept="application/pdf"
+        ></app-file-upload>
         <div fxLayout="column" fxLayoutGap="3rem" class="actions">
             <button
                 type="submit"
-                [disabled]=" !!progress || this.invalidFile"
+                [disabled]="!!progress || this.invalidFile"
                 mat-raised-button
                 color="primary"
                 (click)="uploadFile()"
