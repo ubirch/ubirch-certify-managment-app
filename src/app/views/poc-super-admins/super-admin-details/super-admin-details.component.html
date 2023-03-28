@@ -7,22 +7,26 @@
 <mat-card>
     <mat-card-content>
         <mat-spinner style="margin: auto" *ngIf="!poc"></mat-spinner>
-        <form *ngIf="form" [formGroup]="form" fxLayout="column" fxLayoutGap="1rem" #f>
+        <form
+            *ngIf="form"
+            [formGroup]="form"
+            fxLayout="column"
+            fxLayoutGap="1rem"
+            #f
+        >
             <ng-container>
                 <h3 fxLayout fxLayoutAlign="start center">
-                    <mat-icon color="primary">factory
-                    </mat-icon
-                    >
+                    <mat-icon color="primary">factory </mat-icon>
                     {{ "superAdmin.pocDetails.tenant" | translate }}
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.tenantName" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.tenantName' | translate
-                            }}"
                             formControlName="tenant"
                         />
                     </mat-form-field>
@@ -31,105 +35,114 @@
 
             <ng-container *ngIf="poc?.pocType.includes('app')">
                 <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem">
-                    <mat-icon color="primary">people_alt
-                    </mat-icon
-                    >
+                    <mat-icon color="primary">people_alt </mat-icon>
                     {{ "superAdmin.pocDetails.mainAdmin" | translate }}
                 </h3>
-                <app-poc-main-admin *ngIf="poc.mainAdmin"
-                                    [mainAdmin]="[poc.mainAdmin]"
+                <app-poc-main-admin
+                    *ngIf="poc.mainAdmin"
+                    [mainAdmin]="[poc.mainAdmin]"
                 ></app-poc-main-admin>
             </ng-container>
 
             <ng-container formGroupName="pocDetails">
                 <h3 fxLayout fxLayoutAlign="start center" fxLayoutGap="1rem">
-                    <mat-icon color="primary">info
-                    </mat-icon
-                    >
+                    <mat-icon color="primary">info </mat-icon>
                     {{ "superAdmin.pocDetails.details" | translate }}
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.pocName" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.pocName' | translate
-                            }}"
                             formControlName="pocName"
                         />
                     </mat-form-field>
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.locationId" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.locationId' | translate
-                            }}"
                             formControlName="externalId"
                         />
                     </mat-form-field>
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.status" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.status' | translate
-                            }}"
                             formControlName="status"
                         />
                     </mat-form-field>
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.createdAt" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.createdAt' | translate
-                            }}"
                             formControlName="createdAt"
                         />
                     </mat-form-field>
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.active" | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.active' | translate
-                            }}"
                             formControlName="active"
                         />
                     </mat-form-field>
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="poc?.pocType.includes('app') && poc?.pocType.includes('bmg')">
+            <ng-container
+                *ngIf="
+                    poc?.pocType.includes('app') && poc?.pocType.includes('bmg')
+                "
+            >
                 <h3 fxLayout fxLayoutAlign="start center">
-                    <mat-icon color="primary">info
-                    </mat-icon>
+                    <mat-icon color="primary">info </mat-icon>
                     {{ "superAdmin.pocDetails.clientCert" | translate }}
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width locationIDField">
+                        <mat-label>{{
+                            "superAdmin.pocDetails.certValidUntil" | translate
+                        }}</mat-label>
                         <input
                             *ngIf="!isPolling"
-                            value="{{ poc?.mainAdmin?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
+                            value="{{
+                                poc?.mainAdmin?.certExpirationDate
+                                    | date
+                                        : locale.dateFormatLong
+                                        : ''
+                                        : locale.language
+                            }}"
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'superAdmin.pocDetails.certValidUntil' | translate
-                            }}"
                         />
                         <input
                             *ngIf="isPolling"
-                            value="{{ 'superAdmin.pocDetails.recentChange' | translate }}"
+                            value="{{
+                                'superAdmin.pocDetails.recentChange' | translate
+                            }}"
                             readonly="true"
                             matInput
                             placeholder="{{
-                                'superAdmin.pocDetails.certValidUntil' | translate
+                                'superAdmin.pocDetails.certValidUntil'
+                                    | translate
                             }}"
                         />
                         <button
@@ -138,13 +151,38 @@
                             class="mat-btn-sm locationIdButton"
                             (click)="renewClientCertificate()"
                         >
-                            {{'superAdmin.pocDetails.renewCert' | translate }}
+                            {{ "superAdmin.pocDetails.renewCert" | translate }}
                         </button>
                     </mat-form-field>
                 </div>
-                <p *ngIf="checkCertUrgency() == CERTURGENCY.URGENT" class="expirationAlert urgent"><mat-icon>notification_important</mat-icon> {{'superAdmin.cert.expirationWarnings.urgent' | translate}}</p>
-                <p *ngIf="checkCertUrgency() == CERTURGENCY.VERYURGENT" class="expirationAlert veryUrgent"><mat-icon>warning</mat-icon> {{'superAdmin.cert.expirationWarnings.veryUrgent' | translate}}</p>
-                <p *ngIf="checkCertUrgency() == CERTURGENCY.EXPIRED" class="expirationAlert expired"><mat-icon>error</mat-icon> {{'superAdmin.cert.expirationWarnings.expired' | translate}}</p>
+                <p
+                    *ngIf="checkCertUrgency() == CERTURGENCY.URGENT"
+                    class="expirationAlert urgent"
+                >
+                    <mat-icon>notification_important</mat-icon>
+                    {{
+                        "superAdmin.cert.expirationWarnings.urgent" | translate
+                    }}
+                </p>
+                <p
+                    *ngIf="checkCertUrgency() == CERTURGENCY.VERYURGENT"
+                    class="expirationAlert veryUrgent"
+                >
+                    <mat-icon>warning</mat-icon>
+                    {{
+                        "superAdmin.cert.expirationWarnings.veryUrgent"
+                            | translate
+                    }}
+                </p>
+                <p
+                    *ngIf="checkCertUrgency() == CERTURGENCY.EXPIRED"
+                    class="expirationAlert expired"
+                >
+                    <mat-icon>error</mat-icon>
+                    {{
+                        "superAdmin.cert.expirationWarnings.expired" | translate
+                    }}
+                </p>
             </ng-container>
 
             <div fxLayout="column" fxLayoutGap="1rem" class="actions">

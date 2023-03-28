@@ -16,41 +16,41 @@
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            'tenant.name' | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.name' | translate
-                            }}"
                             formControlName="name"
                         />
                     </mat-form-field>
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            'tenant.created' | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.created' | translate
-                            }}"
                             formControlName="createdAt"
                         />
                     </mat-form-field>
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{ 'tenant.email' | translate }}</mat-label>
                         <input
                             matInput
-                            placeholder="{{ 'tenant.email' | translate }}"
                             formControlName="email"/>
                         <mat-error *ngIf="form.get('tenantDetails').get('email').errors">
                             {{ 'tenant.validationErrors.email' | translate }}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            'tenant.phone' | translate }}"</mat-label>
                         <input
                             matInput
-                            placeholder="{{
-                                'tenant.phone' | translate }}"
                             formControlName="phone"/>
                         <mat-error *ngIf="form.get('tenantDetails').get('phone').errors">
                             {{ 'tenant.validationErrors.phone' | translate }}
@@ -59,22 +59,22 @@
                 </div>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            'tenant.tenantType' | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.tenantType' | translate
-                            }}"
                             formControlName="tenantType"
                         />
                     </mat-form-field>
                     <mat-form-field class="full-width">
+                        <mat-label>{{
+                            'tenant.usageType' | translate
+                        }}</mat-label>
                         <input
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.usageType' | translate
-                            }}"
                             formControlName="usageType"
                         />
                     </mat-form-field>
@@ -88,23 +88,20 @@
                 </h3>
                 <div fxLayout fxLayoutGap="2rem">
                     <mat-form-field class="full-width locationIDField">
+                        <mat-label>{{
+                            'tenant.certValidUntil' | translate
+                        }}</mat-label>
                         <input
                             *ngIf="!isPolling"
                             value="{{ tenant?.certExpirationDate | date:locale.dateFormatLong:'':locale.language}}"
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.certValidUntil' | translate
-                            }}"
                         />
                         <input
                             *ngIf="isPolling"
                             value="{{ 'tenant.notifications.recentChange' | translate }}"
                             readonly="true"
                             matInput
-                            placeholder="{{
-                                'tenant.certValidUntil' | translate
-                            }}"
                         />
                         <button
                             mat-raised-button
