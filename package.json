@@ -32,7 +32,7 @@
     "deepmerge-ts": "^5.0.0",
     "detect-browser": "^5.3.0",
     "keycloak-angular": "^13.0.0",
-    "keycloak-js": "^20.0.1",
+    "keycloak-js": "20.0.3",
     "libphonenumber-js": "^1.9.44",
     "moment": "^2.29.4",
     "ngx-cookie-service": "^15.0.0",
