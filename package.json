@@ -9,7 +9,6 @@
     "build": "npm run supportedBrowsers && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "supportedBrowsers": "(echo module.exports = && browserslist-useragent-regexp --allowHigherVersions) > src/supportedBrowsers.js"
   },
   "private": true,
@@ -63,7 +62,6 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "protractor": "~7.0.0",
     "ts-node": "~10.4.0",
     "typescript": "4.8.4"
   },
