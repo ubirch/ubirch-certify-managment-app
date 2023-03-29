@@ -1,34 +1,63 @@
-<h2>{{'locationEdit.headline' | translate}}</h2>
+<h2>{{ "locationEdit.headline" | translate }}</h2>
 <mat-card>
     <mat-card-content fxLayout="column" fxLayoutGap="2rem">
-        <p *ngIf="isBmgApiPocType(poc)" class="changeAlert"><mat-icon>warning</mat-icon> {{'locationEdit.infoText' | translate}}</p>
-        <form [formGroup]="form" *ngIf="form" fxLayout="column" fxLayoutGap="1rem">
+        <p *ngIf="isBmgApiPocType(poc)" class="changeAlert">
+            <mat-icon>warning</mat-icon>
+            {{ "locationEdit.infoText" | translate }}
+        </p>
+        <form
+            [formGroup]="form"
+            *ngIf="form"
+            fxLayout="column"
+            fxLayoutGap="1rem"
+        >
             <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
                 <!-- CURRENT LOCATION ID -->
                 <div fxLayout>
                     <mat-form-field fxFlex>
-                        <input readonly  matInput
-                               placeholder="{{ 'locationEdit.current' | translate }}" formControlName="current">
+                        <mat-label>{{
+                            "locationEdit.current" | translate
+                        }}</mat-label>
+                        <input readonly matInput formControlName="current" />
                     </mat-form-field>
                 </div>
 
                 <!-- NEW LOCATION ID -->
                 <div fxLayout>
                     <mat-form-field fxFlex>
-                        <input matInput
-                               placeholder="{{ 'locationEdit.new' | translate }}" formControlName="new" [readonly]="disableForm">
+                        <mat-label>{{
+                            "locationEdit.new" | translate
+                        }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="new"
+                            [readonly]="disableForm"
+                        />
                         <mat-error *ngIf="form.get('new').errors">
-                            {{ 'locationEdit.validationErrors.new' | translate }}
+                            {{
+                                "locationEdit.validationErrors.new" | translate
+                            }}
                         </mat-error>
                     </mat-form-field>
                 </div>
             </div>
         </form>
 
-        <app-location-id-change-table *ngIf="locationIdChanges?.[0]" [pocLocationChanges]="locationIdChanges"></app-location-id-change-table>
+        <app-location-id-change-table
+            *ngIf="locationIdChanges?.[0]"
+            [pocLocationChanges]="locationIdChanges"
+        ></app-location-id-change-table>
 
         <div fxLayout="column" fxLayoutGap="1rem" class="actions">
-            <button mat-raised-button color="primary" class="mat-btn-big submitButton" (click)="submitEdit()" [disabled]="form?.invalid || form?.pending || disableForm">{{ 'locationEdit.update' | translate }}</button>
+            <button
+                mat-raised-button
+                color="primary"
+                class="mat-btn-big submitButton"
+                (click)="submitEdit()"
+                [disabled]="form?.invalid || form?.pending || disableForm"
+            >
+                {{ "locationEdit.update" | translate }}
+            </button>
         </div>
     </mat-card-content>
 </mat-card>

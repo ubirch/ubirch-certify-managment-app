@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {detailExpand, fadeDownIn, fadeUpOut} from "../../../core/utils/animations";
 import {TenantDataSource} from "../../../core/services/data-sources/tenant-data-source";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {LocaleService} from "../../../core/services/locale.service";
 import {ILocale} from "../../../core/models/interfaces/locale.interface";
 import {PocSuperAdminService} from "../../../core/services/poc-super-admin.service";
@@ -38,7 +38,7 @@ export class TenantsListComponent
 
     locale: ILocale;
     dataSource: TenantDataSource;
-    filters: FormGroup;
+    filters: UntypedFormGroup;
     displayColumns: string[] = [
         'name',
         'tenantType',
@@ -62,7 +62,7 @@ export class TenantsListComponent
         protected pocSuperAdminService: PocSuperAdminService,
         protected errorService: ErrorHandlerService,
         private localeService: LocaleService,
-        protected fb: FormBuilder,
+        protected fb: UntypedFormBuilder,
         protected notificationService: NotificationService,
         protected router: Router,
         protected translateService: TranslateService,
@@ -89,7 +89,7 @@ export class TenantsListComponent
     }
 
     get columnFilters() {
-        return this.filters?.get('filterColumns') as FormGroup;
+        return this.filters?.get('filterColumns') as UntypedFormGroup;
     }
 
     get tenantTypeFilter() {

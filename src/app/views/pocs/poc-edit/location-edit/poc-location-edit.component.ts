@@ -4,7 +4,7 @@ import {filter, map, switchMap, tap} from "rxjs/operators";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {PocsService} from "../../../../core/services/pocs.service";
 import {ErrorHandlerService} from "../../../../core/services/error-handler.service";
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {getFormatedBirthDate} from "../../../../core/utils/date";
 import {ILocationIdChange} from "../../../../core/models/interfaces/locationIdChange.interface";
 import {NotificationService} from "../../../../core/services/notification.service";
@@ -21,7 +21,7 @@ export class PocLocationEditComponent implements OnInit {
     poc: IPoc;
     pocId: string;
     locationIdChanges: ILocationIdChange[] = [];
-    form: FormGroup;
+    form: UntypedFormGroup;
     disableForm = false;
 
 
@@ -31,7 +31,7 @@ export class PocLocationEditComponent implements OnInit {
         private pocService: PocsService,
         private errorService: ErrorHandlerService,
         private notificationService: NotificationService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private translationService: TranslateService,
     ) {
     }

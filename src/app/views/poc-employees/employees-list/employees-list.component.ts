@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,19 +46,19 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
   pageSizes = PAGE_SIZES;
   expandedElement: IPocEmployee | null;
 
-  filters: FormGroup;
+  filters: UntypedFormGroup;
   employeeStatusTranslation = EmployeeStatusTranslation;
   showActions = false;
   actionLoading = false;
   exportLoading = false;
 
   get search() { return this.filters.get('search'); }
-  get columnFilters() { return this.filters?.get('filterColumns') as FormGroup; }
+  get columnFilters() { return this.filters?.get('filterColumns') as UntypedFormGroup; }
   get statusFilter() { return this.columnFilters?.controls?.status; }
 
   constructor(
     protected employeeService: PocEmployeeService,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected errorService: ErrorHandlerService,
     protected notificationService: NotificationService,
     protected router: Router,
@@ -86,7 +86,7 @@ export class EmployeesListComponent extends ListComponent<IPocEmployee> implemen
         predicate: (employee: IPocEmployee) => employee.status === EmployeeStatus.aborted
       },
     ];
-    this.action = new FormControl();
+    this.action = new UntypedFormControl();
   }
 
   ngOnInit() {

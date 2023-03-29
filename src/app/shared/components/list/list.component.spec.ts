@@ -4,8 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  let component: ListComponent<any>;
+  let fixture: ComponentFixture<ListComponent<any>>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-requester-filters',
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
     styleUrls: ['./requester-filters.component.scss'],
 })
 export class RequesterFiltersComponent {
-    @Input() filters: FormGroup;
+    @Input() filters: UntypedFormGroup;
     @Input() exportDisabled = false;
     @Output() exportClicked = new EventEmitter();
     @Output() dateChanged = new EventEmitter();

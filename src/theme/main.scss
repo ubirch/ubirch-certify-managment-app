@@ -11,10 +11,23 @@ snack-bar-container.mat-snack-bar-container {
     color: #000;
 }
 
-.mat-button-base.mat-btn-big { 
+.mat-button-base.mat-btn-big {
     font-size: 1.2rem;
     line-height: 3rem;
     padding: 0 2rem;
+}
+
+.mat-flat-button, .mat-raised-button, .mat-fab, .mat-mini-fab {
+    color: #000000de;
+    background-color: #fff;
+}
+
+.mat-mdc-mini-fab:not(.mdc-fab--extended) {
+    background-color: white;
+}
+
+.mat-fab:not([class*=mat-elevation-z]), .mat-mini-fab:not([class*=mat-elevation-z]) {
+    box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
 }
 
 @keyframes spinner {
@@ -60,6 +73,6 @@ snack-bar-container.mat-snack-bar-container {
     .select-count span { opacity: 0.87; }
 }
 
-// LIST - STATE DETAILS 
+// LIST - STATE DETAILS
 .state-details .mat-icon { color: #888; }
 .state-details .mat-icon.success { color: green; }

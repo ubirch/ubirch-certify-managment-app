@@ -54,7 +54,7 @@
 
 .detail-row {
     min-height: auto;
-    background: #efefef;
+    background: #efefef !important;
 }
 
 .element-detail {
@@ -66,6 +66,6 @@
     display: flex;
 }
 
-.mat-row.with-error {
-    background-color: rgba(244,67,54,0.2);
+.with-error {
+    background-color: rgba(244,67,54,0.2) !important;
 }

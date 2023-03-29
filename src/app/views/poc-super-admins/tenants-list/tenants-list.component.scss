@@ -59,7 +59,7 @@
 
 .detail-row {
     min-height: auto;
-    background: #efefef;
+    background: #efefef !important;
 }
 
 .element-detail {
@@ -71,21 +71,21 @@
     display: flex;
 }
 
-.mat-row.with-error {
+.with-error {
     background-color: rgba(244,67,54,0.2);
 }
 
 .urgent {
-    background-color: #fff3cd;
+    background-color: #fff3cd !important;
     color: #856404;
 }
 
 .veryUrgent{
-    background-color: #ffe6cd;
+    background-color: #ffe6cd !important;
     color: #855104;
 }
 
 .expired {
-    background-color: #f8d7da;
+    background-color: #f8d7da !important;
     color: #721c24;
 }

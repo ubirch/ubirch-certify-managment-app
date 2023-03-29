@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Directive, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -17,7 +17,7 @@ export abstract class ListComponent<T> implements OnDestroy {
   selection = new SelectionModel<T>(true, []);
   dataSource: IListDataSource<T>;
 
-  action: FormControl;
+  action: UntypedFormControl;
   actions: IAction<T>[];
   showActions = false;
 
@@ -26,7 +26,7 @@ export abstract class ListComponent<T> implements OnDestroy {
   get selectedCount() { return this.selection?.selected?.length; }
 
   constructor(
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected errorService: ErrorHandlerService,
     protected notificationService: NotificationService,
     protected router: Router,

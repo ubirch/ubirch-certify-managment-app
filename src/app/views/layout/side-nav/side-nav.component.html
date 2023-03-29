@@ -1,28 +1,76 @@
 <mat-nav-list>
-    <mat-list-item *ngIf="!authService.isRevocationApp()">
-      <mat-icon>place</mat-icon>
-      <a *ngIf="!authService.isSuperAdmin" [routerLink]="[ '/views', 'pocs' ]" routerLinkActive="active" >{{ 'pocList.menuItem' | translate }}</a>
-      <a *ngIf="authService.isSuperAdmin" [routerLink]="[ '/views', 'super-admin', 'pocs' ]" routerLinkActive="active" >{{ 'pocList.menuItem' | translate }}</a>
-    </mat-list-item>
-    <mat-list-item *ngIf="!authService.isRevocationApp() && !authService.isSuperAdmin()">
-      <mat-icon>group</mat-icon>
-      <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active">PoC Admins</a>
-    </mat-list-item>
-    <mat-list-item *ngIf="authService.hasBothRoles()">
-      <mat-icon>assignment</mat-icon>
-      <a [routerLink]="[ '/views', 'revocation-requester' ]" routerLinkActive="active">{{ 'revocationRequester.headline' | translate }}</a>
-    </mat-list-item>
-    <mat-list-item *ngIf="authService.hasBothRoles()">
-      <mat-icon>check_circle_outline</mat-icon>
-      <a [routerLink]="[ '/views', 'revocation-authorizer' ]" routerLinkActive="active">{{ 'revocationAuthorizer.headline' | translate }}</a>
-    </mat-list-item>
+    <!-- <mat-list-item *ngIf="!authService.isRevocationApp()"> -->
+    <!-- <mat-icon>place</mat-icon> -->
+    <a
+        mat-list-item
+        *ngIf="!authService.isSuperAdmin && !authService.isRevocationApp()"
+        [routerLink]="['/views', 'pocs']"
+        routerLinkActive="active"
+        ><mat-icon>place</mat-icon>{{ "pocList.menuItem" | translate }}</a
+    >
+    <a
+        mat-list-item
+        *ngIf="authService.isSuperAdmin && !authService.isRevocationApp()"
+        [routerLink]="['/views', 'super-admin', 'pocs']"
+        routerLinkActive="active"
+        ><mat-icon>place</mat-icon>{{ "pocList.menuItem" | translate }}</a
+    >
+    <!-- </mat-list-item> -->
+    <a
+        mat-list-item
+        *ngIf="!authService.isRevocationApp() && !authService.isSuperAdmin()"
+        [routerLink]="['/views', 'poc-admins']"
+        routerLinkActive="active"
+    >
+        <mat-icon>group</mat-icon>
+        PoC Admins
+        <!-- <a [routerLink]="[ '/views', 'poc-admins' ]" routerLinkActive="active">PoC Admins</a> -->
+    </a>
+    <!-- <mat-list-item *ngIf="authService.hasBothRoles()"> -->
+    <!-- <mat-icon>assignment</mat-icon> -->
+    <a
+        mat-list-item
+        *ngIf="authService.hasBothRoles()"
+        [routerLink]="['/views', 'revocation-requester']"
+        routerLinkActive="active"
+        ><mat-icon>assignment</mat-icon
+        >{{ "revocationRequester.headline" | translate }}</a
+    >
+    <!-- </mat-list-item> -->
+    <!-- <mat-list-item *ngIf="authService.hasBothRoles()"> -->
+    <!-- <mat-icon>check_circle_outline</mat-icon> -->
+    <a
+        mat-list-item
+        *ngIf="authService.hasBothRoles()"
+        [routerLink]="['/views', 'revocation-authorizer']"
+        routerLinkActive="active"
+        ><mat-icon>check_circle_outline</mat-icon
+        >{{ "revocationAuthorizer.headline" | translate }}</a
+    >
+    <!-- </mat-list-item> -->
     <mat-divider></mat-divider>
-    <mat-list-item *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()">
-      <mat-icon>account_circle</mat-icon>
-      <a [routerLink]="[ '/views', 'profile' ]" routerLinkActive="active">{{ 'userProfile.headline' | translate }}</a>
-    </mat-list-item>
-    <mat-list-item *ngIf="authService.isSuperAdmin()">
-        <mat-icon>factory</mat-icon>
-        <a [routerLink]="[ '/views', 'super-admin', 'tenants' ]" routerLinkActive="active">{{ 'superAdmin.tenantsList.headline' | translate }}</a>
-    </mat-list-item>
+    <!-- <mat-list-item
+        *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()"
+    > -->
+    <!-- <mat-icon>account_circle</mat-icon> -->
+    <a
+        mat-list-item
+        *ngIf="authService.isTenantAdmin() && !authService.hasBothRoles()"
+        [routerLink]="['/views', 'profile']"
+        routerLinkActive="active"
+        ><mat-icon>account_circle</mat-icon
+        >{{ "userProfile.headline" | translate }}</a
+    >
+    <!-- </mat-list-item> -->
+    <!-- <mat-list-item *ngIf="authService.isSuperAdmin()"> -->
+    <!-- <mat-icon>factory</mat-icon> -->
+    <a
+        mat-list-item
+        *ngIf="authService.isSuperAdmin()"
+        [routerLink]="['/views', 'super-admin', 'tenants']"
+        routerLinkActive="active"
+        ><mat-icon>factory</mat-icon
+        >{{ "superAdmin.tenantsList.headline" | translate }}</a
+    >
+    <!-- </mat-list-item> -->
 </mat-nav-list>

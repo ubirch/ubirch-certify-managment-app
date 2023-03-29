@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
     AbstractControl,
-    FormArray,
-    FormBuilder,
-    FormGroup,
+    UntypedFormArray,
+    UntypedFormBuilder,
+    UntypedFormGroup,
     ValidationErrors,
     Validators,
 } from '@angular/forms';
@@ -28,14 +28,14 @@ export class EmployeesImportComponent implements OnInit {
     errorFile: Blob;
     progress: IUploadStatus;
     notification: INotification;
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     constructor(
         private fileService: ExportImportService,
         private employeeService: PocEmployeeService,
         private error: ErrorHandlerService,
         private notificationService: NotificationService,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private translateService: TranslateService,
         private router: Router
     ) {}
@@ -51,7 +51,7 @@ export class EmployeesImportComponent implements OnInit {
     }
 
     get employees() {
-        return this.form.controls['employees'] as FormArray;
+        return this.form.controls['employees'] as UntypedFormArray;
     }
 
     createEmployee() {

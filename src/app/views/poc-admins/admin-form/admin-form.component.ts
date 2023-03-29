@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { isValidPhoneNumber } from 'libphonenumber-js';
@@ -19,7 +19,7 @@ import { ConfirmDialogService } from '../../../shared/components/confirm-dialog/
 })
 export class AdminFormComponent implements OnChanges {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     @Input() admin: IPocAdmin;
     @Input() pocId: string;
     @Output() submitted = new EventEmitter<IPocAdmin>();
@@ -38,7 +38,7 @@ export class AdminFormComponent implements OnChanges {
     constructor(
         private route: ActivatedRoute,
         private translateService: TranslateService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private router: Router,
         public localeService: LocaleService,
         private confirmService: ConfirmDialogService,
@@ -65,11 +65,11 @@ export class AdminFormComponent implements OnChanges {
         });
 
         if (this.isEdit) {
-            this.form.addControl('id', new FormControl(admin?.id));
-            this.form.addControl('webIdentRequired', new FormControl({ value: false, disabled: true }));
+            this.form.addControl('id', new UntypedFormControl(admin?.id));
+            this.form.addControl('webIdentRequired', new UntypedFormControl({ value: false, disabled: true }));
         } else {
-            this.form.addControl('webIdentRequired', new FormControl(false, [ Validators.required ]));
-            this.form.addControl('pocId', new FormControl(pocId, [ Validators.required ]));
+            this.form.addControl('webIdentRequired', new UntypedFormControl(false, [ Validators.required ]));
+            this.form.addControl('pocId', new UntypedFormControl(pocId, [ Validators.required ]));
         }
     }
 

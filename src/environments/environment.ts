@@ -2,8 +2,14 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const keycloakURL: any = {
+    base: 'https://id.certify.dev.ubirch.com/auth',
+    clone: 'https://id-clone.certify.dev.ubirch.com/auth'
+};
+const usedKeycloak: string = keycloakURL.clone;
+
 const keycloakConfig: any = {
-    url: 'https://id.certify.dev.ubirch.com/auth/',
+    url: usedKeycloak,
     realm: 'poc-certify',
     clientId: 'poc-manager-user-access-local'
 };

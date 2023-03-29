@@ -7,7 +7,8 @@
         <div gdColumns="1fr 1fr" gdGap="1rem 2rem">
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.firstName' | translate }}" formControlName="firstName">
+                    <mat-label>{{ 'pocAdmin.firstName' | translate }}</mat-label>
+                    <input matInput formControlName="firstName">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy firstName" 
@@ -18,7 +19,8 @@
             </div>
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.lastName' | translate }}" formControlName="lastName">
+                    <mat-label>{{ 'pocAdmin.lastName' | translate }}</mat-label>
+                    <input matInput formControlName="lastName">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy lastName" 
@@ -29,7 +31,8 @@
             </div>
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.dateOfBirth' | translate }}" formControlName="dateOfBirth">
+                    <mat-label>{{ 'pocAdmin.dateOfBirth' | translate }}</mat-label>
+                    <input matInput formControlName="dateOfBirth">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy dateOfBirth" 
@@ -40,7 +43,8 @@
             </div>
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.email' | translate }}" formControlName="email">
+                    <mat-label>{{ 'pocAdmin.email' | translate }}</mat-label>
+                    <input matInput formControlName="email">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy email" 
@@ -51,7 +55,8 @@
             </div>
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.phone' | translate }}" formControlName="phone">
+                    <mat-label>{{ 'pocAdmin.phone' | translate }}</mat-label>
+                    <input matInput formControlName="phone">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy phone" 
@@ -65,7 +70,8 @@
         <div gdColumns="1fr 1fr" gdGap="2rem" class="ident-ids">
             <div>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocAdmin.initialId' | translate }}" formControlName="initialId">
+                    <mat-label>{{ 'pocAdmin.initialId' | translate }}</mat-label>
+                    <input matInput formControlName="initialId">
                 </mat-form-field>
                 <button 
                     mat-mini-fab aria-label="Copy initialId" 
@@ -76,7 +82,8 @@
             </div>
             <div>
                 <mat-form-field fxFlex>
-                  <input matInput placeholder="{{ 'pocAdmin.completedId' | translate }}" formControlName="completedId">
+                    <mat-label>{{ 'pocAdmin.completedId' | translate }}</mat-label>
+                  <input matInput formControlName="completedId">
                   <mat-error *ngIf="form.get('completedId').errors">
                     {{ 'pocAdmin.validationErrors.completedId' | translate }}
                   </mat-error>

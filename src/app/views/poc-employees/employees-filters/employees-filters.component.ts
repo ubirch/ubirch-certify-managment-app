@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { EmployeeStatus, EmployeeStatusTranslation } from 'src/app/core/models/enums/employee-status.eunm';
 
 @Component({
@@ -9,7 +9,7 @@ import { EmployeeStatus, EmployeeStatusTranslation } from 'src/app/core/models/e
 })
 export class EmployeesFiltersComponent {
 
-  @Input() filters: FormGroup;
+  @Input() filters: UntypedFormGroup;
 
   statuses: string[] = [EmployeeStatus.completed, EmployeeStatus.pending, EmployeeStatus.processing, EmployeeStatus.aborted];
   EmployeeStatusTranslation = EmployeeStatusTranslation;

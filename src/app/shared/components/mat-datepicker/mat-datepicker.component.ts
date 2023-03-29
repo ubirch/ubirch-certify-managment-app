@@ -11,7 +11,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormControl, FormGroupDirective, NgControl, NgForm, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, UntypedFormControl, FormGroupDirective, NgControl, NgForm, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { formatDate } from '@angular/common';
@@ -66,7 +66,7 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
   @Output() dateCallback = new EventEmitter<string>();
 
   public hostControl: NgControl;
-  public input: FormControl = new FormControl();
+  public input: UntypedFormControl = new UntypedFormControl();
 
   public date?: Date;
   public displayDate = '';
@@ -244,7 +244,7 @@ export class MatDatepickerComponent implements ControlValueAccessor, OnInit, OnD
 export class DateInputStateMatcher implements ErrorStateMatcher {
   constructor(private datePickerComponent: MatDatepickerComponent) { }
 
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     return !!this.datePickerComponent.hostControl.errors && this.datePickerComponent.hostControl.touched;
   }
 }

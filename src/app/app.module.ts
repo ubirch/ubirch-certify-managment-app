@@ -12,13 +12,15 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { sessionEndedInterceptorProvider } from './core/interceptors/session-ended';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-    return new TranslateHttpLoader(http);
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(_httpBackend: HttpBackend) {
+    return new MultiTranslateHttpLoader(_httpBackend, ['/assets/i18n/']);
 }
 
 export function maskConfigFunction(): Partial<IConfig> {
@@ -27,7 +29,6 @@ export function maskConfigFunction(): Partial<IConfig> {
 
 @NgModule({
     declarations: [AppComponent],
-    entryComponents: [],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
@@ -36,8 +37,8 @@ export function maskConfigFunction(): Partial<IConfig> {
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,
-                deps: [HttpClient],
-            },
+                deps: [HttpBackend]
+            }
         }),
         CoreModule,
         SharedModule,
@@ -54,8 +55,8 @@ export function maskConfigFunction(): Partial<IConfig> {
             multi: true,
             deps: [KeycloakService],
         },
-        sessionEndedInterceptorProvider
+        sessionEndedInterceptorProvider,
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,7 +9,8 @@
           <!-- FIRST NAME  -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocEmployee.firstName' | translate }}" formControlName="firstName">
+                    <mat-label>{{ 'pocEmployee.firstName' | translate }}</mat-label>
+                    <input matInput formControlName="firstName">
                     <mat-error *ngIf="form.get('firstName').errors">
                         {{ 'employeeEdit.validationErrors.firstName' | translate }}
                       </mat-error>
@@ -19,7 +20,8 @@
             <!-- LAST NAME -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocEmployee.lastName' | translate }}" formControlName="lastName">
+                    <mat-label>{{ 'pocEmployee.lastName' | translate }}</mat-label>
+                    <input matInput formControlName="lastName">
                     <mat-error *ngIf="form.get('lastName').errors">
                         {{ 'employeeEdit.validationErrors.lastName' | translate }}
                     </mat-error>
@@ -29,7 +31,8 @@
             <!-- EMAIL -->
             <div fxLayout>
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="{{ 'pocEmployee.email' | translate }}" formControlName="email">
+                    <mat-label>{{ 'pocEmployee.email' | translate }}</mat-label>
+                    <input matInput formControlName="email">
                     <mat-error *ngIf="form.get('email').errors">
                         {{ 'employeeEdit.validationErrors.email' | translate }}
                     </mat-error>

@@ -6,7 +6,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {PocSuperAdminService} from "../../../core/services/poc-super-admin.service";
 import {ITenant} from "../../../core/models/interfaces/tenant.interface";
 import {ErrorHandlerService} from "../../../core/services/error-handler.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {getCertUrgency, getFormatedDateTime} from "../../../core/utils/date";
 import {TenantTypeTranslation} from "../../../core/models/enums/tenant-type.enum";
 import {TenantPoCUsageTypeTranslation} from "../../../core/models/enums/tenant-poc-usage-type.enum";
@@ -24,7 +24,7 @@ import {ConfirmDialogService} from "../../../shared/components/confirm-dialog/co
 })
 export class TenantDetailsComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     locale: ILocale;
     tenantId: string;
     tenant: ITenant;
@@ -38,7 +38,7 @@ export class TenantDetailsComponent implements OnInit {
         private router: Router,
         private pocSuperAdminService: PocSuperAdminService,
         private errorService: ErrorHandlerService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private notificationService: NotificationService,
         private translateService: TranslateService,
         private confirmDialog: ConfirmDialogService,

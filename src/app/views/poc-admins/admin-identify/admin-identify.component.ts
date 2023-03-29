@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of, Subject } from 'rxjs';
@@ -19,14 +19,14 @@ type AdminIdentity = [IPocAdmin, string];
   styleUrls: ['./admin-identify.component.scss'],
 })
 export class AdminIdentifyComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  form: UntypedFormGroup;
   data$: Observable<AdminIdentity>;
 
   private unsubscribe$ = new Subject<void>();
 
   constructor(
     public adminService: PocAdminService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-status.enum';
 
 @Component({
@@ -9,7 +9,7 @@ import { PocStatus, PocStatusTranslation } from 'src/app/core/models/enums/poc-s
 })
 export class PocListFiltersComponent {
 
-  @Input() filters: FormGroup;
+  @Input() filters: UntypedFormGroup;
   @Input() exportDisabled = false;
   @Output() exportClicked = new EventEmitter();
 

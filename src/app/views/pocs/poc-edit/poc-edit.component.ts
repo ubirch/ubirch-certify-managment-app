@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
@@ -17,7 +17,7 @@ import {LocationIdChangesStates} from "../../../core/models/enums/location-id-ch
 })
 export class PocEditComponent implements OnInit {
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     poc: IPoc;
     locationIdChanges: ILocationIdChange[] = [];
     pocId: string;
@@ -28,7 +28,7 @@ export class PocEditComponent implements OnInit {
         private route: ActivatedRoute,
         private notificationService: NotificationService,
         private translateService: TranslateService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private router: Router,
     ) {
     }

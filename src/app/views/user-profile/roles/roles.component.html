@@ -1,8 +1,8 @@
 <h3>{{ 'userProfile.roles.navLabel' | translate }}</h3>
 <p>{{ 'userProfile.roles.intro' | translate }}</p>
 
-<mat-chip-list>
-  <mat-chip *ngFor="let role of keycloakService.getUserRoles()">
+<mat-chip-listbox>
+  <mat-chip-option *ngFor="let role of keycloakService.getUserRoles()">
     {{role}}
-  </mat-chip>
-</mat-chip-list>
+  </mat-chip-option>
+</mat-chip-listbox>

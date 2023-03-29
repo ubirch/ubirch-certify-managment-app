@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -49,7 +49,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     defaultPageSize = DEFAULT_PAGE_SIZE;
     pageSizes = PAGE_SIZES;
     expandedElement: IPoc | null;
-    filters: FormGroup;
+    filters: UntypedFormGroup;
     PocStatusTranslation = PocStatusTranslation;
     PocActivationStateTranslation = PocActivationStateTranslation;
     exportLoading = false;
@@ -64,7 +64,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
     }
 
     get columnFilters() {
-        return this.filters?.get('filterColumns') as FormGroup;
+        return this.filters?.get('filterColumns') as UntypedFormGroup;
     }
 
     get statusFilter() {
@@ -73,7 +73,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
 
     constructor(
         protected pocService: PocsService,
-        protected fb: FormBuilder,
+        protected fb: UntypedFormBuilder,
         protected translateService: TranslateService,
         protected confirmService: ConfirmDialogService,
         protected errorService: ErrorHandlerService,
@@ -102,7 +102,7 @@ export class PocListComponent extends ListComponent<IPoc> implements OnInit, Aft
             { value: ListAction.delete, label: `listActions.delete`, predicate: (poc: IPoc) => true },
             { value: ListAction.retry, label: `listActions.retry`, predicate: (poc: IPoc) => poc.status === PocStatus.aborted },
         ];
-        this.action = new FormControl();
+        this.action = new UntypedFormControl();
     }
 
     ngOnInit() {
