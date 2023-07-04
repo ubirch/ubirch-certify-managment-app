@@ -109,7 +109,7 @@
 
             <ng-container
                 *ngIf="
-                    poc?.pocType.includes('app') && poc?.pocType.includes('bmg')
+                    poc?.pocType.includes('app') && (poc?.pocType.includes('bmg') || poc?.pocType.includes('ec'))
                 "
             >
                 <h3 fxLayout fxLayoutAlign="start center">
